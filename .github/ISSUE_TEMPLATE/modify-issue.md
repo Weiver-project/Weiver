@@ -2,7 +2,7 @@
 name: Modify Issue
 about: 수정 이슈
 title: "[Refacter]: "
-labels: ''
+labels: "✨feat, \U0001F7E0 Priority: High"
 assignees: ''
 
 ---

@@ -2,7 +2,7 @@
 name: Remove Issue
 about: 삭제 이슈
 title: "[Remove]: "
-labels: ''
+labels: "\U0001F7E2 Priority: Low, \U0001F5D1️remove"
 assignees: ''
 
 ---

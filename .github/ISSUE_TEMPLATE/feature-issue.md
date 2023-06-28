@@ -2,7 +2,7 @@
 name: Feature Issue
 about: '추가 '
 title: "[Feat]: "
-labels: ''
+labels: "✨feat, \U0001F7E1 Priority: Medium"
 assignees: ''
 
 ---
