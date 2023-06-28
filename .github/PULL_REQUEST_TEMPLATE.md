@@ -1,7 +1,7 @@
 ---
 name: Pull Request Template
 about: Write Pull Request
-title: 'Pull request from OOO/6lossom/develop to cherry-6lossom/6lossom/develop'
+title: 'Pull request from OOO/Weiver to Weiver-project/Weiver'
 ---
 
 ### PR 타입(하나 이상의 PR 타입을 선택해주세요)
@@ -19,7 +19,7 @@ title: 'Pull request from OOO/6lossom/develop to cherry-6lossom/6lossom/develop'
 어떤 이유에서 이 PR을 시작하게 됐는지에 대한 히스토리를 남겨주세요.
 
 ### :pencil: 작업사항
-#### feat : 로그인 시, 구글 소셜 로그인 기능을 추가
+#### feat : ex) 구글 소셜 로그인 기능을 추가
 
 - firebase어쩌고
 - 구글 어쩌고
