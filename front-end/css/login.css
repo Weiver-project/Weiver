@@ -28,6 +28,7 @@ article {
 }
 
 #login-form input {
+  border-style: none;
   background-color: #172036;
   height: 40px;
   width: 100%;
