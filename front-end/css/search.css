@@ -2,6 +2,7 @@ h2{
   padding-top: 30px;
   margin: 0;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 article{
@@ -9,7 +10,6 @@ article{
 }
 
 .search{
-  margin-top: 30px;
   margin-bottom: 20px ;
   text-align: center;
   color: #D4D9E1;
@@ -56,6 +56,7 @@ article{
 }
 
 .musical_list li h2{
+  padding: 0px;
   margin-top: 10px;
   text-align: left;
   font-size: 30px;
@@ -98,4 +99,29 @@ article{
 .community_list li span{
   background-color: #172036;
   font-size: 10px;
+}
+
+/* 찜했어요 봤어요 */
+.select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.like {
+  color: #EFEFEF;
+  border: none;
+  font-size: 20px;
+}
+
+.viewed {
+  color: #586A85;
+  border: none;
+  font-size: 20px;
+}
+
+header hr{
+  width: 80%;
+  background: #586A85;
+  border: 0;
+  height: 1;
 }
