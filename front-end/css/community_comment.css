@@ -9,17 +9,19 @@ button{
   background-color: #172036;
 }
 
+.comment li {
+  padding-bottom: 10px;
+}
 article {
   margin: 0 5%;
   margin-top: 100px;
   width: 90%;
-  height: 60vh;
+  min-height: 70vh;
   background-color: #172036;
   border-radius: 10px;  
   color: white;
   font-size: 12px;
 }
-
 
 .user-container{
   display: flex;

@@ -112,12 +112,14 @@ article{
   color: #EFEFEF;
   border: none;
   font-size: 20px;
+  background-color: #101322;
 }
 
 .viewed {
   color: #586A85;
   border: none;
   font-size: 20px;
+  background-color: #101322;
 }
 
 header hr{
