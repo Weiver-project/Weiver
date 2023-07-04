@@ -1,0 +1,101 @@
+h2{
+  padding-top: 30px;
+  margin: 0;
+  text-align: center;
+}
+
+article{
+  margin: 0 10%;
+}
+
+.search{
+  margin-top: 30px;
+  margin-bottom: 20px ;
+  text-align: center;
+  color: #D4D9E1;
+}
+
+.search input{
+  box-sizing: border-box;
+  height: 35px; 
+  border-radius: 5px;
+  font-size: 18px;
+  color: #D4D9E1;
+}
+
+.search input:first-child{
+  background-color: #25304A;
+  width: 80%;
+}
+
+.search input:nth-child(2){
+  background-color: #3B4869;
+  margin-left: 30px;
+  width: 10%;
+}
+
+/* 뮤지컬 검색 */
+.musical_list{
+  list-style: none;
+  color: #D4D9E1;
+  padding: 0;
+}
+
+.musical_list li{
+  background-color: #172036;
+  height: 120px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.musical_list li img{
+  margin-right: 20px;
+  height: 120px;
+  width: 85px;
+  float: left;
+}
+
+.musical_list li h2{
+  margin-top: 10px;
+  text-align: left;
+  font-size: 30px;
+  background-color: #172036;
+}
+
+.musical_list li span{
+  background-color: #172036;
+}
+
+/* 커뮤니티 검색 */
+.community_list{
+  list-style: none;
+  color: #D4D9E1;
+  padding: 0;
+}
+
+.community_list li{
+  background-color: #172036;
+  height: 80px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.community_list li img{
+  margin-right: 20px;
+  height: 80px;
+  width: 120px;
+  float: left;
+}
+
+.community_list li h6{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 12px;
+  background-color: #172036;
+}
+
+.community_list li span{
+  background-color: #172036;
+  font-size: 10px;
+}

@@ -11,34 +11,52 @@
 * {
   background-color: #101322;
   font-family: 'Pretendard-Regular';
-  color: #D4D9E1;
 }
 
 header {
+  display: flex;
+  flex-direction: column;
   color: white;
 }
 
-footer {
+header #logo{
+  margin-top: 30px;
+}
+
+footer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.footer {
   color: #A4A2A2;
   font-size: 12px;
   text-align: center;
 }
 
 nav {
+  margin-top: 10px;
   display: flex;
   justify-content: space-around;
   text-align: center;
+  list-style: none;
+  color: #D4D9E1;
 }
-
 nav a {
   text-decoration: none;
   color: #98A4B7;
 }
-
 nav i {
-  font-size: 28px;
+  font-size: 24px;
+}
+nav div{
+  font-size: 10px;
 }
 
 .bi-chevron-left {
+  position: absolute;
+  left: 30px;
+  margin-top: 30px;
   font-size: 30px;
+  color: #D4D9E1;
 }
