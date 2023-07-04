@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+
+* {
+  background-color: #101322;
+  font-family: 'Pretendard-Regular';
+}
+
+header {
+  color: white;
+}
+
+footer {
+  color: #A4A2A2;
+  font-size: 12px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #98A4B7;
+}
+
+nav i {
+  font-size: 28px;
+}
+
+.bi-chevron-left {
+  color: #D4D9E1;
+  font-size: 30px;
+}
