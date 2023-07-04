@@ -30,7 +30,6 @@ article {
 
 #login-form input {
   background-color: #172036;
-  color: #D4D9E1;
   height: 40px;
   width: 100%;
   border-radius: 10px;
@@ -40,7 +39,6 @@ article {
 
 #login-form .submit {
   background-color: #3B4869;
-  color: #D4D9E1;
   margin-top: 10px;
 }
 
@@ -50,7 +48,6 @@ article {
 
 .login-support a {
   text-decoration: none;
-  color: #D4D9E1;
   margin: 0 10px;
   font-size: 14px;
 }
@@ -58,7 +55,6 @@ article {
 .dividing-line {
   display: flex;
   align-items: center;
-  color: #D4D9E1;
   margin: 30px 0 10px 0;
 }
 

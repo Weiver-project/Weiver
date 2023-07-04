@@ -11,6 +11,7 @@
 * {
   background-color: #101322;
   font-family: 'Pretendard-Regular';
+  color: #D4D9E1;
 }
 
 header {
@@ -39,6 +40,5 @@ nav i {
 }
 
 .bi-chevron-left {
-  color: #D4D9E1;
   font-size: 30px;
 }
