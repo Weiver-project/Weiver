@@ -12,7 +12,6 @@ article {
 #logo {
   display: block;
   margin: auto;
-
 }
 
 .login-title {
@@ -35,6 +34,7 @@ article {
   border-radius: 10px;
   margin-bottom: 10px;
   font-size: 18px;
+  color: #D4D9E1;
 }
 
 #login-form .submit {
@@ -50,12 +50,14 @@ article {
   text-decoration: none;
   margin: 0 10px;
   font-size: 14px;
+  color: #D4D9E1;
 }
 
 .dividing-line {
   display: flex;
   align-items: center;
   margin: 30px 0 10px 0;
+  color: #D4D9E1;
 }
 
 .dividing-line::before {
