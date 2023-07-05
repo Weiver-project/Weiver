@@ -61,6 +61,7 @@ article {
   color: #D4D9E1;
 }
 
+/* 구분선 before:왼쪽 after:오른쪽 */
 .dividing-line::before {
   content: '';
   flex-grow: 1;
