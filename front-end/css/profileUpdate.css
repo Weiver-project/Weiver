@@ -64,6 +64,11 @@ color: #98A4B7;
 
 /* profile img Change */
 .profile {
+    display: flex;
+    justify-content: center;
+}
+
+.profile_cut {
     position: relative;
     width: 150px;
     height: 150px;
@@ -92,6 +97,10 @@ color: #98A4B7;
     color: #D4D9E1;
 }
 
+#my-img {
+    visibility: hidden;
+}
+
 /* ID */
 .text_input {
     margin-top: 5%;
@@ -116,6 +125,7 @@ color: #98A4B7;
     font-size: 20px;
     font-weight: 400;
     padding: 0px 8px;
+    margin-bottom: 20px;
 }
 
 /* 닉네임 */
@@ -140,6 +150,7 @@ color: #98A4B7;
     font-weight: 400;
     padding: 0px 8px;
     color: #EFEFEF;
+    margin-bottom: 20px;
 }
 
 /* 저장 */

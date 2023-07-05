@@ -9,6 +9,12 @@
 </head>
 
 <body>
+    <script>
+        function onClickUpload() {
+            let myimg = document.getElementById("my-img");
+            myimg.click();
+        }
+    </script>
     <!-- header -->
     <header><img src="/img/logo.png" alt="logo" height="70" width="300"></header>
     
@@ -22,13 +28,16 @@
             <div class="name">프로필 수정</div>
         </div>
 
+        <form action="">    
             <!-- 프로필 -->
             <div class="profile">
-                <img src="/img/Default_Profile.png" alt="profile" height="150" width="150">
-                <button class="change">변경</button>
+                <div class="profile_cut">
+                    <img src="/img/Default_Profile.png" alt="profile" height="150" width="150">
+                    <button id="my-button" class="change" onclick="onClickUpload();">변경</button>
+                    <input id="my-img" type="file" accept="image/*">
+                </div>
             </div>
             
-        <form action="">    
             <!-- 입력 칸 -->
             <div class="text_input">
 
