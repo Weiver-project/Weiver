@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+* {
+background-color: #101322;
+font-family: 'Pretendard-Regular';
+}
+
+/* FOOTER */
+footer {
+    color: #A4A2A2;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+/* NAVI */
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+nav a {
+text-decoration: none;
+color: #98A4B7;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* title */
+.title {
+    color: #EFEFEF;
+    width: 646px;
+    margin: 30px;
+}
+
+
+.title .back {
+    position: absolute;
+    text-align: left;
+    font-size: 30px;
+}
+
+.title .name {
+    text-align: center;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+}
+
+/* 작성하기 버튼 */
+.write {
+    width: 700px;
+    display: flex;
+    justify-content: right;
+    margin: 20px;
+}
+
+.write button {
+    width: 130px;
+    height: 50px;
+    padding: 5px 15px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: none;
+    background-color: #4263EB;
+    font-size: 18px;
+    color: #D4D9E1;
+    font-weight: 700;
+}
+
+/* 문의 목록 */
+.list {
+    display: flex;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.inquiry {
+    display: flex;
+    background-color: #172036;
+    border-radius: 8px;
+    width: 470px;
+    height: 100px;
+    padding-left: 30px;
+    align-items: center;
+    margin-right: 36px;
+}
+
+.check {
+    display: flex;
+    background-color: #172036;
+    border-radius: 8px;
+    width: 120px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.inquiry a {
+    width: 470px;
+    background-color: #172036;
+    text-decoration: none;
+}
+
+p {
+    background-color: #172036;
+    color: #D4D9E1;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 100;
+}
