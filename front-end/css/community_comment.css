@@ -1,3 +1,4 @@
+/* 태그 공통 적용 사항*/
 ul{
   padding-top: 20px;
   list-style: none;
@@ -9,9 +10,6 @@ button{
   background-color: #172036;
 }
 
-.comment li {
-  padding-bottom: 10px;
-}
 article {
   margin: 0 5%;
   margin-top: 100px;
@@ -23,6 +21,12 @@ article {
   font-size: 12px;
 }
 
+/* 댓글 */
+.comment li {
+  padding-bottom: 10px;
+}
+
+/* 유저아이디 + 수정, 삭제 버튼 */
 .user-container{
   display: flex;
   margin: 3px;
@@ -46,6 +50,7 @@ article {
   display: flex;
   margin-bottom: 10px;
 }
+/* 대댓글 */
 .re-comment {
   padding: 0;
 }
@@ -60,6 +65,7 @@ article {
   margin: 0 20px;
 }
 
+/* 댓글 입력 */
 .input-reple {
   margin-top: 15px;
   text-align: center;
