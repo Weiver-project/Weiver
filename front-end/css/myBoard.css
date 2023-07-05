@@ -1,0 +1,132 @@
+
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+  
+body{
+	background-color:#101322;
+}
+
+  * {
+    background-color: inherit;
+    font-family: 'Pretendard-Regular';
+    color:#d4d9e1;
+  }
+  
+  header {
+  	max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  footer {
+    color: #A4A2A2;
+    font-size: 12px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #98A4B7;
+  }
+  
+  nav i {
+    font-size: 28px;
+  }
+  
+  
+/* 전체 화면 div */
+#contents {
+    max-width: 700px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* 뒤로가기 + 제목 div */
+.nameTag{
+	position: relative;
+	justify-content: center;
+	align-items: center;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 개수출력 + 정렬방식 div */
+.sortTag{
+	position: relative;
+	justify-content: right;
+	align-items: right;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Board List Card */
+.myBoardCard{
+	background-color : #172036;
+	border-radius:10px;
+	
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    display:flex;
+}
+
+/* 글 가져오기 */
+.card{
+	width: 80%;
+	padding: 10px 20px;
+	border-radius:inherit;
+}
+
+/* 좋아요 버튼 */
+.like-btn{
+	width: 100%;
+	height: 100%;	
+}
+
+.date{
+	font-size:7px;
+}
+
+/* 뒤로가기 버튼 */
+.back-btn{
+	top:auto;
+	left:5px;
+	position: absolute;
+}
+
+/* 개수출력 span */
+.boardNum{
+	font-size:5px;
+	top:auto;
+	left:5px;
+	position: absolute;
+}
+
+div{
+	border-radius:inherit;
+}
+
+
+
+
+
+
+
+
+
