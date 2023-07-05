@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+* {
+background-color: #101322;
+font-family: 'Pretendard-Regular';
+}
+
+/* FOOTER */
+footer {
+    color: #A4A2A2;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+/* NAVI */
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+nav a {
+text-decoration: none;
+color: #98A4B7;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* title */
+.title {
+    color: #EFEFEF;
+    width: 646px;
+    margin: 30px;
+}
+
+
+.title .back {
+    position: absolute;
+    text-align: left;
+    font-size: 30px;
+}
+
+.title .name {
+    text-align: center;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+}
+
+/* 문의내용 */
+.text_box {
+    margin-top: 5%;
+}
+
+.data_show {
+    margin: 10px 0px;
+}
+
+.data_show p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+    margin: 0%;
+}
+
+.data_show div {
+    width: 628px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    font-size: 18px;
+    font-weight: 100;
+    margin-bottom: 5%;
+    padding: 8px;
+    color: #586A85;
+}
+
+.data_show .inquiry_text {
+    height: 100px;
+}
+
+.data_show .answer {
+    height: 250px;
+}
+
+.state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 38px;
+    width: 646px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background-color: #25304A;
+    color: #D4D9E1;
+    font-size: 20px;
+}
