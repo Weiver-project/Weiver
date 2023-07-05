@@ -23,9 +23,12 @@ text-align: center;
 /* NAVI */
 
 nav {
-display: flex;
-justify-content: space-around;
-text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
 }
 
 nav a {
