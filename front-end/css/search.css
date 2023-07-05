@@ -16,7 +16,6 @@ article{
 }
 
 .search input{
-  border-style: none;
   box-sizing: border-box;
   height: 35px; 
   border-radius: 5px;

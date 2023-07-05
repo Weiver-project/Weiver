@@ -65,3 +65,7 @@ nav div{
 .hidden{
   display: none;
 }
+
+input {
+  border: none;
+}
