@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내가 쓴 글 페이지</title>
+<link href="../css/myBoard.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<header><img src="../img/logo.png" alt="logo" height="70" width="300"></header>
+
+<body>
+<div id="contents">
+	<div class="nameTag">
+		<a href="#" class="back-btn"><i class="bi bi-chevron-left" style="color: #EFEFEF"></i></a>
+		<h1>내가 쓴 글</h1>
+	</div>  
+	  
+	<div class="sortTag">
+		<span class="boardNum">N 개의 글</span>
+		
+		<!-- 셀렉트 버튼(작성, 추천) -->
+	    <select id="sortType" onchange="sortTypeChange()">
+	        <option value="select">정렬 기준</option>
+	        <option value="작성">작성 순</option>
+	        <option value="추천">추천 순</option>
+	    </select>		
+	</div>  
+	
+	<div>
+		<!-- <%-- <c:forEach items="" var="" begin="" end=""> --%> -->
+			<div class="myBoardCard">
+				<span class="card">
+					<div class="date">기간</div>
+					<div>제목</div>
+				</span>
+				<span>
+					<button class="like-btn">추천</button>
+				</span>
+				
+			</div>
+		
+			<div class="myBoardCard">
+				<span class="card">
+					<div class="date">기간</div>
+					<div>제목</div>
+				</span>
+				<span>
+					<button class="like-btn">추천</button>
+				</span>
+				
+			</div>
+	</div>
+</div>
+		<!-- <%-- </c:forEach> --%> -->
+		
+	
+<nav>
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+<footer>Copyright 시난과 고련  2023 All Rights Reserved</footer>
+
+<nav>
+    <a href="#"><i class="bi bi-house-door-fill"></i>
+      <div>HOME</div>
+    </a>
+    <a href="#"><i class="bi bi-chat-dots-fill"></i>
+      <div>COMMUNITY</div>
+    </a>
+    <a href="#"><i class="bi bi-person-fill"></i>
+      <div>MY PAGE</div>
+    </a>
+  </nav>
+
+
+</body>
+
+</html>
