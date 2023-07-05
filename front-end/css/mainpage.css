@@ -94,7 +94,7 @@ nav {
 /*인기 뮤지컬 섹션*/
 
 .popular_musical_list {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .popular_musical_list ul {
@@ -207,8 +207,7 @@ nav {
 .today_actor {
     width: calc(100% - 40px);
     overflow: hidden;
-    margin: 0 auto;
-    margin-bottom: 20px;
+    margin: 30px auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -232,6 +231,7 @@ nav {
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin-bottom: 5px;
 }
 
 .today_actor .swiper-slide {
