@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+* {
+background-color: #101322;
+font-family: 'Pretendard-Regular';
+}
+
+/* FOOTER */
+footer {
+    color: #A4A2A2;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+/* NAVI */
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+nav a {
+text-decoration: none;
+color: #98A4B7;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* title */
+.title {
+    color: #EFEFEF;
+    width: 646px;
+    margin: 30px;
+}
+
+
+.title .back {
+    position: absolute;
+    text-align: left;
+    font-size: 30px;
+}
+
+.title .name {
+    text-align: center;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+}
+
+/* 카테고리 */
+.category {
+    margin: auto 0;
+}
+
+.category .card {
+    display: flex;
+    flex-direction: column;
+    width: 646px;
+    height: 135px;
+    border-radius: 8px;
+    margin-bottom: 66px;
+    background: #172036;
+    justify-content: center;
+    padding-left: 22px;
+}
+
+.category .card a {
+    line-height: 135px;
+    height: 135px;
+    background-color: #172036;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 45px;
+}
