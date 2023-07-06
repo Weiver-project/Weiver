@@ -56,6 +56,7 @@ body{
     overflow: hidden;
 }
 
+/* í™”ë©´ ì¤‘ì•™ ì •ë ¬ */
 .nameTag{
 	position: relative;
 	justify-content: center;
@@ -65,13 +66,14 @@ body{
     flex-wrap: wrap;
 }
 
+/* ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ìœ„ì¹˜ì¡°ì • */
 .back-btn{
 	top:auto;
 	left:5px;
 	position: absolute;
 }
 
-/* ÀÌ¹ÌÁö ÆÄÀÏ °£°Ý Á¶Àý */
+/* ì¶œì—°ìž‘í’ˆ ê°„ê²© ì¡°ì ˆ */
 .img-margin{
 	margin: 10px 10px;
 }
