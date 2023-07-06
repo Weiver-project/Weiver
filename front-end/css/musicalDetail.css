@@ -23,45 +23,43 @@ body {
 }
 
 .title {
-    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 30px;
     color: #FFFFFF;
     margin-bottom: 20px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
   
-
-  * {
+* {
     background-color: #101322;
     font-family: 'Pretendard-Regular';
-  }
+}
   
-  footer {
+footer {
     color: #A4A2A2;
     font-size: 12px;
     text-align: center;
-  }
+    margin: 50px auto;
+}
   
-  nav {
+nav {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 700px;
     display: flex;
     justify-content: space-around;
     text-align: center;
     z-index: 9999;
-  }
+}
   
   
-  nav a {
+nav a {
     text-decoration: none;
     color: #98A4B7;
-  }
+}
   
-  nav i {
+nav i {
     font-size: 28px;
-  }
-
+}
 
 /*뒤로가기 버튼, 뮤지컬 제목*/
 .title-container {

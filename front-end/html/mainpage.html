@@ -11,8 +11,8 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
     <!--css, js 연결-->
-    <link rel="stylesheet" href="../css/mainpage.css">
-    <script src="../js/mainpage.js"></script>
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <script src="/js/mainpage.js"></script>
 
     <!--부트스트랩 아이콘 연결-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -20,10 +20,9 @@
 
 <body>
 
-  <header><img src="/img/logo.png" alt="logo" height="70" width="300"></header>
-
  <div class="backgroundBox">
 
+  <header><img src="../img/logo.png" alt="logo" height="70" width="300"></header>
 
         <!--검색 창-->
         <div class="search-container">
@@ -149,59 +148,57 @@
 
         <!--오늘의 배우 2개씩 총 8개 출력-->
         <h1 class="title">오늘의 배우✨</h1>
-        <table>
-            <tr>
-                <td>
-                    <div class="actor_img">
-                        <img src="image1.jpg" alt="이미지 1">
-                    </div>
-                    <span class="actor-name">배역 명 뿌려주세요</span>
-                </td>
-                <td>
-                    <div class="today_actor">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="poster-container">
-                                        <div class="poster">
-                                            <img src="image1.jpg" alt="이미지 1">
-                                        </div>
-                                        <div class="poster">
-                                            <img src="image2.jpg" alt="이미지 2">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="poster-container">
-                                        <div class="poster">
-                                            <img src="image4.jpg" alt="이미지 3">
-                                        </div>
-                                        <div class="poster">
-                                            <img src="image5.jpg" alt="이미지 4">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="poster-container">
-                                        <div class="poster">
-                                            <img src="image7.jpg" alt="이미지 5">
-                                        </div>
-                                        <div class="poster">
-                                            <img src="image8.jpg" alt="이미지 6">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                            <!-- Add Navigation -->
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="today_actor">
+          <div class="actor_img">
+              <img src="image1.jpg" alt="이미지 1">
+              <span class="actor-name">배역 명 뿌려주세요</span>
+          </div>
+          <div class="actor-details">
+              <div class="swiper-container">
+                  <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                          <div class="poster-container">
+                              <div class="poster">
+                                  <img src="image1.jpg" alt="이미지 1">
+                              </div>
+                              <div class="poster">
+                                  <img src="image2.jpg" alt="이미지 2">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="swiper-slide">
+                          <div class="poster-container">
+                              <div class="poster">
+                                  <img src="image4.jpg" alt="이미지 3">
+                              </div>
+                              <div class="poster">
+                                  <img src="image5.jpg" alt="이미지 4">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="swiper-slide">
+                          <div class="poster-container">
+                              <div class="poster">
+                                  <img src="image7.jpg" alt="이미지 5">
+                              </div>
+                              <div class="poster">
+                                  <img src="image8.jpg" alt="이미지 6">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-pagination"></div>
+                  <!-- Add Navigation -->
+                  <div class="swiper-button-next"></div>
+                  <div class="swiper-button-prev"></div>
+              </div>
+          </div>
+      </div>
+      
+      
+      
+      
 
         
         <!--공연 중인 뮤지컬 4개씩 총 8개 출력-->
@@ -254,19 +251,21 @@
 
         <footer>Copyright Weiver 2023 All Rights Reserved</footer>    
 
+        <nav>
+          <a href="#"><i class="bi bi-house-door-fill"></i>
+            <div>HOME</div>
+          </a>
+          <a href="#"><i class="bi bi-chat-dots-fill"></i>
+            <div>COMMUNITY</div>
+          </a>
+          <a href="#"><i class="bi bi-person-fill"></i>
+            <div>MY PAGE</div>
+          </a>
+        </nav>
+        
    </div>
 
-   <nav>
-    <a href="#"><i class="bi bi-house-door-fill"></i>
-      <div>HOME</div>
-    </a>
-    <a href="#"><i class="bi bi-chat-dots-fill"></i>
-      <div>COMMUNITY</div>
-    </a>
-    <a href="#"><i class="bi bi-person-fill"></i>
-      <div>MY PAGE</div>
-    </a>
-  </nav>
+
 
 </body>
 
