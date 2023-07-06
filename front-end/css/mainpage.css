@@ -1,4 +1,4 @@
-/*°øÅë Àû¿ë css*/
+/*ê³µí†µ ì ìš© css*/
 
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -61,7 +61,7 @@ nav {
     font-size: 28px;
   }
 
-/*°Ë»öÃ¢ CSS*/
+/*ê²€ìƒ‰ì°½ CSS*/
 .search-container {
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@ nav {
     color: #FFFFFF;
 }
 
-/*ÀÎ±â ¹ÂÁöÄÃ list css*/
+/*ì¸ê¸° ë®¤ì§€ì»¬ list css*/
 
 .popular_musical_list {
     margin-bottom: 50px;
@@ -113,7 +113,7 @@ nav {
     color: #FFFFFF;
 }
 
-/*½º¿ÍÀÌÇÁ ±â´É °ü·Ã css*/
+/*ìŠ¤ì™€ì´í”„ ê³µí†µ css*/
 .swiper-container {
     position: relative;
     overflow: hidden;
@@ -156,7 +156,7 @@ nav {
 }
 
 
-/*Ä¿¹Â´ÏÆ¼ ÀÎ±â±Û css*/
+/*ì»¤ë®¤ë‹ˆí‹° ì¸ê¸°ê¸€ css*/
 .popular_community {
     margin-bottom: 20px;
 }
@@ -202,7 +202,7 @@ nav {
     margin-top: 15px;
   }
 
-/*¿À´ÃÀÇ ¹è¿ì css*/
+/*ì˜¤ëŠ˜ì˜ ë°°ìš° css*/
 
 .today_actor {
     display: flex;
@@ -230,7 +230,7 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 510px; /* 700px - 190px - 20px (actor_imgÀÇ Æø°ú ¸¶Áø) */
+    width: 510px;
 }
 
 .actor-name {
@@ -247,7 +247,7 @@ nav {
     overflow: hidden;
     justify-content: center;
     width: calc(100% - 190px);
-    max-width: 510px; /* 700px - 190px - 20px (actor_imgÀÇ Æø°ú ¸¶Áø) */
+    max-width: 510px;
     margin: auto;
 }
 
@@ -259,7 +259,7 @@ nav {
 }
 
 
-/*°ø¿¬ ÁßÀÎ ¹ÂÁöÄÃ css*/
+/*ê³µì—° ì¤‘ì¸ ë®¤ì§€ì»¬ css*/
 .progress-musical {
     margin-bottom: 20px;
 }
