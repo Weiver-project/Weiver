@@ -12,9 +12,6 @@ body {
   background-color: #101322;
   font-family: 'Pretendard-Regular';
   padding-bottom: 40px;
-}
-
-.backgroundBox {
   z-index: 1;
   background-color: #101322;
   width: 700px;
@@ -27,20 +24,11 @@ header {
   display: flex;
   flex-direction: column;
   color: white;
-}
-
-header #logo{
-  margin-top: 30px;
-}
-
-.container{
-  width: 700px;
-  margin: 50px auto;
-  position: relative;
+  padding-bottom: 30px;
 }
 
 footer {
-  margin-top: 30px;
+  margin: 50px 0;
   width: 100%;
   color: #A4A2A2;
   font-size: 12px;
