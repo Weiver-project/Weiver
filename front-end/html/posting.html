@@ -18,10 +18,8 @@
 		<h1>글 작성하기</h1>
 	</div>
 	   
-	<div>    
-	    <!-- 글 작성 폼 -->
-	    <form id="postForm">
-			
+	<div>
+		<form>
 			<div>	
 			    <!-- 셀렉트 버튼(리뷰, 잡담) -->
 			    <select id="selectFormType" onchange="postTypeChange()">
@@ -30,46 +28,56 @@
 			        <option value="리뷰">리뷰</option>
 			    </select>
     		</div>
-    	
-    		<div>
-		        <!-- 잡담 -->
-		        <table id="talkForm" style="display:done">
-		            <th align="left">제목</th>
-		            <tr>
-		                <td><textarea class="title" id="talkTitle"></textarea></td>
-		            </tr>
-		            <th align="left" >내용</th>
-		            <tr>
-		                <td><textarea class="content" id="talkContent"></textarea></td>
-		            </tr>
-		        </table>
-        	</div>
         
         	<div>
-		        <!-- 리뷰 -->
-		        <table id="reviewForm" style="display:none">
-		            <th align="left">제목</th>
-		            <tr>
-		                <td><textarea class="title" id="reviewTitle" ></textarea></td>
-		            </tr>
-		            <th align="left" >작품명</th>
-		            <tr>
-		                <td><textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea></td>
-		            </tr>
-		            <th align="left">내용</th>
-		            <tr>
-		                <td><textarea class="content" id="reviewContent"></textarea></td>
-		            </tr>
-		        </table>
+		        <div>
+		            <div align="left">제목</th>
+		            <div>
+		                <textarea class="title" id="title" ></textarea>
+		            </div>
+		            <div align="left" id="reviewForm" style="display:none">작품명
+		            	<div>
+		                <textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
+		            	</div>
+					</div>
+		            <div align="left">내용</div>
+		            <div>
+							<div class="editor-menu">
+								<button id="btn-bold" name="reviewTool" type="button">
+									<b>B</b>
+								</button>
+								<button id="btn-italic" name="reviewTool" type="button">
+									<i>I</i>
+								</button>
+								<button id="btn-underline" name="reviewTool" type="button">
+									<u>U</u>
+								</button>
+								<button id="btn-strike" name="reviewTool" type="button">
+									<s>S</s>
+								</button>
+								<button id="btn-ordered-list" name="reviewTool" type="button">
+									OL
+								</button>
+								<button id="btn-unordered-list" name="reviewTool" type="button">
+									UL
+								</button>
+								<button id="btn-image" name="reviewTool" type="button">
+									IMG
+								</button>
+							</div>
+							<div id="editor" contenteditable="true">
+								<input id="img-selector" type="file" accept="image/*" />
+							</div>
+		            </div>
+		        </div>
 			</div>
-		
-		
+
 			<div class="nameTag" >
 				<!-- 작성하기 버튼 -->
 		        <input type="submit" value="작성하기">
         	</div>
-		        
-	    </form>
+		</form>
+
 		
    </div>
 </div>
@@ -98,29 +106,15 @@ function postTypeChange(){
 	  
 	  let formType = selectFormType.options[selectFormType.selectedIndex].value;
 	  if(formType == '리뷰'){
-		  document.getElementById("talkForm").style.display="none";
 		  document.getElementById("reviewForm").style.display="";
-		  
-		  document.getElementById("reviewTitle").required="required";
 		  document.getElementById("reviewPerformance").required="required";
-		  document.getElementById("reviewContent").required="required";
-		  
-		  document.getElementById("talkTitle").required="";
-		  document.getElementById("talkContent").required="";
-		  
+
 		  console.log("리뷰");
 		  
 	  }else if(formType == '잡담'){
-		  document.getElementById("talkForm").style.display="";
 		  document.getElementById("reviewForm").style.display="none";
-		  
-		  document.getElementById("talkTitle").required="required";
-		  document.getElementById("talkContent").required="required";
-		  
-		  document.getElementById("reviewTitle").required="";
 		  document.getElementById("reviewPerformance").required="";
-		  document.getElementById("reviewContent").required="";
-		  
+
 		  console.log("잡담");
 	  }
 	  
@@ -130,12 +124,75 @@ function searchPerformance(){
 	let performanceTitle = document.getElementById("reviewPerformance");
 	
 	axios
-	
-	
 }
 
-	
-	
+	// 테스트
+	const editor = document.getElementById('editor');
+    const btnBold = document.getElementById('btn-bold');
+    const btnItalic = document.getElementById('btn-italic');
+    const btnUnderline = document.getElementById('btn-underline');
+    const btnStrike = document.getElementById('btn-strike');
+    const btnOrderedList = document.getElementById('btn-ordered-list');
+    const btnUnorderedList = document.getElementById('btn-unordered-list');
+
+    btnBold.addEventListener('click', function () {
+        setStyle('bold');
+    });
+
+    btnItalic.addEventListener('click', function () {
+        setStyle('italic');
+    });
+
+    btnUnderline.addEventListener('click', function () {
+        setStyle('underline');
+    });
+
+    btnStrike.addEventListener('click', function () {
+        setStyle('strikeThrough')
+    });
+
+    btnOrderedList.addEventListener('click', function () {
+        setStyle('insertOrderedList');
+    });
+
+    btnUnorderedList.addEventListener('click', function () {
+        setStyle('insertUnorderedList');
+    });
+
+    function setStyle(style) {
+        document.execCommand(style);
+        focusEditor();
+    }
+
+    // 버튼 클릭 시 에디터가 포커스를 잃기 때문에 다시 에디터에 포커스를 해줌
+    function focusEditor() {
+        editor.focus({ preventScroll: true });
+    }
+
+    const btnImage = document.getElementById('btn-image');
+    const imageSelector = document.getElementById('img-selector');
+
+
+    btnImage.addEventListener('click', function () {
+        imageSelector.click();
+    });
+
+    imageSelector.addEventListener('change', function (e) {
+        const files = e.target.files;
+        if (!!files) {
+            insertImageDate(files[0]);
+        }
+    });
+
+    function insertImageDate(file) {
+        const reader = new FileReader();
+        reader.addEventListener('load', function (e) {
+            focusEditor();
+            document.execCommand('insertImage', false, `${reader.result}`);
+        });
+        reader.readAsDataURL(file);
+    }
+
 </script>
 
 </html>
