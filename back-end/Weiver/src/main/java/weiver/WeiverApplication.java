@@ -1,4 +1,4 @@
-package com.weiver;
+package weiver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
