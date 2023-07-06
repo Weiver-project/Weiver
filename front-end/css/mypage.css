@@ -1,78 +1,10 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
-
-* {
-background-color: #101322;
-font-family: 'Pretendard-Regular';
-}
-
-body {
-    margin: 0;
-}
-
-/* HEADER */
-header {
-    width: 700px;
-    margin: 0px auto;
-}
-
-/* FOOTER */
-
-footer {
-    width: 700px;
-    margin: 0px auto;
-    color: #A4A2A2;
-    font-size: 12px;
-    text-align: center;
-}
-
-/* NAVI */
-nav {
-    width: 700px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: #98A4B7;
-}
-
-nav a i {
-    font-size: 28px;
-}
-
-nav a div {
-    width: 100px;
-}
-
-.page {
-    width: 700px;
-    margin: 0px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* SETTING */
 
 .setting {
-    width: 646px;
     display: flex;
     justify-content: right;
-    margin: 10px;
+    margin: 10px auto;
+    padding-right: 20px;
 }
 
 .setting a {
@@ -90,13 +22,12 @@ nav a div {
 /* PROFILE */
 
 .profile {
-    width: 646px;
     display: flex;
     color: #EFEFEF;
     font-size: 45px;
     font-weight: 700;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
 }
 
 .profile img {
@@ -105,20 +36,19 @@ nav a div {
 }
 
 .profile div {
-    margin: 10px;
+    margin: 20px;
 }
 
 /* SUBSCRIBE */
 
 .subscribe {
-    width: 646px;
     height: 100px;
     border-radius: 8px;
     background: #172036;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
 }
 
 .subscribe a {
@@ -148,8 +78,7 @@ nav a div {
 /* BOARD */
 
 .board {
-    width: 646px;
-    height: 309px;
+    height: 300px;
     border-radius: 8px;
     background: #172036;
     display: flex;
@@ -158,7 +87,7 @@ nav a div {
     justify-content: center;
     font-size: 35px;
     font-weight: 700;
-    margin: 10px;
+    margin: 20px;
 }
 
 .board a {
@@ -166,8 +95,8 @@ nav a div {
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    width: 580px;
-    padding: 10px;
+    width: 600px;
+    padding: 10px 30px;
     background: #172036;
 }
 
@@ -175,7 +104,7 @@ nav a div {
     border: none;
     height: 2px;
     background-color: #586A85;
-    width: 580px;
+    width: 600px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
