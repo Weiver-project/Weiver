@@ -1,0 +1,95 @@
+body {
+    font-family: Arial;
+    margin: 0;
+
+    background: #101322;
+    color: #d4d9e1;
+    font-size: 30px;
+  }
+
+  
+  table{
+      border-collapse: collapse;
+  }
+  
+  input[type="button"],input[type="submit"],input[type="reset"] {
+      text-align: center;
+      vertical-align: middle;
+      padding: 5px 13px;
+      border-radius: 7px;
+      border:1px solid #336699;
+      box-shadow: 0px 0px 0px;
+      background-color:#3b4869;
+      color: #d4d9e1;
+      margin:0 10px;
+      font-weight: 600;
+  }
+  input[type="button"]:hover,input[type="submit"]:hover,input[type="reset"]:hover {
+      text-decoration: none;
+      scale: 103%;
+  }
+  input[type="text"]{
+      border: 1px solid #336699;
+      padding:8px 10px;
+      border-radius: 10px;
+      width: 90%;
+  }
+  
+  table tr:nth-child(2n+1){
+      background-color: rgb(240,240,240);
+  }
+  
+  a:link {
+    color : black;
+  }
+  a:visited {
+    color : black;
+  }
+  a:hover {
+    color : #336699;
+  }
+  a:active {
+    color : black
+  }
+
+
+
+
+
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+  
+
+
+  * {
+    background-color: #101322;
+    font-family: 'Pretendard-Regular';
+    color:#d4d9e1
+  }
+  
+  footer {
+    color: #A4A2A2;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #98A4B7;
+  }
+  
+  nav i {
+    font-size: 28px;
+  }
