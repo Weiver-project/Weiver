@@ -1,4 +1,4 @@
-/*공통 적용 css*/
+/*공통으로 적용된 css*/
 
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -23,7 +23,6 @@ body {
 }
 
 .title {
-    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 30px;
     color: #FFFFFF;
     margin-bottom: 20px;
@@ -31,21 +30,22 @@ body {
 }
   
 
-  * {
+* {
     background-color: #101322;
     font-family: 'Pretendard-Regular';
-  }
+}
   
   footer {
     color: #A4A2A2;
     font-size: 12px;
     text-align: center;
-  }
+    margin: 50px auto;
+}
   
 nav {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 700px;
     display: flex;
     justify-content: space-around;
     text-align: center;
@@ -61,7 +61,7 @@ nav {
     font-size: 28px;
   }
 
-/*검색 관련 CSS*/
+/*검색창 CSS*/
 .search-container {
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@ nav {
     color: #FFFFFF;
 }
 
-/*인기 뮤지컬 섹션*/
+/*인기 뮤지컬 list css*/
 
 .popular_musical_list {
     margin-bottom: 50px;
@@ -113,7 +113,7 @@ nav {
     color: #FFFFFF;
 }
 
-/*스와이프 관련 CSS*/
+/*스와이프 공통 css*/
 .swiper-container {
     position: relative;
     overflow: hidden;
@@ -156,7 +156,7 @@ nav {
 }
 
 
-/*커뮤니티 인기글 섹션*/
+/*커뮤니티 인기글 css*/
 .popular_community {
     margin-bottom: 20px;
 }
@@ -165,19 +165,19 @@ nav {
     display: flex;
     overflow: hidden;
     margin-bottom: 10px;
+    justify-content: center;
 }
 
 .card {
     background-color: #25304A;
-    width: 182px;
-    height: 125px;
+    width: 160px;
+    height: 110px;
     color: #FFFFFF;
     padding: 20px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     flex-shrink: 0;
     border-radius: 8px;
-    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 15px;
     color: #FFFFFF;
 }
@@ -202,21 +202,21 @@ nav {
     margin-top: 15px;
   }
 
-/*오늘의 배우 섹션*/
+/*오늘의 배우 css*/
 
 .today_actor {
-    width: calc(100% - 40px);
-    overflow: hidden;
-    margin: 30px auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    }
-    
+    width: 700px;
+    margin: 30px auto;
+}
+
 .actor_img {
     border-radius: 70%;
     width: 190px;
     height: 190px;
+    margin-right: 20px;
 }
 
 .actor_img img {
@@ -225,7 +225,15 @@ nav {
     object-fit: cover;
 }
 
-.actor-name{
+.actor-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 510px;
+}
+
+.actor-name {
     color: #FFFFFF;
     display: flex;
     justify-content: center;
@@ -234,29 +242,24 @@ nav {
     margin-bottom: 5px;
 }
 
-.today_actor .swiper-slide {
+.poster-container {
     display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-  }
-  
-.today_actor .poster-container {
-        display: flex;
-        overflow: hidden;
-        justify-content: center;
-        width : 165px;
-        flex-shrink: 0;
-        margin: auto;
-    }
-  
-.poster {
-    background-color: #25304A;
-    width: 125px;
-    height: 182px;
-    margin-right: 10px;
-  }
+    overflow: hidden;
+    justify-content: center;
+    width: calc(100% - 190px);
+    max-width: 510px;
+    margin: auto;
+}
 
-/*공연 중인 뮤지컬 섹션*/
+.poster {
+        background-color: #25304A;
+        width: 125px;
+        height: 182px;
+        margin-right: 10px;
+}
+
+
+/*공연 중인 뮤지컬 css*/
 .progress-musical {
     margin-bottom: 20px;
 }
@@ -267,4 +270,4 @@ nav {
     margin-bottom: 10px;
     justify-content: center;
     flex-shrink: 0;
-    }
+}

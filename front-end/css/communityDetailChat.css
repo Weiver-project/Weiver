@@ -1,3 +1,6 @@
+/* utf 설정 어노테이션 */
+@charset "utf-8"; 
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -13,7 +16,7 @@ body {
     color: white;
 }
 
-/* 공통 hr */
+/* 공통 hr 태그 */
 hr {
     width: 650px;
     border: 1px solid #586A85;
@@ -54,7 +57,7 @@ nav i {
     margin: 30px 0px 10px 20px;
 }
 
-/* 뒤로가기 버튼 */
+/* 뒤로가기 버튼 버튼 */
 .bi-chevron-left {
     cursor: pointer;
     font-size: 30px;
@@ -91,7 +94,6 @@ nav i {
 .postWriter {
     max-width: 500px;
 }
-
 
 /* 공유하기 버튼 */
 .postHeader > i {
@@ -130,7 +132,7 @@ nav i {
     line-height: 1.5;
 }
 
-/* 조회, 댓글, 좋아요 아이콘 그룹 */
+/* 조회, 댓글, 좋아요 아이콘 */
 .iconGroup {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -152,6 +154,40 @@ nav i {
 
 /* 좋아요 버튼 */
 .bi-suit-heart {
+    cursor: pointer;
+}
+
+
+/* 게시글 수정, 삭제버튼 그룹 */
+.postBtnGroup {
+    margin: 10px 0px 20px auto;
+    max-width: 200px;
+    display: flex;
+}
+
+/* 게시글 수정하기 버튼 */
+.postModifyBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #4263EB;
+    cursor: pointer;
+}
+
+/* 게시글 삭제하기 버튼 */
+.postDeleteBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #ff3146cd;
     cursor: pointer;
 }
 
@@ -227,14 +263,14 @@ nav i {
     text-align: center;
 }
 
-/* 대댓글 컨테이너 */
+/* 화살표 아이콘 row 처리를 위해 사용*/
 .recommentWrap {
     display: flex;
     margin: 10px 10px 10px 25px;
     justify-content: space-between;
 }
 
-/* 화살표 아이콘 row 처리를 위해 사용*/
+/* 댓글 입력 그룹 */
 .recommentGroup {
     display: flex;
     flex-direction: row;
@@ -268,6 +304,7 @@ nav i {
 
 /* 댓글 작성하기 버튼 */
 .commentInputBtn {
+    cursor: pointer;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
