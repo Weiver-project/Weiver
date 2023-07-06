@@ -15,12 +15,6 @@ a {
     color: #FFFFFF;
 }
 
-.backgroudBox {
-    width: 700px;
-    margin: 50px auto;
-    position: relative;
-}
-
 .pageName {
     width: 75px;
     margin: 10px auto;
@@ -104,19 +98,19 @@ a {
     display: flex;
     overflow: hidden;
     margin-bottom: 10px;
+    justify-content: center;
 }
 
 .card {
     background-color: #25304A;
-    width: 182px;
-    height: 125px;
+    width: 160px;
+    height: 110px;
     color: #FFFFFF;
     padding: 20px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     flex-shrink: 0;
     border-radius: 8px;
-    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 15px;
     color: #FFFFFF;
 }

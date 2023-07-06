@@ -10,10 +10,8 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
-body {
-    background-color: #101322;
-    font-family: 'Pretendard-Regular';
-    color: white;
+* {
+    color: #FFFFFF;
 }
 
 /* 공통 hr 태그 */
@@ -21,24 +19,6 @@ hr {
     width: 650px;
     border: 1px solid #586A85;
     margin: 10px auto 10px auto;
-}
-
-/* 전체 컨테이너 */
-.backgroudBox {
-    width: 700px;
-    margin: 50px auto 20px auto;
-}
-
-/* 뒤로가기 버튼 div */
-.backBtn {
-    margin: 30px 0px 10px 20px;
-}
-
-/* 뒤로가기 버튼 버튼 */
-.bi-chevron-left {
-    cursor: pointer;
-    font-size: 30px;
-    color: #D4D9E1;
 }
 
 /* 게시글 컨테이너 */
@@ -50,7 +30,7 @@ hr {
 
     border: none;
     border-radius: 8px;
-    margin: 0px auto 20px auto;
+    margin: 100px auto 20px auto;
 }
 
 /* 게시글 헤더 (작성, 제목, 공유하기 버튼) */
@@ -255,17 +235,12 @@ hr {
 
 /* 댓글 입력 그룹 */
 .commentInputGroup {
-    /* 포지션 fixed 시 사용 */
-    /* position: fixed;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%); */
     padding-left: 20px;
     width: 680px;
     height: 40px;
     display: flex;
     justify-content: space-between;
-    margin: 0px auto 30px;
+    margin: 20px auto 30px;
 }
 
 /* 댓글 입력창 */
