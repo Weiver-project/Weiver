@@ -14,6 +14,15 @@ body {
   padding-bottom: 40px;
 }
 
+.backgroundBox {
+  z-index: 1;
+  background-color: #101322;
+  width: 700px;
+  margin: 20px auto;
+  position: relative;
+  padding: 0 20px;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -39,7 +48,8 @@ footer {
 }
 
 nav {
-  width: 100%;
+  width: 700px;
+  background-color: #101322;
   position: fixed;
   bottom: 0;
   margin-top: 10px;
@@ -48,7 +58,9 @@ nav {
   text-align: center;
   list-style: none;
   color: #D4D9E1;
+  z-index: 9999;
 }
+
 nav a {
   text-decoration: none;
   color: #98A4B7;
