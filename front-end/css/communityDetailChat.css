@@ -14,6 +14,7 @@ body {
 }
 
 /* ê³µí†µ hr */
+/* °øÅë hr */
 hr {
     width: 650px;
     border: 1px solid #586A85;
@@ -43,25 +44,26 @@ nav i {
     font-size: 28px;
 }
 
-/* ì „ì²´ ì»¨í…Œì´ë„ˆ */
+/* ? „ì²? ì»¨í…Œ?´?„ˆ */
+/* °øÅë ¹é±×¶ó¿îµå  */
 .backgroudBox {
     width: 700px;
     margin: 50px auto 20px auto;
 }
 
-/* ë’¤ë¡œê°€ê¸° ë²„íŠ¼ div */
+/* ?’¤ë¡œê??ê¸? ë²„íŠ¼ div */
 .backBtn {
     margin: 30px 0px 10px 20px;
 }
 
-/* ë’¤ë¡œê°€ê¸° ë²„íŠ¼ */
+/* ?’¤ë¡œê??ê¸? ë²„íŠ¼ */
 .bi-chevron-left {
     cursor: pointer;
     font-size: 30px;
     color: #D4D9E1;
 }
 
-/* ê²Œì‹œê¸€ ì»¨í…Œì´ë„ˆ */
+/* ê²Œì‹œê¸? ì»¨í…Œ?´?„ˆ */
 .postWrap {
     display: flex;
     flex-direction: column;
@@ -73,7 +75,7 @@ nav i {
     margin: 0px auto 20px auto;
 }
 
-/* ê²Œì‹œê¸€ í—¤ë” (ì‘ì„±, ì œëª©, ê³µìœ í•˜ê¸° ë²„íŠ¼) */
+/* ê²Œì‹œê¸? ?—¤?” (?‘?„±, ? œëª?, ê³µìœ ?•˜ê¸? ë²„íŠ¼) */
 .postHeader {
     padding-left: 10px;
     margin-top: 10px;
@@ -82,18 +84,18 @@ nav i {
     justify-content: space-between;
 }
 
-/* ê²Œì‹œê¸€ ì œëª© */
+/* ê²Œì‹œê¸? ? œëª? */
 .postHeader > h2 {
     max-width: 500px;
 }
 
-/* ê²Œì‹œê¸€ ì‘ì„±ì */
+/* ê²Œì‹œê¸? ?‘?„±? */
 .postWriter {
     max-width: 500px;
 }
 
 
-/* ê³µìœ í•˜ê¸° ë²„íŠ¼ */
+/* ê³µìœ ?•˜ê¸? ë²„íŠ¼ */
 .postHeader > i {
     cursor: pointer;
     margin-top: 5px;
@@ -103,34 +105,34 @@ nav i {
     margin-right: 10px;
 }
 
-/* ê²Œì‹œê¸€ ì‘ì„±ì */
+/* ê²Œì‹œê¸? ?‘?„±? */
 .postWriter {
     padding-left: 10px;
     font-size: 14px;
     background: #172036;
 }
 
-/* ê²Œì‹œê¸€ ì œëª© */
+/* ê²Œì‹œê¸? ? œëª? */
 .titleAndIcon > h2 {
     padding-left: 10px;
     background: #172036;
 }
 
-/* ê²Œì‹œê¸€ ì´ë¯¸ì§€ */
+/* ê²Œì‹œê¸? ?´ë¯¸ì?? */
 .postWrap > img {
     margin: 24px auto;
     max-width: calc(100% - 10px);
     border: none;
 }
 
-/* ê²Œì‹œê¸€ í…ìŠ¤íŠ¸ */
+/* ê²Œì‹œê¸? ?…?Š¤?Š¸ */
 .postContent {
     margin-top: 20px;
     padding-left: 10px;
     line-height: 1.5;
 }
 
-/* ì¡°íšŒ, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜ ê·¸ë£¹ */
+/* ì¡°íšŒ, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½? ê·¸ë£¹ */
 .iconGroup {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -139,23 +141,23 @@ nav i {
     background:none;
 }
 
-/* ì•„ì´ì½˜ ê·¸ë£¹ */
+/* ?•„?´ì½? ê·¸ë£¹ */
 .iconGroup > div {
     padding-left: 10px;
 }
 
-/* ì¡°íšŒ, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜ */
+/* ì¡°íšŒ, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½? */
 .iconGroup > div > i {
     font-size: 24px;
     background-color: #172036;
 }
 
-/* ì¢‹ì•„ìš” ë²„íŠ¼ */
+/* ì¢‹ì•„?š” ë²„íŠ¼ */
 .bi-suit-heart {
     cursor: pointer;
 }
 
-/* ëŒ“ê¸€ ì»¨í…Œì´ë„ˆ */
+/* ?Œ“ê¸? ì»¨í…Œ?´?„ˆ */
 .commentWrap {
     display: flex;
     flex-direction: column;
@@ -166,7 +168,7 @@ nav i {
     margin: 0px auto;
 }
 
-/* ì´ ëŒ“ê¸€ ìˆ˜ */
+/* ì´? ?Œ“ê¸? ?ˆ˜ */
 .totalComment {
     margin-top: 20px;
     margin-left: 10px;
@@ -174,7 +176,7 @@ nav i {
     font-size: 16px;
 }
 
-/* ì‘ì„±ëœ ëŒ“ê¸€ (ì•„ì´ë””, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜, ëŒ€ëŒ“ê¸€ ë§í¬, ë²„íŠ¼) */
+/* ?‘?„±?œ ?Œ“ê¸? (?•„?´?””, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½?, ????Œ“ê¸? ë§í¬, ë²„íŠ¼) */
 .commentAndBtn {
     margin-right: 10px;
     display: flex;
@@ -182,25 +184,25 @@ nav i {
     line-height: 1.5;
 }
 
-/* ëŒ“ê¸€ ì•„ì´ë””, ë‚´ìš© í¬ê¸° ì¡°ì ˆ */
+/* ?Œ“ê¸? ?•„?´?””, ?‚´?š© ?¬ê¸? ì¡°ì ˆ */
 .commentIDAndContent {
     width: 500px;
 }
 
-/* ëŒ“ê¸€ ì‘ì„±ì */
+/* ?Œ“ê¸? ?‘?„±? */
 .commentID {
     margin-left: 10px;
     font-weight: bold;
     font-size: 14px;
 }
 
-/* ëŒ“ê¸€ ë‚´ìš© */
+/* ?Œ“ê¸? ?‚´?š© */
 .commentContent {
     margin-left: 10px;
     font-size: 14px;
 }
 
-/* ì¢‹ì•„ìš”, ëŒ€ëŒ“ê¸€ div */
+/* ì¢‹ì•„?š”, ????Œ“ê¸? div */
 .likeAndRecomment {
     margin-top: 10px;
     margin-left: 10px;
@@ -208,7 +210,7 @@ nav i {
     font-size: 14px;
 }
 
-/* ëŒ€ëŒ“ê¸€ ë²„íŠ¼ */
+/* ????Œ“ê¸? ë²„íŠ¼ */
 .recommentBtn {
     margin-left: 5px;
     font-size: 12px;
@@ -216,7 +218,7 @@ nav i {
     cursor: pointer;
 }
 
-/* ëŒ“ê¸€ ìˆ˜ì •, ì‚­ì œí•˜ê¸° ë²„íŠ¼ */
+/* ?Œ“ê¸? ?ˆ˜? •, ?‚­? œ?•˜ê¸? ë²„íŠ¼ */
 .commentBtnGroup > button{
     cursor: pointer;
     border: none;
@@ -227,22 +229,22 @@ nav i {
     text-align: center;
 }
 
-/* ëŒ€ëŒ“ê¸€ ì»¨í…Œì´ë„ˆ */
+/* ????Œ“ê¸? ì»¨í…Œ?´?„ˆ */
 .recommentWrap {
     display: flex;
     margin: 10px 10px 10px 25px;
     justify-content: space-between;
 }
 
-/* í™”ì‚´í‘œ ì•„ì´ì½˜ row ì²˜ë¦¬ë¥¼ ìœ„í•´ ì‚¬ìš©*/
+/* ?™”?‚´?‘œ ?•„?´ì½? row ì²˜ë¦¬ë¥? ?œ„?•´ ?‚¬?š©*/
 .recommentGroup {
     display: flex;
     flex-direction: row;
 }
 
-/* ëŒ“ê¸€ ì…ë ¥ ê·¸ë£¹ */
+/* ?Œ“ê¸? ?…? ¥ ê·¸ë£¹ */
 .commentInputGroup {
-    /* í¬ì§€ì…˜ fixed ì‹œ ì‚¬ìš© */
+    /* ?¬ì§??…˜ fixed ?‹œ ?‚¬?š© */
     /* position: fixed;
     left: 50%;
     bottom: 0;
@@ -255,7 +257,7 @@ nav i {
     margin: 0px auto 30px;
 }
 
-/* ëŒ“ê¸€ ì…ë ¥ì°½ */
+/* ?Œ“ê¸? ?…? ¥ì°? */
 .commentInput {
     border: none;
     border-radius: 8px;
@@ -266,7 +268,7 @@ nav i {
     padding-left: 5px;
 }
 
-/* ëŒ“ê¸€ ì‘ì„±í•˜ê¸° ë²„íŠ¼ */
+/* ?Œ“ê¸? ?‘?„±?•˜ê¸? ë²„íŠ¼ */
 .commentInputBtn {
     color: #FFFFFF;
     font-size: 12px;
