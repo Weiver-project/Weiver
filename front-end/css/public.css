@@ -24,6 +24,12 @@ header #logo{
   margin-top: 30px;
 }
 
+.container{
+  width: 700px;
+  margin: 50px auto;
+  position: relative;
+}
+
 footer {
   margin-top: 30px;
   width: 100%;
