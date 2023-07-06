@@ -23,29 +23,6 @@ hr {
     margin: 10px auto 10px auto;
 }
 
-footer {
-    color: #A4A2A2;
-    font-size: 12px;
-    text-align: center;
-}
-
-nav {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    width: 700px;
-    margin: 0px auto;
-}
-
-nav a {
-    text-decoration: none;
-    color: #98A4B7;
-}
-
-nav i {
-    font-size: 28px;
-}
-
 /* 전체 컨테이너 */
 .backgroudBox {
     width: 700px;

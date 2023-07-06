@@ -7,40 +7,12 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
-/* * {
-    background-color: #101322;
-    font-family: 'Pretendard-Regular';
-    color: white;
-} */
 
 .backgroudBox {
     width: 700px;
     margin: 50px auto;
     position: relative;
 }
-/* 
-footer {
-    color: #A4A2A2;
-    font-size: 12px;
-    text-align: center;
-}
-
-nav {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    width: 700px;
-    margin: 0px auto;
-}
-
-nav a {
-    text-decoration: none;
-    color: #98A4B7;
-}
-
-nav i {
-    font-size: 28px;
-} */
 
 .pageName {
     width: 75px;
