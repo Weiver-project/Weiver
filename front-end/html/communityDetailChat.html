@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEIVER - 커???니??? ????????</title>
+    <title>WEIVER - 커뮤니티 페이지</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -38,7 +38,7 @@
             <hr>
 
             <!-- 게시글 작성자 -->
-            <div class="postWriter">게시?? ????????? ?????????123</div>
+            <div class="postWriter">게시글 작성자 테스트123</div>
             <hr>
             <!-- 게시글 내용 (텍스트 이미지) -->
             <div class="postContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aspernatur a eum
@@ -46,19 +46,19 @@
                 labore
                 sint, ea accusantium fugiat nemo laborum repellendus! Dicta, cum modi voluptas atque a quos
                 quae!</div>
-            <img class="postImg" src="../img/logo.png" alt="게시?? ???미???">
+            <img class="postImg" src="../img/logo.png" alt="게시글 이미지">
             <div class="postContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aspernatur a eum
                 animi cum
                 labore
                 sint, ea accusantium fugiat nemo laborum repellendus! Dicta, cum modi voluptas atque a quos
                 quae!</div>
-            <img class="postImg" src="../img/google_icon.png" alt="게시?? ???미???">
+            <img class="postImg" src="../img/google_icon.png" alt="게시글 이미지">
             <div class="postContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aspernatur a eum
                 animi cum
                 labore
                 sint, ea accusantium fugiat nemo laborum repellendus! Dicta, cum modi voluptas atque a quos
                 quae!</div>
-            <img class="postImg" src="../img/poster.jpg" alt="게시?? ???미???">
+            <img class="postImg" src="../img/poster.jpg" alt="게시글 이미지">
 
             <!-- 조회, 댓글 좋아요 아이콘 그룹 -->
             <div class="iconGroup">
@@ -77,93 +77,101 @@
             </div>
         </div>
 
+        <!-- 게시글 수정하기, 삭제하기 버튼 -->
+        <div class="postBtnGroup">
+            <form action="" method="post">
+                <input type="submit" value="수정하기" class="postModifyBtn">
+                <input type="submit" value="삭제하기" class="postDeleteBtn">
+            </form>
+        </div>
+
         <!-- 댓글 컨테이너 -->
         <div class="commentWrap">
 
-            <!-- 전체 댓글 수 조회 -->
-            <div class="totalComment">?? ????? ??? : <span>3</span></div>
+            <!-- 총 댓글 수 조회 -->
+            <div class="totalComment">총 댓글 수 : <span>3</span></div>
 
-            <!-- 댓글 작성자, 댓글 내용, 좋아요 버튼) -->
+            <!-- 작성된 댓글 (아이디, 댓글, 좋아요 아이콘, 대댓글 링크, 버튼) -->
             <hr>
             <div class="commentAndBtn">
                 <div class="commentIDAndContent">
-                    <div class="commentID">????????? ?????????1</div>
-                    <div class="commentContent">????????? ?????1</div>
+                    <div class="commentID">테스트 아이디1</div>
+                    <div class="commentContent">테스트 댓글1</div>
                     <div class="likeAndRecomment">
                         <i class="bi-suit-heart"></i>
                         <span>2</span>
-                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">????????</span></a>
+                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">대댓글</span></a>
                     </div>
                 </div>
 
-                <!-- 수정하기, 삭제하기 버튼 -->
+                <!-- 댓글 수정, 삭제 버튼 -->
                 <div class="commentBtnGroup">
-                    <button>수정하기</button>
-                    <button>삭제하기</button>
+                    <button>수정</button>
+                    <button>삭제</button>
                 </div>
             </div>
             <!-- 대댓글 컨테이너 -->
             <div class="recommentWrap">
                 <div class="recommentGroup">
-                    <!-- ???????? ????????? ???????? -->
+                    <!-- 대댓글 화살표 아이콘 -->
                     <i class="bi-arrow-return-right"></i>
-                    <!-- ???????? ????? (?????????, ????????, 좋아???) -->
+                    <!-- 대댓글 정보 (아이디, 대댓글, 좋아요) -->
                     <div class="recommentInfo">
-                        <div class="commentID">리코멘트 ????????? ?????????1</div>
-                        <div class="commentContent">리코멘트 ????????? ?????1</div>
+                        <div class="commentID">리코멘트 테스트 아이디1</div>
+                        <div class="commentContent">리코멘트 테스트 댓글1</div>
                         <div class="likeAndRecomment">
                             <i class="bi-suit-heart"></i>
                             <span>0</span>
                         </div>
                     </div>
                 </div>
-                <!-- ????????, ??????, ?????? 버튼 -->
+                <!-- 대댓글, 수정, 삭제 버튼 -->
                 <div class="commentBtnGroup">
-                    <button>??????</button>
-                    <button>??????</button>
+                    <button>수정</button>
+                    <button>삭제</button>
                 </div>
             </div>
             <hr>
             <div class="commentAndBtn">
                 <div class="commentIDAndContent">
-                    <div class="commentID">????????? ?????????2</div>
+                    <div class="commentID">테스트 아이디2</div>
                     <div class="commentContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
                         aspernatur a eum animi cum labore sint, ea accusantium fugiat nemo laborum repellendus! Dicta,
                         cum modi voluptas atque a quos quae!</div>
                     <div class="likeAndRecomment">
                         <i class="bi-suit-heart"></i>
                         <span>1</span>
-                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">????????</span></a>
+                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">대댓글</span></a>
                     </div>
                 </div>
                 
                 <div class="commentBtnGroup">
-                    <button>??????</button>
-                    <button>??????</button>
+                    <button>수정</button>
+                    <button>삭제</button>
                 </div>
             </div>
             <hr>
             <div class="commentAndBtn">
                 <div class="commentIDAndContent">
-                    <div class="commentID">????????? ?????????3</div>
-                    <div class="commentContent">????????? ?????3</div>
+                    <div class="commentID">테스트 아이디3</div>
+                    <div class="commentContent">테스트 댓글3</div>
                     <div class="likeAndRecomment">
                         <i class="bi-suit-heart"></i>
                         <span>2</span>
-                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">????????</span></a>
+                        <a href="#" style="text-decoration: none;"><span class="recommentBtn">대댓글</span></a>
                     </div>
                 </div>
                 <div class="commentBtnGroup">
-                    <button>??????</button>
-                    <button>??????</button>
+                    <button>수정</button>
+                    <button>삭제</button>
                 </div>
             </div>
             <div class="recommentWrap">
                 <div class="recommentGroup">
                     <i class="bi-arrow-return-right"></i>
                     <div class="recommentInfo">
-                        <div class="commentID">리코멘트 ????????? ?????????3</div>
-                        <div class="commentContent">리코멘트 ????????? ?????3</div>
+                        <div class="commentID">리코멘트 테스트 아이디3</div>
+                        <div class="commentContent">리코멘트 테스트 댓글3</div>
                         <div class="likeAndRecomment">
                             <i class="bi-suit-heart"></i>
                             <span>2</span>
@@ -171,18 +179,18 @@
                     </div>
                 </div>
                 <div class="commentBtnGroup">
-                    <button>??????</button>
-                    <button>??????</button>
+                    <button>수정</button>
+                    <button>삭제</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ????? ?????? ?? -->
+    <!-- 댓글 입력 창 -->
     <div class="commentInputGroup">
         <form action="" method="post">
             <input class="commentInput" type="text">
-            <input class="commentInputBtn" type="submit" value="???????????">
+            <input class="commentInputBtn" type="submit" value="작성하기">
         </form>
     </div>
 

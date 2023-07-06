@@ -1,3 +1,6 @@
+/* utf ì„¤ì • ì–´ë…¸í…Œì´ì…˜ */
+@charset "utf-8"; 
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -13,8 +16,7 @@ body {
     color: white;
 }
 
-/* ê³µí†µ hr */
-/* °øÅë hr */
+/* ê³µí†µ hr íƒœê·¸ */
 hr {
     width: 650px;
     border: 1px solid #586A85;
@@ -44,26 +46,25 @@ nav i {
     font-size: 28px;
 }
 
-/* ? „ì²? ì»¨í…Œ?´?„ˆ */
-/* °øÅë ¹é±×¶ó¿îµå  */
+/* ì „ì²´ ì»¨í…Œì´ë„ˆ */
 .backgroudBox {
     width: 700px;
     margin: 50px auto 20px auto;
 }
 
-/* ?’¤ë¡œê??ê¸? ë²„íŠ¼ div */
+/* ë’¤ë¡œê°€ê¸° ë²„íŠ¼ div */
 .backBtn {
     margin: 30px 0px 10px 20px;
 }
 
-/* ?’¤ë¡œê??ê¸? ë²„íŠ¼ */
+/* ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ë²„íŠ¼ */
 .bi-chevron-left {
     cursor: pointer;
     font-size: 30px;
     color: #D4D9E1;
 }
 
-/* ê²Œì‹œê¸? ì»¨í…Œ?´?„ˆ */
+/* ê²Œì‹œê¸€ ì»¨í…Œì´ë„ˆ */
 .postWrap {
     display: flex;
     flex-direction: column;
@@ -75,7 +76,7 @@ nav i {
     margin: 0px auto 20px auto;
 }
 
-/* ê²Œì‹œê¸? ?—¤?” (?‘?„±, ? œëª?, ê³µìœ ?•˜ê¸? ë²„íŠ¼) */
+/* ê²Œì‹œê¸€ í—¤ë” (ì‘ì„±, ì œëª©, ê³µìœ í•˜ê¸° ë²„íŠ¼) */
 .postHeader {
     padding-left: 10px;
     margin-top: 10px;
@@ -84,18 +85,17 @@ nav i {
     justify-content: space-between;
 }
 
-/* ê²Œì‹œê¸? ? œëª? */
+/* ê²Œì‹œê¸€ ì œëª© */
 .postHeader > h2 {
     max-width: 500px;
 }
 
-/* ê²Œì‹œê¸? ?‘?„±? */
+/* ê²Œì‹œê¸€ ì‘ì„±ì */
 .postWriter {
     max-width: 500px;
 }
 
-
-/* ê³µìœ ?•˜ê¸? ë²„íŠ¼ */
+/* ê³µìœ í•˜ê¸° ë²„íŠ¼ */
 .postHeader > i {
     cursor: pointer;
     margin-top: 5px;
@@ -105,34 +105,34 @@ nav i {
     margin-right: 10px;
 }
 
-/* ê²Œì‹œê¸? ?‘?„±? */
+/* ê²Œì‹œê¸€ ì‘ì„±ì */
 .postWriter {
     padding-left: 10px;
     font-size: 14px;
     background: #172036;
 }
 
-/* ê²Œì‹œê¸? ? œëª? */
+/* ê²Œì‹œê¸€ ì œëª© */
 .titleAndIcon > h2 {
     padding-left: 10px;
     background: #172036;
 }
 
-/* ê²Œì‹œê¸? ?´ë¯¸ì?? */
+/* ê²Œì‹œê¸€ ì´ë¯¸ì§€ */
 .postWrap > img {
     margin: 24px auto;
     max-width: calc(100% - 10px);
     border: none;
 }
 
-/* ê²Œì‹œê¸? ?…?Š¤?Š¸ */
+/* ê²Œì‹œê¸€ í…ìŠ¤íŠ¸ */
 .postContent {
     margin-top: 20px;
     padding-left: 10px;
     line-height: 1.5;
 }
 
-/* ì¡°íšŒ, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½? ê·¸ë£¹ */
+/* ì¡°íšŒ, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜ */
 .iconGroup {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -141,23 +141,57 @@ nav i {
     background:none;
 }
 
-/* ?•„?´ì½? ê·¸ë£¹ */
+/* ì•„ì´ì½˜ ê·¸ë£¹ */
 .iconGroup > div {
     padding-left: 10px;
 }
 
-/* ì¡°íšŒ, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½? */
+/* ì¡°íšŒ, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜ */
 .iconGroup > div > i {
     font-size: 24px;
     background-color: #172036;
 }
 
-/* ì¢‹ì•„?š” ë²„íŠ¼ */
+/* ì¢‹ì•„ìš” ë²„íŠ¼ */
 .bi-suit-heart {
     cursor: pointer;
 }
 
-/* ?Œ“ê¸? ì»¨í…Œ?´?„ˆ */
+
+/* ê²Œì‹œê¸€ ìˆ˜ì •, ì‚­ì œë²„íŠ¼ ê·¸ë£¹ */
+.postBtnGroup {
+    margin: 10px 0px 20px auto;
+    max-width: 200px;
+    display: flex;
+}
+
+/* ê²Œì‹œê¸€ ìˆ˜ì •í•˜ê¸° ë²„íŠ¼ */
+.postModifyBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #4263EB;
+    cursor: pointer;
+}
+
+/* ê²Œì‹œê¸€ ì‚­ì œí•˜ê¸° ë²„íŠ¼ */
+.postDeleteBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #ff3146cd;
+    cursor: pointer;
+}
+
+/* ëŒ“ê¸€ ì»¨í…Œì´ë„ˆ */
 .commentWrap {
     display: flex;
     flex-direction: column;
@@ -168,7 +202,7 @@ nav i {
     margin: 0px auto;
 }
 
-/* ì´? ?Œ“ê¸? ?ˆ˜ */
+/* ì´ ëŒ“ê¸€ ìˆ˜ */
 .totalComment {
     margin-top: 20px;
     margin-left: 10px;
@@ -176,7 +210,7 @@ nav i {
     font-size: 16px;
 }
 
-/* ?‘?„±?œ ?Œ“ê¸? (?•„?´?””, ?Œ“ê¸?, ì¢‹ì•„?š” ?•„?´ì½?, ????Œ“ê¸? ë§í¬, ë²„íŠ¼) */
+/* ì‘ì„±ëœ ëŒ“ê¸€ (ì•„ì´ë””, ëŒ“ê¸€, ì¢‹ì•„ìš” ì•„ì´ì½˜, ëŒ€ëŒ“ê¸€ ë§í¬, ë²„íŠ¼) */
 .commentAndBtn {
     margin-right: 10px;
     display: flex;
@@ -184,25 +218,25 @@ nav i {
     line-height: 1.5;
 }
 
-/* ?Œ“ê¸? ?•„?´?””, ?‚´?š© ?¬ê¸? ì¡°ì ˆ */
+/* ëŒ“ê¸€ ì•„ì´ë””, ë‚´ìš© í¬ê¸° ì¡°ì ˆ */
 .commentIDAndContent {
     width: 500px;
 }
 
-/* ?Œ“ê¸? ?‘?„±? */
+/* ëŒ“ê¸€ ì‘ì„±ì */
 .commentID {
     margin-left: 10px;
     font-weight: bold;
     font-size: 14px;
 }
 
-/* ?Œ“ê¸? ?‚´?š© */
+/* ëŒ“ê¸€ ë‚´ìš© */
 .commentContent {
     margin-left: 10px;
     font-size: 14px;
 }
 
-/* ì¢‹ì•„?š”, ????Œ“ê¸? div */
+/* ì¢‹ì•„ìš”, ëŒ€ëŒ“ê¸€ div */
 .likeAndRecomment {
     margin-top: 10px;
     margin-left: 10px;
@@ -210,7 +244,7 @@ nav i {
     font-size: 14px;
 }
 
-/* ????Œ“ê¸? ë²„íŠ¼ */
+/* ëŒ€ëŒ“ê¸€ ë²„íŠ¼ */
 .recommentBtn {
     margin-left: 5px;
     font-size: 12px;
@@ -218,7 +252,7 @@ nav i {
     cursor: pointer;
 }
 
-/* ?Œ“ê¸? ?ˆ˜? •, ?‚­? œ?•˜ê¸? ë²„íŠ¼ */
+/* ëŒ“ê¸€ ìˆ˜ì •, ì‚­ì œí•˜ê¸° ë²„íŠ¼ */
 .commentBtnGroup > button{
     cursor: pointer;
     border: none;
@@ -229,22 +263,22 @@ nav i {
     text-align: center;
 }
 
-/* ????Œ“ê¸? ì»¨í…Œ?´?„ˆ */
+/* í™”ì‚´í‘œ ì•„ì´ì½˜ row ì²˜ë¦¬ë¥¼ ìœ„í•´ ì‚¬ìš©*/
 .recommentWrap {
     display: flex;
     margin: 10px 10px 10px 25px;
     justify-content: space-between;
 }
 
-/* ?™”?‚´?‘œ ?•„?´ì½? row ì²˜ë¦¬ë¥? ?œ„?•´ ?‚¬?š©*/
+/* ëŒ“ê¸€ ì…ë ¥ ê·¸ë£¹ */
 .recommentGroup {
     display: flex;
     flex-direction: row;
 }
 
-/* ?Œ“ê¸? ?…? ¥ ê·¸ë£¹ */
+/* ëŒ“ê¸€ ì…ë ¥ ê·¸ë£¹ */
 .commentInputGroup {
-    /* ?¬ì§??…˜ fixed ?‹œ ?‚¬?š© */
+    /* í¬ì§€ì…˜ fixed ì‹œ ì‚¬ìš© */
     /* position: fixed;
     left: 50%;
     bottom: 0;
@@ -257,7 +291,7 @@ nav i {
     margin: 0px auto 30px;
 }
 
-/* ?Œ“ê¸? ?…? ¥ì°? */
+/* ëŒ“ê¸€ ì…ë ¥ì°½ */
 .commentInput {
     border: none;
     border-radius: 8px;
@@ -268,8 +302,9 @@ nav i {
     padding-left: 5px;
 }
 
-/* ?Œ“ê¸? ?‘?„±?•˜ê¸? ë²„íŠ¼ */
+/* ëŒ“ê¸€ ì‘ì„±í•˜ê¸° ë²„íŠ¼ */
 .commentInputBtn {
+    cursor: pointer;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;

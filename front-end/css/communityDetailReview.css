@@ -1,3 +1,5 @@
+@charset "utf-8"; 
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -332,6 +334,7 @@ nav i {
 
 /* 댓글 작성하기 버튼 */
 .commentInputBtn {
+    cursor: pointer;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
