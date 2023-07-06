@@ -7,18 +7,18 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
-* {
+/* * {
     background-color: #101322;
     font-family: 'Pretendard-Regular';
     color: white;
-}
+} */
 
 .backgroudBox {
     width: 700px;
     margin: 50px auto;
     position: relative;
 }
-
+/* 
 footer {
     color: #A4A2A2;
     font-size: 12px;
@@ -40,7 +40,7 @@ nav a {
 
 nav i {
     font-size: 28px;
-}
+} */
 
 .pageName {
     width: 75px;
@@ -73,49 +73,93 @@ nav i {
     border-radius: 8px;
 }
 
-.popularPostList {
-    display: flex;
-    width: 700px;
-    height: 125px;
+/*스와이프 관련 CSS*/
+.swiper-container {
     position: relative;
-    justify-content: space-evenly;
+    overflow: hidden;
+    width: 100%;
+  }
+
+.swiper-slide {
+    position: relative;
+    width: 100%;
 }
 
-.leftBtn {
-    cursor: pointer;
-    display: flex;
+.swiper-pagination {
     position: absolute;
-    top: 40%;
-    left: 0%;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
 }
 
-.rightBtn {
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    display: flex;
-    position: absolute;
-    top: 40%;
-    right: 0%;
 }
 
-.leftBtn > i, .rightBtn > i {
-    background: none;
+.swiper-button-next {
+    right: 10px;
 }
 
-.popularPost {
+.swiper-button-prev {
+    left: 10px;
+}
+
+
+/*커뮤니티 인기글 섹션*/
+.popular_community {
+    margin-bottom: 20px;
+}
+
+.card-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #466093;
-    border: none;
-    border-radius: 8px;
-    width: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #25304A;
+    width: 182px;
     height: 125px;
+    color: #FFFFFF;
+    padding: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
 }
 
-.popularPost > p {
-    padding-left: 10px;
-    background-color: #466093;
+.card-title {
+    background-color: #25304A;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-footer {
+    background-color: #25304A;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    color: #888;
+}
+
+.author {
+    background-color: #25304A;
+    margin-left: 5px;
+    margin-top: 15px;
 }
 
 .btnGroup {

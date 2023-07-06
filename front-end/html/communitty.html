@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEIVER - 커뮤니티 페이지</title>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/communitty.css">
+
+    <!-- SWIPER 외부 라이브러리 연결-->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="../js/communitty.js"></script>
+
+    <link rel="stylesheet" href="/front-end/css/communitty.css">
+    <link rel="stylesheet" href="/front-end/css/public.css">
+
 </head>
 
 <body>
@@ -28,24 +34,99 @@
             </form>
         </div>
         <p style="font-weight:bold; font-size: 17px;">인기글🔥</p>
-        <div class="popularPostList">
-            <div class="popularPost">
-                <p>게시글 제목</p>
-                <p>작성자</p>
-            </div>
-            <div class="popularPost">
-                <p>게시글 제목</p>
-                <p>작성자</p>
-            </div>
-            <div class="popularPost">
-                <p>게시글 제목</p>
-                <p>작성자</p>
-            </div>
-            <div class="leftBtn">
-                <i class="bi bi-chevron-left"></i>
-            </div>
-            <div class="rightBtn">
-                <i class="bi bi-chevron-right"></i>
+        <div class="popular_community">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 1</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 2</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 3</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 4</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 5</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 6</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 7</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 8</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">카드 9</h3>
+                                </div>
+                                <div class="card-footer">
+                                  <span class="author">작성자</span>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
 
