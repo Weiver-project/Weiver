@@ -1,4 +1,4 @@
-/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ css*/
+/*°øÅë Àû¿ë css*/
 
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -29,12 +29,13 @@ body {
     margin-top: 40px;
 }
   
+
 * {
     background-color: #101322;
     font-family: 'Pretendard-Regular';
 }
   
-footer {
+  footer {
     color: #A4A2A2;
     font-size: 12px;
     text-align: center;
@@ -51,16 +52,16 @@ nav {
     z-index: 9999;
 }
   
-nav a {
+  nav a {
     text-decoration: none;
     color: #98A4B7;
-}
+  }
   
-nav i {
+  nav i {
     font-size: 28px;
-}
+  }
 
-/*ê²€ìƒ‰ì°½ CSS*/
+/*°Ë»öÃ¢ CSS*/
 .search-container {
     display: flex;
     align-items: center;
@@ -90,7 +91,7 @@ nav i {
     color: #FFFFFF;
 }
 
-/*ì¸ê¸° ë®¤ì§€ì»¬ list css*/
+/*ÀÎ±â ¹ÂÁöÄÃ list css*/
 
 .popular_musical_list {
     margin-bottom: 50px;
@@ -112,7 +113,7 @@ nav i {
     color: #FFFFFF;
 }
 
-/*ìŠ¤ì™€ì´í”„ ê¸°ëŠ¥ css*/
+/*½º¿ÍÀÌÇÁ ±â´É °ü·Ã css*/
 .swiper-container {
     position: relative;
     overflow: hidden;
@@ -155,7 +156,7 @@ nav i {
 }
 
 
-/*ì»¤ë®¤ë‹ˆí‹° ì¸ê¸°ê¸€ css*/
+/*Ä¿¹Â´ÏÆ¼ ÀÎ±â±Û css*/
 .popular_community {
     margin-bottom: 20px;
 }
@@ -201,7 +202,7 @@ nav i {
     margin-top: 15px;
   }
 
-/*ì˜¤ëŠ˜ì˜ ë°°ìš° css*/
+/*¿À´ÃÀÇ ¹è¿ì css*/
 
 .today_actor {
     display: flex;
@@ -229,7 +230,7 @@ nav i {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 510px; /* 700px - 190px - 20px (actor_imgï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) */
+    width: 510px; /* 700px - 190px - 20px (actor_imgÀÇ Æø°ú ¸¶Áø) */
 }
 
 .actor-name {
@@ -246,7 +247,7 @@ nav i {
     overflow: hidden;
     justify-content: center;
     width: calc(100% - 190px);
-    max-width: 510px; /* 700px - 190px - 20px (actor_imgï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) */
+    max-width: 510px; /* 700px - 190px - 20px (actor_imgÀÇ Æø°ú ¸¶Áø) */
     margin: auto;
 }
 
@@ -258,7 +259,7 @@ nav i {
 }
 
 
-/*ê³µì—° ì¤‘ì¸ ë®¤ì§€ì»¬ css*/
+/*°ø¿¬ ÁßÀÎ ¹ÂÁöÄÃ css*/
 .progress-musical {
     margin-bottom: 20px;
 }
