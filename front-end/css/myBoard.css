@@ -93,12 +93,6 @@ body{
 	border-radius:inherit;
 }
 
-/* 좋아요 버튼 */
-.like-btn{
-	width: 100%;
-	height: 100%;	
-}
-
 /* 기간 font */
 .date{
 	font-size:7px;
