@@ -1,98 +1,23 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
-
-* {
-background-color: #101322;
-font-family: 'Pretendard-Regular';
-}
-
-body {
-    margin: 0;
-}
-
-/* HEADER */
-header {
-    width: 700px;
-    margin: 0px auto;
-}
-
-/* FOOTER */
-
-footer {
-    width: 700px;
-    margin: 0px auto;
-    color: #A4A2A2;
-    font-size: 12px;
-    text-align: center;
-}
-
-/* NAVI */
-nav {
-    width: 700px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: #98A4B7;
-}
-
-nav a i {
-    font-size: 28px;
-}
-
-nav a div {
-    width: 100px;
-}
-
-.page {
-    width: 700px;
-    margin: 0px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* title */
 .title {
-    color: #EFEFEF;
-    width: 646px;
-    margin: 30px;
-}
-
-
-.title .back {
-    position: absolute;
-    text-align: left;
-    font-size: 30px;
+    margin-bottom: 30px;
 }
 
 .title .name {
+    padding-top: 30px;
     text-align: center;
     text-decoration: none;
     color: #EFEFEF;
     font-size: 30px;
+    font-weight: 700;
 }
 
 /* 작성하기 버튼 */
 .write {
-    width: 700px;
+    width: 660px;
     display: flex;
     justify-content: right;
-    margin: 20px;
+    padding: 0 20px;
 }
 
 .write button {
@@ -113,7 +38,7 @@ nav a div {
 .list {
     display: flex;
     align-items: center;
-    margin: 20px 40px;
+    margin: 20px 20px;
 }
 
 .inquiry {
@@ -124,7 +49,7 @@ nav a div {
     height: 100px;
     padding-left: 30px;
     align-items: center;
-    margin-right: 36px;
+    margin-right: 40px;
 }
 
 .check {

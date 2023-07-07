@@ -1,99 +1,22 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
-
-* {
-background-color: #101322;
-font-family: 'Pretendard-Regular';
-}
-
-body {
-    margin: 0;
-}
-
-/* HEADER */
-header {
-    width: 700px;
-    margin: 0px auto;
-}
-
-/* FOOTER */
-
-footer {
-    width: 700px;
-    margin: 0px auto;
-    color: #A4A2A2;
-    font-size: 12px;
-    text-align: center;
-}
-
-/* NAVI */
-nav {
-    width: 700px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: #98A4B7;
-}
-
-nav a i {
-    font-size: 28px;
-}
-
-nav a div {
-    width: 100px;
-}
-
-.page {
-    width: 700px;
-    margin: 0px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* title */
 .title {
-    color: #EFEFEF;
-    width: 646px;
-    margin: 30px;
-}
-
-
-.title .back {
-    position: absolute;
-    text-align: left;
-    font-size: 30px;
+    margin-bottom: 30px;
 }
 
 .title .name {
+    padding-top: 30px;
     text-align: center;
     text-decoration: none;
     color: #EFEFEF;
     font-size: 30px;
+    font-weight: 700;
 }
+
 
 /* 문의내용 */
-.text_box {
-    margin-top: 20px;
-}
-
 .data_show {
     margin: 10px 0px;
+    padding: 0px 20px;
 }
 
 .data_show p {
@@ -104,14 +27,15 @@ nav a div {
 }
 
 .data_show div {
-    width: 628px;
+    width: 640px;
     height: auto;
+    background-color: #101322;
     border-radius: 8px;
     border: 1px solid #25304A;
-    font-size: 18px;
-    font-weight: 100;
-    margin-bottom: 5%;
-    padding: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 20px;
     color: #586A85;
 }
 
@@ -128,7 +52,7 @@ nav a div {
     justify-content: center;
     align-items: center;
     bottom: 38px;
-    width: 646px;
+    width: 660px;
     height: 48px;
     border: none;
     border-radius: 8px;
