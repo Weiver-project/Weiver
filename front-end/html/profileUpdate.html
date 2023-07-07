@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profileUpdate</title>
     <link rel="stylesheet" href="/css/profileUpdate.css">
+    <link rel="stylesheet" href="/css/public.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -15,18 +16,21 @@
             myimg.click();
         }
     </script>
-    <!-- header -->
-    <header><img src="/img/logo.png" alt="logo" height="70" width="300"></header>
     
     <div class="page">
-
-        <!-- 타이틀 -->
-        <div class="title">
-            <div class="back">
-                <a href="#"><i class="bi bi-chevron-left" style="color: #EFEFEF"></i></a>
+        <!-- header -->
+        <header>
+            <img src="/img/logo.png" alt="logo" height="70" width="300">
+        
+            <!-- 타이틀 -->
+            <div class="title">
+                <div class="back">
+                    <a href="#"><i class="bi bi-chevron-left"></i></a>
+                </div>
+                <div class="name">프로필 수정</div>
             </div>
-            <div class="name">프로필 수정</div>
-        </div>
+        </header>
+        
 
         <form action="">    
             <!-- 프로필 -->
@@ -34,7 +38,7 @@
                 <div class="profile_cut">
                     <img src="/img/Default_Profile.png" alt="profile" height="150" width="150">
                     <button id="my-button" class="change" onclick="onClickUpload();">변경</button>
-                    <input id="my-img" type="file" accept="image/*">
+                    <input id="my-img" class="button hidden" type="file" accept="image/*">
                 </div>
             </div>
             
