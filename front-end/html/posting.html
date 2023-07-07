@@ -6,80 +6,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>글 작성 페이지</title>
 <link href="../css/posting.css" rel="stylesheet" type="text/css" />
+<link href="../css/public.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<header><img src="../img/logo.png" alt="logo" height="70" width="300"></header>
+<header>
+	<div>
+		<img src="../img/logo.png" alt="logo" height="70" width="300">
+	</div>
+
+	<div>
+		<div>
+			<a href="#"><i class="bi-chevron-left"></i></a>
+		</div>
+		<div class="nameTag">
+
+			<h1>글 작성하기</h1>
+		</div>
+	</div>
+</header>
 
 <body >
-<div id="contents">
-	<div class="nameTag">
-		<a href="#" class="back-btn"><i class="bi bi-chevron-left" style="color: #EFEFEF"></i></a>
-		<h1>글 작성하기</h1>
-	</div>
-	   
 	<div>
-		<form>
-			<div>	
-			    <!-- 셀렉트 버튼(리뷰, 잡담) -->
-			    <select id="selectFormType" onchange="postTypeChange()">
-			        <option value="select">글 종류</option>
-			        <option value="잡담">잡담</option>
-			        <option value="리뷰">리뷰</option>
-			    </select>
-    		</div>
-        
-        	<div>
-		        <div>
-		            <div align="left">제목</th>
-		            <div>
-		                <textarea class="title" id="title" ></textarea>
-		            </div>
-		            <div align="left" id="reviewForm" style="display:none">작품명
-		            	<div>
-		                <textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
-		            	</div>
+	   
+		<div>
+			<form>
+				<div>	
+					<!-- 셀렉트 버튼(리뷰, 잡담) -->
+					<select id="selectFormType" onchange="postTypeChange()">
+						<option value="select">글 종류</option>
+						<option value="잡담">잡담</option>
+						<option value="리뷰">리뷰</option>
+					</select>
+				</div>
+			
+				<div>
+					<div>
+						<div align="left">제목</div>
+						<div>
+							<textarea class="title" id="title" ></textarea>
+						</div>
+						<div align="left" id="reviewForm" style="display:none">작품명
+							<div>
+							<textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
+							</div>
+						</div>
+						<div align="left">내용</div>
+						<div>
+								<div class="editor-menu">
+									<button id="btn-bold" name="reviewTool" type="button">
+										<b>B</b>
+									</button>
+									<button id="btn-italic" name="reviewTool" type="button">
+										<i>I</i>
+									</button>
+									<button id="btn-underline" name="reviewTool" type="button">
+										<u>U</u>
+									</button>
+									<button id="btn-strike" name="reviewTool" type="button">
+										<s>S</s>
+									</button>
+									<button id="btn-ordered-list" name="reviewTool" type="button">
+										OL
+									</button>
+									<button id="btn-unordered-list" name="reviewTool" type="button">
+										UL
+									</button>
+									<button id="btn-image" name="reviewTool" type="button">
+										IMG
+									</button>
+								</div>
+								<div id="editor" contenteditable="true">
+									<input id="img-selector" type="file" accept="image/*" />
+								</div>
+						</div>
 					</div>
-		            <div align="left">내용</div>
-		            <div>
-							<div class="editor-menu">
-								<button id="btn-bold" name="reviewTool" type="button">
-									<b>B</b>
-								</button>
-								<button id="btn-italic" name="reviewTool" type="button">
-									<i>I</i>
-								</button>
-								<button id="btn-underline" name="reviewTool" type="button">
-									<u>U</u>
-								</button>
-								<button id="btn-strike" name="reviewTool" type="button">
-									<s>S</s>
-								</button>
-								<button id="btn-ordered-list" name="reviewTool" type="button">
-									OL
-								</button>
-								<button id="btn-unordered-list" name="reviewTool" type="button">
-									UL
-								</button>
-								<button id="btn-image" name="reviewTool" type="button">
-									IMG
-								</button>
-							</div>
-							<div id="editor" contenteditable="true">
-								<input id="img-selector" type="file" accept="image/*" />
-							</div>
-		            </div>
-		        </div>
-			</div>
+				</div>
 
-			<div class="nameTag" >
-				<!-- 작성하기 버튼 -->
-		        <input type="submit" value="작성하기">
-        	</div>
-		</form>
+				<div class="nameTag" >
+					<!-- 작성하기 버튼 -->
+					<button>
 
-		
-   </div>
+						<input type="submit" value="작성하기" class="submit-btn">
+					</button>
+				</div>
+			</form>
+
+			
+	</div>
 </div>
 
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
