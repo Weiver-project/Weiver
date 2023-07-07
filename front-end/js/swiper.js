@@ -18,8 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var swiperPopularCommunity = new Swiper('.popular_community .swiper-container', swiperOptions);
     var swiperTodayActor = new Swiper('.today_actor .swiper-container', swiperOptions);
     var swiperProgressMusical = new Swiper('.progress-musical .swiper-container', swiperOptions);
-
+    var swiperCasting = new Swiper('.casting .swiper-container', swiperOptions);
+    var swiperCasting = new Swiper('.youtube-api .swiper-container', swiperOptions);
+  
+    
     swiperPopularCommunity.init();  // Swiper 인스턴스 초기화
     swiperTodayActor.init();
     swiperProgressMusical.init();
+    swiperCasting.init();
 });

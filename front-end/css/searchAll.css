@@ -1,3 +1,62 @@
+/*검색과 관련된 css입니다.*/
+
+/*메인 페이지*/
+/*검색창 CSS*/
+.mainSearch-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.mainSearch-container input[type=text] {
+    padding: 5px;
+    width: 200px;
+    background-color: #98A4B7;
+    border: none;
+}
+
+.mainSearch-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.mainSearch-container svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+/*커뮤니티 메인 페이지*/
+
+/*검색 창*/
+.communittySearch {
+    display: flex;
+    margin: 0px 50px 30px 50px;
+    justify-content: space-between;
+}
+
+.communittySearch > input {
+    width: 480px;
+    height: 50px;
+    background-color: #25304A;
+    border: none;
+    border-radius: 8px;
+}
+
+.communittySearch > button {
+    width: 70px;
+    height: 50px;
+    background-color: #25304A;
+    color: #D4D9E1;
+    border: 0px;
+    border-radius: 8px;
+}
+
 /* 검색 페이지 공통 사항 */
 h2{
   padding-top: 30px;
@@ -128,3 +187,4 @@ header hr{
   border: 0;
   height: 1;
 }
+

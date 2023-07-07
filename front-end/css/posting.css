@@ -1,6 +1,6 @@
- 
- 
- * {
+/*글 작성 폼에 대한 css입니다.*/
+
+* {
     background-color: inherit;
     font-family: 'Pretendard-Regular';
     color:#d4d9e1;
@@ -57,8 +57,3 @@ div#editor {
 #editor img {
   max-width: 700px;
 }
-
-
-
-
-

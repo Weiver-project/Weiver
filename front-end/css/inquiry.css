@@ -1,3 +1,7 @@
+/*문의에 관련된 css입니다.*/
+
+/* 문의 리스트 */
+
 /* title */
 .title {
     margin-bottom: 30px;
@@ -74,4 +78,53 @@ p {
     font-size: 15px;
     text-decoration: none;
     font-weight: 100;
+}
+
+/*문의 작성 페이지*/
+/* 문의내용 */
+.data_show {
+    margin: 10px 0px;
+    padding: 0px 20px;
+}
+
+.data_show p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+    margin: 0%;
+}
+
+.data_show div {
+    width: 640px;
+    height: auto;
+    background-color: #101322;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #586A85;
+}
+
+.data_show .inquiry_text {
+    height: 100px;
+}
+
+.data_show .answer {
+    height: 250px;
+}
+
+.state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 38px;
+    width: 660px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background-color: #25304A;
+    color: #D4D9E1;
+    font-size: 20px;
 }
