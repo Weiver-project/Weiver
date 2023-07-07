@@ -16,10 +16,14 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<dependencies>
+<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -38,6 +42,23 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+	      	<groupId>javax.servlet</groupId>
+	      	<artifactId>jstl</artifactId>
+	  	</dependency>
+	  	<dependency>
+      		<groupId>org.apache.tomcat.embed</groupId>
+      		<artifactId>tomcat-embed-jasper</artifactId>
+      		<scope>provided</scope>
+  		</dependency>
+  		
+  		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.15.3</version>
+		</dependency>
+		  		
 	</dependencies>
 
 	<build>
