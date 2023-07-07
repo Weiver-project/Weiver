@@ -21,5 +21,6 @@ public class DataSeverApplication {
 	@Scheduled(fixedDelay = 100000000)
 	public void executeTask() {
 		kopisService.getMusicalIdList();
+		kopisService.saveMusical();
 	}
 }
