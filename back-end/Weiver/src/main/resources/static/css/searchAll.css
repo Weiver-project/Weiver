@@ -1,0 +1,190 @@
+/*검색과 관련된 css입니다.*/
+
+/*메인 페이지*/
+/*검색창 CSS*/
+.mainSearch-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.mainSearch-container input[type=text] {
+    padding: 5px;
+    width: 200px;
+    background-color: #98A4B7;
+    border: none;
+}
+
+.mainSearch-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.mainSearch-container svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+/*커뮤니티 메인 페이지*/
+
+/*검색 창*/
+.communittySearch {
+    display: flex;
+    margin: 0px 50px 30px 50px;
+    justify-content: space-between;
+}
+
+.communittySearch > input {
+    width: 480px;
+    height: 50px;
+    background-color: #25304A;
+    border: none;
+    border-radius: 8px;
+}
+
+.communittySearch > button {
+    width: 70px;
+    height: 50px;
+    background-color: #25304A;
+    color: #D4D9E1;
+    border: 0px;
+    border-radius: 8px;
+}
+
+/* 검색 페이지 공통 사항 */
+h2{
+  padding-top: 30px;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+article{
+  margin: 0 10%;
+}
+
+.search{
+  margin-bottom: 20px ;
+  text-align: center;
+  color: #D4D9E1;
+}
+
+.search input{
+  box-sizing: border-box;
+  height: 35px; 
+  border-radius: 5px;
+  font-size: 18px;
+  color: #D4D9E1;
+}
+
+.search input:first-child{
+  background-color: #25304A;
+  width: 80%;
+}
+
+.search input:nth-child(2){
+  background-color: #3B4869;
+  margin-left: 30px;
+  width: 10%;
+}
+
+/* 뮤지컬 검색 */
+.musical_list{
+  list-style: none;
+  color: #D4D9E1;
+  padding: 0;
+}
+
+.musical_list li{
+  background-color: #172036;
+  height: 120px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.musical_list li img{
+  margin-right: 20px;
+  height: 120px;
+  width: 85px;
+  float: left;
+}
+
+.musical_list li h2{
+  padding: 0px;
+  margin-top: 10px;
+  text-align: left;
+  font-size: 30px;
+  background-color: #172036;
+}
+
+.musical_list li span{
+  background-color: #172036;
+}
+
+/* 커뮤니티 검색 */
+.community_list{
+  list-style: none;
+  color: #D4D9E1;
+  padding: 0;
+}
+
+.community_list li{
+  background-color: #172036;
+  height: 80px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.community_list li img{
+  margin-right: 20px;
+  height: 80px;
+  width: 120px;
+  float: left;
+}
+
+.community_list li h6{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 12px;
+  background-color: #172036;
+}
+
+.community_list li span{
+  background-color: #172036;
+  font-size: 10px;
+}
+
+/* 찜했어요 봤어요 */
+.select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.like {
+  color: #EFEFEF;
+  border: none;
+  font-size: 20px;
+  background-color: #101322;
+}
+
+.viewed {
+  color: #586A85;
+  border: none;
+  font-size: 20px;
+  background-color: #101322;
+}
+
+header hr{
+  width: 80%;
+  background: #586A85;
+  border: 0;
+  height: 1;
+}
+

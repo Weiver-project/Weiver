@@ -21,11 +21,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+
+		<dependency>	
+	        <groupId>org.mongodb</groupId>
+	        <artifactId>mongodb-driver-sync</artifactId>
+	    </dependency>
+	    
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -42,23 +49,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		  		
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux -->
 		<dependency>
-	      	<groupId>javax.servlet</groupId>
-	      	<artifactId>jstl</artifactId>
-	  	</dependency>
-	  	<dependency>
-      		<groupId>org.apache.tomcat.embed</groupId>
-      		<artifactId>tomcat-embed-jasper</artifactId>
-      		<scope>provided</scope>
-  		</dependency>
-  		
-  		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-webflux</artifactId>
+		    <version>2.7.13</version>
+		</dependency>
 		<dependency>
 		    <groupId>org.jsoup</groupId>
 		    <artifactId>jsoup</artifactId>
-		    <version>1.15.3</version>
+		    <version>1.14.2</version>
 		</dependency>
-		  		
+
 	</dependencies>
 
 	<build>
