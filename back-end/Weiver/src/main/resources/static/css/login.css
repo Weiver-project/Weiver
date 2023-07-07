@@ -1,0 +1,185 @@
+/* 로그인 페이지 */
+header {
+  margin: 30px;
+  margin-bottom: 10%;
+}
+
+article {
+  box-sizing: border-box;
+  margin: 0 15%;
+}
+
+#logo {
+  display: block;
+  margin: auto;
+}
+
+.login-title {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  margin: 30px 0 20px 0;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-form input {
+  border-style: none;
+  background-color: #172036;
+  height: 40px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #D4D9E1;
+}
+
+#login-form .submit {
+  background-color: #3B4869;
+  margin-top: 10px;
+}
+
+.login-support {
+  text-align: right;
+}
+
+.login-support a {
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+  color: #D4D9E1;
+}
+
+.dividing-line {
+  display: flex;
+  align-items: center;
+  margin: 30px 0 10px 0;
+  color: #D4D9E1;
+}
+
+/* 구분선 before:왼쪽 after:오른쪽 */
+.dividing-line::before {
+  content: '';
+  flex-grow: 1;
+  background: #D4D9E1;
+  height: 1px;
+  margin-right: 20px;
+}
+
+.dividing-line::after {
+  content: '';
+  flex-grow: 1;
+  background: #D4D9E1;
+  height: 1px;
+  margin-left: 20px;
+}
+
+#simple-login {
+  display: flex;
+  justify-content: space-around;
+  border: 0;
+}
+
+#simple-login img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 비밀번호 찾기 페이지 */
+.search-pw-title{
+  color: #D4D9E1;
+  margin-bottom: 20px;
+  font-size: 20px;
+  margin-top: 65%;
+}
+
+/*비밀번호 변경*/
+/* title */
+.title {
+  margin-bottom: 30px;
+}
+
+.title .name {
+  padding-top: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #EFEFEF;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ID */
+.ID {
+  margin: 10px 0px;
+  padding: 0px 20px;
+}
+
+.ID p {
+  font-size: 22px;
+  font-weight: 400;
+  color: #D4D9E1;
+  margin: 0%;
+}
+
+.ID input {
+  width: 640px;
+  height: 48px;
+  background-color: #101322;
+  border-radius: 8px;
+  border: 1px solid #25304A;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0px 10px;
+  margin-bottom: 20px;
+}
+
+/* 비밀번호 */
+.data_input {
+  margin: 10px 0px;
+  padding: 0px 20px;
+}
+
+.data_input p {
+  font-size: 22px;
+  font-weight: 400;
+  color: #D4D9E1;
+  margin: 0%;
+}
+
+.data_input input {
+  width: 640px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #25304A;
+  background-color: #25304A;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0px 10px;
+  color: #EFEFEF;
+  margin-bottom: 20px;
+}
+
+/* 저장 */
+.btn {
+  text-align: center;
+}
+
+.submit_btn {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  width: 700px;
+  height: 48px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 8px;
+  background-color: #4263EB;
+  color: #D4D9E1;
+  font-size: 20px;
+  font-weight: 700;
+}

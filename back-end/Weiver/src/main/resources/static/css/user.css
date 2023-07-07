@@ -1,0 +1,346 @@
+/*마이 페이지 메인*/
+/* SETTING */
+
+.setting {
+    display: flex;
+    justify-content: right;
+    margin: 10px auto;
+    padding-right: 20px;
+}
+
+.setting a {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.setting a i{
+    font-size: 43px;
+    line-height: 43px;
+    color: #EFEFEF;
+}
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    color: #EFEFEF;
+    font-size: 45px;
+    font-weight: 700;
+    align-items: center;
+    margin: 20px;
+}
+
+.profile img {
+    border-radius: 70%;
+    background-color: #586A85;
+}
+
+.profile div {
+    margin: 20px;
+}
+
+/* SUBSCRIBE */
+
+.subscribe {
+    height: 100px;
+    border-radius: 8px;
+    background: #172036;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+}
+
+.subscribe a {
+    width: 50%;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    background: #172036;
+    color: #98A4B7;
+    font-size: 15px;
+}
+
+.subscribe a div {
+    background: #172036;
+    color: #EFEFEF;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.subscribe .line {
+    width : 2px;
+    height: 70px;
+    background-color: #586A85;
+}
+
+/* BOARD */
+
+.board {
+    height: 300px;
+    border-radius: 8px;
+    background: #172036;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-weight: 700;
+    margin: 20px;
+}
+
+.board a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    width: 600px;
+    padding: 10px 30px;
+    background: #172036;
+}
+
+.board hr {
+    border: none;
+    height: 2px;
+    background-color: #586A85;
+    width: 600px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.board a div {
+    margin-right: 10px;
+    background: #172036;
+    color: #EFEFEF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.board a i {
+    margin-left: 10px;
+    background: #172036;
+    color: #EFEFEF;
+}
+
+/*내가 쓴 글*/
+
+  * {
+    background-color: inherit;
+    font-family: 'Pretendard-Regular';
+    color:#d4d9e1;
+  }
+
+
+/* 뒤로가기 + 대문 div */
+.nameTag{
+	justify-content: center;
+	align-items: center;
+    margin: auto auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 개수 + 정렬방식 div */
+.sortTag{
+	position: relative;
+	justify-content: right;
+	align-items: right;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Board List Card */
+.myBoardCard{
+	background-color : #172036;
+	border-radius:10px;
+	
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    display:flex;
+}
+
+/* 카드 */
+.card{
+	width: 80%;
+	padding: 10px 20px;
+	border-radius:inherit;
+}
+
+/* 기간 font */
+.date{
+	font-size:7px;
+}
+
+/* 뒤로가기 버튼 */
+.back-btn{
+	top:auto;
+	left:5px;
+	position: absolute;
+}
+
+/* 글 쓴 개수 span */
+.boardNum{
+	font-size:5px;
+	top:auto;
+	left:5px;
+	position: absolute;
+}
+
+div{
+	border-radius:inherit;
+}
+
+
+/*프로필 업데이트*/
+/* title */
+.title {
+    margin-bottom: 30px;
+}
+
+.title .name {
+    padding-top: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* profile img Change */
+.profileChange {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.profileChange_cut {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 70%;
+}
+
+.profileChange img {
+    position: absolute;
+    border-radius: 70%;
+    background-color: #586A85;
+}
+
+.profileChange .change {
+    width: 150px;
+    height: 30%;
+    opacity: 90%;
+    position:absolute;
+    text-align: center;
+    top: 70%;
+    background-color: #172036;
+    cursor: pointer;
+    border: none;
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+}
+
+/* ID */
+.ID {
+    margin: 10px 0px;
+    padding: 0px 20px;
+}
+
+.ID p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+    margin: 0%;
+}
+
+.ID input {
+    width: 640px;
+    height: 48px;
+    background-color: #101322;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+}
+
+/* 닉네임 */
+.nickname {
+    margin: 10px 0px;
+    padding: 0px 20px;
+}
+
+.nickname p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+    margin: 0%;
+}
+
+.nickname input {
+    width: 640px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    background-color: #25304A;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0px 10px;
+    color: #EFEFEF;
+    margin-bottom: 20px;
+}
+
+/* 저장 */
+.btn {
+    text-align: center;
+}
+
+.submit_btn {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    width: 700px;
+    height: 48px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #4263EB;
+    color: #D4D9E1;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/*설정*/
+
+/* 카테고리 */
+.category {
+    margin: auto 0;
+    padding: 0px 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background: #172036;
+    justify-content: center;
+    padding: 0px 20px;
+}
+
+.card a {
+    line-height: 100px;
+    background-color: #172036;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+}

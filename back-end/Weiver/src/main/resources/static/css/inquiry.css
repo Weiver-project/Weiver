@@ -1,0 +1,130 @@
+/*문의에 관련된 css입니다.*/
+
+/* 문의 리스트 */
+
+/* title */
+.title {
+    margin-bottom: 30px;
+}
+
+.title .name {
+    padding-top: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #EFEFEF;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* 작성하기 버튼 */
+.write {
+    width: 660px;
+    display: flex;
+    justify-content: right;
+    padding: 0 20px;
+}
+
+.write button {
+    width: 130px;
+    height: 50px;
+    padding: 5px 15px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: none;
+    background-color: #4263EB;
+    font-size: 18px;
+    color: #D4D9E1;
+    font-weight: 700;
+}
+
+/* 문의 목록 */
+.list {
+    display: flex;
+    align-items: center;
+    margin: 20px 20px;
+}
+
+.inquiry {
+    display: flex;
+    background-color: #172036;
+    border-radius: 8px;
+    width: 470px;
+    height: 100px;
+    padding-left: 30px;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.check {
+    display: flex;
+    background-color: #172036;
+    border-radius: 8px;
+    width: 120px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.inquiry a {
+    width: 470px;
+    background-color: #172036;
+    text-decoration: none;
+}
+
+p {
+    background-color: #172036;
+    color: #D4D9E1;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 100;
+}
+
+/*문의 작성 페이지*/
+/* 문의내용 */
+.data_show {
+    margin: 10px 0px;
+    padding: 0px 20px;
+}
+
+.data_show p {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D4D9E1;
+    margin: 0%;
+}
+
+.data_show div {
+    width: 640px;
+    height: auto;
+    background-color: #101322;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #586A85;
+}
+
+.data_show .inquiry_text {
+    height: 100px;
+}
+
+.data_show .answer {
+    height: 250px;
+}
+
+.state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 38px;
+    width: 660px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background-color: #25304A;
+    color: #D4D9E1;
+    font-size: 20px;
+}
