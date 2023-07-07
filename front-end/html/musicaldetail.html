@@ -10,27 +10,29 @@
      <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
     <!--css, js 연결-->
-    <link rel="stylesheet" href="/css/musicalDetail.css">
+    <link rel="stylesheet" href="/css/musical.css">
+    <link rel="stylesheet" href="/css/actor.css">
+    <link rel="stylesheet" href="/css/swiper.css">
     <link rel="stylesheet" href="/css/public.css">
-    <script src="/js/musicalDetail.js"></script>
+    <script src="/js/swiper.js"></script>
 
     <!--부트스트랩 아이콘 연결-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
+<header>
+  <img src="../img/logo.png" alt="logo" height="70" width="300">
+  <div class="title-container">
+    <a href="#" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+      </svg>
+    </a>
+    <h1 class="musical-title">Musical Title</h1>
+  </div>
+</header>
+
 <body>
-    <div class="backgroundBox">
-
-      <header><img src="../img/logo.png" alt="logo" height="70" width="300"></header>
-
-      <div class="title-container">
-        <a href="#" class="back-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-          </svg>
-        </a>
-        <h1 class="musical-title">Musical Title</h1>
-      </div>
 
       <div class="musical-info">
         <img src="들어가야 하는 포스터" alt="Musical Poster" width="180" height="270">
@@ -203,10 +205,6 @@
       <div>MY PAGE</div>
     </a>
 </nav>  
-
-  </div>
-
-
 
 </body>
 </html>
