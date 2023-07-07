@@ -1,0 +1,595 @@
+/*커뮤니티와 관련된 css입니다.*/
+
+/*커뮤니티 메인 페이지*/
+
+/*공통 적용*/
+body {
+    color: #FFFFFF;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+.pageName {
+    width: 75px;
+    margin: 10px auto;
+    font-size: 20;
+    font-weight: bold;
+    color: #D4D9E1;
+}
+
+/*커뮤니티 인기글 섹션*/
+.popular_community {
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #25304A;
+    width: 160px;
+    height: 110px;
+    color: #FFFFFF;
+    padding: 20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.card-title {
+    background-color: #25304A;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-footer {
+    background-color: #25304A;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    color: #888;
+}
+
+.author {
+    background-color: #25304A;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+/*카테고리*/
+
+.btnGroup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.categoryGroup {
+    display: flex;
+    justify-content: space-between;
+    width: 205px;
+    margin-bottom: 22px;
+
+}
+
+.categoryGroup > button {
+    width: 60px;
+    height: 25px;
+    border: none;
+    border-radius: 16px;
+    font-size: 12px;
+    color: #D4D9E1;
+}
+
+
+/*글 작성하기 버튼*/
+
+.writeBtn {
+    width: 113px;
+    height: 25px;
+    background-color: #4263EB;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.postAndUserInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .postList {
+    flex: 1;
+} */
+
+/* 게시글*/
+.postWrap-main {
+    background-color: #172036;
+    border: 1px solid blue;
+    padding-top: 10px;
+    padding-left: 18px;
+    width: 500px;
+    height: 500px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.postWrap-main > p {
+    font-size: 14px;
+    background-color: #172036;
+}
+
+.postWrap-main > h2 {
+    background-color: #172036;
+}
+
+.postWrap-main > img {
+    width: 480px;
+    height: 260px;
+    max-width: 480px;
+    max-height: 260px;
+}
+
+.iconGroup {
+    margin-top: 10px;
+    display: flex;
+    height: 24px;
+    background:none;
+}
+
+.iconGroup > div {
+    background: none;
+    margin-right: 10px;
+}
+
+.iconGroup > div > i {
+    font-size: 24px;
+    background-color: #172036;
+}
+
+.iconGroup > div > span {
+    background:none;
+}
+
+.bi-suit-heart {
+    cursor: pointer;
+}
+
+/*유저 사이드 네비 바*/
+
+.sideGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 200px;
+    margin-left: 20px;
+}
+
+.userInfoAndLoginBtn {
+    display: flex;
+    flex-direction: column;
+    background:none;
+    
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #172036;
+    border: none;
+    border-radius: 8px;
+    width: 150px;
+    height: 150px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    
+}
+
+.myWrited {
+    background: none;
+}
+
+.userInfoID {
+    margin-left: 10px;
+    background: none;
+}
+
+.myPost, .myComment {
+    background: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 10px;
+}
+
+.myPost > div,p,a, .myComment > div,p,a {
+    background: none;
+}
+
+/*로그인 버튼*/
+.loginBtn {
+    background-color: #4263EB;
+    width: 115px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.bi-arrow-up-circle {
+    font-size: 30px;
+    cursor: pointer;
+    margin:  0px auto 20px;
+}
+
+/*잡담 게시판 상세*/
+
+/* utf 설정 어노테이션 */
+* {
+    color: #FFFFFF;
+}
+
+/* 공통 hr 태그 */
+hr {
+    width: 650px;
+    border: 1px solid #586A85;
+    margin: 10px auto 10px auto;
+}
+
+/* 게시글 컨테이너 */
+.postWrap {
+    display: flex;
+    flex-direction: column;
+    background: #172036;
+    width: 660px;
+
+    border: none;
+    border-radius: 8px;
+    margin: 100px auto 20px auto;
+}
+
+/* 게시글 헤더 (작성, 제목, 공유하기 버튼) */
+.postHeader {
+    padding-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* 게시글 제목 */
+.postHeader > h2 {
+    max-width: 500px;
+}
+
+/* 게시글 작성자 */
+.postWriter {
+    max-width: 500px;
+}
+
+/* 공유하기 버튼 */
+.postHeader > i {
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 40px;
+    transform: rotateY( 180deg );
+    background: #172036;
+    margin-right: 10px;
+}
+
+/* 게시글 작성자 */
+.postWriter {
+    padding-left: 10px;
+    font-size: 14px;
+    background: #172036;
+}
+
+/* 게시글 제목 */
+.titleAndIcon > h2 {
+    padding-left: 10px;
+    background: #172036;
+}
+
+/* 게시글 이미지 */
+.postWrap > img {
+    margin: 24px auto;
+    max-width: calc(100% - 10px);
+    border: none;
+}
+
+/* 게시글 텍스트 */
+.postContent {
+    margin-top: 20px;
+    padding-left: 10px;
+    line-height: 1.5;
+}
+
+/* 조회, 댓글, 좋아요 아이콘 */
+.iconGroup {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    height: 24px;
+    background:none;
+}
+
+/* 아이콘 그룹 */
+.iconGroup > div {
+    padding-left: 10px;
+}
+
+/* 조회, 댓글, 좋아요 아이콘 */
+.iconGroup > div > i {
+    font-size: 24px;
+    background-color: #172036;
+}
+
+/* 좋아요 버튼 */
+.bi-suit-heart {
+    cursor: pointer;
+}
+
+
+/* 게시글 수정, 삭제버튼 그룹 */
+.postBtnGroup {
+    margin: 10px 0px 20px auto;
+    max-width: 200px;
+    display: flex;
+}
+
+/* 게시글 수정하기 버튼 */
+.postModifyBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #4263EB;
+    cursor: pointer;
+}
+
+/* 게시글 삭제하기 버튼 */
+.postDeleteBtn {
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    background-color: #ff3146cd;
+    cursor: pointer;
+}
+
+/* 댓글 컨테이너 */
+.commentWrap {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 8px;
+    width: 660px;
+    background-color: #172036;
+    margin: 0px auto;
+}
+
+/* 총 댓글 수 */
+.totalComment {
+    margin-top: 20px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 작성된 댓글 (아이디, 댓글, 좋아요 아이콘, 대댓글 링크, 버튼) */
+.commentAndBtn {
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.5;
+}
+
+/* 댓글 아이디, 내용 크기 조절 */
+.commentIDAndContent {
+    width: 500px;
+}
+
+/* 댓글 작성자 */
+.commentID {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 댓글 내용 */
+.commentContent {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/* 좋아요, 대댓글 div */
+.likeAndRecomment {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 대댓글 버튼 */
+.recommentBtn {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #586A85;
+    cursor: pointer;
+}
+
+/* 댓글 수정, 삭제하기 버튼 */
+.commentBtnGroup > button{
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #586A85;
+    color: #FFFFFF;
+    font-size: 8px;
+    text-align: center;
+}
+
+/* 화살표 아이콘 row 처리를 위해 사용*/
+.recommentWrap {
+    display: flex;
+    margin: 10px 10px 10px 25px;
+    justify-content: space-between;
+}
+
+/* 댓글 입력 그룹 */
+.recommentGroup {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 댓글 입력 그룹 */
+.commentInputGroup {
+    padding-left: 20px;
+    width: 680px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 30px;
+}
+
+/* 댓글 입력창 */
+.commentInput {
+    border: none;
+    border-radius: 8px;
+    background-color: #586A85;
+    width: 530px;
+    height: 40px;
+    color: #FFFFFF;
+    padding-left: 5px;
+}
+
+/* 댓글 작성하기 버튼 */
+.commentInputBtn {
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    width: 100px;
+    height: 40px;
+    margin-left: 20px;
+    background-color: #4263EB;
+}
+
+/*리뷰 상세 게시판*/
+/* 대댓글 컨테이너 */
+.recommentWrap {
+    display: flex;
+    margin: 10px 10px 10px 25px;
+    justify-content: space-between;
+}
+
+/*댓글*/
+/* 태그 공통 적용 사항*/
+ul{
+    padding-top: 20px;
+    list-style: none;
+  }
+  
+  button{
+    border: none;
+    color: white;
+    background-color: #172036;
+  }
+  
+  article {
+    margin: 0 5%;
+    margin-top: 100px;
+    width: 90%;
+    min-height: 70vh;
+    background-color: #172036;
+    border-radius: 10px;  
+    color: white;
+    font-size: 12px;
+  }
+  
+  /* 댓글 */
+  .comment li {
+    padding-bottom: 10px;
+  }
+  
+  /* 유저아이디 + 수정, 삭제 버튼 */
+  .user-container{
+    display: flex;
+    margin: 3px;
+    align-items: center;
+  }
+  .modify, .delete {
+    border-radius: 20px;
+    background-color: #586A85;
+    margin: 0 3px;
+    height: 16px;
+    font-size: 10px;
+  }
+  .modify {
+    align-items: center;
+    margin-left: 100px;
+  }
+  .reple{
+    margin: 5px;
+  }
+  .like-container{
+    display: flex;
+    margin-bottom: 10px;
+  }
+  /* 대댓글 */
+  .re-comment {
+    padding: 0;
+  }
+  .re-comment .reple{
+    margin-left: 65px;
+  }
+  .re-comment .like-container{
+    margin-left: 60px;
+  }
+  .bi-arrow-return-right {
+    font-size: 20px;
+    margin: 0 20px;
+  }
+  
+  /* 댓글 입력 */
+  .input-reple {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .input-reple input:first-child{
+    width: 75%;
+    margin-right: 3%;
+    background-color: #586A85;
+    border-radius: 5px;
+    height: 30px;
+  }
+  
+  .input-reple input:nth-child(2){
+    width: 10%;
+    background-color: #4263EB;
+    color: #ffffff;
+    border-radius: 5px;
+    height: 30px;
+  }

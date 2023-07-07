@@ -1,0 +1,59 @@
+/*글 작성 폼에 대한 css입니다.*/
+
+* {
+    background-color: inherit;
+    font-family: 'Pretendard-Regular';
+    color:#d4d9e1;
+  }
+
+.nameTag{
+	justify-content: center;
+	align-items: center;
+  margin: auto auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.back-btn{
+  margin-right:100px;
+}
+
+.title{
+	width:680px;
+	height:30px;
+}
+
+.content{
+	width:680px;
+	height:400px;
+}
+
+/* text + img */
+div#editor {
+  padding: 16px 24px;
+  border: 1px solid #D6D6D6;
+  width: 680px;
+  height: 400px;
+  padding: 16px 24px;
+  border: 1px solid #D6D6D6;
+  border-radius: 4px;
+
+  min-height: 400px;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+/* text + img */
+#editor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+/* text + img */
+#img-selector {
+  display: none;
+}
+/* text + img */
+#editor img {
+  max-width: 700px;
+}
