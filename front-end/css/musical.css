@@ -1,0 +1,196 @@
+/*뮤지컬과 관련된 css입니다.*/
+
+/*공통 적용 css*/
+
+.title {
+    font-size: 30px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+/*메인 페이지*/
+/*인기 뮤지컬 list css*/
+
+.popular_musical_list {
+    margin-bottom: 50px;
+}
+
+.popular_musical_list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.popular_musical_list li {
+    background-color: #25304A;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+/*오늘의 배우 css*/
+.poster-container {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    width: calc(100% - 190px);
+    max-width: 510px;
+    margin: auto;
+}
+
+.poster {
+        background-color: #25304A;
+        width: 125px;
+        height: 182px;
+        margin-right: 10px;
+}
+
+
+/*공연 중인 뮤지컬 css*/
+.progress-musical {
+    margin-bottom: 20px;
+}
+
+.progress-musical .poster-container {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 10px;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/*뮤지컬 상세 페이지*/
+  
+/*뒤로가기 버튼, 뮤지컬 제목*/
+.title-container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.back-button svg{
+  width: 40px;
+  height: 40px;
+  color: #FFFFFF;
+  margin : -10px;
+  justify-content: center;
+}
+
+.musical-title {
+  color: #ffffff;
+  font-size: 30px;
+}
+
+/*뮤지컬 포스터 및 상세 정보*/
+.musical-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.musical-info img {
+  width: 180px;
+  height: 250px;
+  margin-right: 20px;
+}
+
+.musical-info table {
+  border-collapse: collapse;
+  margin-right: 20px;
+}
+
+.musical-info td {
+  padding: 5px 15px;
+  color: #FFFFFF;
+}
+
+/*좋아요, 찜하기 버튼*/
+.like-jjim-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  border-bottom: 2px solid #ccc;
+}
+
+.like-jjim-btn .button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  padding-bottom: 10px;
+}
+
+.like-jjim-btn .button svg {
+  width: 40px;
+  height: 40px;
+  color: #98A4B8;
+  padding: 5px 100px;
+}
+
+.like-jjim-btn .button span {
+  color: #98A4B8;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+/*유튜브 영상*/
+.youtube-api{
+  margin-bottom: 20px;
+}
+
+.youtube-container {
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 10px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.youtube {
+  background-color: #25304A;
+  width: 530px;
+  height: 300px;
+  margin-right: 10px;
+}
+
+/*뮤지컬 리뷰 상세 페이지*/
+/* 연결된 뮤지컬 컨테이너 */
+.currentMusical {
+    padding-left: 10px;
+    display: flex;
+}
+
+/* 연결된 뮤지컬 이미지 */
+.currentMusical > img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+/* 연결된 뮤지컬 정보 */
+.currentMusicalInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+/* 연결된 뮤지컬 제목 */
+.musicalTitle {
+    color: #EFEFEF;
+    font-weight: bold;
+}
+
+/* 연결된 뮤지컬 공연 기간 */
+.musicalPeriod {
+    color: #98A4B7;
+}
+

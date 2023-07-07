@@ -1,0 +1,41 @@
+/*스와이프 공통 css*/
+.swiper-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+.swiper-slide {
+    position: relative;
+    width: 100%;
+}
+
+.swiper-pagination {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
