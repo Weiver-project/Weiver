@@ -2,7 +2,7 @@ package dto;
 
 import java.util.Date;
 
-public class MusicalDTO {
+public class SimpleMusicalDTO {
 	private String _id;
 	private String title;
 	private String posterImage;
