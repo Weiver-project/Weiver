@@ -15,6 +15,9 @@ public interface UserRepository extends MongoRepository<User, String> {
 //	일반 유저만 검색
 	public List<User> findByAdmin(boolean admin);
 	
+//	일반 유저 id 검색
+	public List<User> findByIdAndAdmin(String id, boolean admin);
+	
 //	유저 비밀번호만 검색
 	public boolean existsByIdAndPassword(String id, String password);
 	

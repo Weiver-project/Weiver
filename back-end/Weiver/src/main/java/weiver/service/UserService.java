@@ -1,5 +1,7 @@
 package weiver.service;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,15 +27,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-//	전체 검색
-	public void findAll() {
-		List<User> result = userRepository.findAll();
+//	일반 유저 전체 검색
+	public void findByAdmin(boolean admin) {
+		List<User> result = userRepository.findByAdmin(admin);
 		System.out.println(result);
 	}
 	
-//	관리자 아닌 일반 유저 검색
-	public void findByAdmin(boolean admin) {
-		List<User> result = userRepository.findByAdmin(admin);
+//	유저 id 검색
+	public void findByIdAndAdmin(String id, boolean admin) {
+		List<User> result = userRepository.findByIdAndAdmin(id, admin);
 		System.out.println(result);
 	}
 	
