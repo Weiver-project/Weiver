@@ -16,6 +16,7 @@ public class MongoDBConfig {
 	@Autowired
     private MongoMappingContext mongoMappingContext;
     
+//	insert 시, "_class" 필드 생성X
     @Bean
     public MappingMongoConverter mappingMongoConverter(MongoDatabaseFactory mongoDatabaseFactory,
 											            MongoMappingContext mongoMappingContext) {

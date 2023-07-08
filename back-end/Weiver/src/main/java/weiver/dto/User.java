@@ -3,14 +3,13 @@ package weiver.dto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "user")
 public class User {
 	@Id
@@ -25,5 +24,4 @@ public class User {
 	private int myComment;
 	private int likeContent;
 	private boolean admin;
-	
 }
