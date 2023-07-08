@@ -1,6 +1,7 @@
 package weiver.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,16 @@ import weiver.repository.UserRepository;
 @Service
 public class UserService {
 	
-//	복잡한 쿼리 짤때
+//	update 구문
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-//	단순한 crd 사용할 때
+//	단순한 crd 사용할 때 https://jaime-note.tistory.com/51
 	@Autowired
 	private UserRepository userRepository;
 	
 //	전체 검색
 	public void findAll() {
-//		List<User> result = mongoTemplate.findAll(User.class);
 		List<User> result = userRepository.findAll();
 		System.out.println(result);
 	}
@@ -39,20 +39,20 @@ public class UserService {
 	
 //	유저 비밀번호 수정
 	public void updatePassword(String id, String password) {
-		
-		Optional<User> user = userRepository.findById(id);
+
+		// password	중복 확인	
+		boolean result = userRepository.existsByIdAndPassword(id, password);
 				
-//		if(!result) {
-//			System.out.println("업뎃");
-//			Query query = new Query();
-//			
-//			Criteria criteria = Criteria.where("_id").is(id);
-//	
-//			query.addCriteria(criteria);
-//			Update update = Update.update("password", password);
-//			
-//			mongoTemplate.updateFirst(query, update, User.class);
-//		}
+		if(!result) {
+			Query query = new Query();
+			
+			Criteria criteria = Criteria.where("_id").is(id);
+	
+			query.addCriteria(criteria);
+			Update update = Update.update("password", password);
+			
+			mongoTemplate.updateFirst(query, update, User.class);
+		}
 	}
 		
 //	유저 프로필 이미지 변경
