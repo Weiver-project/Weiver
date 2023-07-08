@@ -1,4 +1,4 @@
-package entity;
+package weiver.entity;
 
 import java.util.Date;
 
