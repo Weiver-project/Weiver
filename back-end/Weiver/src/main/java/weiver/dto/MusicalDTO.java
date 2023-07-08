@@ -1,4 +1,4 @@
-package dto;
+package weiver.dto;
 
 public class MusicalDTO {
 
