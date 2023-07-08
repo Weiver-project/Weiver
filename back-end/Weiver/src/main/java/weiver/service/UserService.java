@@ -19,7 +19,7 @@ import weiver.repository.UserRepository;
 @Service
 public class UserService {
 	
-//	update 구문
+//	update 구문 작성 시 활용
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
