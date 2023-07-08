@@ -25,8 +25,6 @@ public class UserController {
 	
 	@RequestMapping(value="/mongotest",method = RequestMethod.GET)
 	public void test() {
-		System.out.println("---------");
-		System.out.println(mongoTemplate.getDb().getName());
 		userService.findAll();
 		userService.findByAdmin(false);
 	}
@@ -37,8 +35,6 @@ public class UserController {
 								@RequestParam String img,
 								@RequestParam String name) {
 		
-		System.out.println("---------");
-		System.out.println(mongoTemplate.getDb().getName());
 		if(password != null && password != "") {
 			userService.updatePassword(id, password);
 		}
