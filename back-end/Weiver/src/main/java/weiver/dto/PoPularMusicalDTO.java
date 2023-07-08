@@ -1,4 +1,4 @@
-package dto;
+package weiver.dto;
 
 import lombok.Getter;
 import lombok.Setter;
