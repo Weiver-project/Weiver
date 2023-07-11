@@ -1,26 +1,27 @@
-package entity;
+package weiver.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Document(collection = "casting")
-@Builder
-@Getter
 @ToString
-@Setter
-public class Casting {
+@Builder
+@Document(collection = "musical")
+public class Musical {
 	@Id
 	private String _id;
-	private String title;
 	private String posterImage;
+	private String title;
+	private String theater;
 	private Date stDate;
 	private Date edDate;
-	private String role;
+	private String runngingTime;
+	private String viewingAge;
+	private String ticketPrice;
+	private List<String> actorIds;
 }

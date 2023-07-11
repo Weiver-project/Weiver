@@ -1,4 +1,4 @@
-package service;
+package weiver.service;
 
 public class MusicalService {
 

@@ -1,10 +1,16 @@
 package entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Builder;
+import lombok.ToString;
+
+@ToString
+@Builder
 @Document(collection = "musical")
 public class Musical {
 	@Id
@@ -14,8 +20,8 @@ public class Musical {
 	private String theater;
 	private Date stDate;
 	private Date edDate;
-	private int runngingTime;
+	private String runngingTime;
 	private String viewingAge;
 	private String ticketPrice;
-	private String[] actorIds;
+	private List<String> actorIds;
 }

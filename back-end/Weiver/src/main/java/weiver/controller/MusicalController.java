@@ -1,4 +1,4 @@
-package controller;
+package weiver.controller;
 
 public class MusicalController {
 
