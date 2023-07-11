@@ -1,6 +1,6 @@
 CREATE TABLE scott."admin" (
     "id"         NUMBER NOT NULL,
-    "admin_pw"   VARCHAR2(20 BYTE) NOT NULL,
+    "admin_pw"   VARCHAR2(200 BYTE) NOT NULL,
     "admin_name" VARCHAR2(20 BYTE) NOT NULL
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
