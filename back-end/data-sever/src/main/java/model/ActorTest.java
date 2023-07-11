@@ -12,7 +12,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import entity.Actor;
-import entity.Casting;
 
 public class ActorTest {
 	
@@ -81,13 +80,13 @@ public class ActorTest {
 						System.out.println("출연작품 iframe 링크 : " + contentIframeURL);
 						
 						// 전체 Casting 객체 생성
-						ArrayList<Casting> actorAllCastings = new ArrayList<Casting>();
+						ArrayList<Actor.Casting> actorAllCastings = new ArrayList<Actor.Casting>();
 						
 						// 출연 작품 이미지 정보
 						String tableImageURL = ".detail_contentsbox > table > tbody > tr > td > table > tbody > tr > td > a > img.img_size4";
 						Elements images = doc.select(tableImageURL);
 						for(Element image : images) {
-							actorAllCastings.add(Casting.builder()
+							actorAllCastings.add(Actor.Casting.builder()
 													.posterImage(image.attr("src"))
 													.build());
 						}
@@ -152,8 +151,8 @@ public class ActorTest {
 						
 						// Casting에서 뮤지컬만 골라내기
 						// "역" Casting 객체 생성
-						ArrayList<Casting> actorCastings = new ArrayList<Casting>();
-						for(Casting c : actorAllCastings) {
+						ArrayList<Actor.Casting> actorCastings = new ArrayList<Actor.Casting>();
+						for(Actor.Casting c : actorAllCastings) {
 							if(c.getRole().endsWith("역")) {
 								actorCastings.add(c);
 							}
@@ -165,10 +164,10 @@ public class ActorTest {
 											._id(contentactorNo)
 											.name(actorName.split(" ")[0])
 											.profileImage(actorImage)
-											.castings(actorCastings.toArray(Casting[]::new))
+											.castings(actorCastings.toArray(Actor.Casting[]::new))
 											.build();
 						
-						for(Casting c : actor.getCastings()) {
+						for(Actor.Casting c : actor.getCastings()) {
 							System.out.println(c);
 						}
 						
