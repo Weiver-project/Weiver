@@ -1,0 +1,380 @@
+CREATE TABLE scott."admin" (
+    "id"         NUMBER NOT NULL,
+    "admin_pw"   VARCHAR2(20 BYTE) NOT NULL,
+    "admin_name" VARCHAR2(20 BYTE) NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_admin ON
+    scott."admin" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."admin"
+    ADD CONSTRAINT pk_admin PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_admin;
+
+CREATE TABLE scott."answer" (
+    "id"           NUMBER NOT NULL,
+    "inquiry_id"   NUMBER NOT NULL,
+    "admin_id"     NUMBER NOT NULL,
+    "answer"       VARCHAR2(4000 BYTE) NOT NULL,
+    "created_time" DATE NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_answer ON
+    scott."answer" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."answer"
+    ADD CONSTRAINT pk_answer PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_answer;
+
+CREATE TABLE scott."comment" (
+    "id"           NUMBER NOT NULL,
+    "post_id"      NUMBER NOT NULL,
+    "user_id"      VARCHAR2(30 BYTE) NOT NULL,
+    "content"      VARCHAR2(2000 BYTE) NOT NULL,
+    "created_time" DATE NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_comment ON
+    scott."comment" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."comment"
+    ADD CONSTRAINT pk_comment PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_comment;
+
+CREATE TABLE scott."comment_like" (
+    "id"         NUMBER NOT NULL,
+    "user_id"    VARCHAR2(30 BYTE) NOT NULL,
+    "comment_id" NUMBER NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott."comment_like_PK" ON
+    scott."comment_like" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."comment_like"
+    ADD CONSTRAINT "comment_like_PK" PRIMARY KEY ( "id" )
+        USING INDEX scott."comment_like_PK";
+
+CREATE TABLE scott."image" (
+    "id"      NUMBER NOT NULL,
+    "post_id" NUMBER NOT NULL,
+    "path"    VARCHAR2(1000 BYTE) NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_image ON
+    scott."image" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."image"
+    ADD CONSTRAINT pk_image PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_image;
+
+CREATE TABLE scott."inquiry" (
+    "id"           NUMBER NOT NULL,
+    "user_id"      VARCHAR2(30 BYTE) NOT NULL,
+    "title"        VARCHAR2(30 BYTE) NOT NULL,
+    "content"      VARCHAR2(4000 BYTE) NOT NULL,
+    "created_time" DATE NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_inquiry ON
+    scott."inquiry" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."inquiry"
+    ADD CONSTRAINT pk_inquiry PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_inquiry;
+
+CREATE TABLE scott."post" (
+    "id"           NUMBER NOT NULL,
+    "user_id"      VARCHAR2(30 BYTE) NOT NULL,
+    "type"         VARCHAR2(20 BYTE) NOT NULL,
+    "title"        VARCHAR2(30 BYTE) NOT NULL,
+    "content"      VARCHAR2(4000 BYTE) NOT NULL,
+    "created_time" DATE NOT NULL,
+    "view"         NUMBER(20) DEFAULT 0 NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_post ON
+    scott."post" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."post"
+    ADD CONSTRAINT pk_post PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_post;
+
+CREATE TABLE scott."post_like" (
+    "id"      NUMBER NOT NULL,
+    "user_id" VARCHAR2(20 BYTE) NOT NULL,
+    "post_id" NUMBER NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott."post_like_PK" ON
+    scott."post_like" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."post_like"
+    ADD CONSTRAINT "post_like_PK" PRIMARY KEY ( "id" )
+        USING INDEX scott."post_like_PK";
+
+CREATE TABLE scott."recomment" (
+    "id"           NUMBER NOT NULL,
+    "post_id"      NUMBER NOT NULL,
+    "user_id"      VARCHAR2(30 BYTE) NOT NULL,
+    "comment_id"   NUMBER NOT NULL,
+    "content"      VARCHAR2(1000 BYTE) NOT NULL,
+    "created_time" DATE NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_recomment ON
+    scott."recomment" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."recomment"
+    ADD CONSTRAINT pk_recomment PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_recomment;
+
+CREATE TABLE scott."recomment_like" (
+    "id"           NUMBER NOT NULL,
+    "user_id"      VARCHAR2(30 BYTE) NOT NULL,
+    "recomment_id" NUMBER NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott."recomment_like_PK" ON
+    scott."recomment_like" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."recomment_like"
+    ADD CONSTRAINT "recomment_like_PK" PRIMARY KEY ( "id" )
+        USING INDEX scott."recomment_like_PK";
+
+CREATE TABLE scott."review" (
+    "id"      NUMBER NOT NULL,
+    "post_id" NUMBER NOT NULL,
+    "title"   VARCHAR2(20 BYTE) NOT NULL,
+    "path"    VARCHAR2(1000 BYTE) NOT NULL,
+    "stdate"  DATE NOT NULL,
+    "eddate"  DATE NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_review ON
+    scott."review" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."review"
+    ADD CONSTRAINT pk_review PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_review;
+
+CREATE TABLE scott."subscribe" (
+    "id"         NUMBER NOT NULL,
+    "musical_id" VARCHAR2(100 BYTE) NOT NULL,
+    "user_id"    VARCHAR2(30 BYTE) NOT NULL,
+    "type"       VARCHAR2(20 BYTE) NOT NULL
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_subscribe ON
+    scott."subscribe" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."subscribe"
+    ADD CONSTRAINT pk_subscribe PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_subscribe;
+
+CREATE TABLE scott."user" (
+    "id"               VARCHAR2(30 BYTE) NOT NULL,
+    "user_pw"          VARCHAR2(20 BYTE) NOT NULL,
+    "user_nickname"    VARCHAR2(20 BYTE) NOT NULL,
+    "user_profile_img" VARCHAR2(1000 BYTE)
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
+
+CREATE UNIQUE INDEX scott.pk_user ON
+    scott."user" (
+        "id"
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE scott."user"
+    ADD CONSTRAINT pk_user PRIMARY KEY ( "id" )
+        USING INDEX scott.pk_user;
+
+ALTER TABLE scott."answer"
+    ADD CONSTRAINT answer_admin_fk FOREIGN KEY ( "admin_id" )
+        REFERENCES scott."admin" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."answer"
+    ADD CONSTRAINT answer_inquiry_fk FOREIGN KEY ( "inquiry_id" )
+        REFERENCES scott."inquiry" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."comment_like"
+    ADD CONSTRAINT comment_like_comment_fk FOREIGN KEY ( "comment_id" )
+        REFERENCES scott."comment" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."comment_like"
+    ADD CONSTRAINT comment_like_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."comment"
+    ADD CONSTRAINT comment_post_fk FOREIGN KEY ( "post_id" )
+        REFERENCES scott."post" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."comment"
+    ADD CONSTRAINT comment_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."image"
+    ADD CONSTRAINT image_post_fk FOREIGN KEY ( "post_id" )
+        REFERENCES scott."post" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."inquiry"
+    ADD CONSTRAINT inquiry_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."post_like"
+    ADD CONSTRAINT post_like_post_fk FOREIGN KEY ( "post_id" )
+        REFERENCES scott."post" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."post_like"
+    ADD CONSTRAINT post_like_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."post"
+    ADD CONSTRAINT post_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."recomment"
+    ADD CONSTRAINT recomment_comment_fk FOREIGN KEY ( "comment_id" )
+        REFERENCES scott."comment" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."recomment_like"
+    ADD CONSTRAINT recomment_like_recomment_fk FOREIGN KEY ( "recomment_id" )
+        REFERENCES scott."recomment" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."recomment_like"
+    ADD CONSTRAINT recomment_like_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."recomment"
+    ADD CONSTRAINT recomment_post_fk FOREIGN KEY ( "post_id" )
+        REFERENCES scott."post" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."recomment"
+    ADD CONSTRAINT recomment_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."review"
+    ADD CONSTRAINT review_post_fk FOREIGN KEY ( "post_id" )
+        REFERENCES scott."post" ( "id" )
+    NOT DEFERRABLE;
+
+ALTER TABLE scott."subscribe"
+    ADD CONSTRAINT subscribe_user_fk FOREIGN KEY ( "user_id" )
+        REFERENCES scott."user" ( "id" )
+    NOT DEFERRABLE;
