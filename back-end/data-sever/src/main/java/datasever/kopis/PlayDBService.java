@@ -24,6 +24,8 @@ public class PlayDBService {
 	
 	// 배우 DB에 정보 추가
 	public void saveActor() {
+		// 최신화 하기 전에 기존 데이터를 모두 삭제한다.
+		actorRepository.deleteAll();
 		
 		Document doc = null;
 		
