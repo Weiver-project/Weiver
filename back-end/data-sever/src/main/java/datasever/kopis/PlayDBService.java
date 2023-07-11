@@ -1,4 +1,4 @@
-package model;
+package datasever.kopis;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -6,27 +6,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.apache.tomcat.jni.Time;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Service;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClientFactory;
-
+import datasever.repository.ActorRepository;
 import entity.Actor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-public class ActorTest {
+@RequiredArgsConstructor
+public class PlayDBService {
+
+	private final ActorRepository actorRepository;
 	
-	public static void main(String[] args) {
+	// 배우 DB에 정보 추가
+	public void saveActor() {
 		
 		Document doc = null;
 		
@@ -46,10 +43,10 @@ public class ActorTest {
 			// 최대 페이지 알아내기
 			Elements maxPages = doc.select("body > table > tbody > tr > td");
 			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
-			System.out.println("최대 페이지 수 : " + maxPage);
+//			System.out.println("최대 페이지 수 : " + maxPage);
 			
 			// 페이지 반복
-			for(pageNo = 2; pageNo <= 2; pageNo++) {
+			for(pageNo = 1; pageNo <= maxPage; pageNo++) {
 				
 				// 페이지별로 배우 리스트 접근
 				ActorListURL = "https://www.playdb.co.kr/artistdb/list_iframe.asp?Page=" + pageNo + "&code=013003&sub_code=&ImportantSelect=&ClickCnt=Y&NameSort=&Country=Y&TKPower=&WeekClickCnt=&NameStart=&NameEnd=";
@@ -101,7 +98,6 @@ public class ActorTest {
 													.posterImage(image.attr("src"))
 													.build());
 						}
-						
 						// 출연 작품 정보 (이미지 제외)
 						String tableRoleURL = ".detail_contentsbox > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td";
 						Elements roles = doc.select(tableRoleURL);
@@ -166,9 +162,9 @@ public class ActorTest {
 //						배우 이미지 주소 : actorImage
 //						배우 이름 : actorName.split(" ")[0]
 //						출연 작품 정보 : actorCastings
-						System.out.println("배우 ID : " + contentactorNo);
-						System.out.println("배우 이미지 주소 : " + actorImage);
-						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
+//						System.out.println("배우 ID : " + contentactorNo);
+//						System.out.println("배우 이미지 주소 : " + actorImage);
+//						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
 						
 						
 						// Casting에서 뮤지컬만 골라내기
@@ -189,12 +185,13 @@ public class ActorTest {
 											.castings(actorCastings.toArray(Actor.Casting[]::new))
 											.build();
 						
-						System.out.println(actor);
-						for(Actor.Casting c : actor.getCastings()) {
-							System.out.println(c);
-						}
+						// 배우DB에 저장
+						System.out.println(actorRepository.save(actor));
+//						for(Actor.Casting c : actor.getCastings()) {
+//							System.out.println(c);
+//						}
 						
-						System.out.println("====================  정보 입력 완료  ========================");
+//						System.out.println("====================  정보 입력 완료  ========================");
 //						for(Casting c : actorCasting) {
 //							System.out.println(c);
 //							
@@ -215,8 +212,8 @@ public class ActorTest {
 //							}
 //						}
 						
-						System.out.println("cycle");
-						System.out.println(actorName.split(" ")[0] + " 정보 조회 종료");
+//						System.out.println("cycle");
+//						System.out.println(actorName.split(" ")[0] + " 정보 조회 종료");
 					}
 				}
 			}
@@ -225,8 +222,6 @@ public class ActorTest {
 			e.printStackTrace();
 		}
 		
-		
-		
 	}
-
+	
 }
