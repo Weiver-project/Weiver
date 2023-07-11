@@ -269,7 +269,7 @@ ALTER TABLE scott."subscribe"
 
 CREATE TABLE scott."user" (
     "id"               VARCHAR2(30 BYTE) NOT NULL,
-    "user_pw"          VARCHAR2(20 BYTE) NOT NULL,
+    "user_pw"          VARCHAR2(200 BYTE) NOT NULL,
     "user_nickname"    VARCHAR2(20 BYTE) NOT NULL,
     "user_profile_img" VARCHAR2(1000 BYTE)
 )
