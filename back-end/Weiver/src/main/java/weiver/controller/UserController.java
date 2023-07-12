@@ -4,18 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import weiver.service.UserService;
 
 
 @Controller
 public class UserController {
 
-
-	@RequestMapping(value="/mongotest",method = RequestMethod.GET)
+	@Autowired
+	private UserService userservice;
+	
+	@RequestMapping(value="/test1",method = RequestMethod.GET)
 	public void test() {
+		String id = "asdf@naver.com";
+		String password = "asdf1234";
+		userservice.test();
 	}
 	
-	@RequestMapping(value="/mongo",method = RequestMethod.GET)
+	@RequestMapping(value="/test2",method = RequestMethod.GET)
 	public void updatetest() {
 		
 	}

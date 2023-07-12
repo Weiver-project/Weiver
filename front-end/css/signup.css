@@ -81,6 +81,7 @@ button {
     width: 55%;
     height: 75%;
     background-color: #172036;
+    border-radius: 16px;
 }
 
 .modalBox {
