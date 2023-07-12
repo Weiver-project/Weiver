@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,6 +29,8 @@ public class PlayDBService {
 		actorRepository.deleteAll();
 		
 		Document doc = null;
+		// Casting.title에서 " - 지역이름" 을 제외하기 위한 키워드
+		List<String> regions = new ArrayList<String>();
 		
 		try {
 			
@@ -46,7 +49,7 @@ public class PlayDBService {
 			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
 			
 			// 페이지 반복
-			for(pageNo = 1; pageNo <= maxPage; pageNo++) {
+			for(pageNo = 1; pageNo <= 1; pageNo++) {
 				System.out.println("지금부터 " + pageNo + "페이지 데이터 처리 시작");
 				
 				// 페이지별로 배우 리스트 접근
@@ -100,9 +103,9 @@ public class PlayDBService {
 								
 							switch(i % 5) {
 								// 출연 작품 Title
-								case(0):
-									// 공연작품 - 지역 : 지역을 제거해야 한다. (KopisAPI와 형식이 다르기 때문)
-									String title = roles.get(i).text().split(" - ")[0];
+								case(0):		
+									String title = roles.get(i).text();
+	//								System.out.println("제목 : " + title);
 									actorAllCastings.get(i/5).setTitle(title);
 									break;
 								// 출연 작품 Date
@@ -128,9 +131,10 @@ public class PlayDBService {
 									actorAllCastings.get(i/5).setStDate(stDate);
 									actorAllCastings.get(i/5).setEdDate(edDate);
 									break;
-								// 출연 작품 장소 (사용 안함)
+								// 출연 작품 장소
 								case(2):
 									String place = roles.get(i).text();
+									actorAllCastings.get(i/5).setPlace(place);
 									break;
 								// 출연 작품 Role
 								case(3):

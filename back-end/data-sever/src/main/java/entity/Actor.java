@@ -23,11 +23,12 @@ public class Actor {
 	private Casting[] castings;
 	
 	@Builder
-	@Setter
 	@Getter
+	@Setter	
 	@ToString
 	public static class Casting {
 		private String title;
+		private String place;
 		private String posterImage;
 		private Date stDate;
 		private Date edDate;
