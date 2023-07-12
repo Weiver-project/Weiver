@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import weiver.dto.PerformingMusical;
+import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
 
@@ -28,6 +29,10 @@ public interface MusicalRepository extends MongoRepository<Musical, String>{
     //뮤지컬 아이디 목록에 해당하는 뮤지컬 전부 조회
     @Query("{'_id': {$in: ?0}}")
     List<Musical> findMusicalsByIds(List<String> musicalIds);
+    
+    //뮤지컬 아이디 목록에 해당하는 뮤지컬 제목 전부 조회
+    @Query(value = "{'_id': {$in: ?0}}", fields ="{'id':1,'title':1}")
+    List<PoPularMusicalDTO> findMusicalTitleByIds(List<String> musicalIds);
     
 	//뮤지컬 상세정보 조회
 

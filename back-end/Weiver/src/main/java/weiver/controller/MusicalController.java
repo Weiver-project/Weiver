@@ -1,5 +1,8 @@
 package weiver.controller;
 
-public class MusicalController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class MusicalController {
+	
 }
