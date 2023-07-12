@@ -1,0 +1,30 @@
+<user testdata>
+INSERT INTO scott."user" ("id", "user_pw", "user_nickname", "user_profile_img")
+VALUES ('user1', 'password1', 'Nickname 1', 'profile1.jpg');
+
+INSERT INTO scott."user" ("id", "user_pw", "user_nickname", "user_profile_img")
+VALUES ('user2', 'password2', 'Nickname 2', 'profile2.jpg');
+
+INSERT INTO scott."user" ("id", "user_pw", "user_nickname", "user_profile_img")
+VALUES ('user3', 'password3', 'Nickname 3', 'profile3.jpg');
+
+<post.id에 시퀀스 주는 sql문>
+CREATE SEQUENCE post_seq START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER post_trigger
+BEFORE INSERT ON scott."post"
+FOR EACH ROW
+BEGIN
+    SELECT post_seq.NEXTVAL INTO :new."id" FROM dual;
+END;
+
+<post 테스트 데이터 삽입>
+INSERT INTO scott."post" ("user_id", "type", "title", "content", "created_time", "view")
+VALUES ('user1', 'type1', 'Title 1', 'Content 1', SYSDATE, 10);
+
+INSERT INTO scott."post" ("user_id", "type", "title", "content", "created_time", "view")
+VALUES ('user2', 'type2', 'Title 2', 'Content 2', SYSDATE, 20);
+
+INSERT INTO scott."post" ("user_id", "type", "title", "content", "created_time", "view")
+VALUES ('user3', 'type1', 'Title 3', 'Content 3', SYSDATE, 30);
+
