@@ -394,6 +394,5 @@ ALTER TABLE scott.review
 ALTER TABLE scott.subscribe
     ADD CONSTRAINT subscribe_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-
         ON DELETE CASCADE
     NOT DEFERRABLE;
