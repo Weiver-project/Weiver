@@ -8,5 +8,5 @@ import weiver.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-	
+		
 }

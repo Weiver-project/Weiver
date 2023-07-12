@@ -14,11 +14,11 @@ public class UserController {
 	@Autowired
 	private UserService userservice;
 	
+	// 유저 아이디로 조회	
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
 	public void test() {
 		String id = "asdf@naver.com";
-		String password = "asdf1234";
-		userservice.test();
+		userservice.findById(id);
 	}
 	
 	@RequestMapping(value="/test2",method = RequestMethod.GET)

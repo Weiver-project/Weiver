@@ -1,6 +1,7 @@
 package weiver.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,11 @@ public class UserService {
     public void test() {
         List<User> result = userRepository.findAll();
         System.out.println(result);
+    }
+    
+    // 유저 Id로 조회   
+    public void findById(String id) {
+    	Optional<User> result = userRepository.findById(id);
+    	System.out.println(result);
     }
 }
