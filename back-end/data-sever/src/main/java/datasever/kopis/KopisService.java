@@ -96,6 +96,11 @@ public class KopisService {
 			String posterImage = dbElement.selectFirst("poster").text();
 			String theater = dbElement.selectFirst("fcltynm").text();
 			String title = dbElement.selectFirst("prfnm").text();
+			
+			//제목에 지역 정보가 있다면 삭제
+			if(title.contains("["))
+				title = title.substring(0, title.lastIndexOf("[")).trim();
+	
 			String stdate = dbElement.selectFirst("prfpdfrom").text();
 			String eddate = dbElement.selectFirst("prfpdto").text();
 			String runningTime = dbElement.selectFirst("prfruntime").text();
