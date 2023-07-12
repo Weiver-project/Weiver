@@ -28,7 +28,7 @@ public class Actor {
 	@ToString
 	public static class Casting {
 		private String title;
-		private String place;
+		private String theater;
 		private String posterImage;
 		private Date stDate;
 		private Date edDate;

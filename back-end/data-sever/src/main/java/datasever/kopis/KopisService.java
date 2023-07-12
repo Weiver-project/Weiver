@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -95,24 +96,39 @@ public class KopisService {
 			String _id = dbElement.selectFirst("mt20id").text();
 			String posterImage = dbElement.selectFirst("poster").text();
 			String theater = dbElement.selectFirst("fcltynm").text();
-			String title = dbElement.selectFirst("prfnm").text();
+			String title = dbElement.selectFirst("prfnm").text();		
 			String stdate = dbElement.selectFirst("prfpdfrom").text();
 			String eddate = dbElement.selectFirst("prfpdto").text();
 			String runningTime = dbElement.selectFirst("prfruntime").text();
 			String viewingAge = dbElement.selectFirst("prfage").text();
 			String ticketPrice = dbElement.selectFirst("pcseguidance").text();
 			String actors = dbElement.selectFirst("prfcast").text();
-			//String -> Date 타입 변경
+			
 			try {
+				//String -> Date 타입 변경 및 7일 범위 계산을 위한 변수 생성
+				Calendar calendar = Calendar.getInstance();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+				
 				Date stDate = dateFormat.parse(stdate);
+				calendar.setTime(stDate);
+				calendar.add(Calendar.DAY_OF_MONTH, -7);
+				Date preStDate = calendar.getTime();
+				
 				Date edDate = dateFormat.parse(eddate);
+				calendar.setTime(edDate);
+				calendar.add(Calendar.DAY_OF_MONTH, 7);
+				Date preEdDate = calendar.getTime();
+				
+				//배우 정보 검색을 위한 제목, 극장 tmp 데이터 생성
+				String tmpTitle = title.split(" ")[0];
+				String tmpTheater = theater.split(" ")[0];
+				
 				//배우 정보 ,로 파싱
 				String[] actorArray = actors.split(",");
 				
 				//배우 아이디 가져오기
 				for(String actor : actorArray ) {
-					List<String> ids = actorRepository.findActorIdsByNameAndCasting(actor, title, stDate, edDate);	
+					List<String> ids = actorRepository.findActorsByConditions(actor, tmpTitle, preStDate, stDate, preEdDate, edDate, tmpTheater);	
 					//배우 아이디 추가
 					for(String i : ids) {
 						actorIds.add(i);
