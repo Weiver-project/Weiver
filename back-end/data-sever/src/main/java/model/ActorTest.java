@@ -46,7 +46,7 @@ public class ActorTest {
 			// 최대 페이지 알아내기
 			Elements maxPages = doc.select("body > table > tbody > tr > td");
 			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
-			System.out.println("최대 페이지 수 : " + maxPage);
+//			System.out.println("최대 페이지 수 : " + maxPage);
 			
 			// 페이지 반복
 			for(pageNo = 2; pageNo <= 2; pageNo++) {
@@ -111,7 +111,7 @@ public class ActorTest {
 							switch(i % 5) {
 								// 출연 작품 Title
 								case(0):
-									String title = roles.get(i).text();
+									String title = roles.get(i).text().split(" - ")[0];
 //									System.out.println("제목 : " + title);
 									actorAllCastings.get(i/5).setTitle(title);
 									break;
@@ -166,9 +166,9 @@ public class ActorTest {
 //						배우 이미지 주소 : actorImage
 //						배우 이름 : actorName.split(" ")[0]
 //						출연 작품 정보 : actorCastings
-						System.out.println("배우 ID : " + contentactorNo);
-						System.out.println("배우 이미지 주소 : " + actorImage);
-						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
+//						System.out.println("배우 ID : " + contentactorNo);
+//						System.out.println("배우 이미지 주소 : " + actorImage);
+//						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
 						
 						
 						// Casting에서 뮤지컬만 골라내기
@@ -217,6 +217,7 @@ public class ActorTest {
 						
 						System.out.println("cycle");
 						System.out.println(actorName.split(" ")[0] + " 정보 조회 종료");
+						break;
 					}
 				}
 			}
