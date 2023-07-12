@@ -137,7 +137,7 @@ CREATE TABLE scott.post (
     title        VARCHAR2(30 BYTE) NOT NULL,
     content      VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL,
-    view         NUMBER(20) DEFAULT 0 NOT NULL
+    viewed         NUMBER(20) DEFAULT 0 NOT NULL
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -292,89 +292,108 @@ ALTER TABLE scott.user_tb
 ALTER TABLE scott.answer
     ADD CONSTRAINT answer_admin_fk FOREIGN KEY ( admin_id )
         REFERENCES scott.admin ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.answer
     ADD CONSTRAINT answer_inquiry_fk FOREIGN KEY ( inquiry_id )
         REFERENCES scott.inquiry ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply_like
     ADD CONSTRAINT reply_like_comment_fk FOREIGN KEY ( comment_id )
         REFERENCES scott.reply ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply_like
     ADD CONSTRAINT reply_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
     ADD CONSTRAINT comment_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
     ADD CONSTRAINT comment_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.image
     ADD CONSTRAINT image_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.inquiry
     ADD CONSTRAINT inquiry_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post_like
     ADD CONSTRAINT post_like_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post_like
     ADD CONSTRAINT post_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post
     ADD CONSTRAINT post_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT recomment_comment_fk FOREIGN KEY ( comment_id )
         REFERENCES scott.reply ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply_like
     ADD CONSTRAINT re_reply_like_recomment_fk FOREIGN KEY ( recomment_id )
         REFERENCES scott.re_reply ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply_like
     ADD CONSTRAINT re_reply_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT recomment_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT recomment_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.review
     ADD CONSTRAINT review_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
+        ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.subscribe
     ADD CONSTRAINT subscribe_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+
+        ON DELETE CASCADE
     NOT DEFERRABLE;
