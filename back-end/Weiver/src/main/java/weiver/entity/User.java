@@ -3,13 +3,9 @@ package weiver.entity;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
 @Data
 @Entity
 @Table(name = "user_tb")
