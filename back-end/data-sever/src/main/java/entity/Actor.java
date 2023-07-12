@@ -23,8 +23,8 @@ public class Actor {
 	private Casting[] castings;
 	
 	@Builder
-	@Setter
 	@Getter
+	@Setter	
 	@ToString
 	public static class Casting {
 		private String title;
