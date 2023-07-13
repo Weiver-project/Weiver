@@ -1,10 +1,11 @@
-//package model;
+//package service;
 //
 //import java.io.IOException;
 //import java.text.ParseException;
 //import java.text.SimpleDateFormat;
 //import java.util.ArrayList;
 //import java.util.Date;
+//import java.util.List;
 //
 //import org.jsoup.Jsoup;
 //import org.jsoup.nodes.Document;
@@ -12,63 +13,65 @@
 //import org.jsoup.select.Elements;
 //import org.springframework.stereotype.Service;
 //
+//import repository.ActorRepository;
 //import entity.Actor;
+//import lombok.RequiredArgsConstructor;
 //
 //@Service
-//public class ActorTest {
+//@RequiredArgsConstructor
+//public class PlayDBService {
 //
-//	public static void main(String[] args) {
+//	private final ActorRepository actorRepository;
+//
+//	// 배우 DB에 정보 추가
+//	public void saveActor() {
+//		// 최신화 하기 전에 기존 데이터를 모두 삭제한다.
+//		actorRepository.deleteAll();
 //
 //		Document doc = null;
+//		// Casting.title에서 " - 지역이름" 을 제외하기 위한 키워드
+//		List<String> regions = new ArrayList<String>();
 //
 //		try {
 //
 //			String mainURL = "http://www.playdb.co.kr";
 //			String mainURL2 = "http://www.playdb.co.kr/artistdb/";
 //			// 뮤지컬 배우 첫 페이지
-//			// beta
-////			String URL = "http://www.playdb.co.kr/artistdb/list.asp?code=013003";
 //
 //			int pageNo = 1; // 초기 페이지 넘버
 //			String ActorListURL = "https://www.playdb.co.kr/artistdb/list_iframe.asp?Page=" + pageNo + "&code=013003&sub_code=&ImportantSelect=&ClickCnt=Y&NameSort=&Country=Y&TKPower=&WeekClickCnt=&NameStart=&NameEnd=";
 //
+//			// 뮤지컬 배우 첫 페이지 접근
 //			doc = Jsoup.connect(ActorListURL).get();
 //
 //			// 최대 페이지 알아내기
 //			Elements maxPages = doc.select("body > table > tbody > tr > td");
 //			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
-////			System.out.println("최대 페이지 수 : " + maxPage);
 //
 //			// 페이지 반복
-//			for(pageNo = 1; pageNo <= 1; pageNo++) {
+//			for(pageNo = 1; pageNo <= maxPage; pageNo++) {
+//				System.out.println("지금부터 " + pageNo + "페이지 데이터 처리 시작");
 //
 //				// 페이지별로 배우 리스트 접근
 //				ActorListURL = "https://www.playdb.co.kr/artistdb/list_iframe.asp?Page=" + pageNo + "&code=013003&sub_code=&ImportantSelect=&ClickCnt=Y&NameSort=&Country=Y&TKPower=&WeekClickCnt=&NameStart=&NameEnd=";
 //				doc = Jsoup.connect(ActorListURL).get();
 //
 //				// 각각 배우 상세로 들어가는 방법
-//				// beta
-//	//			Elements imgSrcs = doc.select("#first_list > table > tbody > tr > td > table > tbody > tr > td > table"
-//	//						+ "> tbody > tr > td > a");
 //				Elements imgSrcs = doc.select("body > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > a");
 //
 //				// 모든 배우에 대한 반복
 //				for(Element imgSrc : imgSrcs) {
 //					if((imgSrc.text()).equals("")) {
-//
 //						String actorDetailURL = mainURL2 + imgSrc.attr("href");
-//	//					System.out.println("배우 상세 페이지 링크 : " + actorDetailURL);
 //
 //						// 새로 연결
 //						doc = Jsoup.connect(actorDetailURL).get();
 //
 //						// 배우 이미지 주소
 //						String actorImage = doc.select("#manImage").attr("src");
-////						System.out.println("배우 이미지 링크 : " + actorImage);
 //
 //						// 배우 이름
 //						String actorName = doc.select(".title").get(0).text();
-//						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
 //
 //						// 출연 작품 : 이미지 .img_size4
 //						// iframe 접근을 위해 actorNo값을 알아낸다.
@@ -80,7 +83,6 @@
 //						String contentIframeURL = mainURL2 + "Detail_Content_new.asp?TabKind=3&ManNo=" + contentactorNo;
 //						// contentIframeURL로 연결
 //						doc = Jsoup.connect(contentIframeURL).get();
-////						System.out.println("출연작품 iframe 링크 : " + contentIframeURL);
 //
 //						// 전체 Casting 객체 생성
 //						ArrayList<Actor.Casting> actorAllCastings = new ArrayList<Actor.Casting>();
@@ -93,7 +95,6 @@
 //													.posterImage(image.attr("src"))
 //													.build());
 //						}
-//
 //						// 출연 작품 정보 (이미지 제외)
 //						String tableRoleURL = ".detail_contentsbox > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td";
 //						Elements roles = doc.select(tableRoleURL);
@@ -110,7 +111,6 @@
 //								// 출연 작품 Date
 //								case(1):
 //									String date = roles.get(i).text();
-////									System.out.println("기간 : " + date);
 //
 //									SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
 //									Date stDate = null, edDate = null;
@@ -128,27 +128,22 @@
 //										e.printStackTrace();
 //									}
 //
-////									String stDate = roles.get(i).text().trim().split("~")[0];
 //									actorAllCastings.get(i/5).setStDate(stDate);
-////									String edDate = roles.get(i).text().trim().split("~")[1];
 //									actorAllCastings.get(i/5).setEdDate(edDate);
 //									break;
-//								// 출연 작품 장소 (사용 안함)
+//								// 출연 작품 장소
 //								case(2):
 //									String theater = roles.get(i).text();
 //									actorAllCastings.get(i/5).setTheater(theater);
-////									System.out.println("장소 : " + place);
 //									break;
 //								// 출연 작품 Role
 //								case(3):
 //									String role = roles.get(i).text();
-////									System.out.println("역할 : " + role);
 //									actorAllCastings.get(i/5).setRole(role);
 //									break;
 //								// 여백 처리
 //								case(4):
 //									String blank = roles.get(i).text();
-////									System.out.println("여백 : " + blank);
 //									break;
 //							} // switch
 //
@@ -159,10 +154,6 @@
 ////						배우 이미지 주소 : actorImage
 ////						배우 이름 : actorName.split(" ")[0]
 ////						출연 작품 정보 : actorCastings
-////						System.out.println("배우 ID : " + contentactorNo);
-////						System.out.println("배우 이미지 주소 : " + actorImage);
-////						System.out.println("배우 이름 : " + actorName.split(" ")[0]);
-//
 //
 //						// Casting에서 뮤지컬만 골라내기
 //						// "역" Casting 객체 생성
@@ -173,7 +164,6 @@
 //							}
 //						}
 //
-//
 //						// Actor 객체 생성
 //						Actor actor = Actor.builder()
 //											._id(contentactorNo)
@@ -182,12 +172,9 @@
 //											.castings(actorCastings.toArray(Actor.Casting[]::new))
 //											.build();
 //
-//						System.out.println(actor);
-//						for(Actor.Casting c : actor.getCastings()) {
-//							System.out.println(c);
-//						}
-//
-//						System.out.println(actorName.split(" ")[0] + " 정보 조회 종료");
+//						// 배우DB에 저장
+//						//System.out.println();
+//						actorRepository.save(actor);
 //					}
 //				}
 //			}
