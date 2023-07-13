@@ -1,11 +1,10 @@
 package weiver.entity;
 
-import java.util.Date;
-
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -26,7 +25,7 @@ public class ReReply {
     private User user;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")
+    @JoinColumn(name = "reply_id")
     private Reply reply;
 
     @Column(name = "content")

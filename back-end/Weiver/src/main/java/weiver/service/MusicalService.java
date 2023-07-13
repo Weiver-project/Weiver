@@ -1,3 +1,4 @@
+
 //package weiver.service;
 //
 //import java.util.List;
@@ -15,7 +16,7 @@
 //	private final MusicalRepository musicalRepository;
 //	private final SubscribeRepository subscribeRepository;
 //	
-//	
+//
 //	/*인기 뮤지컬 조회*/
 //	public List<PoPularMusicalDTO> getLikedMusical(){
 //		List<String> musicalIds = subscribeRepository.findTop3MusicalIdsByDesiredType();
@@ -24,3 +25,4 @@
 //	}
 //
 //}
+
