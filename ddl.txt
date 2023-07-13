@@ -52,7 +52,7 @@ CREATE TABLE scott.reply (
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
 
-CREATE UNIQUE INDEX scott.pk_comment ON
+CREATE UNIQUE INDEX scott.pk_reply ON
     scott.reply (
         id
     ASC )
@@ -62,13 +62,13 @@ CREATE UNIQUE INDEX scott.pk_comment ON
         LOGGING;
 
 ALTER TABLE scott.reply
-    ADD CONSTRAINT pk_comment PRIMARY KEY ( id )
-        USING INDEX scott.pk_comment;
+    ADD CONSTRAINT pk_reply PRIMARY KEY ( id )
+        USING INDEX scott.pk_reply;
 
 CREATE TABLE scott.reply_like (
     id         NUMBER NOT NULL,
     user_id    VARCHAR2(30 BYTE) NOT NULL,
-    comment_id NUMBER NOT NULL
+    reply_id NUMBER NOT NULL
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -180,14 +180,14 @@ CREATE TABLE scott.re_reply (
     id           NUMBER NOT NULL,
     post_id      NUMBER NOT NULL,
     user_id      VARCHAR2(30 BYTE) NOT NULL,
-    comment_id   NUMBER NOT NULL,
+    reply_id   NUMBER NOT NULL,
     content      VARCHAR2(1000 BYTE) NOT NULL,
     created_time DATE NOT NULL
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
 
-CREATE UNIQUE INDEX scott.pk_recomment ON
+CREATE UNIQUE INDEX scott.pk_re_reply ON
     scott.re_reply (
         id
     ASC )
@@ -197,13 +197,13 @@ CREATE UNIQUE INDEX scott.pk_recomment ON
         LOGGING;
 
 ALTER TABLE scott.re_reply
-    ADD CONSTRAINT pk_recomment PRIMARY KEY ( id )
-        USING INDEX scott.pk_recomment;
+    ADD CONSTRAINT pk_re_reply PRIMARY KEY ( id )
+        USING INDEX scott.pk_re_reply;
 
 CREATE TABLE scott.re_reply_like (
     id           NUMBER NOT NULL,
     user_id      VARCHAR2(30 BYTE) NOT NULL,
-    recomment_id NUMBER NOT NULL
+    re_reply_id NUMBER NOT NULL
 )
 PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
     STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT );
@@ -305,7 +305,7 @@ ALTER TABLE scott.answer
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply_like
-    ADD CONSTRAINT reply_like_comment_fk FOREIGN KEY ( comment_id )
+    ADD CONSTRAINT reply_like_reply_fk FOREIGN KEY ( reply_id )
         REFERENCES scott.reply ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
@@ -317,13 +317,13 @@ ALTER TABLE scott.reply_like
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
-    ADD CONSTRAINT comment_post_fk FOREIGN KEY ( post_id )
+    ADD CONSTRAINT reply_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
-    ADD CONSTRAINT comment_user_fk FOREIGN KEY ( user_id )
+    ADD CONSTRAINT reply_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
@@ -359,13 +359,13 @@ ALTER TABLE scott.post
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
-    ADD CONSTRAINT recomment_comment_fk FOREIGN KEY ( comment_id )
+    ADD CONSTRAINT re_reply_reply_fk FOREIGN KEY ( reply_id )
         REFERENCES scott.reply ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply_like
-    ADD CONSTRAINT re_reply_like_recomment_fk FOREIGN KEY ( recomment_id )
+    ADD CONSTRAINT re_reply_like_re_reply_fk FOREIGN KEY ( re_reply_id )
         REFERENCES scott.re_reply ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
@@ -377,13 +377,13 @@ ALTER TABLE scott.re_reply_like
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
-    ADD CONSTRAINT recomment_post_fk FOREIGN KEY ( post_id )
+    ADD CONSTRAINT re_reply_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
-    ADD CONSTRAINT recomment_user_fk FOREIGN KEY ( user_id )
+    ADD CONSTRAINT re_reply_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
         ON DELETE CASCADE
     NOT DEFERRABLE;
