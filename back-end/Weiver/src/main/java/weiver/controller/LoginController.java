@@ -5,16 +5,11 @@ package weiver.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import weiver.entity.User;
@@ -64,10 +59,13 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 닉네임입니다.");
 		}
 		
-		// 패스워드, 패스워드 확인 체크
+		// 비밀번호, 비밀번호확인 체크
 		if(!userPw.equals(userPwCheck)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
 		}
+		
+		// 비밀번호 한글 체크
+	
 		
 		System.out.println(userId);
 		System.out.println(userPw);
