@@ -19,8 +19,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "type")
     private String type;
@@ -37,7 +38,7 @@ public class Post {
     @Column(name = "viewed")
     private Long viewed;
 
-    // 이미지 목록을 저장하는 컬렉션 필드
+    // 이미지 entity 참조
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "post_id")
     private List<Image> images = new ArrayList<>();
@@ -49,20 +50,43 @@ public class Post {
     public void removeImage(Image image) {
         images.remove(image);
     }
-    
-    //좋아요 목록을 저장하는 컬렉션 필드
+
+    // 좋아요 entity 참조
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "post_id")
     private List<PostLike> postLikes = new ArrayList<>();
 
     public void addPostLike(PostLike postLike) {
-    	postLikes.add(postLike);
+        postLikes.add(postLike);
     }
 
     public void removePostLike(PostLike postLike) {
-    	postLikes.remove(postLike);
+        postLikes.remove(postLike);
+    }
+
+    // 댓글 entity 참조
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<Reply> replies = new ArrayList<>();
+
+    public void addReply(Reply reply) {
+        replies.add(reply);
+    }
+
+    public void removeReply(Reply reply) {
+        replies.remove(reply);
+    }
+
+    // 대댓글 entity 참조
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<ReReply> rereplies = new ArrayList<>();
+
+    public void addReReply(ReReply rereply) {
+        rereplies.add(rereply);
+    }
+
+    public void removeReReply(ReReply rereply) {
+        rereplies.remove(rereply);
     }
 }
-
-
-
