@@ -49,7 +49,7 @@ public class PlayDBService {
 			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
 			
 			// 페이지 반복
-			for(pageNo = 1; pageNo <= 1; pageNo++) {
+			for(pageNo = 1; pageNo <= maxPage; pageNo++) {
 				System.out.println("지금부터 " + pageNo + "페이지 데이터 처리 시작");
 				
 				// 페이지별로 배우 리스트 접근
@@ -133,8 +133,8 @@ public class PlayDBService {
 									break;
 								// 출연 작품 장소
 								case(2):
-									String place = roles.get(i).text();
-									actorAllCastings.get(i/5).setPlace(place);
+									String theater = roles.get(i).text();
+									actorAllCastings.get(i/5).setTheater(theater);
 									break;
 								// 출연 작품 Role
 								case(3):
@@ -173,7 +173,8 @@ public class PlayDBService {
 											.build();
 						
 						// 배우DB에 저장
-						System.out.println(actorRepository.save(actor));
+						//System.out.println();
+						actorRepository.save(actor);
 					}
 				}
 			}

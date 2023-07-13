@@ -117,22 +117,42 @@ public class KopisService {
 				Date edDate = dateFormat.parse(eddate);
 				calendar.setTime(edDate);
 				calendar.add(Calendar.DAY_OF_MONTH, 7);
-				Date preEdDate = calendar.getTime();
+				Date postEdDate = calendar.getTime();
 				
 				//배우 정보 검색을 위한 제목, 극장 tmp 데이터 생성
 				String tmpTitle = title.split(" ")[0];
-				String tmpTheater = theater.split(" ")[0];
+				String tmpTheater;
+				if(theater.contains("(")) {
+					tmpTheater = theater.split("\\(")[0];
+					System.out.println(tmpTheater);
+					System.out.println(theater);
+					
+				} else {
+					tmpTheater = theater.split(" ")[0];
+					System.out.println(tmpTheater);
+					System.out.println(theater);
+				}
+				
 				
 				//배우 정보 ,로 파싱
 				String[] actorArray = actors.split(",");
 				
+//				System.out.println("배우 목록");
+				for(int i = 0; i < actorArray.length; i++) {
+					 actorArray[i] = actorArray[i].trim();
+//					System.out.println(actor);
+				}
 				//배우 아이디 가져오기
 				for(String actor : actorArray ) {
-					List<String> ids = actorRepository.findActorsByConditions(actor, tmpTitle, preStDate, stDate, preEdDate, edDate, tmpTheater);	
-					//배우 아이디 추가
-					for(String i : ids) {
-						actorIds.add(i);
-					}
+//					System.out.println("=================================");
+					System.out.println("배우:" + actor + "\n제목:" + tmpTitle + "\n날짜: " + preStDate + " "+ stDate + "\n날짜2: "+ edDate + " " + postEdDate + "\n극장: "+ tmpTheater);
+					if(!actor.isEmpty()) {
+						List<String> ids = actorRepository.findActorsByConditions(actor, tmpTitle, preStDate, stDate, edDate, postEdDate, tmpTheater);	
+						//배우 아이디 추가
+						for(String i : ids) {
+							actorIds.add(i);
+						}
+					}					
 				}
 			
 			//뮤지컬 정보 DB에 저장
@@ -149,9 +169,13 @@ public class KopisService {
 								.actorIds(actorIds)
 								.build();
 			
+//			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 			System.out.println(musical);
+//			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");	
+			if(!actorIds.isEmpty())
+				musicalRepository.save(musical);
 			
-			musicalRepository.save(musical);
+			actorIds.clear();
 			
 			} catch (ParseException e) {
 				e.printStackTrace();
