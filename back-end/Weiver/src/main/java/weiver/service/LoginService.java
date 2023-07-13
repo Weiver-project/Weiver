@@ -63,17 +63,10 @@ public class LoginService {
 	}
 
 	
-	public User findByIdAndPassword(String id, String pw) {
-
-		Optional<User> OptionalUser = userRepository.findById(id);
-
-		if (OptionalUser.isPresent()) {
-			User user = OptionalUser.get();
-			if (user.getPassword().equals(pw)) {
-				return user;
-			}
-		}
-
+	public User findUserByIdAndPw(String userId, String userPw) {
+		
+//		String decodeedPassword = passwordEncoder.matches(userPw, encodedPassword)
+		
 		return null;
 	}
 }

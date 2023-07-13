@@ -88,24 +88,30 @@ public class LoginController {
 	
 	// 로그인 기능 개발중
 	@PostMapping(value =  "/signin")
-	public String login(@RequestParam(value = "userId") String userId, 
-						@RequestParam(value = "userPw") String userPw) {
-		
+	public ResponseEntity<String> login(@RequestParam(value = "userId") String userId, 
+										@RequestParam(value = "userPw") String userPw) {
+
 		System.out.println(userId);
 		System.out.println(userPw);
 		
-		if (userId == null || userPw == null) {
-	        return "error";
-	    }
+		if (userId == null || userPw == null || userId == "" || userPw == "") {
+			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("아이디, 비밀번호를 제대로 입력해주세요.");
+		}
 		
-		User user = service.findByIdAndPassword(userId, userPw);
+		boolean checkUserId = service.checkUserExists(userId);
 		
-		if (user != null) {
-	        return "redirect:/mainpage";
-	    } else {
-	        // 로그인 실패 처리
-	        return "redirect:/login";
-	    }
+		if (!checkUserId) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 아이디는 존재하지 않습니다.");
+		} 
+		
+		
+		try {
+//			boolean loginResult = service.findUserByIdAndPw(userId, userPw);
+			return ResponseEntity.ok("로그인 성공");
+		} catch (Exception e) {
+			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 가입 중 에러가 발생했습니다.");
+		}
+		return null;
 	}
 
 

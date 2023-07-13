@@ -19,11 +19,24 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+		
+		// 로그인 설정
+		httpSecurity.formLogin()
+					.loginPage("/login")
+					.loginProcessingUrl("/signin")
+					.usernameParameter("userId")
+					.passwordParameter("userPw")
+					.defaultSuccessUrl("/");
+		
+		// 비활성화 목록
 		httpSecurity.cors().disable()	// cors 비활성화
 					.csrf().disable()	// csrf 비활성화
-					.formLogin().disable()	// 로그인 폼 비활성화 
 					.headers().frameOptions().disable();	// X-Frame-Options 헤더를 비활성화 
 		
+		
+		httpSecurity.logout()
+					.logoutUrl("/logoup")
+					.logoutSuccessUrl("/");
 		return httpSecurity.build();
 	}
 }
