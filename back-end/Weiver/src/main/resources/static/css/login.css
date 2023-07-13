@@ -1,4 +1,4 @@
-/* ·Î±×ÀÎ ÆäÀÌÁö */
+/* ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 header {
   margin: 30px;
   margin-bottom: 10%;
@@ -36,11 +36,13 @@ article {
   margin-bottom: 10px;
   font-size: 18px;
   color: #D4D9E1;
+  padding-left: 12px;
 }
 
 #login-form .submit {
   background-color: #3B4869;
   margin-top: 10px;
+  width: 504px;
 }
 
 .login-support {
@@ -61,7 +63,7 @@ article {
   color: #D4D9E1;
 }
 
-/* ±¸ºÐ¼± before:¿ÞÂÊ after:¿À¸¥ÂÊ */
+/* ï¿½ï¿½ï¿½Ð¼ï¿½ before:ï¿½ï¿½ï¿½ï¿½ after:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .dividing-line::before {
   content: '';
   flex-grow: 1;
@@ -89,7 +91,7 @@ article {
   height: 30px;
 }
 
-/* ºñ¹Ð¹øÈ£ Ã£±â ÆäÀÌÁö */
+/* ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .search-pw-title{
   color: #D4D9E1;
   margin-bottom: 20px;
@@ -97,7 +99,7 @@ article {
   margin-top: 65%;
 }
 
-/*ºñ¹Ð¹øÈ£ º¯°æ*/
+/*ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½*/
 /* title */
 .title {
   margin-bottom: 30px;
@@ -137,7 +139,7 @@ article {
   margin-bottom: 20px;
 }
 
-/* ºñ¹Ð¹øÈ£ */
+/* ï¿½ï¿½Ð¹ï¿½È£ */
 .data_input {
   margin: 10px 0px;
   padding: 0px 20px;
@@ -163,7 +165,7 @@ article {
   margin-bottom: 20px;
 }
 
-/* ÀúÀå */
+/* ï¿½ï¿½ï¿½ï¿½ */
 .btn {
   text-align: center;
 }

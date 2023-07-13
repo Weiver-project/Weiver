@@ -23,7 +23,7 @@ public class DataSeverApplication {
 	//1000*60*60*24*7 = 60,480,000 = 1주일
 	@Scheduled(fixedDelay = 60480000)
 	public void executeTask() {
-		playDBService.saveActor();
+//		playDBService.saveActor();
 
 		kopisService.getMusicalIdList();
 		kopisService.saveMusical();

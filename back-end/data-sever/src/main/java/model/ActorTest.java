@@ -135,8 +135,8 @@ public class ActorTest {
 									break;
 								// 출연 작품 장소 (사용 안함)
 								case(2):
-									String place = roles.get(i).text();
-									actorAllCastings.get(i/5).setPlace(place);
+									String theater = roles.get(i).text();
+									actorAllCastings.get(i/5).setTheater(theater);
 //									System.out.println("장소 : " + place);
 									break;
 								// 출연 작품 Role

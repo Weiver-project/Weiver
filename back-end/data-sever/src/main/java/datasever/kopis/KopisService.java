@@ -19,6 +19,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import datasever.repository.ActorRepository;
 import datasever.repository.MusicalRepository;
+import dto.MusicalIdDto;
 import entity.Musical;
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +38,18 @@ public class KopisService {
 	private String stdate = "";
 	private String eddate = "";
 
+	
+	/*뮤지컬 아이디 중복 검사*/
+	public boolean isexist(List<MusicalIdDto> musicalIds, String id) {
+		for(MusicalIdDto i : musicalIds) {
+    		//DB에서 공연 아이디 중 같은 ID가 있는지 확인 후 있다면 추가하지 않음    
+    		if(i.getId().equals(id)){
+    			return true;
+    		}
+    	}
+		return false;
+	}
+	
 	
 	/**뮤지컬 아이디 조회*/
 	public void getMusicalIdList() {
@@ -63,15 +76,14 @@ public class KopisService {
         Elements mt20idList = doc.select("mt20id");
         
         //DB에 있는 뮤지컬 아이디 조회
-        List<String> musicalIds = musicalRepository.getAllMusicalIds();
+        List<MusicalIdDto> musicalIds = musicalRepository.getAllMusicalIds();
         
+        
+        //DB에 없는 뮤지컬 아이디 추가
         for (Element element : mt20idList) {
-            String id = element.text();
-            
-            //DB에서 공연 아이디 중 같은 ID가 있는지 확인 후 있다면 추가하지 않음    
-            if(!musicalIds.contains(id)) {
-            	musicalIdList.add(id);    
-            }
+        	String id = element.text();
+        	if(!isexist(musicalIds, id))
+        		musicalIdList.add(id); 
         }
 	}
 	
@@ -117,22 +129,37 @@ public class KopisService {
 				Date edDate = dateFormat.parse(eddate);
 				calendar.setTime(edDate);
 				calendar.add(Calendar.DAY_OF_MONTH, 7);
-				Date preEdDate = calendar.getTime();
+				Date postEdDate = calendar.getTime();
 				
 				//배우 정보 검색을 위한 제목, 극장 tmp 데이터 생성
 				String tmpTitle = title.split(" ")[0];
-				String tmpTheater = theater.split(" ")[0];
+				String tmpTheater;
+				if(theater.contains("(")) {
+					tmpTheater = theater.split("\\(")[0];
+
+				} else {
+					tmpTheater = theater.split(" ")[0];
+				}
+				
 				
 				//배우 정보 ,로 파싱
 				String[] actorArray = actors.split(",");
 				
+//				System.out.println("배우 목록");
+				for(int i = 0; i < actorArray.length; i++) {
+					 actorArray[i] = actorArray[i].trim();
+//					System.out.println(actor);
+				}
 				//배우 아이디 가져오기
 				for(String actor : actorArray ) {
-					List<String> ids = actorRepository.findActorsByConditions(actor, tmpTitle, preStDate, stDate, preEdDate, edDate, tmpTheater);	
-					//배우 아이디 추가
-					for(String i : ids) {
-						actorIds.add(i);
-					}
+//					System.out.println("배우:" + actor + "\n제목:" + tmpTitle + "\n날짜: " + preStDate + " "+ stDate + "\n날짜2: "+ edDate + " " + postEdDate + "\n극장: "+ tmpTheater);
+					if(!actor.isEmpty()) {
+						List<String> ids = actorRepository.findActorsByConditions(actor, tmpTitle, preStDate, stDate, edDate, postEdDate, tmpTheater);	
+						//배우 아이디 추가
+						for(String i : ids) {
+							actorIds.add(i);
+						}
+					}					
 				}
 			
 			//뮤지컬 정보 DB에 저장
@@ -149,9 +176,15 @@ public class KopisService {
 								.actorIds(actorIds)
 								.build();
 			
-			System.out.println(musical);
+			if(!actorIds.isEmpty()) {				
+				//System.out.println(musical);
+				musicalRepository.save(musical);
+			}
+			else {
+				//System.out.println("안들어간 데이터: " + title);
+			}
 			
-			musicalRepository.save(musical);
+			actorIds.clear();
 			
 			} catch (ParseException e) {
 				e.printStackTrace();
