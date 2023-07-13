@@ -23,10 +23,10 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form">
-      <input type="email" name="id" placeholder=" 이메일을 입력하세요">
-      <input type="password" name="pw" placeholder=" 비밀번호를 입력하세요">
-      <input class="submit" type="submit" value="Login" style="cursor: pointer;">
+    <form id="login-form" action="/signin">
+      <input type="email" name="id" placeholder=" 이메일을 입력하세요" required style="padding-left: 10px;">
+      <input type="password" name="pw" placeholder=" 비밀번호를 입력하세요" required style="padding-left: 10px;">
+      <input class="submit" type="submit" value="Login" style="cursor: pointer; padding: 0px 0px;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
