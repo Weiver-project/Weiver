@@ -1,15 +1,19 @@
+package com.example;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import lombok.RequiredArgsConstructor;
+import com.example.service.MusicalService;
 
 @SpringBootApplication
 @EnableScheduling
 @RequiredArgsConstructor
 public class DataSeverApplication {
 //	private final PlayDBService playDBService;
+	private final MusicalService musicalService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataSeverApplication.class, args);

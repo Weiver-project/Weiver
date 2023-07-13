@@ -1,9 +1,11 @@
-package service;
+package com.example.service;
 
-import constant.Sub_category;
-import constant.URLs;
+import com.example.constant.Sub_category;
+import com.example.constant.URLs;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class MusicalService {
 
         try {
             Document doc = Jsoup.connect(MUSICAL_URL + page).get();
-
+            Elements pageNumber = doc.select("");
 
         } catch (IOException e) {
             throw new RuntimeException(e);

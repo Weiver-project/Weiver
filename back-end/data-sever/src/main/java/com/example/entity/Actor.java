@@ -1,4 +1,4 @@
-package entity;
+package com.example.entity;
 
 import lombok.*;
 
@@ -18,6 +18,6 @@ public class Actor {
 
 	@Column(name = "NAME")
 	private String name;
-	@Column(name = "NAME")
+	@Column(name = "PROFILE_IMAGE")
 	private String profileImage;
 }

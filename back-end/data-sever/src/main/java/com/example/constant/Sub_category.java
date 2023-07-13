@@ -1,4 +1,4 @@
-package constant;
+package com.example.constant;
 
 public final class Sub_category {
     public static final String LICENSES = "001001";
