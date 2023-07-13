@@ -23,10 +23,10 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form" action="/signin">
-      <input type="email" name="id" placeholder=" 이메일을 입력하세요" required style="padding-left: 10px;">
-      <input type="password" name="pw" placeholder=" 비밀번호를 입력하세요" required style="padding-left: 10px;">
-      <input class="submit" type="submit" value="Login" style="cursor: pointer; padding: 0px 0px;">
+    <form id="login-form" action="/signin" method="post">
+      <input type="email" name="userId" placeholder=" 이메일을 입력하세요" required>
+      <input type="password" name="userPw" placeholder=" 비밀번호를 입력하세요" required>
+      <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
@@ -47,20 +47,31 @@
 
 
   <script>
-    // 폼 제출 이벤트 핸들러
-    document.getElementById("login-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // 기본 제출 동작 방지
-
-      // 입력된 값을 가져오기
-      let userId = document.getElementsByName("id")[0].value;
-      let userPw = document.getElementsByName("pw")[0].value;
-
-      const params = {userId, userPw}
-      console.log(userId)
-      console.log(userPw)
-
-      // Axios를 사용하여 POST 요청 보내기
-      
+  	const loginForm = document.getElementById("login-form");
+  	const formData = new FormData(loginForm);
+  	const userId = document.getElementsByName("userId")[0].value;
+    const userPw = document.getElementsByName("userPw")[0].value;
+    
+    console.log(userId)
+    console.log(userPw)
+    
+    /* 폼 제출 이벤트 핸들러 */
+    loginForm.addEventListener("submit", function (event) {
+    	event.preventDefault(); // 기본 제출 동작 방지
+    	
+    	/* 로그인 axios 요청 */
+        axios.post("/signin", formData)
+        		.then(response => {
+        			const data => response.data;
+        			if(response.status === 200) {
+        				window.location.href = "/community";
+        			}
+  	   			})
+  	   			.catch((error) => {
+  	   				const errorMessage = error.response.data;
+  	   				alert(errorMessage);
+  	   			});
+   	}
   </script>
 </body>
 

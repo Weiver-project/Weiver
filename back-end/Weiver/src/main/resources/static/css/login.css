@@ -36,11 +36,13 @@ article {
   margin-bottom: 10px;
   font-size: 18px;
   color: #D4D9E1;
+  padding-left: 12px;
 }
 
 #login-form .submit {
   background-color: #3B4869;
   margin-top: 10px;
+  width: 504px;
 }
 
 .login-support {
