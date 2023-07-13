@@ -24,6 +24,19 @@ public class LoginService {
 		return userRepository.existsById(userId);
 	} 
 	
+	// 아이디 중복 확인
+	public boolean checkUserExists(String userId) {
+		boolean result = userRepository.existsById(userId);
+		return result;
+	}
+	
+	// 닉네임 중복 확인
+	public boolean checkUserNicknameExists(String userNickname) {
+		boolean result = userRepository.existsByNickname(userNickname);
+		return result;
+	}
+	
+	// 회원 가입
 	public boolean saveUser(String userId, String userPw, String userNickname) throws Exception{
 		// 암호화된 패스워드
 		String encodedPassword = passwordEncoder.encode(userPw);
@@ -50,6 +63,7 @@ public class LoginService {
 		return false;
 	}
 
+	
 	public User findByIdAndPassword(String id, String pw) {
 
 		Optional<User> OptionalUser = userRepository.findById(id);
@@ -63,5 +77,4 @@ public class LoginService {
 
 		return null;
 	}
-
 }

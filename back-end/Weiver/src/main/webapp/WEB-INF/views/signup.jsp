@@ -51,7 +51,7 @@
             </div>
 
             <div class="data_input">
-                <input class="info_input" type="password" placeholder="비밀번호를 다시 입력해주세요" required>
+                <input class="info_input" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력해주세요" required>
             </div>
             <div class="data_input">
                 <input class="info_input" type="text" name="userNickname" placeholder="닉네임을 입력해주세요" required>
@@ -214,9 +214,9 @@
 	        });
 			
 			/* 소문자로 변형 */
-			emailValue.addEventListener("keyup", (e) => {
-				emailValue.value = e.target.value.toLowerCase();
-				console.log(emailValue.value);
+			emailValue.addEventListener("input", (e) => {
+				e.target.value = e.target.value.toLowerCase();
+				console.log(e.target.value);
 			})
 			
 			/* 회원가입 axios 요청 */
@@ -229,16 +229,14 @@
 			        axios.post("/signupTest", formData)
 			            .then(response => {
 			                const data = response.data;
-			                if (data.error) {
-			                    alert(data.error);
-			                } else {
-			                    alert(data.message);
-			                    window.location.href = "/login";
-			                }
+			                if (response.status === 200) {
+		                        alert(data);
+		                        window.location.href = "/login";
+			                } 
 			            })
 			            .catch((error) => {
-			                console.error(error);
-			                alert("회원 가입 중 오류가 발생했습니다.");
+			            	const errorMessage = error.response.data;
+			                alert(errorMessage);
 			            });
 			    } else {
 			        signupForm.reportValidity(); // 양식이 유효하지 않으면 유효성 검사 메시지 표시
