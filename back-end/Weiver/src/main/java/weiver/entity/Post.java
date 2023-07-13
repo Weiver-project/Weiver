@@ -1,17 +1,18 @@
 package weiver.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString(exclude = {"postLikes","replies","rereplies"})
 @Entity
 @Table(name = "post")
 public class Post {
