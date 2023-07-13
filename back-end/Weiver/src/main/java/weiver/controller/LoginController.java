@@ -90,8 +90,8 @@ public class LoginController {
 	
 	// 로그인 기능 개발중
 	@PostMapping(value =  "/signin")
-	public String login(@RequestParam(value = "id") String userId, 
-						@RequestParam(value = "pw") String userPw) {
+	public String login(@RequestParam(value = "userId") String userId, 
+						@RequestParam(value = "userPw") String userPw) {
 		
 		System.out.println(userId);
 		System.out.println(userPw);
