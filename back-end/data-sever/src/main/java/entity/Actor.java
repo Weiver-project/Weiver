@@ -1,38 +1,23 @@
 package entity;
 
-import java.util.Date;
+import lombok.*;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Document(collection = "actor")
 @Builder
-@Setter
-@Getter
-@ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "ACTOR")
 public class Actor {
 	@Id
-	private String _id;
-	private String name;
-	private String profileImage;
-	private Casting[] castings;
-	
-	@Builder
-	@Getter
-	@Setter	
-	@ToString
-	public static class Casting {
-		private String title;
-		private String theater;
-		private String posterImage;
-		private Date stDate;
-		private Date edDate;
-		private String role;
-	}
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
+	@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "xxx_SEQUENCE", initialValue = 1, allocationSize = 1)
+	@Column(name = "ID")
+	private String id;
 
+	@Column(name = "NAME")
+	private String name;
+	@Column(name = "NAME")
+	private String profileImage;
 }
