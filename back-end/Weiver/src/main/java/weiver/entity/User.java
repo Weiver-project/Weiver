@@ -12,29 +12,29 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Builder
-@Table(name = "USER_TB")
+@Table(name = "user_tb")
 public class User {
 	
 	@Id
-	@Column(name = "ID")
+	@GeneratedValue
+	@Column(name = "id")
 	private String id;
 	
-	@Column(name = "USER_PW")
+	@Column(name = "user_pw")
 	private String password;
 	
-	@Column(name = "USER_NICKNAME")
+	@Column(name = "user_nickname")
 	private String nickname;
 	
-	@Column(name = "USER_PROFILE_IMG")
+	@Column(name = "user_profile_img")
 	private String profileImg;
 	
-	@Column(name = "ESSENTIAL_AGREE")
+	@Column(name = "essential_agree")
 	private String essentialAgree;
 	
-	@Column(name = "PERSONAL_AGREE")
+	@Column(name = "personal_agree")
 	private String personalAgree;
 	
-	@Column(name = "AGE_AGREE")
+	@Column(name = "age_agree")
 	private String ageAgree;
-
 }
