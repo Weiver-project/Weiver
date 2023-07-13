@@ -294,18 +294,6 @@ ALTER TABLE scott.user_tb
     ADD CONSTRAINT pk_user PRIMARY KEY ( id )
         USING INDEX scott.pk_user;
 
-ALTER TABLE scott.answer
-    ADD CONSTRAINT answer_admin_fk FOREIGN KEY ( admin_id )
-        REFERENCES scott.admin ( id )
-        ON DELETE CASCADE
-    NOT DEFERRABLE;
-
-ALTER TABLE scott.answer
-    ADD CONSTRAINT answer_inquiry_fk FOREIGN KEY ( inquiry_id )
-        REFERENCES scott.inquiry ( id )
-        ON DELETE CASCADE
-    NOT DEFERRABLE;
-
 ALTER TABLE scott.casting
     ADD CONSTRAINT casting_actor_fk FOREIGN KEY ( actor_id )
         REFERENCES scott.actor ( id )
@@ -319,101 +307,95 @@ ALTER TABLE scott.casting
 ALTER TABLE scott.image
     ADD CONSTRAINT image_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
-        ON DELETE CASCADE
-    NOT DEFERRABLE;
-
-ALTER TABLE scott.inquiry
-    ADD CONSTRAINT inquiry_user_fk FOREIGN KEY ( user_id )
-        REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post_like
     ADD CONSTRAINT post_like_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post_like
     ADD CONSTRAINT post_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.post
     ADD CONSTRAINT post_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply_like
     ADD CONSTRAINT re_reply_like_re_reply_fk FOREIGN KEY ( re_reply_id )
         REFERENCES scott.re_reply ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply_like
     ADD CONSTRAINT re_reply_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT re_reply_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT re_reply_reply_fk FOREIGN KEY ( reply_id )
         REFERENCES scott.reply ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.re_reply
     ADD CONSTRAINT re_reply_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply_like
     ADD CONSTRAINT reply_like_reply_fk FOREIGN KEY ( reply_id )
         REFERENCES scott.reply ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply_like
     ADD CONSTRAINT reply_like_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
     ADD CONSTRAINT reply_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.reply
     ADD CONSTRAINT reply_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.review
     ADD CONSTRAINT review_post_fk FOREIGN KEY ( post_id )
         REFERENCES scott.post ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.subscribe
     ADD CONSTRAINT subscribe_musical_fk FOREIGN KEY ( musical_id )
         REFERENCES scott.musical ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.subscribe
     ADD CONSTRAINT subscribe_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
-        ON DELETE CASCADE
+            ON DELETE CASCADE
     NOT DEFERRABLE;
