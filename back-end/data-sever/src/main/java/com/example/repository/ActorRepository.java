@@ -1,7 +1,7 @@
-package repository;
+package com.example.repository;
 
 
-import entity.Actor;
+import com.example.entity.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
