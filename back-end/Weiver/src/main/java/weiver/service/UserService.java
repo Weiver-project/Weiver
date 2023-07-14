@@ -3,6 +3,7 @@ package weiver.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import weiver.dto.UserDTO;
 import weiver.entity.*;
 import weiver.repository.*;
 
@@ -41,10 +42,10 @@ public class UserService {
     }
     
     // 유저 Id로 조회   
-    public void findById(String id) {
-        Optional<User> result = userRepository.findById(id);
+    public User findById(String id) {
+        User result = userRepository.getUserById(id);
 
-        System.out.println(result);
+        return result;
     }
     
     // 유저가 쓴 게시글 조회
@@ -120,7 +121,19 @@ public class UserService {
         }
     }
 
+    // 마이페이지 정보 출력
+    public UserDTO userInfo(String id) {
+        User user = userRepository.getUserById(id);
 
-    
-    
+        return UserDTO.builder()
+                .userId(id)
+                .nickname(user.getNickname())
+                .profileImg(user.getProfileImg())
+                .countJjim(subscribeRepository.countByUserIdAndType(id,"찜"))
+                .countIsWatched(subscribeRepository.countByUserIdAndType(id,"봤어요"))
+                .countPosts(communityRepository.countByUserId(id))
+                .countReplies(replyRepository.countByUserId(id) + reReplyRepository.countByUserId(id))
+                .countPostLikes(postLikeRepository.countByUserId(id)).build();
+    }
+
 }

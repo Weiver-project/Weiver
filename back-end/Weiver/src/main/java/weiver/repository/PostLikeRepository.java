@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     List<PostLike> findByUserId(String userId);
+
+    int countByUserId(String userId);
 }
