@@ -1,7 +1,8 @@
 package com.example.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,13 +13,13 @@ import javax.persistence.*;
 
 @Data
 @Builder
-@Entity(name = "MUSICAL")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table (name = "MUSICAL")
 public class Musical {
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
-	@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "xxx_SEQUENCE", initialValue = 1, allocationSize = 1)
+	@Column(name = "ID")
 	private String id;
 	@Column(name = "TITLE")
 	private String title;
@@ -36,4 +37,7 @@ public class Musical {
 	private String runningTime;
 	@Column(name = "MAIN_CHARACTER")
 	private String mainCharacter;
+	
+	@OneToMany(mappedBy = "musicalId")
+    private List<Casting> castings = new ArrayList<>();
 }
