@@ -22,8 +22,11 @@ public interface UserRepository extends JpaRepository<User, String> {
 	// 동일 닉네임 찾기
 	boolean existsByNickname(String nickname);
 	
+	//id에 따라 하나의 유저 정보만 가져옴. >> communityService에 사용
+	User getUserById(String id);
+	
 	// 개발중
-	Optional<User> findById(String userId);
+	Optional<User> findById(Long long1);
     
 	// 개발중
 	public User findByIdAndPassword(String userId, String password);

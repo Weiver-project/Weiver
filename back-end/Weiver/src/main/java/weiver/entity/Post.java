@@ -3,12 +3,17 @@ package weiver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"postlikes"})
 @Entity
 @Table(name = "post")
 public class Post {
@@ -36,54 +41,28 @@ public class Post {
     private Long viewed;
 
     // 이미지 entity 참조
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "post_id")
-//    private List<Image> images = new ArrayList<>();
-//
-//    public void addImage(Image image) {
-//        images.add(image);
-//    }
-//
-//    public void removeImage(Image image) {
-//        images.remove(image);
-//    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<Image> images = new ArrayList<>();
+
+    public void addImage(Image image) {
+        images.add(image);
+    }
+
+    public void removeImage(Image image) {
+        images.remove(image);
+    }
 
     // 좋아요 entity 참조
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "post_id")
-//    private List<PostLike> postLikes = new ArrayList<>();
-//
-//    public void addPostLike(PostLike postLike) {
-//        postLikes.add(postLike);
-//    }
-//
-//    public void removePostLike(PostLike postLike) {
-//        postLikes.remove(postLike);
-//    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<PostLike> postLikes = new ArrayList<>();
 
-    // 댓글 entity 참조
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "post_id")
-//    private List<Reply> replies = new ArrayList<>();
-//
-//    public void addReply(Reply reply) {
-//        replies.add(reply);
-//    }
-//
-//    public void removeReply(Reply reply) {
-//        replies.remove(reply);
-//    }
+    public void addPostLike(PostLike postLike) {
+        postLikes.add(postLike);
+    }
 
-    // 대댓글 entity 참조
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "post_id")
-//    private List<ReReply> rereplies = new ArrayList<>();
-//
-//    public void addReReply(ReReply rereply) {
-//        rereplies.add(rereply);
-//    }
-//
-//    public void removeReReply(ReReply rereply) {
-//        rereplies.remove(rereply);
-//    }
+    public void removePostLike(PostLike postLike) {
+        postLikes.remove(postLike);
+    }
 }
