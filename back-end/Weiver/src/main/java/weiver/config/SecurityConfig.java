@@ -33,13 +33,9 @@ public class SecurityConfig {
 		return httpSecurity
 				.httpBasic().disable()
 				.csrf().disable()
-				.cors().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				
-				.formLogin()
-				.loginPage("/login")
-				.loginProcessingUrl("/signin")
 				.and()
-				
 				.authorizeRequests()	// 요청 없이 사용 가능한 url
 				.antMatchers("/login/**", 
 							 "/community/**",
@@ -55,16 +51,9 @@ public class SecurityConfig {
 							 "/like/**").hasRole("USER")
 				
 				.anyRequest().permitAll()
-				 
 				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				
-				.and()
-				.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class) 
 				.build();
-		
-		
 		
 	}
 }
