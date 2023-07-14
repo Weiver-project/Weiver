@@ -1,12 +1,18 @@
 package com.example.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name = "CASTING")
 @SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "CASTING_SEQUENCE", initialValue = 1, allocationSize = 1)

@@ -33,8 +33,9 @@ public class ActorService {
 	// 배우 DB에 정보 추가
 	public void saveActor() {
 		// 최신화 하기 전에 기존 데이터를 모두 삭제한다.
-		actorRepository.deleteAll();
-		castingRepository.deleteAll();
+//		castingRepository.deleteAll();
+//		actorRepository.deleteAll();
+//		musicalRepository.deleteAll();
 		
 		Document doc = null;
 		// Casting.title에서 " - 지역이름" 을 제외하기 위한 키워드
@@ -57,7 +58,7 @@ public class ActorService {
 			int maxPage = Integer.parseInt(maxPages.get(maxPages.size()-1).text().split("/")[1].split("]")[0]);
 
 			// 페이지 반복
-			for(pageNo = 1; pageNo <= 2; pageNo++) {
+			for(pageNo = 1; pageNo <= maxPage; pageNo++) {
 				System.out.println("지금부터 " + pageNo + "페이지 데이터 처리 시작");
 
 				// 페이지별로 배우 리스트 접근
@@ -173,25 +174,25 @@ public class ActorService {
 //						System.out.println("Actor 저장 완료");
 						
 						// 뮤지컬 임시 DB 저장
-						for(Casting c : actorAllCastings) {
-							Musical musical = Musical.builder()
-													.id(c.getMusicalId().getId())
-													.stDate(new Date())
-													.edDate(new Date())
-													.title("title")
-													.theater("theater")
-													.posterImage("image")
-													.build();
-							musicalRepository.save(musical);
-						}
+//						for(Casting c : actorAllCastings) {
+//							Musical musical = Musical.builder()
+//													.id(c.getMusicalId().getId())
+//													.stDate(new Date())
+//													.edDate(new Date())
+//													.title("title")
+//													.theater("theater")
+//													.posterImage("image")
+//													.build();
+//							musicalRepository.save(musical);
+//						}
 						
 						// CastingDB에 저장
-						castingRepository.saveAll(actorCastings);
+//						castingRepository.saveAll(actorCastings);
 //						System.out.println("Casting 저장 완료");
 					}
 				}
-				System.out.println("모든 insert 종료");
 			}
+			System.out.println("모든 insert 종료");
 
 		} catch (IOException e) {
 			e.printStackTrace();
