@@ -85,7 +85,7 @@ public class MusicalService {
     public Musical saveMusical(String musicalId){
         String url = URLs.MUSICAL_DETAIL_URL + musicalId;
 
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(url).timeout(10000).get();
 
         /*뮤지컬 상세 정보 태그 가져오기*/
         Element element = doc.selectFirst(".pddetail");
@@ -163,7 +163,7 @@ public class MusicalService {
 
         /*마지막 페이지까지 반복*/
         for(currentPage = 1; currentPage <= maxPage; currentPage++){
-            Document doc = Jsoup.connect(url + currentPage).get();
+            Document doc = Jsoup.connect(url + currentPage).timeout(10000).get();
             log.info("크롤링 중인 페이지: " + currentPage);
 
             /*뮤지컬 정보가 들어있는 tr 태그 가져오기*/
@@ -187,7 +187,7 @@ public class MusicalService {
 
         try {
             /*카테고리에 해당하는 페이지 정보 가져오기*/
-            Document doc = Jsoup.connect(MUSICAL_URL).get();
+            Document doc = Jsoup.connect(MUSICAL_URL).timeout(10000).get();
             Elements elements = doc.select("#contents .container1 > table > tbody > tr:last-child");
 
             /*마지막 페이지 가져오기*/
