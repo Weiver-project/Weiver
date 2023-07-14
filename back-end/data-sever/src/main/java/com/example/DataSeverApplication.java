@@ -6,14 +6,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import lombok.RequiredArgsConstructor;
+
+import com.example.service.ActorService;
 import com.example.service.MusicalService;
 
 @SpringBootApplication
 @EnableScheduling
 @RequiredArgsConstructor
 public class DataSeverApplication {
-//	private final PlayDBService playDBService;
 	private final MusicalService musicalService;
+	private final ActorService actorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataSeverApplication.class, args);
@@ -29,5 +31,7 @@ public class DataSeverApplication {
 		* 처음 1번 실행할 때만 그대로 실행하시고 이후부터는 MusicalService안에 있는 isFirst를 false로 바꾸고 실행해주세요
 		* */
 		musicalService.task();
+//		actorService.saveActor();
+		
 	}
 }

@@ -2,13 +2,18 @@ package com.example.entity;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "ACTOR")
+@Entity
+@Table(name = "ACTOR")
 public class Actor {
 	@Id
 	@Column(name = "ID")
@@ -16,6 +21,10 @@ public class Actor {
 
 	@Column(name = "NAME")
 	private String name;
+	
 	@Column(name = "PROFILE_IMAGE")
 	private String profileImage;
+	
+	@OneToMany(mappedBy = "actorId")  
+    private List<Casting> castings = new ArrayList<>();
 }
