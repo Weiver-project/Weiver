@@ -2,9 +2,14 @@ package weiver.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import weiver.dto.UserDTO;
+import weiver.entity.User;
 import weiver.service.UserService;
 
 @Controller
@@ -57,5 +62,24 @@ public class UserController {
 		String type = "찜";
 		userservice.findSubscribe(id,type);
 	}
-	
+
+	@GetMapping("/mypage/{userid}")
+	public String mypage(@PathVariable String userid,
+						 Model model) {
+		UserDTO userInfo = userservice.userInfo(userid);
+
+		model.addAttribute("userInfo", userInfo);
+
+		return "mypage";
+	}
+
+	@GetMapping("/profileUpdate/{userid}")
+	public String profileUpdate(@PathVariable String userid,
+						 Model model) {
+		User userInfo = userservice.findById(userid);
+		// DTO 바꿔야함 (issue: 비밀번호 노출)
+		model.addAttribute("userInfo", userInfo);
+
+		return "profileUpdate";
+	}
 }

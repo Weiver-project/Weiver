@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,24 +28,24 @@
     
         <!-- 프로필 -->
         <div class="profile">
+            <%--${requestScope.userInfo.profileImg}--%>
             <img src="/img/Default_Profile.png" alt="profile" height="150" width="150">
-            <div>프로필 이름</div>
+            <div>${requestScope.userInfo.nickname}</div>
         </div>
     
         <!-- 찜했어요/ 봤어요 -->
         <div class="subscribe">
             <a href="#">
-                <div>${subscribe.count}</div>
+                <div>${requestScope.userInfo.countJjim}</div>
                 찜했어요
             </a>
         
             <div class="line"></div>
                 
             <a href="#">
-                <div>${subscribe.count}</div>
+                <div>${requestScope.userInfo.countIsWatched}</div>
                 봤어요
             </a>
-            
             
         </div>
     
@@ -54,7 +55,7 @@
             <a href="#">
                 <div>내가 쓴 글</div>
                 <div>
-                    ${post.count}
+                    ${requestScope.userInfo.countPosts}
                     <i class="bi bi-chevron-right"></i>
                 </div>
             </a>
@@ -64,7 +65,7 @@
             <a href="#">
                 <div>내가 쓴 댓글</div>
                 <div>
-                    ${reply.count}
+                    ${requestScope.userInfo.countReplies}
                     <i class="bi bi-chevron-right"></i>
                 </div>
             </a>
@@ -74,7 +75,7 @@
             <a href="#">
                 <div>좋아요한 글</div>
                 <div>
-                    ${postlike.count}
+                    ${requestScope.userInfo.countPostLikes}
                     <i class="bi bi-chevron-right"></i>
                 </div>
             </a>
