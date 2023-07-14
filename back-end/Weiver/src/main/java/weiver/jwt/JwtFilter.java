@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean{
-	private final TokenProvider tokenProvider;
+	private final JwtTokenProvider tokenProvider;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

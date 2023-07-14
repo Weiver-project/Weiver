@@ -7,31 +7,20 @@ package weiver.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import weiver.dto.TokenInfo;
 import weiver.entity.User;
 import weiver.service.LoginService;
 
 
-@Controller
+@RestController
 public class LoginController {
 	@Autowired
 	LoginService service;
-	
-	// 회원가입 페이지
-	@GetMapping(value = "/signup")
-	public String signupPage() {
-		return "signup";
-	}
-	
-	// 로그인 페이지
-	@GetMapping(value = "/login")
-	public String loginPage() {
-		return "login";
-	}
 	
 	// 회원가입 기능
 	@PostMapping(value = "/signupTest")
@@ -64,9 +53,6 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
 		}
 		
-		// 비밀번호 한글 체크
-	
-		
 		System.out.println(userId);
 		System.out.println(userPw);
 		System.out.println(userNickname);
@@ -86,32 +72,15 @@ public class LoginController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 가입 중 에러가 발생했습니다.");
 	}
 	
-	// 로그인 기능 개발중
+	// 로그인 기능
 	@PostMapping(value =  "/signin")
-	public ResponseEntity<String> login(@RequestParam(value = "userId") String userId, 
-										@RequestParam(value = "userPw") String userPw) {
-
+	public TokenInfo login(@RequestParam(value = "userId") String userId, 
+						   @RequestParam(value = "userPw") String userPw) {
+		
 		System.out.println(userId);
 		System.out.println(userPw);
 		
-		if (userId == null || userPw == null || userId == "" || userPw == "") {
-			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("아이디, 비밀번호를 제대로 입력해주세요.");
-		}
-		
-		boolean checkUserId = service.checkUserExists(userId);
-		
-		if (!checkUserId) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 아이디는 존재하지 않습니다.");
-		} 
-		
-		
-		try {
-//			boolean loginResult = service.findUserByIdAndPw(userId, userPw);
-			return ResponseEntity.ok("로그인 성공");
-		} catch (Exception e) {
-			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 가입 중 에러가 발생했습니다.");
-		}
-		return null;
+		return service.signin(userId, userPw);
 	}
 
 

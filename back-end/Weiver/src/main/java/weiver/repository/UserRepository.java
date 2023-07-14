@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	boolean existsByNickname(String nickname);
 	
 	// 개발중
-	Optional<User> findById(String userId);
+	public Optional<User> findById(String userId);
     
 	// 개발중
 	public User findByIdAndPassword(String userId, String password);

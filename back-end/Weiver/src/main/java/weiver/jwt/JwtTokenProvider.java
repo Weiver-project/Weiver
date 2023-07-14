@@ -28,14 +28,14 @@ import weiver.dto.TokenInfo;
 
 @Component
 @Slf4j
-public class TokenProvider {
+public class JwtTokenProvider {
 	
 	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // Access 토큰 30분
 	private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60;	// Refresh 토큰 60분
 	private final Key key;
 	
 	// secretKey 디코딩, HMAC-SHA로 key 객체 생성
-	public TokenProvider(@Value("${jwt.secret}") String secretKey) {
+	public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
 		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 		this.key = Keys.hmacShaKeyFor(keyBytes);
 	}

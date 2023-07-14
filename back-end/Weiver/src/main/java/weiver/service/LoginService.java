@@ -1,23 +1,28 @@
 package weiver.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+import weiver.dto.TokenInfo;
 import weiver.entity.User;
+import weiver.jwt.JwtTokenProvider;
 import weiver.repository.UserRepository;
-
-import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class LoginService {
 	
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtTokenProvider jwtTokenProvider;
+	private final AuthenticationManagerBuilder authenticationManagerBuilder;
+	
 	
 	public boolean checkUserId(String userId) {
 		return userRepository.existsById(userId);
@@ -61,12 +66,16 @@ public class LoginService {
 		
 		return false;
 	}
-
 	
-	public User findUserByIdAndPw(String userId, String userPw) {
+	// 로그인
+	@Transactional
+	public TokenInfo signin(String userId, String userPw) {
+		UsernamePasswordAuthenticationToken authenticationToken =
+				new UsernamePasswordAuthenticationToken(userId, userPw); // 사용자 id, pw를 통해 UsernamePasswordAuthenticationToken 객체를 생성함
 		
-//		String decodeedPassword = passwordEncoder.matches(userPw, encodedPassword)
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken); // authenticationToken을 인증하고 성공하면 authenticationToken 객체를 반환
+		TokenInfo tokenInfo = jwtTokenProvider.generateTokenDto(authentication); // authenticationToken 객체를 기반으로 토큰 생성
 		
-		return null;
+		return tokenInfo;
 	}
 }
