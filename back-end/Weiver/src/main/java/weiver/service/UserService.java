@@ -1,6 +1,7 @@
 package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import weiver.entity.*;
 import weiver.repository.*;
@@ -26,31 +27,46 @@ public class UserService {
     @Autowired
     private PostLikeRepository postLikeRepository;
 
+    @Autowired
+    private SubscribeRepository subscribeRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // 전체 조회
     public void test() {
         List<User> result = userRepository.findAll();
+
         System.out.println(result);
     }
     
     // 유저 Id로 조회   
     public void findById(String id) {
         Optional<User> result = userRepository.findById(id);
+
         System.out.println(result);
     }
     
     // 유저가 쓴 게시글 조회
     public void findPostsByUserId(String id) {
+        // 게시글 리스트
         List<Post> result = communityRepository.findByUserId(id);
+        // 게시글 개수
         int countresult = communityRepository.countByUserId(id);
+
         System.out.println(result);
         System.out.println(countresult);
     }
 
     // 유저가 쓴 댓글 조회
     public void findRepliesByUserId(String id) {
+        // 댓글 리스트
         List<Reply> replyResult = replyRepository.findByUserId(id);
+        // 대댓글 리스트
         List<ReReply> reReplyResult = reReplyRepository.findByUserId(id);
+        // 댓글 개수 합계
         int countResult = replyRepository.countByUserId(id) + reReplyRepository.countByUserId(id);
+
         System.out.println(replyResult);
         System.out.println(reReplyResult);
         System.out.println(countResult);
@@ -58,30 +74,53 @@ public class UserService {
 
     // 유저가 좋아요 누른 게시글 조회
     public void findPostLikeByUserId(String id) {
-        List<Long> postIdList = postLikeRepository.findPostIdByUserId(id);
-        System.out.println(postIdList);
-//        for (Post post : postIdList) {
-//            Long postId = post.getId();
-//            System.out.println(communityRepository.findById(postId));
-//        }
+        // 좋아요누른 ID 기준으로 postId 리스트 조회
+        List<PostLike> postIdList = postLikeRepository.findByUserId(id);
+
+        // 게시글 리스트 매핑
+        for (PostLike postLike : postIdList) {
+            Long postId = postLike.getPost().getId();
+            Optional<Post> result = communityRepository.findById(postId);
+
+            System.out.println(result);
+        }
+
     }
-    
+
+    // 유저가 찜하거나 봤던 뮤지컬 조회
+    public void findSubscribe(String id, String type) {
+        List<String> result = subscribeRepository.findMusicalIdByUserIdAndType(id, type);
+        int countresult = subscribeRepository.countByUserIdAndType(id, type);
+
+        System.out.println(result);
+        System.out.println(countresult);
+    }
+
     // 유저 정보 수정(사진, 이름)
     public void updateInfo(String nickname, String profileImg, String id) {
         userRepository.updateInfoById(nickname, profileImg, id);
+
         System.out.println(userRepository.findById(id));
     }
-    
-    // 유저 정보 수정(비밀번호)
-    public void updatePassword(String password, String id) {
-        User user = userRepository.findPasswordById(id);
-        String result = user.getPassword();
-        if(!result.equals(password)) {
-            userRepository.updatePasswordById(password, id);
+
+    // 유저 정보 수정(비밀번호 암호화)
+    public void updateBcryptPassword(String password, String id) {
+        String user_password = userRepository.findPasswordById(id).getPassword();
+        boolean result = passwordEncoder.matches(password,user_password);
+
+        System.out.println(result);
+
+        if(!result) {
+            System.out.println(userRepository.findById(id));
+
+            String bcryptPassword = passwordEncoder.encode(password);
+            userRepository.updatePasswordById(bcryptPassword, id);
+
             System.out.println(userRepository.findById(id));
         }
     }
-    
+
+
     
     
 }

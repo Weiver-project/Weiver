@@ -3,16 +3,17 @@ package weiver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@ToString(exclude = {"postLikes","replies","rereplies"})
+@ToString(exclude = {"postlikes"})
 @Entity
 @Table(name = "post")
 public class Post {
@@ -64,5 +65,4 @@ public class Post {
     public void removePostLike(PostLike postLike) {
         postLikes.remove(postLike);
     }
-
 }
