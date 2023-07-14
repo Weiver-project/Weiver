@@ -11,8 +11,6 @@ import javax.persistence.*;
 @Entity(name = "ACTOR")
 public class Actor {
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
-	@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "xxx_SEQUENCE", initialValue = 1, allocationSize = 1)
 	@Column(name = "ID")
 	private String id;
 
