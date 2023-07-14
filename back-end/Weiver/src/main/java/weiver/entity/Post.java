@@ -3,16 +3,17 @@ package weiver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@ToString(exclude = {"postLikes","replies","rereplies"})
+@ToString(exclude = {"postlikes"})
 @Entity
 @Table(name = "post")
 public class Post {
@@ -63,31 +64,5 @@ public class Post {
 
     public void removePostLike(PostLike postLike) {
         postLikes.remove(postLike);
-    }
-
-    // 댓글 entity 참조
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
-    private List<Reply> replies = new ArrayList<>();
-
-    public void addReply(Reply reply) {
-        replies.add(reply);
-    }
-
-    public void removeReply(Reply reply) {
-        replies.remove(reply);
-    }
-
-    // 대댓글 entity 참조
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
-    private List<ReReply> rereplies = new ArrayList<>();
-
-    public void addReReply(ReReply rereply) {
-        rereplies.add(rereply);
-    }
-
-    public void removeReReply(ReReply rereply) {
-        rereplies.remove(rereply);
     }
 }

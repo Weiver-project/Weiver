@@ -1,0 +1,22 @@
+drop table answer;
+drop table inquiry;
+
+drop table image;
+drop table review;
+drop table subscribe;
+drop table post_like;
+drop table re_reply_like;
+drop table reply_like;
+
+drop table re_reply;
+drop table reply;
+drop table post;
+
+drop table casting;
+drop table actor;
+drop table musical;
+
+drop table admin;
+drop table user_tb;
+
+commit;
