@@ -21,6 +21,9 @@ public interface ReReplyRepository extends JpaRepository<ReReply, Long> {
     //아이디로 대댓글 하나 조회
 	ReReply getRereplyById(Long id);
 	
+	//post_id와 reply_id으로 대댓글 하나 조회
+	List<ReReply> findByPostIdAndReplyId(Long postId, Long replyId);
+	
 	//대댓글 수정
 	@Modifying
 	@Transactional

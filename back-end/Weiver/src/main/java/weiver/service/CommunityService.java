@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import weiver.entity.Image;
 import weiver.entity.Post;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
 import weiver.entity.User;
 import weiver.repository.CommunityRepository;
+import weiver.repository.ImageRepository;
 import weiver.repository.ReReplyRepository;
 import weiver.repository.ReplyRepository;
 import weiver.repository.UserRepository;
@@ -67,11 +69,11 @@ public class CommunityService {
 	}
 
 	//title, content에 들어 있는 키워드에 따라 게시글 가져오기 > 커뮤니티 검색 페이지
-	public List<Post> getPostByKeyword(String keyword) {
-		List<Post> posts = communityRepository.findByTitleContainingOrContentContaining(keyword, keyword);
-		System.out.println(posts);
-	    return posts;
-	}
+		public List<Post> getPostByKeyword(String keyword) {
+			List<Post> posts = communityRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+			System.out.println(posts);
+		    return posts;
+		}
 	
 
 	//게시글 수정하기
@@ -106,31 +108,38 @@ public class CommunityService {
 	 * */
 	
 	//댓글 삽입
-	public boolean insertReply(Reply reply) throws Exception {
-	    boolean result = false;
+//	public boolean insertReply(Reply reply) throws Exception {
+//	    boolean result = false;
+//
+//	    // user_id와 post_id의 유효성 검증
+//	    User user = userRepository.getUserById(reply.getUser().getId());
+//	    if (user == null) {
+//	        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
+//	    }
+//
+//	    Post post = communityRepository.getPostById(reply.getPostId());
+//	    if (post == null) {
+//	        throw new Exception("게시물이 존재하지 않습니다.");
+//	    }
+//
+//	    // 댓글 삽입 로직
+//	    int res = replyRepository.insertReply(reply.getId(), post.getId(), user.getId(), reply.getContent(), reply.getCreatedTime());
+//	    if (res != 0) {
+//	        result = true;
+//	        System.out.println("댓글 생성 성공");
+//	    } else {
+//	        throw new Exception("댓글 생성 실패");
+//	    }
+//	    return result;
+//	}
 
-	    // user_id와 post_id의 유효성 검증
-	    User user = userRepository.getUserById(reply.getUser().getId());
-	    if (user == null) {
-	        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
-	    }
-
-	    Post post = communityRepository.getPostById(reply.getPost().getId());
-	    if (post == null) {
-	        throw new Exception("게시물이 존재하지 않습니다.");
-	    }
-
-	    // 댓글 삽입 로직
-	    int res = replyRepository.insertReply(reply.getId(), post.getId(), user.getId(), reply.getContent(), reply.getCreatedTime());
-	    if (res != 0) {
-	        result = true;
-	        System.out.println("댓글 생성 성공");
-	    } else {
-	        throw new Exception("댓글 생성 실패");
-	    }
-	    return result;
-	}
-
+	// post_id에 따라 댓글 가져오기
+    public List<Reply> findReplyByPostId(Long postId) {
+    	List<Reply> replies = replyRepository.findRepliesByPostId(postId);
+    	System.out.println(replies);
+    	return replies;
+    }
+	
 	//아이디로 하나의 댓글 가져오기.
 	public Reply getReplyById(Long id) {
 		Reply reply = replyRepository.getReplyById(id);
@@ -177,6 +186,13 @@ public class CommunityService {
 		
 		return rereply;
 	}
+	
+	// post_id와 reply_id에 따라 대댓글 가져오기
+		public List<ReReply> getReReplyByPostIdAndReplyId(Long postId, Long replyId) {
+		    	List<ReReply> rereplies = rereplyRepository.findByPostIdAndReplyId(postId, replyId);
+		    	System.out.println(rereplies);
+		    	return rereplies;
+		   }
 
 	
 	//대댓글 수정
