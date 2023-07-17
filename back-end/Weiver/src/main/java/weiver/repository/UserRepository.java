@@ -17,6 +17,9 @@ import weiver.entity.User;
 public interface UserRepository extends JpaRepository<User, String> {
 	User findPasswordById(String id);
 	
+	// Id로 유저 검색
+	Optional<User> findById(String id);
+	
 	// 동일 닉네임 찾기
 	boolean existsByNickname(String nickname);
 	

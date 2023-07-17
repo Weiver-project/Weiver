@@ -42,7 +42,7 @@
         </div>
 
         <!-- 회원가입 form -->
-        <form id="signupForm" action="/signupTest" method="post">
+        <form id="signupForm" action="/signup" method="post">
             <!-- ID -->
             <div class="ID">
                 <input id="userId" class="info_input" type="email" name="userId" placeholder="이메일을 입력해주세요" required style="text-transform: lowercase;">
@@ -282,17 +282,22 @@
 			
 			/* 회원가입 axios 요청 */
 			signupButton.addEventListener("click", (event) => {
+				const requestData = {
+						id : emailValue.value,
+						password : passwordValue.value,
+						nickname : nicknameValue.value};
+				
+				
 			    event.preventDefault(); // 기본 양식 제출을 방지
-			
+				console.log(requestData.id);
 			    if (signupForm.checkValidity()) { // 양식이 유효한지 확인
-			        const formData = new FormData(signupForm);
-			
-			        axios.post("/signupTest", formData)
+			    	console.log(requestData);
+			        axios.post("/signup", requestData)
 			        	.then(response => {
 			                const data = response.data;
 			                if (response.status === 200) {
 		                        alert(data);
-		                        window.location.href = "/login";
+		                        window.location.href = "/loginPage";
 			                } 
 			            })
 			            .catch((error) => {

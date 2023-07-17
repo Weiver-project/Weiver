@@ -65,6 +65,23 @@ public class TokenProvider implements InitializingBean{
 				.compact();
 	}
 	
+	// Refresh Token
+	public String createRefreshToken(Authentication authentication) {
+		String authorites = authentication.getAuthorities().stream()
+							.map(GrantedAuthority::getAuthority)
+							.collect(Collectors.joining(","));
+		
+		long now = (new Date().getTime());
+		Date validity = new Date(now + (this.tokenValidityInMilliseconds * 24 * 30));
+		
+		return Jwts.builder()
+				.setSubject(authentication.getName())	// 사용자 id
+				.claim(AUTHORITIES_KEY, authorites)		// JWT에 사용자의 권한 추가
+				.signWith(key, SignatureAlgorithm.HS512)	// 사용될 해쉬알고리즘
+				.setExpiration(validity)					// 유효시간
+				.compact();
+	}
+	
 	// Token의 정보를 이용해서 Authenticaion 객체를 리턴
 	// JWS = 서명이 검증된 JWT
 	// Claims = JWT의 클레임 정보를 포함하는 객체

@@ -1,10 +1,13 @@
 package weiver.config;
 
+import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +39,14 @@ public class SecurityConfig{
 		return new BCryptPasswordEncoder();
 	}
 	
+	// static 파일 무시
+	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return web -> web.ignoring().antMatchers("/css/**", "/img/**", "/js/**");
+		
+	}
+	
+	
 	@Bean
 	public SecurityFilterChain filerChain(HttpSecurity http) throws Exception {
 		http
@@ -53,13 +64,14 @@ public class SecurityConfig{
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			
-			.and()
-			.authorizeHttpRequests()
-			.antMatchers("/api/hello").permitAll()
-			.antMatchers("/api/login").permitAll()
-			.antMatchers("/api/signin").permitAll()
-			.antMatchers("/api/signup").permitAll()
-			.antMatchers("/signup").permitAll()
+			.and().authorizeHttpRequests()
+			.antMatchers("/loginPage/**").permitAll()
+			.antMatchers("/community").permitAll()
+			.antMatchers("/signin/**").permitAll()
+			.antMatchers("/signupPage/**").permitAll()
+			.antMatchers("/signup/**").permitAll()
+			.antMatchers("/main/**").permitAll()
+			.antMatchers("/error/**").permitAll()
 			.anyRequest().authenticated()
 			
 			.and()
