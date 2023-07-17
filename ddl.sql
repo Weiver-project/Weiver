@@ -1,5 +1,14 @@
+CREATE TABLE scott.authority (
+    authority_name VARCHAR2(500 BYTE) NOT NULL
+)
+
+CREATE TABLE scott.user_authority (
+    id             VARCHAR2(1000 BYTE),
+    authority_name VARCHAR2(1000 BYTE)
+)
+
 CREATE TABLE scott.admin (
-    id         NUMBER NOT NULL,
+    id         VARCHAR2(30 BYTE) NOT NULL,
     admin_pw   VARCHAR2(200 BYTE) NOT NULL,
     admin_name VARCHAR2(20 BYTE) NOT NULL
 );
@@ -15,12 +24,12 @@ ALTER TABLE scott.admin
         USING INDEX scott.pk_admin;
 
 CREATE TABLE scott.answer (
-    id           NUMBER NOT NULL,
+    id           VARCHAR2(30 BYTE) NOT NULL,
     inquiry_id   NUMBER NOT NULL,
-    admin_id     NUMBER NOT NULL,
+    admin_id     VARCHAR2(30),
     answer       VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL
-);
+)
 
 CREATE UNIQUE INDEX scott.pk_answer ON
     scott.answer (
@@ -214,13 +223,10 @@ ALTER TABLE scott.reply_like
         USING INDEX scott.reply_like_pk;
 
 CREATE TABLE scott.review (
-    id      NUMBER NOT NULL,
-    post_id NUMBER NOT NULL,
-    title   VARCHAR2(20 BYTE) NOT NULL,
-    path    VARCHAR2(1000 BYTE) NOT NULL,
-    stdate  DATE NOT NULL,
-    eddate  DATE NOT NULL
-);
+    id         NUMBER NOT NULL,
+    post_id    NUMBER NOT NULL,
+    musical_id VARCHAR2(100 BYTE)
+)
 
 CREATE UNIQUE INDEX scott.pk_review ON
     scott.review (
@@ -351,6 +357,12 @@ ALTER TABLE scott.reply
 ALTER TABLE scott.reply
     ADD CONSTRAINT reply_user_fk FOREIGN KEY ( user_id )
         REFERENCES scott.user_tb ( id )
+            ON DELETE CASCADE
+    NOT DEFERRABLE;
+
+ALTER TABLE scott.review
+    ADD CONSTRAINT review_musical_fk FOREIGN KEY ( musical_id )
+        REFERENCES scott.musical ( id )
             ON DELETE CASCADE
     NOT DEFERRABLE;
 
