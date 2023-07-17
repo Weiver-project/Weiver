@@ -59,7 +59,7 @@ public class TokenProvider implements InitializingBean{
 		
 		return Jwts.builder()
 				.setSubject(authentication.getName())	// 사용자 id
-				.claim(AUTHORITIES_KEY, authorites)		// JWT에 사용자의 권한 추가
+				
 				.signWith(key, SignatureAlgorithm.HS512)	// 사용될 해쉬알고리즘
 				.setExpiration(validity)					// 유효시간
 				.compact();
@@ -72,7 +72,7 @@ public class TokenProvider implements InitializingBean{
 							.collect(Collectors.joining(","));
 		
 		long now = (new Date().getTime());
-		Date validity = new Date(now + (this.tokenValidityInMilliseconds * 24 * 30));
+		Date validity = new Date(now + (this.tokenValidityInMilliseconds * 24 * 7));
 		
 		return Jwts.builder()
 				.setSubject(authentication.getName())	// 사용자 id

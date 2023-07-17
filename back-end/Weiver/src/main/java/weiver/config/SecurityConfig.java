@@ -69,7 +69,7 @@ public class SecurityConfig{
 			.antMatchers("/community").permitAll()
 			.antMatchers("/signin/**").permitAll()
 			.antMatchers("/signupPage/**").permitAll()
-			.antMatchers("/signup/**").permitAll()
+			.antMatchers("/signup/").permitAll()
 			.antMatchers("/main/**").permitAll()
 			.antMatchers("/error/**").permitAll()
 			.anyRequest().authenticated()
