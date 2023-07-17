@@ -131,6 +131,7 @@ article {
   width: 640px;
   height: 48px;
   background-color: #101322;
+  color: #D4D9E1;
   border-radius: 8px;
   border: 1px solid #25304A;
   font-size: 20px;
@@ -171,17 +172,26 @@ article {
 }
 
 .submit_btn {
-  position: fixed;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  width: 700px;
-  height: 48px;
-  margin: 0 auto;
-  border: none;
-  border-radius: 8px;
-  background-color: #4263EB;
-  color: #D4D9E1;
-  font-size: 20px;
-  font-weight: 700;
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    width: 700px;
+    height: 48px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #3B4869;
+    color: #D4D9E1;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.submit_btn:hover {
+    background-color: #4263EB;
+}
+
+.submit_btn[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
 }
