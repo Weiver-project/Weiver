@@ -1,87 +1,57 @@
 package weiver.controller;
 
+import javax.validation.Valid;
 
-
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import weiver.dto.TokenInfo;
-import weiver.entity.User;
-import weiver.service.LoginService;
+import weiver.dto.LoginDTO;
+import weiver.dto.TokenDTO;
+import weiver.jwt.JwtFilter;
+import weiver.jwt.TokenProvider;
 
 
 @RestController
+@RequestMapping("/api")
 public class LoginController {
-	@Autowired
-	LoginService service;
+	private final TokenProvider tokenProvider;
+	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 	
-	// 회원가입 기능
-	@PostMapping(value = "/signupTest")
-	public ResponseEntity<String> signup(@RequestParam("userId") String userId,
-	                     @RequestParam("userPw") String userPw,
-	                     @RequestParam("userPwCheck") String userPwCheck,
-	                     @RequestParam("userNickname") String userNickname) {
-		
-		boolean userIdExists = service.checkUserExists(userId);
-		boolean userNicknameExists = service.checkUserNicknameExists(userNickname);
-		
-		// front required 속성으로 굳이 필요 없어짐
-//		if(userId == null || userId.equals("") || 
-//			userPw == null || userPw.equals("") || 
-//			userNickname == null || userNickname.equals("")) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원 가입 정보를 모두 입력해주세요.");
-//		}
-		
-		// 유저 id 중복 확인
-		if (userIdExists) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 아이디입니다.");
-		}
-		
-		if (userNicknameExists) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 닉네임입니다.");
-		}
-		
-		// 비밀번호, 비밀번호확인 체크
-		if(!userPw.equals(userPwCheck)) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
-		}
-		
-		System.out.println(userId);
-		System.out.println(userPw);
-		System.out.println(userNickname);
-		
-		// 회원 가입 try - catch
-		try {
-			boolean result = service.saveUser(userId, userPw, userNickname);
-			
-			if (result) {
-				return ResponseEntity.ok("회원가입이 완료되었습니다.");
-			} 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 내부 에러가 발생했습니다.");
-		}
-		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 가입 중 에러가 발생했습니다.");
+	public LoginController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+		this.tokenProvider = tokenProvider;
+		this.authenticationManagerBuilder = authenticationManagerBuilder;
 	}
 	
 	// 로그인 기능
-	@PostMapping(value =  "/signin")
-	public TokenInfo login(@RequestParam(value = "userId") String userId, 
-						   @RequestParam(value = "userPw") String userPw) {
+	@PostMapping("/signin")
+	public ResponseEntity<TokenDTO> signin(@Valid @RequestBody LoginDTO loginDTO) {
+		System.out.println("id : " + loginDTO.getId());
+		System.out.println("pw : " + loginDTO.getPassword());
 		
-		System.out.println(userId);
-		System.out.println(userPw);
+		// loginDTO 의 id, password로 UsernamePasswordAuthenticationToken 객체를 생성함
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getId(), loginDTO.getPassword());
 		
-		return service.signin(userId, userPw);
+		// authenticationToken를 이용해서 Authentication객체를 생성하려고 authenticate 메소드가 실행이 될 때 CustomUserDetailsService의 loadUserByUsername 메소드가 실행되고 이 결과를 가지고 Authentication 객체를 생성함
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+		
+		// Authentication객체를 SecurityContext에 저장 후 그 인증 정보를 통해 createToken를 실행하고 JWT Token을 생성함
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		String jwt = tokenProvider.createToken(authentication);
+		
+		// JWT Token을 Response Header, Response Body에 넣어서 리턴함
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);		
+		
+		return new ResponseEntity<>(new TokenDTO(jwt), httpHeaders, HttpStatus.OK);
 	}
-
-
 }

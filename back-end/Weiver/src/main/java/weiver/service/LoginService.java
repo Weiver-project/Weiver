@@ -1,81 +1,83 @@
 package weiver.service;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
+import java.util.Collections;
+import java.util.Optional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.RequiredArgsConstructor;
-import weiver.dto.TokenInfo;
+import weiver.dto.UserDTO;
+import weiver.entity.Authority;
 import weiver.entity.User;
-import weiver.jwt.JwtTokenProvider;
 import weiver.repository.UserRepository;
-
+import weiver.util.SecurityUtil;
 
 @Service
-@RequiredArgsConstructor
 public class LoginService {
-	
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
-	private final JwtTokenProvider jwtTokenProvider;
-	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 	
-	
-	public boolean checkUserId(String userId) {
-		return userRepository.existsById(userId);
-	} 
-	
-	// 아이디 중복 확인
-	public boolean checkUserExists(String userId) {
-		boolean result = userRepository.existsById(userId);
-		return result;
+	public LoginService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
-	// 닉네임 중복 확인
-	public boolean checkUserNicknameExists(String userNickname) {
-		boolean result = userRepository.existsByNickname(userNickname);
-		return result;
-	}
-	
-	// 회원 가입
-	public boolean saveUser(String userId, String userPw, String userNickname) throws Exception{
-		// 암호화된 패스워드
-		String encodedPassword = passwordEncoder.encode(userPw);
-		
-		System.out.println(userPw);
-		System.out.println(encodedPassword);
-		
-		User user = User.builder()
-							.id(userId)
-							.password(encodedPassword)
-							.nickname(userNickname)
-							.profileImg("defaultProfileImgSrc")
-							.essentialAgree("Y")
-							.personalAgree("Y")
-							.ageAgree("Y")
-							.build();
-		
-		User result = userRepository.save(user);
-		
-		if(result != null) {
-			return true;
+	// 회원가입
+	@Transactional
+	public User signup(UserDTO userDTO) {
+		if(userRepository.findOneWithAuthoritiesByid(userDTO.getId()).orElse(null) != null) {	// DB에 아이디를 검색함, id가 null이 아니면 예외 발생
+			throw new RuntimeException("이미 가입되어 있는 유저입니다.");
 		}
 		
-		return false;
+		if(userRepository.existsByNickname(userDTO.getNickname())) {
+			throw new RuntimeException("이미 존재하는 닉네임입니다.");
+		}
+		
+		// 유저 id 중복 확인
+//		if (userIdExists) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 아이디입니다.");
+//		}
+//		
+//		// 닉네임 중복 확인
+//		if (userNicknameExists) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 닉네임입니다.");
+//		}
+//		
+//		// 비밀번호, 비밀번호확인 체크
+//		if(!userPw.equals(userPwCheck)) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
+//		}
+		
+		Authority authority = Authority.builder()
+				.authorityName("ROLE_USER")
+				.build();
+
+		User user = User.builder()
+						.id(userDTO.getId())
+						.password(passwordEncoder.encode(userDTO.getPassword()))
+						.nickname(userDTO.getNickname())
+						.profileImg("baseURL")
+						.essentialAgree("Y")
+						.personalAgree("Y")
+						.ageAgree("Y")
+						.activated("Y")
+						.authorities(Collections.singleton(authority))	// Set을 사용해서 단일권한 부여
+						.build();
+		
+		return userRepository.save(user);
 	}
 	
-	// 로그인
+	// id를 통해 유저 객체와 권한 객체를 리턴 받음
 	@Transactional
-	public TokenInfo signin(String userId, String userPw) {
-		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(userId, userPw); // 사용자 id, pw를 통해 UsernamePasswordAuthenticationToken 객체를 생성함
-		
-		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken); // authenticationToken을 인증하고 성공하면 authenticationToken 객체를 반환
-		TokenInfo tokenInfo = jwtTokenProvider.generateTokenDto(authentication); // authenticationToken 객체를 기반으로 토큰 생성
-		
-		return tokenInfo;
+	public Optional<User> getUserWithAuthorities(String id) {
+		return userRepository.findOneWithAuthoritiesByid(id);
 	}
+	
+	// 현재 Security Context에 저장이 되어있는 id에 해당하는 유저 객체와 권한 객체를 받음
+	@Transactional
+	public Optional<User> getMyUserWithAuthorities() {
+		return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByid);	// flatMap : 단일 스트림으로 평면화
+	}
+
 }
