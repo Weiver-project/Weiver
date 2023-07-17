@@ -105,11 +105,12 @@ ALTER TABLE scott.image
 
 CREATE TABLE scott.musical (
     id             VARCHAR2(100 BYTE) NOT NULL,
-    stdate         DATE NOT NULL,
-    eddate         DATE NOT NULL,
-    theater        VARCHAR2(100 BYTE) NOT NULL,
+    stdate         DATE,
+    eddate         DATE,
+    title          VARCHAR2(100 BYTE) NOT NULL,
+    theater        VARCHAR2(100 BYTE),
     view_age       VARCHAR2(100 BYTE),
-    running_time   NUMBER,
+    running_time   VARCHAR2(100 BYTE),
     main_character VARCHAR2(100 BYTE),
     poster_image   VARCHAR2(1000 BYTE) NOT NULL
 );

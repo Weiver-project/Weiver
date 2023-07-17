@@ -1,30 +1,24 @@
 package weiver.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@Builder
+// mypage main dto
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDTO {
-	
-	@NotNull
-	@Size(min = 3, max = 30)
-	private String id;
-	
-	@NotNull
-	@Size(min = 3, max = 30)
-	private String password;
-	
-	@NotNull
-	@Size(min = 2, max = 14)
-	private String nickname;
+    private String userId;
+    private String nickname;
+    private String profileImg;
+    private int countJjim;
+    private int countIsWatched;
+    private int countPosts;
+    private int countReplies;
+    private int countPostLikes;
+
 }

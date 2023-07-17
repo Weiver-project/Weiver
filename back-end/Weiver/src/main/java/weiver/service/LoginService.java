@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import weiver.dto.UserDTO;
+import weiver.dto.SignupDTO;
 import weiver.entity.Authority;
 import weiver.entity.User;
 import weiver.repository.UserRepository;
@@ -25,12 +25,12 @@ public class LoginService {
 	
 	// 회원가입
 	@Transactional
-	public User signup(UserDTO userDTO) {
-		if(userRepository.findOneWithAuthoritiesByid(userDTO.getId()).orElse(null) != null) {	// DB에 아이디를 검색함, id가 null이 아니면 예외 발생
+	public User signup(SignupDTO signupDto) {
+		if(userRepository.findOneWithAuthoritiesByid(signupDto.getId()).orElse(null) != null) {	// DB에 아이디를 검색함, id가 null이 아니면 예외 발생
 			throw new RuntimeException("이미 가입되어 있는 유저입니다.");
 		}
 		
-		if(userRepository.existsByNickname(userDTO.getNickname())) {
+		if(userRepository.existsByNickname(signupDto.getNickname())) {
 			throw new RuntimeException("이미 존재하는 닉네임입니다.");
 		}
 		
@@ -54,9 +54,9 @@ public class LoginService {
 				.build();
 
 		User user = User.builder()
-						.id(userDTO.getId())
-						.password(passwordEncoder.encode(userDTO.getPassword()))
-						.nickname(userDTO.getNickname())
+						.id(signupDto.getId())
+						.password(passwordEncoder.encode(signupDto.getPassword()))
+						.nickname(signupDto.getNickname())
 						.profileImg("baseURL")
 						.essentialAgree("Y")
 						.personalAgree("Y")

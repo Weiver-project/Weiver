@@ -1,9 +1,6 @@
 package weiver.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -20,7 +17,9 @@ import javax.persistence.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"essentialAgree","personalAgree","ageAgree"})
 @Entity
 @Builder
 @Table(name = "user_tb")

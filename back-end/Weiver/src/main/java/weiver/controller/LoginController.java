@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import weiver.dto.LoginDTO;
+import weiver.dto.SignupDTO;
 import weiver.dto.TokenDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
@@ -64,11 +65,11 @@ public class LoginController {
 	
 	// 회원가입 기능
 	@PostMapping(value = "/signup")
-	public ResponseEntity<User> signupPage(@Valid @RequestBody UserDTO userDto) {
-		System.out.println(userDto.getId());
-		System.out.println(userDto.getPassword());
-		System.out.println(userDto.getNickname());
-		return ResponseEntity.ok(loginService.signup(userDto));
+	public ResponseEntity<User> signupPage(@Valid @RequestBody SignupDTO signupDto) {
+		System.out.println(signupDto.getId());
+		System.out.println(signupDto.getPassword());
+		System.out.println(signupDto.getNickname());
+		return ResponseEntity.ok(loginService.signup(signupDto));
 	}
 	
 	// 현재 Security Context에 저장이 되어있는 id에 해당하는 유저 객체와 권한 객체를 받음, USER, ADMIN 모두 호출 가능
