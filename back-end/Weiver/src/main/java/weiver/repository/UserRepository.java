@@ -1,21 +1,17 @@
 package weiver.repository;
 
-import javax.transaction.Transactional;
-
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import weiver.entity.User;
+
+import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-	User findPasswordById(String id);
-	
 	// 동일 아이디 찾기
 	boolean existsById(String userId);
 	
@@ -31,15 +27,22 @@ public interface UserRepository extends JpaRepository<User, String> {
 	// 개발중
 	public User findByIdAndPassword(String userId, String password);
 
-	// 유저 정보 수정(사진, 이름)
+	// 유저 정보 수정(사진)
 	@Modifying(clearAutomatically = true)
 	@Transactional
-	@Query("update User u set u.nickname = :nickname, u.profileImg = :img where u.id = :id")
-	void updateInfoById(@Param("nickname") String nickname, @Param("img") String profileImg, @Param("id") String id);
-	
+	@Query("update User u set u.profileImg = :img where u.id = :id")
+	int updateImgById(@Param("img") String profileImg, @Param("id") String id);
+
+	// 유저 정보 수정(이름)
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query("update User u set u.nickname = :nickname where u.id = :id")
+	int updateNameById(@Param("nickname") String nickname, @Param("id") String id);
+
+
 	// 유저 정보 수정(비밀번호)
 	@Modifying(clearAutomatically = true)
 	@Transactional
 	@Query("update User u set u.password = :password where u.id = :id")
-	void updatePasswordById(@Param("password") String password, @Param("id") String id);
+	int updatePasswordById(@Param("password") String password, @Param("id") String id);
 }
