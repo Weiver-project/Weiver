@@ -9,6 +9,7 @@ body {
 
 a {
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .pageName {
@@ -99,6 +100,7 @@ a {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    margin-right: 48px;
 }
 
 .postAndUserInfo {
@@ -121,6 +123,7 @@ a {
     border: none;
     border-radius: 8px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .postWrap-main > p {
@@ -130,6 +133,13 @@ a {
 
 .postWrap-main > h2 {
     background-color: #172036;
+}
+
+.post-content {
+	width: 480px;
+	height: 50px;
+	max-width: 480px;
+	max-height: 50px;
 }
 
 .postWrap-main > img {
@@ -144,6 +154,8 @@ a {
     display: flex;
     height: 24px;
     background:none;
+    position: absolute;
+ 	bottom: 0;
 }
 
 .iconGroup > div {
@@ -162,6 +174,10 @@ a {
 
 .bi-suit-heart {
     cursor: pointer;
+}
+
+.bi-heart-fill {
+     color: red;
 }
 
 /*유저 사이드 네비 바*/
@@ -241,6 +257,7 @@ a {
 * {
     color: #FFFFFF;
 }
+
 
 /* 공통 hr 태그 */
 hr {
@@ -415,8 +432,19 @@ hr {
     font-size: 14px;
 }
 
+.recommentID {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 /* 댓글 내용 */
 .commentContent {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.recommentContent {
     margin-left: 10px;
     font-size: 14px;
 }
@@ -439,6 +467,16 @@ hr {
 
 /* 댓글 수정, 삭제하기 버튼 */
 .commentBtnGroup > button{
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #586A85;
+    color: #FFFFFF;
+    font-size: 8px;
+    text-align: center;
+}
+
+.recommentBtnGroup > button{
     cursor: pointer;
     border: none;
     border-radius: 8px;

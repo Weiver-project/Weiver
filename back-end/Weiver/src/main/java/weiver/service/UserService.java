@@ -80,7 +80,7 @@ public class UserService {
 
         // 게시글 리스트 매핑
         for (PostLike postLike : postIdList) {
-            Long postId = postLike.getPost().getId();
+            Long postId = postLike.getPostId();
             Optional<Post> result = communityRepository.findById(postId);
 
             System.out.println(result);
