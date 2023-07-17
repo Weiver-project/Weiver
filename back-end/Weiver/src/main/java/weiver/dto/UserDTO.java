@@ -1,5 +1,6 @@
 package weiver.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class UserDTO {
     private int countPosts;
     private int countReplies;
     private int countPostLikes;
+
 }
