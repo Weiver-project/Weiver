@@ -57,6 +57,7 @@
     border-radius: 8px;
 }
 
+
 /* 검색 페이지 공통 사항 */
 h2{
   padding-top: 30px;
@@ -106,6 +107,7 @@ article{
   height: 120px;
   padding: 10px;
   border-radius: 10px;
+  margin-bottom : 10px;
 }
 
 .musical_list li img{
@@ -139,6 +141,7 @@ article{
   height: 80px;
   padding: 10px;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .community_list li img{
