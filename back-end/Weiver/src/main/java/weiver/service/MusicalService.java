@@ -10,6 +10,7 @@ import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
+import weiver.entity.Subscribe;
 import weiver.repository.CastingRepository;
 import weiver.repository.MusicalRepository;
 import weiver.repository.SubscribeRepository;
@@ -23,17 +24,17 @@ public class MusicalService {
 
 
 	/*인기 뮤지컬 조회*/
-	public List<PoPularMusicalDTO> getLikedMusical(String type){
+	public List<PoPularMusicalDTO> getLikedMusical(){
 		List<PoPularMusicalDTO> poPularMusicalDTOList = new ArrayList<>();
 
-		List<Object[]> musicalObjectList = subscribeRepository.findTop3MusicalIdsByDesiredType(type);
+		List<Subscribe> musicalObjectList = subscribeRepository.findTop3MusicalByDesiredType();
 
-		for(Object[] o : musicalObjectList){
-			String id = (String) o[0];
-			String title = (String) o[1];
-			PoPularMusicalDTO poPularMusicalDTO = PoPularMusicalDTO.builder().id(id).title(title).build();
-			poPularMusicalDTOList.add(poPularMusicalDTO);
-		}
+//		for(Object[] o : musicalObjectList){
+//			String id = (String) o[0];
+//			String title = (String) o[1];
+//			PoPularMusicalDTO poPularMusicalDTO = PoPularMusicalDTO.builder().id(id).title(title).build();
+//			poPularMusicalDTOList.add(poPularMusicalDTO);
+//		}
 
 		return poPularMusicalDTOList;
 	}

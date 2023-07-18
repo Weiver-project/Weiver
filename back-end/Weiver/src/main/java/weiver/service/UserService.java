@@ -1,7 +1,6 @@
 package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import weiver.dto.UserDTO;
 import weiver.entity.*;
@@ -31,7 +30,6 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
-    private PasswordEncoder passwordEncoder;
 
     // 전체 조회
     public void test() {
@@ -115,20 +113,20 @@ public class UserService {
     }
 
     // 유저 정보 수정(비밀번호 암호화)
-    public boolean updateBcryptPassword(String password, String id) throws Exception {
-        String user_password = userRepository.getUserById(id).getPassword();
-        boolean result = passwordEncoder.matches(password,user_password);
-
-        if(!result) {
-            String bcryptPassword = passwordEncoder.encode(password);
-            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
-            if(updateResult == 1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    public boolean updateBcryptPassword(String password, String id) throws Exception {
+//        String user_password = userRepository.getUserById(id).getPassword();
+//        boolean result = passwordEncoder.matches(password,user_password);
+//
+//        if(!result) {
+//            String bcryptPassword = passwordEncoder.encode(password);
+//            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
+//            if(updateResult == 1) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     // 마이페이지 정보 출력
     public UserDTO userInfo(String id) {
