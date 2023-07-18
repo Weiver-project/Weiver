@@ -26,7 +26,7 @@ public interface MusicalRepository extends JpaRepository<Musical, String> {
     @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m WHERE UPPER(m.title) LIKE CONCAT('%', UPPER(?1), '%')")
     List<SimpleMusicalDTO> findMusicalsByTitleKeyword(String keyword);
     
-    @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m JOIN Casting c ON c.musicalId.id = m.id WHERE c.actorId.id = :actorId")
+    @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m JOIN Casting c ON c.musicalId.id = m.id WHERE c.actorId.id = :actorId ORDER BY m.edDate DESC")
 	List<SimpleMusicalDTO> findMusicalsByActorId(@Param("actorId") String actorId);
 
 }
