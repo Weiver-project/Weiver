@@ -26,14 +26,12 @@ public class MusicalController {
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
 
-        System.out.println(performingMusicals.size());
-        
-        for(PerformingMusical p: performingMusicals) {
-        	System.out.println(p.getId());
-        	System.out.println(p.getPosterImage());
-        }
+        	
+        //인기 뮤지컬 추가
+        System.out.println(poPularMusicalDTOs.get(0).getTitle());
         
         model.addAttribute("popularMusicals", poPularMusicalDTOs);
+        //공연 중인 뮤지컬 추가
         model.addAttribute("performingMusicals", performingMusicals);
 
         return "main";
@@ -55,8 +53,6 @@ public class MusicalController {
     	if(keyword != null) {
     		List<SimpleMusicalDTO> musicals = musicalService.getMusicalByKeyword(keyword);
     		model.addAttribute("musicals", musicals);
-    		
-    		System.out.println(musicals.size());
     	}    	
     	
     	return "musicalSearch";
