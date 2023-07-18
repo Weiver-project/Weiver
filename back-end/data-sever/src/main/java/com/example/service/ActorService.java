@@ -1,11 +1,7 @@
 package com.example.service;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -15,17 +11,13 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.constant.Sub_category;
-import com.example.constant.URLs;
 import com.example.entity.Actor;
 import com.example.entity.Casting;
 import com.example.entity.Musical;
 import com.example.repository.ActorRepository;
 import com.example.repository.CastingRepository;
-import com.example.repository.MusicalRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 
 @Service
 @RequiredArgsConstructor
