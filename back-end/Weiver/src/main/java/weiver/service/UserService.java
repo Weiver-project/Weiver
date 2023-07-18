@@ -29,9 +29,9 @@ public class UserService {
 
     @Autowired
     private SubscribeRepository subscribeRepository;
+    
+    private PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
 
     // 전체 조회
     public void test() {

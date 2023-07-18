@@ -23,10 +23,10 @@ public class MusicalService {
 
 
 	/*인기 뮤지컬 조회*/
-	public List<PoPularMusicalDTO> getLikedMusical(){
+	public List<PoPularMusicalDTO> getLikedMusical(String type){
 		List<PoPularMusicalDTO> poPularMusicalDTOList = new ArrayList<>();
 
-		List<Object[]> musicalObjectList = subscribeRepository.findTop3MusicalIdsByDesiredType();
+		List<Object[]> musicalObjectList = subscribeRepository.findTop3MusicalIdsByDesiredType(type);
 
 		for(Object[] o : musicalObjectList){
 			String id = (String) o[0];
