@@ -50,7 +50,6 @@ public class LoginService {
 							.essentialAgree("Y")
 							.personalAgree("Y")
 							.ageAgree("Y")
-							.activated("Y")
 							.build();
 
 		User result = userRepository.save(user);
@@ -73,6 +72,11 @@ public class LoginService {
 		}
 		
 		return null;
+	}
+
+	// 회원 탈퇴
+	public void removeUser(String userId) throws Exception{	
+		userRepository.deleteById(userId);
 	}
 
 }
