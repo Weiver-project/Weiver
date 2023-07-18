@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import weiver.dto.PerformingMusical;
@@ -24,5 +25,8 @@ public interface MusicalRepository extends JpaRepository<Musical, String> {
 	 */
     @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m WHERE UPPER(m.title) LIKE CONCAT('%', UPPER(?1), '%')")
     List<SimpleMusicalDTO> findMusicalsByTitleKeyword(String keyword);
+    
+    @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m JOIN Casting c ON c.musicalId.id = m.id WHERE c.actorId.id = :actorId")
+	List<SimpleMusicalDTO> findMusicalsByActorId(@Param("actorId") String actorId);
 
 }

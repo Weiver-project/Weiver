@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -21,11 +22,11 @@
 
 	<div>
 		<div>
-			<a href="#"><i class="bi-chevron-left"></i></a>
+			<a href="javascript:history.back();"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
-			<h1>배우 이름</h1>
+			<h1>${actor.name}</h1>
 		</div>
 	</div>
 </header>
@@ -34,7 +35,7 @@
 <div  >
 	<div >
 		<div class="nameTag">
-			<img src="../img/logo.png" alt="logo" height="200" width="150">
+			<img src="${actor.profileImage}"  alt="logo" height="200" width="150">
 		</div>
 		<table>
 	    	<tr class="td-margin">
@@ -44,16 +45,11 @@
 	    	</tr>
 	    	<tr>
 	    		<td class="td-margin">
-		    		<!-- <%-- <c:forEach> --%> -->
+		    		<c:forEach items="${requestScope.musicalList}" var="musical">
 		    		<div>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
-		    			<a href="#"><img src="../img/logo.png" alt="logo" height="150" width="200" class="img-margin"></a>
+		    			<a href="/musical-detail/${musical.getId()}"><img src="${musical.getPosterImage()}" alt="logo" height="150" width="200" class="img-margin"></a>
 		    		</div>
-		    		<!-- <%-- </c:forEach> --%> -->
+		    		</c:forEach>
 	    		</td>
 	    	</tr>
 	    </table>
