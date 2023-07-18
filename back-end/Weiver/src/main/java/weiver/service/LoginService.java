@@ -45,7 +45,7 @@ public class LoginService {
 							.essentialAgree("Y")
 							.personalAgree("Y")
 							.ageAgree("Y")
-							.activated("Y")
+//							.activated("Y")
 							.build();
 
 		User result = userRepository.save(user);
