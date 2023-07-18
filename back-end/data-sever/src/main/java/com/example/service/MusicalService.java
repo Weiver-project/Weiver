@@ -77,7 +77,7 @@ public class MusicalService {
         /*크롤링하는데 소요된 시간 출력*/
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        log.info("크롤링 경과 시간: " + elapsedTime);
+        log.info("크롤링 경과 시간: " + elapsedTime/60000 + "분");
     }
 
 
