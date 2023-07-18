@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import weiver.entity.ReReply;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -35,5 +36,13 @@ public interface ReReplyRepository extends JpaRepository<ReReply, Long> {
 	@Modifying
 	@Transactional
 	int deleteRereplyById(Long id);
+
+	//대댓글 생성
+	@Modifying
+	@Query("INSERT INTO ReReply (post, user, reply, content, createdTime) " +
+	       "SELECT p, u, r, :content, CURRENT_TIMESTAMP FROM Post p, User u, Reply r " +
+	       "WHERE p.id = :postId AND u.id = :userId AND r.id = :replyId")
+	int insertRereply(@Param("postId") Long postId, @Param("userId") String userId, @Param("replyId") Long replyId, @Param("content") String content);
+
 
 }

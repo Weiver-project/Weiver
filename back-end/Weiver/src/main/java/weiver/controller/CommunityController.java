@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import weiver.entity.Image;
 import weiver.entity.Post;
+import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
 import weiver.service.CommunityService;
@@ -81,6 +83,9 @@ public class CommunityController {
         	List<ReReply> rerepliesForReply = communityService.getReReplyByPostIdAndReplyId(post.getId(), reply.getId());
             rereplies.addAll(rerepliesForReply);
         }
+        
+        // 조회수 +1
+        communityService.incrementViewCount(post);
 
         model.addAttribute("posts", post);
         model.addAttribute("reply", replies);
@@ -89,123 +94,7 @@ public class CommunityController {
         return "communityDetail";
     	}
     
-    // 댓글 수정 페이지를 렌더링하는 GET 메서드 추가
-    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.GET)
-    public String showUpdateCommentPage(@PathVariable Long id, Model model) {
-        Reply reply = communityService.getReplyById(id);
-        model.addAttribute("reply", reply);
-        return "updateComment";
-    }
 
- // 댓글을 업데이트하는 POST 메서드 추가
-    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.POST)
-    public String updateComment(@PathVariable Long id,
-                                @ModelAttribute("replyToUpdate") Reply updatedReply) {
-        String view = "error";
-
-        boolean result = false;
-
-        Reply reply = communityService.getReplyById(id);
-        reply.setContent(updatedReply.getContent());
-
-        try {
-            result = communityService.updateReply(id, updatedReply.getContent());
-
-            if (result) {
-                return "redirect:/community/" + reply.getPost().getId();
-            }
-        } catch (Exception e) {
-            return view;
-        }
-
-        return view;
-    }
-    
-    
-  //대댓글 수정 페이지를 랜더링
-    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.GET)
-    public String showUpdaterecommentPage(@PathVariable Long id, Model model) {
-            ReReply rereply = communityService.getRereplyById(id);
-            model.addAttribute("rereply", rereply);
-            return "updateRecomment";
-        }
-
-    // 대댓글을 업데이트하는 POST 메서드 추가
-    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.POST)
-    public String updateRecomment(@PathVariable Long id,
-                                @ModelAttribute("rereplyToUpdate") ReReply updatedRereply) {
-            String view = "error";
-
-            boolean result = false;
-
-            ReReply rereply = communityService.getRereplyById(id);
-            rereply.setContent(updatedRereply.getContent());
-
-            try {
-                result = communityService.updateRereply(id, updatedRereply.getContent());
-
-                if (result) {
-                    return "redirect:/community/" + rereply.getPost().getId();
-                }
-            } catch (Exception e) {
-                return view;
-            }
-
-            return view;
-        }
-    
-    //댓글 삭제
-    @RequestMapping(value="/community/delete/reply/{id}", method=RequestMethod.DELETE)
-	public String deleteReply(@PathVariable Long id) {
-		String view = "error";
-		
-		boolean replyResult = false;
-		boolean rereplyResult = false;
-		
-		Reply reply = communityService.getReplyById(id);
-		
-		try {
-			// 댓글 삭제 시 대댓글도 같이 삭제
-
-			replyResult = communityService.deleteReplyById(id);
-			rereplyResult = communityService.deleteRereplyById(id);
-			
-			if(replyResult && rereplyResult) {
-				view ="redirect:/community/" + reply.getPost().getId();
-				return view;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return view;
-		}
-		
-		return view;
-	}
-    
-	  //대댓글 삭제
-	    @RequestMapping(value = "/community/delete/rereply/{id}", method = RequestMethod.DELETE)
-		 public String deleteRereply(@PathVariable Long id) {
-			String view = "error";
-			
-			boolean rereplyResult = false;
-	
-			ReReply rereply = communityService.getRereplyById(id);
-			
-			try {
-				rereplyResult = communityService.deleteRereplyById(id);
-				
-				if(rereplyResult) {
-					view ="redirect:/community/" + rereply.getPost().getId();
-			return view;
-				}
-				
-			} catch (Exception e) {
-				return view;
-			
-			}
-			return view;
-	    }
-	    
 	    @RequestMapping(value = "/community/delete/post/{id}", method = RequestMethod.DELETE)
 	    public String deletePost(@PathVariable Long id) {
 	        String view = "error";
@@ -308,6 +197,41 @@ public class CommunityController {
 		    }
 		    return view;
 		}
+		
+		/*
+		 * 게시글 작성 페이지
+		 * */
+		
+		@RequestMapping(value="/community/board", method=RequestMethod.GET)
+		public String insertPostForm() {
+			return "registerPost";
+		}
+		
+		@RequestMapping(value="/community/board", method=RequestMethod.POST)
+		public String insertPost(@ModelAttribute Post newPost,
+					 @ModelAttribute Image newImage) {
+			String view = "error";
+			
+			boolean postResult = false;
+			boolean imageResult = false;
+			
+			try {
+				postResult = communityService.insertPost(newPost);
+				imageResult = communityService.insertImage(newImage);
+				
+				if(postResult && imageResult) {
+					view = "redirect:/community";
+					return view;
+				}
+				
+			} catch (Exception e) {
+				System.out.println("Exception occurred while inserting post or image: " + e.getMessage());
+
+				return view;
+			}
+			
+			return view;
+		}
 
    
 
@@ -315,35 +239,187 @@ public class CommunityController {
     /*
      * 댓글 관련 기능
      * */
+		
+	    // 댓글 수정 페이지를 렌더링하는 GET 메서드 추가
+	    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.GET)
+	    public String showUpdateCommentPage(@PathVariable Long id, Model model) {
+	        Reply reply = communityService.getReplyById(id);
+	        model.addAttribute("reply", reply);
+	        return "updateComment";
+	    }
 
-	 // 댓글 삽입 : 개발 중                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-//	    @RequestMapping(value = "/reply", method = RequestMethod.POST)
-//	    public void insertReply(@RequestBody Reply reply) {
-//	        String view = "error";
-//	        boolean result = false;
-//	        
-//	        try {
-//	            result = communityService.insertReply(reply);
-//	            
-//	            if (result) {
-//	                System.out.println("댓글 삽입 성공");
-//	            }
-//	        } catch (Exception e) {
-//	            e.printStackTrace();
-//	        }
-//	    }
+	 // 댓글을 업데이트하는 POST 메서드 추가
+	    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.POST)
+	    public String updateComment(@PathVariable Long id,
+	                                @ModelAttribute("replyToUpdate") Reply updatedReply) {
+	        String view = "error";
+
+	        boolean result = false;
+
+	        Reply reply = communityService.getReplyById(id);
+	        reply.setContent(updatedReply.getContent());
+
+	        try {
+	            result = communityService.updateReply(id, updatedReply.getContent());
+
+	            if (result) {
+	                return "redirect:/community/" + reply.getPost().getId();
+	            }
+	        } catch (Exception e) {
+	            return view;
+	        }
+
+	        return view;
+	    }
+
+	 // 댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	    @RequestMapping(value = "/community/insert/reply/{id}", method = RequestMethod.POST)
+	    public void insertReply(@RequestBody Reply reply) {
+	        String view = "error";
+	        boolean result = false;
+	        
+	        try {
+	            result = communityService.insertReply(reply);
+	            
+	            if (result) {
+	                System.out.println("댓글 삽입 성공");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 	    
- 
+	    //댓글 삭제
+	    @RequestMapping(value="/community/delete/reply/{id}", method=RequestMethod.DELETE)
+		public String deleteReply(@PathVariable Long id) {
+			String view = "error";
+			
+			boolean replyResult = false;
+			boolean rereplyResult = false;
+			
+			Reply reply = communityService.getReplyById(id);
+			
+			try {
+				// 댓글 삭제 시 대댓글도 같이 삭제
 
-
+				replyResult = communityService.deleteReplyById(id);
+				rereplyResult = communityService.deleteRereplyById(id);
+				
+				if(replyResult && rereplyResult) {
+					view ="redirect:/community/" + reply.getPost().getId();
+					return view;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return view;
+			}
+			
+			return view;
+		}
 	    
-
-	     
 	     
 	     /*
 	      * 대댓글 관련 기능
 	      * */
-	     
+	    
+	    //대댓글 수정 페이지를 랜더링
+	    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.GET)
+	    public String showUpdaterecommentPage(@PathVariable Long id, Model model) {
+	            ReReply rereply = communityService.getRereplyById(id);
+	            model.addAttribute("rereply", rereply);
+	            return "updateRecomment";
+	        }
+
+	    // 대댓글을 업데이트하는 POST 메서드 추가
+	    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.POST)
+	    public String updateRecomment(@PathVariable Long id,
+	                                @ModelAttribute("rereplyToUpdate") ReReply updatedRereply) {
+	            String view = "error";
+
+	            boolean result = false;
+
+	            ReReply rereply = communityService.getRereplyById(id);
+	            rereply.setContent(updatedRereply.getContent());
+
+	            try {
+	                result = communityService.updateRereply(id, updatedRereply.getContent());
+
+	                if (result) {
+	                    return "redirect:/community/" + rereply.getPost().getId();
+	                }
+	            } catch (Exception e) {
+	                return view;
+	            }
+
+	            return view;
+	        }
+	    
+
+		 // 대댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+		    @RequestMapping(value = "/community/insert/rereply/{id}", method = RequestMethod.POST)
+		    public void insertReply(@RequestBody ReReply rereply) {
+		        String view = "error";
+		        boolean result = false;
+		        
+		        try {
+		            result = communityService.insertRereply(rereply);
+		            
+		            if (result) {
+		                System.out.println("대댓글 삽입 성공");
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+	    
+		  //대댓글 삭제
+		    @RequestMapping(value = "/community/delete/rereply/{id}", method = RequestMethod.DELETE)
+			 public String deleteRereply(@PathVariable Long id) {
+				String view = "error";
+				
+				boolean rereplyResult = false;
+		
+				ReReply rereply = communityService.getRereplyById(id);
+				
+				try {
+					rereplyResult = communityService.deleteRereplyById(id);
+					
+					if(rereplyResult) {
+						view ="redirect:/community/" + rereply.getPost().getId();
+				return view;
+					}
+					
+				} catch (Exception e) {
+					return view;
+				
+				}
+				return view;
+		    }
+		    
+		    
+		    /*
+		     * 좋아요 기능
+		     * */
+		    
+		 // 게시글 좋아요 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+		    @RequestMapping(value = "/community/insert/postlike", method = RequestMethod.POST)
+		    public ResponseEntity<String> insertPostLike(@RequestBody PostLike postlike) {
+		        try {
+		            // 서비스로부터 결과를 받아서 처리하도록 변경
+		            boolean result = communityService.insertPostlike(postlike);
+
+		            if (result) {
+		                return new ResponseEntity<>("좋아요 데이터 삽입 성공", HttpStatus.OK);
+		            } else {
+		                return new ResponseEntity<>("좋아요 데이터 삽입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            return new ResponseEntity<>("서버 오류 발생", HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+		    }
+
+
 	    
 	     
 	     

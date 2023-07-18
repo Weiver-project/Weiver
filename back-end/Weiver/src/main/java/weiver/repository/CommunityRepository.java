@@ -49,4 +49,15 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 	//내가 쓴 게시글 리스트 개수 조회
 	int countByUserId(String userId);
 	
+	
+	//게시글 작성
+	@Modifying
+    @Transactional
+    @Query(value = "INSERT INTO post (user_id, type, title, content, created_time) " +
+            "VALUES (:userId, :type, :title, :content, SYSDATE())", nativeQuery = true)
+    int insertPost(@Param("userId") String userId,
+                   @Param("type") String type,
+                   @Param("title") String title,
+                   @Param("content") String content);
+	
 }

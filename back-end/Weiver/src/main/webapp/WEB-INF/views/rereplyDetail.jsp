@@ -74,7 +74,7 @@
     <a href="#"><i class="bi bi-house-door-fill"></i>
       <div>HOME</div>
     </a>
-    <a href="#"><i class="bi bi-chat-dots-fill"></i>
+    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
       <div>COMMUNITY</div>
     </a>
     <a href="#"><i class="bi bi-person-fill"></i>
