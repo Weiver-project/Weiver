@@ -162,6 +162,23 @@
     display:flex;
 }
 
+.myBoardCard a {
+    display: flex;
+    text-decoration-line: none;
+    border-radius:10px;
+}
+
+.myBoardCard .like {
+    display: flex;
+    width: 80px;
+    align-items: center;
+    border-radius:10px;
+}
+
+.myBoardCard .like div {
+    margin: 0px 12px;
+}
+
 /* Ä«µå */
 .card{
 	width: 80%;
@@ -337,7 +354,7 @@ div{
 .card {
     display: flex;
     flex-direction: column;
-    width: 640px;
+    width: 580px;
     height: 100px;
     border-radius: 8px;
     margin-bottom: 30px;
