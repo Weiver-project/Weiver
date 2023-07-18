@@ -31,7 +31,6 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     // 전체 조회
