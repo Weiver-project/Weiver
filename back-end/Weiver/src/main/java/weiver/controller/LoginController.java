@@ -7,8 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,6 +88,8 @@ public class LoginController {
 			User user = loginService.loginTest(userId, userPw);
 			
 			if (user != null) {
+				session.setAttribute("userId", user.getId());
+				session.setAttribute("userNickname", user.getNickname());				
 				return ResponseEntity.ok("로그인에 성공했습니다.");
 			}
 			
@@ -99,4 +100,13 @@ public class LoginController {
 		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 중 문제가 발생했습니다.");
 	}
+	
+	// 로그아웃
+	@GetMapping(value = "/logout")
+	public ResponseEntity<String> logout(HttpSession session) {
+		if(session != null) {
+			
+		}
+		return null;
+	} 
 }

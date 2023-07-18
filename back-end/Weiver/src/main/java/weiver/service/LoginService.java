@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,9 @@ public class LoginService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	 
 	// 아이디 중복 확인
 	public boolean checkUserExists(String userId) {
@@ -32,7 +36,7 @@ public class LoginService {
 	@Transactional
 	public boolean saveUser(String userId, String userPw, String userNickname) throws Exception{
 		// 암호화된 패스워드
-		String encodedPassword = BCrypt.hashpw(userPw, BCrypt.gensalt(10));
+		String encodedPassword = passwordEncoder.encode(userPw);
 
 		System.out.println(userPw);
 		System.out.println(encodedPassword);
@@ -79,7 +83,11 @@ public class LoginService {
 			return null;
 		}
 		
-		return user;
+		if(user.getPassword() == userPw) {
+			return user;
+		}
+		
+		return null;
 	}
 
 }
