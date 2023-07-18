@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,15 +50,9 @@
 <h1 class="title">인기 뮤지컬 🔥</h1>
 <div class="popular_musical_list">
   <ul>
-    <c:if test="${popularMusical.get(0) ne null}">
-      <li>${popularMusical.get(0)}</li>
-    </c:if>
-    <c:if test="${popularMusical.get(1) ne null}">
-      <li>${popularMusical.get(1)}</li>
-    </c:if>
-    <c:if test="${popularMusical.get(2) ne null}">
-      <li>${popularMusical.get(2)}</li>
-    </c:if>
+    <li>${popularMusicals.get(0).getTitle()}</li>
+    <li>${popularMusicals.get(1).getTitle()}</li>
+    <li>${popularMusicals.get(2).getTitle()}</li>
   </ul>
 </div>
 
@@ -218,42 +214,26 @@
 <div class="progress-musical">
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="poster-container">
-          <div class="poster">
-            <img src="image11.jpg" alt="이미지 1">
-          </div>
-          <div class="poster">
-            <img src="image12.jpg" alt="이미지 2">
-          </div>
-          <div class="poster">
-            <img src="image13.jpg" alt="이미지 3">
-          </div>
-          <div class="poster">
-            <img src="image14.jpg" alt="이미지 4">
-          </div>
+      <c:forEach var="performingMusical" items="${performingMusicals}" varStatus="status">
+        <c:if test="${status.index % 4 == 0}">
+          <div class="swiper-slide">
+            <div class="poster-container">
+        </c:if>
+        <div class="poster" id="${performingMusical.getId()}">
+          <img src="${performingMusical.getPosterImage()}" alt="image ${status.index + 1}">
         </div>
-      </div>
-
-      <div class="swiper-slide">
-        <div class="poster-container">
-
-          <div class="poster">
-            <img src="image15.jpg" alt="이미지 5">
+        <c:if test="${status.index % 4 == 3 or status.last}">
+            </div>
           </div>
-          <div class="poster">
-            <img src="image16.jpg" alt="이미지 6">
-          </div>
-          <div class="poster">
-            <img src="image17.jpg" alt="이미지 7">
-          </div>
-          <div class="poster">
-            <img src="image18.jpg" alt="이미지 8">
-          </div>
-        </div>
-      </div>
+        </c:if>
+      </c:forEach>
     </div>
-    <!-- Add Pagination -->
+  </div>
+</div>
+
+
+
+    <!-- Add Pagination -->	
     <div class="swiper-pagination"></div>
     <!-- Add Navigation -->
     <div class="swiper-button-next"></div>
