@@ -88,7 +88,7 @@ public class UserController {
 
 	@PostMapping("/update")
 	public String profileUpdate(@RequestParam(value = "userId") String id,
-								@RequestParam("nickname") String nickname,
+								@RequestParam(value = "nickname") String nickname,
 								@RequestParam(value = "profileImg") MultipartFile profileImg) {
 
 		// 파일 저장은 어디에?
