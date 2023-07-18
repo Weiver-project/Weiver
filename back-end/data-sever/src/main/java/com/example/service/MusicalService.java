@@ -87,7 +87,7 @@ public class MusicalService {
         List<Musical> musicals = new ArrayList<>();
 
         for(int i =0; i < musicalIds.size(); i++){
-            if(i != 0 && i % 1000 == 0){
+            if(i != 0 && i % 100 == 0){
                 musicalRepository.saveAll(musicals);
                 musicals.clear();
             }

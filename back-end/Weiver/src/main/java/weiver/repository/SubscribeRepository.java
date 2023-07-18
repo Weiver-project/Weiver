@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import weiver.entity.Subscribe;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -17,8 +16,8 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 //	@Query("SELECT s.musicalId.id, s.musicalId.title FROM Subscribe s WHERE s.type = ?1 GROUP BY s.musicalId.id ORDER BY COUNT(s) DESC")
 //	List<Object[]> findTop3MusicalByDesiredType(String type);
 
-	@Query("SELECT s FROM Subscribe s")
-	List<Subscribe> findTop3MusicalByDesiredType();
+	@Query("SELECT s.musicalId.id, s.musicalId.title FROM Subscribe s WHERE s.type = '봤어요' GROUP BY s.musicalId.id, s.musicalId.title ORDER BY COUNT(s.musicalId) DESC")
+	List<Object[]> findTop3MusicalByDesiredType(org.springframework.data.domain.Pageable pageable);
 
 
 	//	유저의 봤어요, 찜 목록 조회

@@ -48,15 +48,9 @@
 <h1 class="title">인기 뮤지컬 🔥</h1>
 <div class="popular_musical_list">
   <ul>
-    <c:if test="${popularMusical.get(0) ne null}">
-      <li>${popularMusical.get(0)}</li>
-    </c:if>
-    <c:if test="${popularMusical.get(1) ne null}">
-      <li>${popularMusical.get(1)}</li>
-    </c:if>
-    <c:if test="${popularMusical.get(2) ne null}">
-      <li>${popularMusical.get(2)}</li>
-    </c:if>
+    <li>${popularMusical.get(0).getTitle()}</li>
+    <li>${popularMusical.get(1).getTitle()}</li>
+    <li>${popularMusical.get(2).getTitle()}</li>
   </ul>
 </div>
 
