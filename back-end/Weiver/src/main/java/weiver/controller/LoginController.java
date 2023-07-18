@@ -100,13 +100,4 @@ public class LoginController {
 		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 중 문제가 발생했습니다.");
 	}
-	
-	// 로그아웃
-	@GetMapping(value = "/logout")
-	public ResponseEntity<String> logout(HttpSession session) {
-		if(session != null) {
-			
-		}
-		return null;
-	} 
 }

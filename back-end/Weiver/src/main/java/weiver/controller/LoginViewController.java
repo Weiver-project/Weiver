@@ -1,6 +1,8 @@
 package weiver.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,5 +18,14 @@ public class LoginViewController {
 	@GetMapping(value = "/signup")
 	public String signupPage() {
 		return "signup";
+	}
+	
+	// 로그아웃
+	@GetMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		if(session != null) {
+			session.invalidate();
+		}
+		return "redirect:/main";
 	}
 }
