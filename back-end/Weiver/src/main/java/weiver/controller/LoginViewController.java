@@ -25,6 +25,7 @@ public class LoginViewController {
 	public String logout(HttpSession session) {
 		if(session != null) {
 			session.invalidate();
+			System.out.println("로그 아웃");
 		}
 		return "redirect:/main";
 	}
