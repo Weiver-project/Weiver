@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"postlikes"})
+@Data
 @Entity
 @Table(name = "post")
 public class Post {
@@ -40,7 +40,7 @@ public class Post {
     @Column(name = "viewed")
     private Long viewed;
 
-    // 이미지 entity 참조
+    //이미지 데이터 받아와서 저장
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "post_id")
     private List<Image> images = new ArrayList<>();
@@ -52,17 +52,17 @@ public class Post {
     public void removeImage(Image image) {
         images.remove(image);
     }
-
-    // 좋아요 entity 참조
+    
+    //좋아요 데이터 받아와서 저장
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "post_id")
-    private List<PostLike> postLikes = new ArrayList<>();
+    private List<PostLike> postlikes = new ArrayList<>();
 
-    public void addPostLike(PostLike postLike) {
-        postLikes.add(postLike);
+    public void addLike(PostLike postlike) {
+    	postlikes.add(postlike);
     }
 
-    public void removePostLike(PostLike postLike) {
-        postLikes.remove(postLike);
+    public void removeLike(PostLike postlike) {
+    	postlikes.remove(postlike);
     }
 }

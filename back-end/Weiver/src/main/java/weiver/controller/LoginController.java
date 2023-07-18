@@ -1,114 +1,88 @@
 package weiver.controller;
 
+import javax.validation.Valid;
 
-
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import weiver.dto.LoginDTO;
+import weiver.dto.SignupDTO;
+import weiver.dto.TokenDTO;
+import weiver.dto.UserDTO;
 import weiver.entity.User;
+import weiver.jwt.JwtFilter;
+import weiver.jwt.TokenProvider;
 import weiver.service.LoginService;
 
 
-@Controller
+@RestController
 public class LoginController {
-	@Autowired
-	LoginService service;
+	private final TokenProvider tokenProvider;
+	private final AuthenticationManagerBuilder authenticationManagerBuilder;
+	private final LoginService loginService;
 	
-	// 회원가입 페이지
-	@GetMapping(value = "/signup")
-	public String signupPage() {
-		return "signup";
+	public LoginController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, LoginService loginService) {
+		this.tokenProvider = tokenProvider;
+		this.authenticationManagerBuilder = authenticationManagerBuilder;
+		this.loginService = loginService;
 	}
 	
-	// 로그인 페이지
-	@GetMapping(value = "/login")
-	public String loginPage() {
-		return "login";
+	// 로그인 기능
+	@PostMapping("/signin")
+	public ResponseEntity<TokenDTO> signin(@RequestBody LoginDTO loginDTO) {
+		System.out.println("id : " + loginDTO.getId());
+		System.out.println("pw : " + loginDTO.getPassword());
+		
+		// loginDTO 의 id, password로 UsernamePasswordAuthenticationToken 객체를 생성함
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getId(), loginDTO.getPassword());
+		
+		// authenticationToken를 이용해서 Authentication객체를 생성하려고 authenticate 메소드가 실행이 될 때 CustomUserDetailsService의 loadUserByUsername 메소드가 실행되고 이 결과를 가지고 Authentication 객체를 생성함
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+		
+		// Authentication객체를 SecurityContext에 저장 후 그 인증 정보를 통해 createToken를 실행하고 JWT Token을 생성함
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		String jwt = tokenProvider.createToken(authentication);
+		
+		// JWT Token을 Response Header, Response Body에 넣어서 리턴함
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);		
+		
+		return new ResponseEntity<>(new TokenDTO(jwt), httpHeaders, HttpStatus.OK);
 	}
 	
 	// 회원가입 기능
-	@PostMapping(value = "/signupTest")
-	public ResponseEntity<String> signup(@RequestParam("userId") String userId,
-	                     @RequestParam("userPw") String userPw,
-	                     @RequestParam("userPwCheck") String userPwCheck,
-	                     @RequestParam("userNickname") String userNickname) {
-		
-		boolean userIdExists = service.checkUserExists(userId);
-		boolean userNicknameExists = service.checkUserNicknameExists(userNickname);
-		
-		// front required 속성으로 굳이 필요 없어짐
-//		if(userId == null || userId.equals("") || 
-//			userPw == null || userPw.equals("") || 
-//			userNickname == null || userNickname.equals("")) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원 가입 정보를 모두 입력해주세요.");
-//		}
-		
-		// 유저 id 중복 확인
-		if (userIdExists) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 아이디입니다.");
-		}
-		
-		if (userNicknameExists) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 닉네임입니다.");
-		}
-		
-		// 패스워드, 패스워드 확인 체크
-		if(!userPw.equals(userPwCheck)) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
-		}
-		
-		System.out.println(userId);
-		System.out.println(userPw);
-		System.out.println(userNickname);
-		
-		// 회원 가입 try - catch
-		try {
-			boolean result = service.saveUser(userId, userPw, userNickname);
-			
-			if (result) {
-				return ResponseEntity.ok("회원가입이 완료되었습니다.");
-			} 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 내부 에러가 발생했습니다.");
-		}
-		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 가입 중 에러가 발생했습니다.");
+	@PostMapping(value = "/signup")
+	public ResponseEntity<User> signupPage(@Valid @RequestBody SignupDTO signupDto) {
+		System.out.println(signupDto.getId());
+		System.out.println(signupDto.getPassword());
+		System.out.println(signupDto.getNickname());
+		return ResponseEntity.ok(loginService.signup(signupDto));
 	}
 	
-	// 로그인 기능 개발중
-	@PostMapping(value =  "/signin")
-	public String login(@RequestParam(value = "userId") String userId, 
-						@RequestParam(value = "userPw") String userPw) {
-		
-		System.out.println(userId);
-		System.out.println(userPw);
-		
-		if (userId == null || userPw == null) {
-	        return "error";
-	    }
-		
-		User user = service.findByIdAndPassword(userId, userPw);
-		
-		if (user != null) {
-	        return "redirect:/mainpage";
-	    } else {
-	        // 로그인 실패 처리
-	        return "redirect:/login";
-	    }
+	// 현재 Security Context에 저장이 되어있는 id에 해당하는 유저 객체와 권한 객체를 받음, USER, ADMIN 모두 호출 가능
+	@GetMapping(value = "/user")
+	@PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public  ResponseEntity<User> getMyUserInfo() {
+		return ResponseEntity.ok(loginService.getMyUserWithAuthorities().get());
 	}
-
-
+	
+	// id를 통해 유저 객체와 권한 객체를 리턴 받음, ADMIN만 모두 호출 가능
+	@GetMapping(value = "/user/{username}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public  ResponseEntity<User> getUserInfo(@PathVariable String id) {
+		return ResponseEntity.ok(loginService.getUserWithAuthorities(id).get());
+	}
 }

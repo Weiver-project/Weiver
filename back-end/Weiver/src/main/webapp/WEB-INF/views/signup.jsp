@@ -15,6 +15,9 @@
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- inko 한글 -> 영문으로 변환 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/inko@1.1.1/inko.min.js"></script>
 
 </head>
 
@@ -26,7 +29,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="#"><i class="bi bi-chevron-left"></i></a>
+                <a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a>
             </div>
         </div>
     </header>
@@ -39,22 +42,28 @@
         </div>
 
         <!-- 회원가입 form -->
-        <form id="signupForm" action="/signupTest" method="post">
+        <form id="signupForm" action="/signup" method="post">
             <!-- ID -->
             <div class="ID">
-                <input id="userId" class="info_input" type="email" name="userId" placeholder="이메일을 입력해주세요" required style="text-transform: lowercase">
+                <input id="userId" class="info_input" type="email" name="userId" placeholder="이메일을 입력해주세요" required style="text-transform: lowercase;">
             </div>
 
-            <!-- 닉네임 -->
+            <!-- 패스워드 -->
             <div class="data_input">
                 <input class="info_input" type="password" name="userPw" placeholder="비밀번호를 입력주세요" required>
+                <p class="pwErrorMessage"></p>
             </div>
 
+			<!-- 패스워드 확인 -->
             <div class="data_input">
                 <input class="info_input" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력해주세요" required>
+                <p class="pwCheckErrorMessage"></p>
             </div>
+            
+            <!-- 닉네임 -->
             <div class="data_input">
-                <input class="info_input" type="text" name="userNickname" placeholder="닉네임을 입력해주세요" required>
+                <input class="info_input" type="text" name="userNickname" placeholder="닉네임을 입력해주세요" required maxlength="10">
+                <p class="nicknameErrorMessage"></p>
             </div>
         </form>
 
@@ -176,21 +185,20 @@
 
         <!-- script -->
         <script>
-            // 모달 팝업
-            // 이벤트가 발생한 후 다음 요소(빈 값)의 히든을 제거
+	        const openBtns = document.querySelectorAll(".openBtn");
+	        const closeBtns = document.querySelectorAll(".closeBtn");
+	        
+            /* 이벤트가 발생한 후 다음 요소(빈 값)의 히든을 제거 */
             const open = (e) => {
                 const modal = e.target.nextElementSibling;
                 modal.classList.remove("hidden");
             }
 
-            // 이벤트가 발생한 상위, 상위 태그를 modal로 특정 시킴
+            /* 이벤트가 발생한 상위, 상위 태그를 modal로 특정 시킴 */
             const close = (e) => {
                 const modal = e.target.parentElement.parentElement;
                 modal.classList.add("hidden");
             }
-
-            const openBtns = document.querySelectorAll(".openBtn");
-            const closeBtns = document.querySelectorAll(".closeBtn");
 
             openBtns.forEach((btn) => {
                 btn.addEventListener("click", open);
@@ -205,33 +213,91 @@
 			const signupForm = document.querySelector("#signupForm");
 			const signupCheckBoxes = document.querySelectorAll(".signupCheckBox");
 			const emailValue = document.querySelector("#userId")
+			const passwordValue = document.getElementsByName("userPw")[0];
+			const CheckPasswordValue = document.getElementsByName("userPwCheck")[0];
+			const pwErrorMessage = document.querySelector(".pwErrorMessage");
+			const pwCheckErrorMessage = document.querySelector(".pwCheckErrorMessage");
+			const nicknameValue = document.getElementsByName("userNickname")[0];
+			const nicknameErrorMessage = document.querySelector(".nicknameErrorMessage");
+			const initialKoreanRegex = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
+			const regex = /[ㄱ-ㅎ-ㅣ가-힣]/;
+			
+			/* 공백 제거 */
+			function removeSpace(testValue) {
+				testValue.addEventListener("input", (event) => {
+			    event.target.value = event.target.value.replace(/\s/g, "");
+			  });
+			}
+			
+			removeSpace(passwordValue);
+			removeSpace(CheckPasswordValue);
+			removeSpace(nicknameValue);
 			
 			/* 체크박스 체크 확인 -> 버튼 활성화 */
 			signupCheckBoxes.forEach((checkbox) => {
-	            checkbox.addEventListener("change", () => {
-	                signupButton.disabled = !signupCheckBoxes[0].checked || !signupCheckBoxes[1].checked || !signupCheckBoxes[2].checked;
-	            });
-	        });
+			    checkbox.addEventListener("change", toggleSignupButton);
+			});
 			
-			/* 소문자로 변형 */
+			/* 이메일 소문자로 변형 */
 			emailValue.addEventListener("input", (e) => {
 				e.target.value = e.target.value.toLowerCase();
-				console.log(e.target.value);
 			})
+			
+			/* 닉네임 초성 여부 체크 */
+			function checkNickname(inputValue, errorMessage) {
+			    errorMessage.textContent = initialKoreanRegex.test(inputValue) ? "닉네임에 초성으로 된 한글을 사용할 수 없습니다." : "";
+			}
+			
+			nicknameValue.addEventListener("blur", () => {
+				checkNickname(nicknameValue.value, nicknameErrorMessage);
+    			toggleSignupButton();
+			});
+			
+			/* 패스워드 한글 여부 체크 */
+			function checkPassword(inputValue, errorMessage) {
+			  	errorMessage.textContent = regex.test(inputValue) ? "비밀번호는 영문 소문자, 대문자, 숫자, 특수문자만 가능합니다." : "";
+			}
+			
+			passwordValue.addEventListener("blur", (e) => {
+				e.target.value = inko.ko2en(e.target.value);
+				console.log(e.target.value);
+			  	checkPassword(passwordValue.value, pwErrorMessage);
+			  	toggleSignupButton();
+			});
+			
+			CheckPasswordValue.addEventListener("blur", (e) => {
+				e.target.value = inko.ko2en(e.target.value);
+				console.log(e.target.value);
+			  	checkPassword(CheckPasswordValue.value, pwCheckErrorMessage);
+				toggleSignupButton();
+			});
+			
+			/* 가입하기 버튼 활성화/비활성화(비밀번호, 닉네임, 체크박스가 정상적이여야 활성화) */
+			function toggleSignupButton() {
+			    const regexResult = regex.test(passwordValue.value) || regex.test(CheckPasswordValue.value) || initialKoreanRegex.test(nicknameValue.value);
+			    const allChecked = Array.from(signupCheckBoxes).every((checkbox) => checkbox.checked);
+			    signupButton.disabled = regexResult || !allChecked;
+			}
+			toggleSignupButton();
 			
 			/* 회원가입 axios 요청 */
 			signupButton.addEventListener("click", (event) => {
+				const requestData = {
+						id : emailValue.value,
+						password : passwordValue.value,
+						nickname : nicknameValue.value};
+				
+				
 			    event.preventDefault(); // 기본 양식 제출을 방지
-			
+				console.log(requestData.id);
 			    if (signupForm.checkValidity()) { // 양식이 유효한지 확인
-			        const formData = new FormData(signupForm);
-			
-			        axios.post("/signupTest", formData)
-			            .then(response => {
+			    	console.log(requestData);
+			        axios.post("/signup", requestData)
+			        	.then(response => {
 			                const data = response.data;
 			                if (response.status === 200) {
 		                        alert(data);
-		                        window.location.href = "/login";
+		                        window.location.href = "/loginPage";
 			                } 
 			            })
 			            .catch((error) => {

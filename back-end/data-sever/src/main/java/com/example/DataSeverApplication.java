@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,8 +15,10 @@ import com.example.service.MusicalService;
 @EnableScheduling
 @RequiredArgsConstructor
 public class DataSeverApplication {
-	private final MusicalService musicalService;
-	private final ActorService actorService;
+	@Autowired
+	private MusicalService musicalService;
+	@Autowired
+	private ActorService actorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataSeverApplication.class, args);
@@ -32,6 +35,5 @@ public class DataSeverApplication {
 		* */
 		musicalService.task();
 		actorService.saveActor();
-		
 	}
 }

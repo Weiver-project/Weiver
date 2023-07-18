@@ -311,10 +311,19 @@ div{
     margin: 0 auto;
     border: none;
     border-radius: 8px;
-    background-color: #4263EB;
+    background-color: #3B4869;
     color: #D4D9E1;
     font-size: 20px;
     font-weight: 700;
+}
+
+.submit_btn:hover {
+    background-color: #4263EB;
+}
+
+.submit_btn[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 /*¼³Á¤*/

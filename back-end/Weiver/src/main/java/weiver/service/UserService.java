@@ -80,7 +80,7 @@ public class UserService {
 
         // 게시글 리스트 매핑
         for (PostLike postLike : postIdList) {
-            Long postId = postLike.getPost().getId();
+            Long postId = postLike.getPostId();
             Optional<Post> result = communityRepository.findById(postId);
 
             System.out.println(result);
@@ -97,28 +97,38 @@ public class UserService {
 //        System.out.println(countresult);
     }
 
-    // 유저 정보 수정(사진, 이름)
-    public void updateInfo(String nickname, String profileImg, String id) {
-        userRepository.updateInfoById(nickname, profileImg, id);
+    // 유저 정보 수정(사진)
+    public boolean updateImg(String profileImg, String id) throws Exception {
+        int result = userRepository.updateImgById(profileImg, id);
+        if(result == 1) {
+            return true;
+        }
+        return false;
+    }
 
-        System.out.println(userRepository.findById(id));
+    // 유저 정보 수정(이름)
+    public boolean updateName(String nickname, String id) throws Exception {
+        int result =  userRepository.updateNameById(nickname, id);
+        if(result == 1) {
+            return true;
+        }
+        return false;
     }
 
     // 유저 정보 수정(비밀번호 암호화)
-    public void updateBcryptPassword(String password, String id) {
-        String user_password = userRepository.findPasswordById(id).getPassword();
+    public boolean updateBcryptPassword(String password, String id) throws Exception {
+        String user_password = userRepository.getUserById(id).getPassword();
         boolean result = passwordEncoder.matches(password,user_password);
 
-        System.out.println(result);
-
         if(!result) {
-            System.out.println(userRepository.findById(id));
-
             String bcryptPassword = passwordEncoder.encode(password);
-            userRepository.updatePasswordById(bcryptPassword, id);
-
-            System.out.println(userRepository.findById(id));
+            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
+            if(updateResult == 1) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     // 마이페이지 정보 출력
