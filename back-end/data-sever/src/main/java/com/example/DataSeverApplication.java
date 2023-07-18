@@ -31,7 +31,7 @@ public class DataSeverApplication {
 		* 처음 1번 실행할 때만 그대로 실행하시고 이후부터는 MusicalService안에 있는 isFirst를 false로 바꾸고 실행해주세요
 		* */
 		musicalService.task();
-//		actorService.saveActor();
+		actorService.saveActor();
 		
 	}
 }
