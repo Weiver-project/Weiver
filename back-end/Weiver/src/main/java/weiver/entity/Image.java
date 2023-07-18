@@ -1,14 +1,9 @@
 package weiver.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Data
@@ -19,9 +14,11 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "post_id")
+    private Long postId;
+
     @Column(name = "path")
     private String path;
 }
-
 
 

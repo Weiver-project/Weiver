@@ -37,6 +37,17 @@
     margin-bottom: 10px;
 }
 
+.data_input > div {
+	color: #ff3f3f;
+	font-size: 13px;
+	padding-left: 10px;
+	margin-bottom: 30px;
+}
+
+.pwCheckErrorMessage, .pwErrorMessage, .nicknameErrorMessage {
+	color: red;
+}
+
 .signupBtn {
     margin-top: 30px;
     color: #D4D9E1;

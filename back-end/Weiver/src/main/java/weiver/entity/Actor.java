@@ -1,26 +1,29 @@
 package weiver.entity;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Document(collection = "actor")
+import javax.persistence.*;
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ACTOR")
 public class Actor {
 	@Id
-	private String _id;
-	private String name;
-	private String profileImage;
-	private Casting[] castings;
-	
-	
-	
-	public class Casting {
-		private String title;
-		private String posterImage;
-		private Date stDate;
-		private Date edDate;
-		private String role;
-	}
+	@Column(name = "ID")
+	private String id;
 
+	@Column(name = "NAME")
+	private String name;
+
+	@Column(name = "PROFILE_IMAGE")
+	private String profileImage;
 }

@@ -3,10 +3,10 @@ package weiver.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.multipart.MultipartFile;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
@@ -18,9 +18,6 @@ public class UserController {
 	@Autowired
 	private UserService userservice;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
 	// 유저 아이디로 조회
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
 	public void test() {
@@ -30,21 +27,21 @@ public class UserController {
 	}
 
 	// 유저 정보 수정(사진, 이름)
-//	@RequestMapping(value="/test2",method = RequestMethod.GET)
-//	public void updatetest() {
-//		String id = "test1";
-//		String nickname = "Doe";
-//		String profileImg = "profile_img1.jpg";
+	@RequestMapping(value="/test2",method = RequestMethod.GET)
+	public void updatetest() {
+		String id = "test1";
+		String nickname = "Doe";
+		String profileImg = "profile_img1.jpg";
 //		userservice.updateInfo(nickname, profileImg, id);
-//	}
+	}
 
 	// 유저 정보 수정(비밀번호)
-//	@RequestMapping(value="/test3",method = RequestMethod.GET)
-//	public void updatetest2() {
-//		String id = "asdfasdf@naver.com";
-//		String password = "asdfasdf";
-//		userservice.updateBcryptPassword(password, id);
-//	}
+	@RequestMapping(value="/test3",method = RequestMethod.GET)
+	public void updatetest2() {
+		String id = "test2";
+		String password = "password3";
+//		userservice.updatePassword(password, id);
+	}
 
 	// 유저가 쓴 게시글/댓글/좋아요한 글 조회
 	@RequestMapping(value="/test4",method = RequestMethod.GET)
@@ -141,12 +138,12 @@ public class UserController {
 										   @RequestParam("checkPw") String checkPw) {
 
 		String password = userservice.findById(userId).getPassword();
-		boolean result = passwordEncoder.matches(userPw, password);
-
-		// 기존 비밀번호 확인
-		if (!result) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
-		}
+//		boolean result = passwordEncoder.matches(userPw, password);
+//
+//		// 기존 비밀번호 확인
+//		if (!result) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
+//		}
 
 		// 새 패스워드, 패스워드 확인 체크
 		if(!newPw.equals(checkPw)) {

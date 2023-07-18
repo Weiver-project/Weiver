@@ -1,7 +1,6 @@
 package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import weiver.dto.UserDTO;
 import weiver.entity.*;
@@ -31,8 +30,8 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     // 전체 조회
     public void test() {
@@ -80,7 +79,7 @@ public class UserService {
 
         // 게시글 리스트 매핑
         for (PostLike postLike : postIdList) {
-            Long postId = postLike.getPost().getId();
+            Long postId = postLike.getPostId();
             Optional<Post> result = communityRepository.findById(postId);
 
             System.out.println(result);
@@ -90,11 +89,11 @@ public class UserService {
 
     // 유저가 찜하거나 봤던 뮤지컬 조회
     public void findSubscribe(String id, String type) {
-        List<String> result = subscribeRepository.findMusicalIdByUserIdAndType(id, type);
-        int countresult = subscribeRepository.countByUserIdAndType(id, type);
-
-        System.out.println(result);
-        System.out.println(countresult);
+//        List<String> result = subscribeRepository.findMusicalIdByUserIdAndType(id, type);
+//        int countresult = subscribeRepository.countByUserIdAndType(id, type);
+//
+//        System.out.println(result);
+//        System.out.println(countresult);
     }
 
     // 유저 정보 수정(사진)
@@ -118,15 +117,15 @@ public class UserService {
     // 유저 정보 수정(비밀번호 암호화)
     public boolean updateBcryptPassword(String password, String id) throws Exception {
         String user_password = userRepository.getUserById(id).getPassword();
-        boolean result = passwordEncoder.matches(password,user_password);
-
-        if(!result) {
-            String bcryptPassword = passwordEncoder.encode(password);
-            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
-            if(updateResult == 1) {
-                return true;
-            }
-        }
+//        boolean result = passwordEncoder.matches(password,user_password);
+//
+//        if(!result) {
+//            String bcryptPassword = passwordEncoder.encode(password);
+//            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
+//            if(updateResult == 1) {
+//                return true;
+//            }
+//        }
 
         return false;
     }

@@ -1,6 +1,9 @@
 package weiver.dto;
 
+import lombok.Builder;
+
+@Builder
 public class PerformingMusical {
-	private String _id;
+	private String id;
 	private String posterImage;
 }

@@ -18,7 +18,7 @@
 </head>
 
 <body class="container">
-  <header><a href="#"><i class="bi bi-chevron-left"></i></a></header>
+  <header><a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a></header>
   <article>
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
@@ -30,8 +30,8 @@
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
-      <a href="#">회원가입</a>
-      <a href="/html/search_pw.html">비밀번호를 잊으셨나요?</a>
+      <a href="/signup">회원가입</a>
+      <a href="/">비밀번호를 잊으셨나요?</a>
     </div>
     <!-- 간편로그인 구분 선 -->
     <div class="dividing-line">
@@ -48,21 +48,20 @@
 
   <script>
   	const loginForm = document.getElementById("login-form");
-  	const formData = new FormData(loginForm);
-  	const userId = document.getElementsByName("userId")[0].value;
-    const userPw = document.getElementsByName("userPw")[0].value;
-    
-    console.log(userId)
-    console.log(userPw)
     
     /* 폼 제출 이벤트 핸들러 */
     loginForm.addEventListener("submit", function (event) {
+    	const userId = document.getElementsByName("userId")[0];
+        const userPw = document.getElementsByName("userPw")[0];
+        
+    	const requestData = {id : userId.value, password : userPw.value};
+    	console.log(requestData);
     	event.preventDefault(); // 기본 제출 동작 방지
     	
     	/* 로그인 axios 요청 */
-        axios.post("/signin", formData)
+        axios.post("/loginTest", requestData)
         		.then(response => {
-        			const data => response.data;
+        			const data = response.data;
         			if(response.status === 200) {
         				window.location.href = "/community";
         			}
@@ -71,7 +70,7 @@
   	   				const errorMessage = error.response.data;
   	   				alert(errorMessage);
   	   			});
-   	}
+   	});
   </script>
 </body>
 

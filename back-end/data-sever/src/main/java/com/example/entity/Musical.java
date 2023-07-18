@@ -22,29 +22,36 @@ public class Musical {
 	@Id
 	@Column(name = "ID")
 	private String id;
+	
+	@Nullable
 	@Column(name = "TITLE")
 	private String title;
+	
 	@Nullable
 	@Column(name = "THEATER")
 	private String theater;
+	
+	@Nullable
 	@Column(name = "POSTER_IMAGE")
 	private String posterImage;
+	
+	@Nullable
 	@Column(name = "STDATE")
-	@Nullable
 	private Date stDate;
+	
+	@Nullable
 	@Column(name = "EDDATE")
-	@Nullable
 	private Date edDate;
+	
+	@Nullable
 	@Column(name = "VIEW_AGE")
-	@Nullable
 	private String viewAge;
-	@Column(name = "RUNNING_TIME")
+	
 	@Nullable
+	@Column(name = "RUNNING_TIME")
 	private String runningTime;
+	
 	@Nullable
 	@Column(name = "MAIN_CHARACTER")
 	private String mainCharacter;
-	
-	@OneToMany(mappedBy = "musicalId")
-    private List<Casting> castings = new ArrayList<>();
 }

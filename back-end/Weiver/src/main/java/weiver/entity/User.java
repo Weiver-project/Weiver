@@ -2,10 +2,13 @@ package weiver.entity;
 
 import lombok.*;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,12 +18,12 @@ import javax.persistence.Table;
 @Entity
 @Builder
 @Table(name = "user_tb")
-public class User {
+public class User{
 
 	@Id
 	@Column(name = "id")
 	private String id;
-
+	
 	@Column(name = "user_pw")
 	private String password;
 
@@ -38,4 +41,7 @@ public class User {
 
 	@Column(name = "age_agree")
 	private String ageAgree;
+
+//	@Column(name = "activated")
+//	private String activated;
 }
