@@ -1,8 +1,6 @@
 package com.example.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +23,6 @@ public class Musical {
 	
 	@Nullable
 	@Column(name = "TITLE")
-	@Nullable
 	private String title;
 	
 	@Nullable

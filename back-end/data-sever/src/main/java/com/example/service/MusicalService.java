@@ -85,20 +85,46 @@ public class MusicalService {
     @SneakyThrows
     public void saveAllMusical(List<String> musicalIds){
         List<Musical> musicals = new ArrayList<>();
+        
         for(int i =0; i < musicalIds.size(); i++){
-            if(i != 0 && i % 1000 == 0){
-                musicalRepository.saveAll(musicals);
-                musicals.clear();
-            }
+
+        		
             //뮤지컬 저장 로직
             Musical musical = saveMusical(musicalIds.get(i));
-            log.info(i + "번 MUSICAL(" +musicalIds.get(i) +") 저장: " + musical);
+//	            log.info(i + "번 MUSICAL(" + musicalIds.get(i) + ") 저장: " + musical);
             musicals.add(musical);
 
-            //배우 저장 로직
-            actorService.saveData(musicalIds.get(i));
+            
+        	
+            // 데이터를 100개씩 저장한다.
+            if(i != 0 && i % 500 == 0){
+            	// musical 저장
+            	musicalRepository.saveAll(musicals);
+            	
+            	// actor, casting 저장
+            	List<String> musicalIdList = new ArrayList<String>();
+            	for(Musical m : musicals) {
+            		musicalIdList.add(m.getId());
+            	}
+            	actorService.saveData(musicalIdList);
+            	// 100개 묶음을 초기화 한다.
+            	musicals.clear();
+            	System.out.println("500 save");
+            }
         }
-
+        
+        // 100개 묶음을 제외한 나머지 처리
+        if(musicals.size() != 0) {        	
+	        musicalRepository.saveAll(musicals);
+	        
+	        List<String> musicalIdList = new ArrayList<String>();
+        	for(Musical m : musicals) {
+        		musicalIdList.add(m.getId());
+        	}
+	        actorService.saveData(musicalIdList);
+	        musicals.clear();
+        }
+        System.out.println("save All");
     }
 
     /**뮤지컬 상세 페이지에서 정보 크롤링 후 저장*/
@@ -139,7 +165,11 @@ public class MusicalService {
                     edDate = dateFormat.parse(dates[1].trim());
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+            	if(dates[0].trim() == "2011" || dates[1].trim() == "2011") {
+            		System.out.println("2011은 date 타입으로 변환 할 수 없습니다.");
+            	}else {
+            		e.printStackTrace();
+            	}
             }
         }
 

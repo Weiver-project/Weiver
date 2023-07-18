@@ -1,13 +1,12 @@
 package com.example.entity;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import reactor.util.annotation.Nullable;
 
 @Builder
 @Data
@@ -25,6 +24,7 @@ public class Casting {
     @JoinColumn(name = "ACTOR_ID", referencedColumnName = "ID")
     private Actor actorId;
     
+    @Nullable
     @Column(name = "ROLE")
     private String role;
     
