@@ -1,12 +1,6 @@
 package weiver.repository;
 
 
-import javax.transaction.Transactional;
-
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.EntityGraph;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import weiver.entity.User;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -25,7 +18,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	// 동일 닉네임 찾기
 	boolean existsByNickname(String nickname);
-	
 
 	//id에 따라 하나의 유저 정보만 가져옴. >> communityService에 사용
 	User getUserById(String id);

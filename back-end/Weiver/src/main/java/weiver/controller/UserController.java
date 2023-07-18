@@ -3,23 +3,23 @@ package weiver.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.multipart.MultipartFile;
 import weiver.dto.UserDTO;
+import weiver.entity.Post;
 import weiver.entity.User;
 import weiver.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userservice;
-
-	@Autowired
-//	private PasswordEncoder passwordEncoder;
 
 	// 유저 아이디로 조회
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
@@ -30,21 +30,21 @@ public class UserController {
 	}
 
 	// 유저 정보 수정(사진, 이름)
-//	@RequestMapping(value="/test2",method = RequestMethod.GET)
-//	public void updatetest() {
-//		String id = "test1";
-//		String nickname = "Doe";
-//		String profileImg = "profile_img1.jpg";
+	@RequestMapping(value="/test2",method = RequestMethod.GET)
+	public void updatetest() {
+		String id = "test1";
+		String nickname = "Doe";
+		String profileImg = "profile_img1.jpg";
 //		userservice.updateInfo(nickname, profileImg, id);
-//	}
+	}
 
 	// 유저 정보 수정(비밀번호)
-//	@RequestMapping(value="/test3",method = RequestMethod.GET)
-//	public void updatetest2() {
-//		String id = "asdfasdf@naver.com";
-//		String password = "asdfasdf";
-//		userservice.updateBcryptPassword(password, id);
-//	}
+	@RequestMapping(value="/test3",method = RequestMethod.GET)
+	public void updatetest2() {
+		String id = "test2";
+		String password = "password3";
+//		userservice.updatePassword(password, id);
+	}
 
 	// 유저가 쓴 게시글/댓글/좋아요한 글 조회
 	@RequestMapping(value="/test4",method = RequestMethod.GET)
@@ -80,6 +80,8 @@ public class UserController {
 	public String profileUpdateForm(@PathVariable String userid,
 									Model model) {
 		User userInfo = userservice.findById(userid);
+		System.out.println(userInfo.getId());
+		System.out.println(userInfo.getPassword());
 		// DTO 바꿔야함 (issue: 비밀번호 노출)
 		model.addAttribute("userInfo", userInfo);
 
@@ -88,7 +90,7 @@ public class UserController {
 
 	@PostMapping("/update")
 	public String profileUpdate(@RequestParam(value = "userId") String id,
-								@RequestParam("nickname") String nickname,
+								@RequestParam(value = "nickname") String nickname,
 								@RequestParam(value = "profileImg") MultipartFile profileImg) {
 
 		// 파일 저장은 어디에?
@@ -142,11 +144,11 @@ public class UserController {
 //
 //		String password = userservice.findById(userId).getPassword();
 ////		boolean result = passwordEncoder.matches(userPw, password);
-//
-//		// 기존 비밀번호 확인
-//		if (!result) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
-//		}
+////
+////		// 기존 비밀번호 확인
+////		if (!result) {
+////			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
+////		}
 //
 //		// 새 패스워드, 패스워드 확인 체크
 //		if(!newPw.equals(checkPw)) {
@@ -154,7 +156,7 @@ public class UserController {
 //		}
 //
 //		try {
-////			boolean updateResult = userservice.updateBcryptPassword(newPw,userId);
+//			boolean updateResult = userservice.updateBcryptPassword(newPw,userId);
 //			if (updateResult) {
 //				return ResponseEntity.ok("변경이 완료되었습니다.");
 //			}
@@ -165,4 +167,15 @@ public class UserController {
 //
 //		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("비밀번호 변경 중 에러가 발생했습니다.");
 //	}
+
+	@GetMapping("/myBoard/{userid}")
+	public String myBoard(@PathVariable String userid,
+						  Model model) {
+		List<Post> postList = userservice.findPostsByUserId(userid);
+		int postCount = userservice.countPostsByUserId(userid);
+		model.addAttribute("postList", postList);
+		model.addAttribute("postCount", postCount);
+
+		return "myBoard";
+	}
 }

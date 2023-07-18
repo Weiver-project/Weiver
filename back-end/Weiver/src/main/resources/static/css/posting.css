@@ -21,11 +21,13 @@
 .title{
 	width:680px;
 	height:30px;
+    resize: vertical;
 }
 
 .content{
 	width:680px;
 	height:400px;
+    resize: vertical;
 }
 
 /* text + img */
@@ -34,8 +36,6 @@ div#editor {
   border: 1px solid #D6D6D6;
   width: 680px;
   height: 400px;
-  padding: 16px 24px;
-  border: 1px solid #D6D6D6;
   border-radius: 4px;
 
   min-height: 400px;

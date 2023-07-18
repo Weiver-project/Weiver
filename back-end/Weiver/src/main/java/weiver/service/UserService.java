@@ -30,7 +30,6 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
-
     // 전체 조회
     public void test() {
         List<User> result = userRepository.findAll();
@@ -46,14 +45,13 @@ public class UserService {
     }
     
     // 유저가 쓴 게시글 조회
-    public void findPostsByUserId(String id) {
-        // 게시글 리스트
-        List<Post> result = communityRepository.findByUserId(id);
-        // 게시글 개수
-        int countresult = communityRepository.countByUserId(id);
+    public List<Post> findPostsByUserId(String id) {
+        return communityRepository.findByUserId(id);
+    }
 
-        System.out.println(result);
-        System.out.println(countresult);
+    // 유저가 쓴 게시글 개수
+    public int countPostsByUserId(String id) {
+        return communityRepository.countByUserId(id);
     }
 
     // 유저가 쓴 댓글 조회
@@ -113,6 +111,7 @@ public class UserService {
     }
 
     // 유저 정보 수정(비밀번호 암호화)
+
 //    public boolean updateBcryptPassword(String password, String id) throws Exception {
 //        String user_password = userRepository.getUserById(id).getPassword();
 //        boolean result = passwordEncoder.matches(password,user_password);
@@ -127,7 +126,6 @@ public class UserService {
 //
 //        return false;
 //    }
-
 
     // 마이페이지 정보 출력
     public UserDTO userInfo(String id) {
