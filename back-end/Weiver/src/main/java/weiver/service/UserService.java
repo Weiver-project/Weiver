@@ -128,6 +128,7 @@ public class UserService {
 //        return false;
 //    }
 
+
     // 마이페이지 정보 출력
     public UserDTO userInfo(String id) {
         User user = userRepository.getUserById(id);
@@ -144,3 +145,4 @@ public class UserService {
     }
 
 }
+

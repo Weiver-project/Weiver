@@ -1,8 +1,11 @@
 package weiver.service;
 
+
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +15,8 @@ import weiver.repository.UserRepository;
 
 @Service
 public class LoginService {
+	
+	private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -45,7 +50,7 @@ public class LoginService {
 							.essentialAgree("Y")
 							.personalAgree("Y")
 							.ageAgree("Y")
-//							.activated("Y")
+							.activated("Y")
 							.build();
 
 		User result = userRepository.save(user);
@@ -56,30 +61,18 @@ public class LoginService {
 
 		return false;
 	}
-	
+
 	// 로그인
-	public User findByIdAndPassword(String id, String pw) {
-
-		Optional<User> OptionalUser = userRepository.findById(id);
-
-		if (OptionalUser.isPresent()) {
-			User user = OptionalUser.get();
-			if (user.getPassword().equals(pw)) {
-				return user;
-			}
+	@Transactional
+	public User loginTest(String id, String userPw) throws Exception{
+		User user = userRepository.getUserById(id);
+		
+		if(BCrypt.checkpw(userPw, user.getPassword())) {
+			System.out.println("패스워드 일치 결과 true");
+			return user;
 		}
-
+		
 		return null;
-	}
-
-	public User loginTest(String userId, String userPw) {
-		User user = userRepository.getUserById(userId);
-		
-		if(user == null) {
-			return null;
-		}
-		
-		return user;
 	}
 
 }
