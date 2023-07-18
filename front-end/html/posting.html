@@ -12,28 +12,29 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<header>
-	<div>
-		<img src="../img/logo.png" alt="logo" height="70" width="300">
-	</div>
+<body>
 
-	<div>
-		<div>
-			<a href="#"><i class="bi-chevron-left"></i></a>
-		</div>
-		<div class="nameTag">
+	<!-- 전체 컨테이너 -->
+    <div class="backgroudBox">
 
-			<h1>글 작성하기</h1>
-		</div>
-	</div>
-</header>
+        <!-- 헤더 -->
+        <header>
+            <img src="../img/logo.png" alt="logo" height="70" width="300" />
+        </header>
 
-<body >
-	<div>
+        <!-- 뒤로가기 버튼 -->
+        <div class="backBtn">
+            <a href="/community">
+                <i class="bi-chevron-left"></i>
+            </a>
+			<div class="nameTag">
+				<h1>글 작성하기</h1>
+			</div>
+        </div>
+
 	   
-		<div>
 			<form>
-				<div>	
+				<div class = selectbtn>	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
 					<select id="selectFormType" onchange="postTypeChange()">
 						<option value="select">글 종류</option>
@@ -41,62 +42,68 @@
 						<option value="리뷰">리뷰</option>
 					</select>
 				</div>
-			
+
+				<br>
+				
+				<!-- 제목 작성 칸-->
+				<span>제목</span>
 				<div>
+					<textarea class="title" id="title"></textarea>
+				</div>
+
+
+				<!-- 작품 명 작성칸 -->
+				<div align="left" id="reviewForm" style="display:none">
+					<br>
+					작품명
 					<div>
-						<div align="left">제목</div>
-						<div>
-							<textarea class="title" id="title" ></textarea>
-						</div>
-						<div align="left" id="reviewForm" style="display:none">작품명
-							<div>
-							<textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
-							</div>
-						</div>
-						<div align="left">내용</div>
-						<div>
-								<div class="editor-menu">
-									<button id="btn-bold" name="reviewTool" type="button">
-										<b>B</b>
-									</button>
-									<button id="btn-italic" name="reviewTool" type="button">
-										<i>I</i>
-									</button>
-									<button id="btn-underline" name="reviewTool" type="button">
-										<u>U</u>
-									</button>
-									<button id="btn-strike" name="reviewTool" type="button">
-										<s>S</s>
-									</button>
-									<button id="btn-ordered-list" name="reviewTool" type="button">
-										OL
-									</button>
-									<button id="btn-unordered-list" name="reviewTool" type="button">
-										UL
-									</button>
-									<button id="btn-image" name="reviewTool" type="button">
-										IMG
-									</button>
-								</div>
-								<div id="editor" contenteditable="true">
-									<input id="img-selector" type="file" accept="image/*" />
-								</div>
-						</div>
+						<textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
 					</div>
 				</div>
 
-				<div class="nameTag" >
-					<!-- 작성하기 버튼 -->
-					<button>
+				<br>
 
+				<!-- 내용 작성칸 -->
+				<span>내용</span>
+
+					<!-- 내용 작성칸(편집 버튼: 굵기, 이탤릭, 언더라인 등) -->
+					<div class="editor-menu">
+						<button id="btn-bold" name="reviewTool" type="button">
+							<b>B</b>
+						</button>
+						<button id="btn-italic" name="reviewTool" type="button">
+							<i>I</i>
+						</button>
+						<button id="btn-underline" name="reviewTool" type="button">
+							<u>U</u>
+						</button>
+						<button id="btn-strike" name="reviewTool" type="button">
+							<s>S</s>
+						</button>
+						<button id="btn-ordered-list" name="reviewTool" type="button">
+							OL
+						</button>
+						<button id="btn-unordered-list" name="reviewTool" type="button">
+							UL
+						</button>
+						<button id="btn-image" name="reviewTool" type="button">
+							IMG
+						</button>
+					</div>
+
+						<!-- 내용칸 -->
+							<div id="editor" contenteditable="true">
+							<input id="img-selector" type="file" accept="image/*" />
+						</div>
+				
+				<br>
+					<!-- 작성하기 버튼 -->
+					<div class="nameTag">
+					<button>
 						<input type="submit" value="작성하기" class="submit-btn">
 					</button>
-				</div>
+					</div>
 			</form>
-
-			
-	</div>
-</div>
 
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 

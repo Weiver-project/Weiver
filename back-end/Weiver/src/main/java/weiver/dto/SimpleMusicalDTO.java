@@ -4,11 +4,10 @@ import lombok.Builder;
 
 import java.util.Date;
 
-@Builder
-public class SimpleMusicalDTO {
-	private String id;
-	private String title;
-	private String posterImage;
-	private Date stDate;
-	private Date edDate;
+public interface SimpleMusicalDTO {
+	String getId();
+	String getTitle();
+	String getPosterImage();
+	Date getStDate();
+	Date getEdDate();
 }

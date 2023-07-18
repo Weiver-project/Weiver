@@ -3,6 +3,8 @@ package weiver.service;
 
 import java.util.*;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,6 @@ import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
-import weiver.entity.Subscribe;
 import weiver.repository.CastingRepository;
 import weiver.repository.MusicalRepository;
 import weiver.repository.SubscribeRepository;
@@ -25,23 +26,16 @@ public class MusicalService {
 
 	/*인기 뮤지컬 조회*/
 	public List<PoPularMusicalDTO> getLikedMusical(){
-		List<PoPularMusicalDTO> poPularMusicalDTOList = new ArrayList<>();
-
-		List<Subscribe> musicalObjectList = subscribeRepository.findTop3MusicalByDesiredType();
-
-//		for(Object[] o : musicalObjectList){
-//			String id = (String) o[0];
-//			String title = (String) o[1];
-//			PoPularMusicalDTO poPularMusicalDTO = PoPularMusicalDTO.builder().id(id).title(title).build();
-//			poPularMusicalDTOList.add(poPularMusicalDTO);
-//		}
-
+		Pageable pageable = (Pageable) PageRequest.of(0, 3);
+		List<PoPularMusicalDTO> poPularMusicalDTOList = subscribeRepository.findTop3MusicalByDesiredType(pageable);
+		
 		return poPularMusicalDTOList;
 	}
 
 	/*공연 중인 뮤지컬 조회*/
 	public List<PerformingMusical> getPerformingMusical(){
-		return musicalRepository.findPerformingMusicals(new Date());
+		List<PerformingMusical> performingMusicals = musicalRepository.findPerformingMusicals(new Date());
+		return performingMusicals;
 	}
 
 	/*뮤지컬 검색*/
@@ -56,16 +50,7 @@ public class MusicalService {
 
 	/*배우 출연작 조회*/
 	public List<PerformingMusical> getMusicalByActor(Long actorId){
-		List<PerformingMusical> performingMusicals = new ArrayList<>();
-
-		List<Object[]> objects = castingRepository.findMusicalIdAndPosterByActorId(actorId);
-
-		for(Object[] o : objects){
-			String id = (String) o[0];
-			String poster = (String) o[1];
-			PerformingMusical performingMusical = PerformingMusical.builder().id(id).posterImage(poster).build();
-			performingMusicals.add(performingMusical);
-		}
+		List<PerformingMusical> performingMusicals = castingRepository.findMusicalIdAndPosterByActorId(actorId);
 		return performingMusicals;
 	}
 }

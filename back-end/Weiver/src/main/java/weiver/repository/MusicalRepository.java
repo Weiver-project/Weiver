@@ -15,14 +15,14 @@ import weiver.entity.Musical;
 @Repository
 public interface MusicalRepository extends JpaRepository<Musical, String> {
 	//공연 중인 뮤지컬 조회
-    @Query("SELECT m.id, m.posterImage FROM Musical m WHERE m.stDate <= ?1 AND m.edDate >= ?1")
+    @Query("SELECT m.id as id, m.posterImage as posterImage FROM Musical m WHERE m.stDate <= ?1 AND m.edDate >= ?1")
     List<PerformingMusical> findPerformingMusicals(Date today);
 	/*
 	 * 키워드로 뮤지컬 조회
 	 * regex로 title의 값에 keyword가 포함하는지 확인하는데, 
 	 * 이때 옵션으로 대소문자를 구분하지 않도록 한다.
 	 */
-    @Query("SELECT m.id, m.title, m.posterImage, m.stDate, m.edDate FROM Musical m WHERE UPPER(m.title) LIKE CONCAT('%', UPPER(?1), '%')")
+    @Query("SELECT m.id as id, m.title as title, m.posterImage as posterImage, m.stDate as stDate, m.edDate as edDate FROM Musical m WHERE UPPER(m.title) LIKE CONCAT('%', UPPER(?1), '%')")
     List<SimpleMusicalDTO> findMusicalsByTitleKeyword(String keyword);
 
 }

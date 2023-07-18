@@ -1,9 +1,7 @@
 package com.example.entity;
 
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import reactor.util.annotation.Nullable;
 
 import javax.persistence.*;
 
@@ -19,9 +17,11 @@ public class Actor {
 	@Column(name = "ID")
 	private String id;
 
+	@Nullable
 	@Column(name = "NAME")
 	private String name;
 	
+	@Nullable
 	@Column(name = "PROFILE_IMAGE")
 	private String profileImage;
 }
