@@ -95,9 +95,32 @@ $(function() {
     });
 });
 
+//게시글 삭제 함수
+function deletePost(postsId) {
+    // 삭제를 확인하는 다이얼로그를 띄우기
+    const isConfirmed = confirm("글을 삭제하시겠습니까?");
+    if (!isConfirmed) {
+        return; // 삭제 취소
+    }
+
+    // AJAX로 댓글 삭제 컨트롤러 실행하기
+    $.ajax({
+        url: '/community/delete/post/' + postsId,
+        type: 'DELETE',
+        success: function(response) {
+            console.log('글이 삭제되었습니다.');
+            window.location.href = 'http://localhost:8081/community';
+        },
+        error: function(xhr) {
+            // 작동 실패
+            console.error('댓글 삭제 실패:', xhr.responseText);
+        }
+    });
+}
+
 //댓글 삭제 함수
 function deleteReply(commentId) {
-    // 삭제를 확인하는 다이얼로그를 띄우기 (선택사항)
+    // 삭제를 확인하는 다이얼로그를 띄우기
     const isConfirmed = confirm("댓글을 삭제하시겠습니까?");
     if (!isConfirmed) {
         return; // 삭제 취소
@@ -211,7 +234,7 @@ function deleteRereply(recommentId) {
         <!-- 게시글 수정하기, 삭제하기 버튼 -->
         <div class="postBtnGroup">
                 <input type="submit" value="수정하기" class="postModifyBtn">
-                <input type="submit" value="삭제하기" class="postDeleteBtn">
+                <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
         </div>
 
         <!-- 댓글 컨테이너 -->

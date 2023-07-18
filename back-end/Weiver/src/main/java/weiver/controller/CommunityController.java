@@ -34,12 +34,7 @@ public class CommunityController {
     public CommunityController(CommunityService communityService) {
         this.communityService = communityService;
     }
-    
-    
-    /*
-     * 게시글 관련
-     * */
-    
+
     /*
      * 커뮤니티 메인 페이지
      * */
@@ -210,6 +205,32 @@ public class CommunityController {
 			}
 			return view;
 	    }
+	    
+	    @RequestMapping(value = "/community/delete/post/{id}", method = RequestMethod.DELETE)
+	    public String deletePost(@PathVariable Long id) {
+	        String view = "error";
+
+	        boolean postResult = false;
+	        boolean replyResult = false;
+	        boolean rereplyResult = false;
+
+	        try {
+	            postResult = communityService.deletePostById(id);
+	            replyResult = communityService.deleteReplyById(id);
+	            rereplyResult = communityService.deleteRereplyById(id);
+
+	            if (postResult) {
+	                view = "redirect:http://localhost:8081/community";
+	                return view;
+	            }
+
+	        } catch (Exception e) {
+	            return view;
+
+	        }
+	        return view;
+	    }
+
     
 	  /*
 	   * 커뮤니티 검색 결과 페이지
@@ -247,61 +268,48 @@ public class CommunityController {
 		  }
 
 
-    
-    //게시글 수정
-    @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-    public String updatePostById(@PathVariable Long id, Model model) {  	
-    	Post post = communityService.getPostById(id);
-    	
-    	model.addAttribute("posts", post);
-    	
-    	return "posts";
-    }
-    
-    @RequestMapping(value = "/test/{id}/update", method = RequestMethod.PUT)
-    public void updatePost(@PathVariable Long id,
-                           @ModelAttribute("type") String type,
-                           @ModelAttribute("title") String title,
-                           @ModelAttribute("content") String content) {
-        Post post = communityService.getPostById(id);
-        post.setType(type);
-        post.setTitle(title);
-        
-        // content 값이 null인 경우 빈 문자열로 처리
-        post.setContent(content != null ? content : "");
-        
-        try {
-            boolean result = communityService.updatePost(id, type, title, content);
-            if (result) {
-                System.out.println("글 수정 성공");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    //게시글 삭제
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
-	public void deletePost(@PathVariable Long id) {
-		String view = "error";
-		
-		boolean result = false;
-		
-		try {
-			result = communityService.deletePostById(id);
-			
-			if(result) {
-				
-				System.out.println("삭제 성공");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		
+		 /*
+		* 게시글 수정 페이지
+		* */
+		@RequestMapping(value = "community/update/{id}", method = RequestMethod.GET)
+	    public String updatePostById(@PathVariable Long id, Model model) {  	
+	    	Post post = communityService.getPostById(id);
+	    	
+	    	model.addAttribute("posts", post);
+	    	
+	    	return "updatePost";
+	    }
+	    
+		@RequestMapping(value = "community/{id}", method = RequestMethod.PUT)
+		public String updatePost(@PathVariable Long id,
+		                       @ModelAttribute("type") String type,
+		                       @ModelAttribute("title") String title,
+		                       @ModelAttribute("content") String content) {
+
+		    String view = "error";
+
+		    Post post = communityService.getPostById(id);
+		    post.setType(type);
+		    // title 값이 빈 문자열인 경우 null로 처리
+		    post.setTitle(title.isEmpty() ? null : title);
+		    
+		    // content 값이 빈 문자열인 경우 null로 처리
+		    post.setContent(content.isEmpty() ? null : content);
+
+		    boolean postResult = false;
+		    try {
+		        postResult = communityService.updatePost(id, type, title, content);
+		        if (postResult) {
+		            view = "redirect:/community/" + post.getId();
+		            return view;
+		        }
+		    } catch (Exception e) {
+		       return view;
+		    }
+		    return view;
 		}
-		
-		
-	}
+
+   
 
 
     /*
