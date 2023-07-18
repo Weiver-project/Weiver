@@ -77,14 +77,14 @@ public class MusicalService {
         /*크롤링하는데 소요된 시간 출력*/
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        log.info("크롤링 경과 시간: " + elapsedTime);
+        log.info("크롤링 경과 시간: " + elapsedTime/60000 + "분");
     }
 
 
     /*뮤지컬 상세 페이지에서 뮤지컬 정보 저장*/
     @SneakyThrows
     public void saveAllMusical(List<String> musicalIds){
-        List<Musical> musicals = new ArrayList<>();
+      List<Musical> musicals = new ArrayList<>();
         
         for(int i =0; i < musicalIds.size(); i++){
 

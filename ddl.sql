@@ -1,12 +1,3 @@
-CREATE TABLE scott.authority (
-    authority_name VARCHAR2(500 BYTE) NOT NULL
-)
-
-CREATE TABLE scott.user_authority (
-    id             VARCHAR2(1000 BYTE),
-    authority_name VARCHAR2(1000 BYTE)
-)
-
 CREATE TABLE scott.admin (
     id         VARCHAR2(30 BYTE) NOT NULL,
     admin_pw   VARCHAR2(200 BYTE) NOT NULL,

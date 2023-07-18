@@ -23,15 +23,15 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form" action="/signin" method="post">
-      <input type="email" name="userId" placeholder=" 이메일을 입력하세요" required>
-      <input type="password" name="userPw" placeholder=" 비밀번호를 입력하세요" required>
+    <form id="login-form" action="loginTest" method="post">
+      <input type="email" name="userId" placeholder=" 이메일을 입력하세요" >
+      <input type="password" name="userPw" placeholder=" 비밀번호를 입력하세요" >
       <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
-      <a href="/signupPage">회원가입</a>
-      <a href="/html/search_pw.html">비밀번호를 잊으셨나요?</a>
+      <a href="/signup">회원가입</a>
+      <a href="/">비밀번호를 잊으셨나요?</a>
     </div>
     <!-- 간편로그인 구분 선 -->
     <div class="dividing-line">
@@ -47,22 +47,22 @@
 
 
   <script>
-  	const loginForm = document.getElementById("login-form");
+  	const loginForm = document.querySelector("#login-form");
+  	const userId = document.getElementsByName("userId")[0];
+    const userPw = document.getElementsByName("userPw")[0];
     
     /* 폼 제출 이벤트 핸들러 */
     loginForm.addEventListener("submit", function (event) {
-    	const userId = document.getElementsByName("userId")[0];
-        const userPw = document.getElementsByName("userPw")[0];
-        
-    	const requestData = {id : userId.value, password : userPw.value};
-    	console.log(requestData);
+        const formData = new FormData(loginForm);
+    
     	event.preventDefault(); // 기본 제출 동작 방지
     	
     	/* 로그인 axios 요청 */
-        axios.post("/signin", requestData)
+        axios.post("/loginTest", formData)
         		.then(response => {
         			const data = response.data;
         			if(response.status === 200) {
+        				alert(data);
         				window.location.href = "/community";
         			}
   	   			})
