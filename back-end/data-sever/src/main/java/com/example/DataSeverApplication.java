@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,8 +15,10 @@ import com.example.service.MusicalService;
 @EnableScheduling
 @RequiredArgsConstructor
 public class DataSeverApplication {
-	private final MusicalService musicalService;
-	private final ActorService actorService;
+	@Autowired
+	private MusicalService musicalService;
+	@Autowired
+	private ActorService actorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataSeverApplication.class, args);
@@ -30,8 +33,8 @@ public class DataSeverApplication {
 		* Task 실행 시 처음 시작은 모든 뮤지컬 정보를 가져오기 때문에 시간이 오래걸립니다.
 		* 처음 1번 실행할 때만 그대로 실행하시고 이후부터는 MusicalService안에 있는 isFirst를 false로 바꾸고 실행해주세요
 		* */
-		musicalService.task();
-//		actorService.saveActor();
+//		musicalService.task();
+		actorService.saveData("190036");
 		
 	}
 }
