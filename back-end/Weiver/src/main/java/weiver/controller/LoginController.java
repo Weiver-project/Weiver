@@ -1,20 +1,18 @@
 package weiver.controller;
 
-
-import javax.persistence.Id;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import weiver.entity.User;
 import weiver.service.LoginService;
 
@@ -22,11 +20,13 @@ import weiver.service.LoginService;
 @RestController
 public class LoginController {
 	
+	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired
 	private LoginService loginService;
 	
 	// 회원가입
-	@PostMapping(value = "/signupTZest")
+	@PostMapping(value = "/signupTest")
 	public ResponseEntity<String> signup(@RequestParam("userId") String userId,
 			@RequestParam("userPw") String userPw,
 			@RequestParam("userPwCheck") String userPwCheck,
@@ -66,9 +66,11 @@ public class LoginController {
 			
 			if (result) {
 				return ResponseEntity.ok("회원가입이 완료되었습니다.");
-			} 
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("LoginContorller : 회원가입 중 문제 발생");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 내부 에러가 발생했습니다.");
 		}
 		
@@ -77,26 +79,32 @@ public class LoginController {
 	
 	// 로그인
 	@PostMapping(value =  "/loginTest")
-	public ResponseEntity<String> loginTest(@RequestParam(value = "id") String userId, 
-			@RequestParam(value = "pw") String userPw, HttpSession session) {
+	public ResponseEntity<String> loginTest(@RequestParam(value = "userId") String userId, 
+											@RequestParam(value = "userPw") String userPw,
+											HttpSession session) {
+		System.out.println("요청 아이디 : " + userId);
+		System.out.println("요청 비밀번호 : " + userPw);
 		
 		
-		if(userId == null || userId == "" || userPw == null || userPw == "") {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("아이디, 비밀번호를 입력해주세요");
-		}
-		
-		try {
+		try {			
+			if(userId == null || userId.isEmpty() || userPw == null || userPw.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("아이디, 비밀번호를 입력해주세요");
+			}
+			
 			User user = loginService.loginTest(userId, userPw);
 			
-			if (user != null) {
-				return ResponseEntity.ok("로그인에 성공했습니다.");
-			}
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userNickname", user.getNickname());
+			
+			logger.info("로그인 컨트롤러 DB 호출 ID : " + user.getId());
+			logger.info("로그인 컨트롤러 DB 호출 PW : " + user.getPassword());
+			return ResponseEntity.ok("로그인에 성공했습니다.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("아이디 또는 비밀번호가 틀렸습니다.");
+			logger.info("로그인 인증 실패");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호가 틀렸습니다.");
 		}
-		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 중 문제가 발생했습니다.");
+
 	}
 }

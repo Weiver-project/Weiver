@@ -1,9 +1,7 @@
 package weiver.dto;
 
-import lombok.Builder;
 
-@Builder
-public class PerformingMusical {
-	private String id;
-	private String posterImage;
+public interface PerformingMusical {
+	String getId();
+	String getPosterImage();
 }

@@ -30,9 +30,6 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
-//    private PasswordEncoder passwordEncoder;
-
-
     // 전체 조회
     public void test() {
         List<User> result = userRepository.findAll();
@@ -114,8 +111,9 @@ public class UserService {
     }
 
     // 유저 정보 수정(비밀번호 암호화)
-    public boolean updateBcryptPassword(String password, String id) throws Exception {
-        String user_password = userRepository.getUserById(id).getPassword();
+
+//    public boolean updateBcryptPassword(String password, String id) throws Exception {
+//        String user_password = userRepository.getUserById(id).getPassword();
 //        boolean result = passwordEncoder.matches(password,user_password);
 //
 //        if(!result) {
@@ -125,9 +123,9 @@ public class UserService {
 //                return true;
 //            }
 //        }
-
-        return false;
-    }
+//
+//        return false;
+//    }
 
     // 마이페이지 정보 출력
     public UserDTO userInfo(String id) {
@@ -145,3 +143,4 @@ public class UserService {
     }
 
 }
+

@@ -163,7 +163,30 @@ function deleteRereply(recommentId) {
     });
 }
 
+function changeHeartIcon(type, id, heartIcon) {
+    // 서버로 보낼 데이터 준비
+    const data = {
+        type: type, // 'post', 'reply', 'rereply' 중 하나
+        id: id // 게시글, 댓글 또는 대댓글의 ID 값
+    };
 
+    // 서버에 데이터 전송 (AJAX 사용)
+    $.ajax({
+        type: 'POST',
+        url: '/community/insert/postlike/' + id, // 좋아요 처리를 담당하는 컨트롤러 URL
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            // 서버에서 응답을 받으면 좋아요 개수를 업데이트
+            const likesCount = response.likesCount;
+            $(heartIcon).next().text(likesCount);
+        },
+        error: function (error) {
+            // 에러 처리
+            console.error('Error occurred:', error);
+        }
+    });
+}
 </script>
 
 
@@ -225,15 +248,15 @@ function deleteRereply(recommentId) {
                     <span>${posts.viewed}</span>
                 </div>
                 <div>
-                    <i class="bi-suit-heart"></i>
-                    <span>${posts.postlikes.size()}</span>
-                </div>
+				    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
+				    <span>${post.postlikes.size()}</span>
+				</div>
             </div>
         </div>
 
         <!-- 게시글 수정하기, 삭제하기 버튼 -->
         <div class="postBtnGroup">
-                <input type="submit" value="수정하기" class="postModifyBtn">
+                <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
                 <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
         </div>
 
@@ -250,7 +273,7 @@ function deleteRereply(recommentId) {
 		            <div class="commentID">${reply.user.nickname}</div>
 		            <div class="commentContent" id="commentContent_${reply.id}">${reply.content}</div>
 		            <div class="likeAndRecomment">
-		                <i class="bi-suit-heart"></i>
+		                <i class="bi-suit-heart" onclick="changeHeartIcon('reply', ${reply.id}, this)"></i>
 		                <span>${reply.id}</span>
 		                <a href="/community/${posts.id}/reply/${reply.id}" style="text-decoration: none;">
 		                    <span class="recommentBtn">대댓글</span>
@@ -275,7 +298,7 @@ function deleteRereply(recommentId) {
                                     <div class="recommentID">${rereply.user.nickname}</div>
                                     <div class="recommentContent" id="recommentContent_${rereply.id}">${rereply.content}</div>
                                     <div class="likeAndRecomment">
-                                        <i class="bi-suit-heart"></i>
+                                        <i class="bi-suit-heart" onclick="changeHeartIcon('rereply', ${rereply.id}, this)"></i>
                                         <span>${rerepliesForReply.size()}</span>
                                     </div>
                                 </div>
@@ -308,7 +331,7 @@ function deleteRereply(recommentId) {
         <a href="#"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="#"><i class="bi bi-chat-dots-fill"></i>
+        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
         <a href="#"><i class="bi bi-person-fill"></i>
