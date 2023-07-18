@@ -1,27 +1,43 @@
 package weiver.entity;
 
 import java.util.Date;
-import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
+import org.springframework.lang.Nullable;
 
-import lombok.Builder;
-import lombok.ToString;
+import javax.persistence.*;
 
-@ToString
+@Data
 @Builder
-@Document(collection = "musical")
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "MUSICAL")
 public class Musical {
 	@Id
-	private String _id;
-	private String posterImage;
+	@Column(name = "ID")
+	private String id;
+	@Column(name = "TITLE")
+	@Nullable
 	private String title;
+	@Nullable
+	@Column(name = "THEATER")
 	private String theater;
+	@Column(name = "POSTER_IMAGE")
+	private String posterImage;
+	@Column(name = "STDATE")
+	@Nullable
 	private Date stDate;
+	@Column(name = "EDDATE")
+	@Nullable
 	private Date edDate;
-	private String runngingTime;
-	private String viewingAge;
-	private String ticketPrice;
-	private List<String> actorIds;
+	@Column(name = "VIEW_AGE")
+	@Nullable
+	private String viewAge;
+	@Column(name = "RUNNING_TIME")
+	@Nullable
+	private String runningTime;
+	@Nullable
+	@Column(name = "MAIN_CHARACTER")
+	private String mainCharacter;
 }

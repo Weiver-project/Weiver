@@ -90,11 +90,11 @@ public class UserService {
 
     // 유저가 찜하거나 봤던 뮤지컬 조회
     public void findSubscribe(String id, String type) {
-        List<String> result = subscribeRepository.findMusicalIdByUserIdAndType(id, type);
-        int countresult = subscribeRepository.countByUserIdAndType(id, type);
-
-        System.out.println(result);
-        System.out.println(countresult);
+//        List<String> result = subscribeRepository.findMusicalIdByUserIdAndType(id, type);
+//        int countresult = subscribeRepository.countByUserIdAndType(id, type);
+//
+//        System.out.println(result);
+//        System.out.println(countresult);
     }
 
     // 유저 정보 수정(사진, 이름)
