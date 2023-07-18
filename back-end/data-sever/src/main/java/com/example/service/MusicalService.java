@@ -25,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class MusicalService {
     private final MusicalRepository musicalRepository;
+    private final ActorService actorService;
     private boolean isFirst = true;     //처음 실행하는지 체크
 
 
@@ -89,9 +90,13 @@ public class MusicalService {
                 musicalRepository.saveAll(musicals);
                 musicals.clear();
             }
+            //뮤지컬 저장 로직
             Musical musical = saveMusical(musicalIds.get(i));
             log.info(i + "번 MUSICAL(" +musicalIds.get(i) +") 저장: " + musical);
             musicals.add(musical);
+
+            //배우 저장 로직
+            actorService.saveData(musicalIds.get(i));
         }
 
     }
