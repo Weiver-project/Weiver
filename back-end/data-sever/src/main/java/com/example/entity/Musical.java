@@ -25,6 +25,7 @@ public class Musical {
 	
 	@Nullable
 	@Column(name = "TITLE")
+	@Nullable
 	private String title;
 	
 	@Nullable
@@ -54,7 +55,4 @@ public class Musical {
 	@Nullable
 	@Column(name = "MAIN_CHARACTER")
 	private String mainCharacter;
-	
-	@OneToMany(mappedBy = "musicalId")
-    private List<Casting> castings = new ArrayList<>();
 }

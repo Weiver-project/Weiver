@@ -25,17 +25,16 @@ import java.util.List;
 @Slf4j
 public class MusicalService {
     private final MusicalRepository musicalRepository;
-    private List<String> musicalIds = new ArrayList<>();
-    private int currentPage;
-    private int maxPage;
     private boolean isFirst = true;     //처음 실행하는지 체크
 
 
     /**스레드에서 돌아가는 전체 과정을 실행하는 함수*/
     public void task(){
+        //시작 시간
         long startTime = System.currentTimeMillis();
 
-        String[] genres = {Sub_category.LICENSES, Sub_category.ORIGINAL, Sub_category.CREATIVE, Sub_category.MUSICAL};
+        //크롤링 할 뮤지컬 장르
+        String[] genres = {Sub_category.LICENSE, Sub_category.ORIGINAL, Sub_category.CREATIVE, Sub_category.MUSICAL};
         String CrawlingType = "";
 
         //처음 한번만 모든 뮤지컬을 가져오고 이후부터는 공연예정인 뮤지컬만 가져온다.
@@ -49,7 +48,7 @@ public class MusicalService {
         /*모든 뮤지컬 아이디를 가져온다.*/
         for(String genre: genres){
             switch (genre){
-                case Sub_category.LICENSES:
+                case Sub_category.LICENSE:
                     log.info("뮤지컬 장르: 라이센스");
                     break;
                 case Sub_category.ORIGINAL:
@@ -62,17 +61,17 @@ public class MusicalService {
                     log.info("뮤지컬 장르: 뮤지컬");
                     break;
             }
-            setMaxPage(genre, CrawlingType);
-            setMusicalIds(genre, CrawlingType);
+
+            int maxPage = setMaxPage(genre, CrawlingType);
+
+            List<String> musicalIds = setMusicalIds(genre, CrawlingType, maxPage);
+
+            log.info("가져온 MUSICAL ID 개수: " + musicalIds.size());
+            log.info("MUSICAL ID LIST: " + musicalIds);
+
+            saveAllMusical(musicalIds);
         }
 
-        log.info("가져온 MUSICAL ID 개수: " + musicalIds.size());
-        log.info("MUSICAL ID LIST: " + musicalIds);
-
-        /*뮤지컬 상세 페이지에서 뮤지컬 정보 저장*/
-        for(int i =0; i < musicalIds.size(); i++){
-            log.info(i + "번 MUSICAL 저장: " + saveMusical(musicalIds.get(i)));
-        }
 
         /*크롤링하는데 소요된 시간 출력*/
         long endTime = System.currentTimeMillis();
@@ -80,12 +79,29 @@ public class MusicalService {
         log.info("크롤링 경과 시간: " + elapsedTime);
     }
 
+
+    /*뮤지컬 상세 페이지에서 뮤지컬 정보 저장*/
+    @SneakyThrows
+    public void saveAllMusical(List<String> musicalIds){
+        List<Musical> musicals = new ArrayList<>();
+        for(int i =0; i < musicalIds.size(); i++){
+            if(i != 0 && i % 1000 == 0){
+                musicalRepository.saveAll(musicals);
+                musicals.clear();
+            }
+            Musical musical = saveMusical(musicalIds.get(i));
+            log.info(i + "번 MUSICAL(" +musicalIds.get(i) +") 저장: " + musical);
+            musicals.add(musical);
+        }
+
+    }
+
     /**뮤지컬 상세 페이지에서 정보 크롤링 후 저장*/
     @SneakyThrows   //RuntimeException 같이 어떤 예외가 발생했는지 정확히 알 수 없는 경우에 사용
     public Musical saveMusical(String musicalId){
         String url = URLs.MUSICAL_DETAIL_URL + musicalId;
 
-        Document doc = Jsoup.connect(url).timeout(10000).get();
+        Document doc = Jsoup.connect(url).timeout(30000).get();
 
         /*뮤지컬 상세 정보 태그 가져오기*/
         Element element = doc.selectFirst(".pddetail");
@@ -94,7 +110,10 @@ public class MusicalService {
         String poster = element.selectFirst("h2 > img").attr("src");
 
         //공연 제목
-        String title = element.selectFirst(".title").text();
+        String title = "";
+        Element titleE = element.selectFirst(".title");
+        if(titleE != null)
+            title = titleE.text();
 
         //공연 일시 = img태그의 alt값이 일시인 태그 상위 td태그 옆에 td태그를 지정
         String temporary = element.selectFirst("img[alt=일시]").parent().nextElementSibling().text();
@@ -152,18 +171,21 @@ public class MusicalService {
                 .mainCharacter(mainCharacter)
                 .build();
 
-        return musicalRepository.save(musical);
+        return musical;
+//        return musicalRepository.save(musical);
     }
 
 
     /**PlayDB에서 뮤지컬Id 정보를 전부 가져와서 저장*/
     @SneakyThrows
-    public void setMusicalIds(String genre, String type){
+    public List<String> setMusicalIds(String genre, String type, int maxPage){
+        int currentPage;
         String url = URLs.MUSICAL_URL + type + URLs.SUB_CATEGORY + genre + URLs.PAGE;
+        List<String> musicalIds = new ArrayList<>();
 
         /*마지막 페이지까지 반복*/
         for(currentPage = 1; currentPage <= maxPage; currentPage++){
-            Document doc = Jsoup.connect(url + currentPage).timeout(10000).get();
+            Document doc = Jsoup.connect(url + currentPage).timeout(30000).get();
             log.info("크롤링 중인 페이지: " + currentPage);
 
             /*뮤지컬 정보가 들어있는 tr 태그 가져오기*/
@@ -179,21 +201,23 @@ public class MusicalService {
                 musicalIds.add(id);
             }
         }
+        return musicalIds;
     }
 
     /**크롤링할 장르페이지의 최대 페이지 수를 저장*/
-    public void setMaxPage(String subCategory, String type){
+    public int setMaxPage(String subCategory, String type){
         String MUSICAL_URL = URLs.MUSICAL_URL + type + URLs.SUB_CATEGORY + subCategory + URLs.PAGE;
 
         try {
             /*카테고리에 해당하는 페이지 정보 가져오기*/
-            Document doc = Jsoup.connect(MUSICAL_URL).timeout(10000).get();
+            Document doc = Jsoup.connect(MUSICAL_URL).timeout(30000).get();
             Elements elements = doc.select("#contents .container1 > table > tbody > tr:last-child");
 
             /*마지막 페이지 가져오기*/
             String[] pages = elements.get(elements.size()-1).text().split("/");
-            maxPage = Integer.parseInt(pages[1].replaceAll("\\D+", ""));
+            int maxPage = Integer.parseInt(pages[1].replaceAll("\\D+", ""));
 
+            return maxPage;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

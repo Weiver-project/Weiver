@@ -107,7 +107,7 @@ CREATE TABLE scott.musical (
     id             VARCHAR2(100 BYTE) NOT NULL,
     stdate         DATE,
     eddate         DATE,
-    title          VARCHAR2(100 BYTE) NOT NULL,
+    title          VARCHAR2(100 BYTE),
     theater        VARCHAR2(100 BYTE),
     view_age       VARCHAR2(100 BYTE),
     running_time   VARCHAR2(100 BYTE),
