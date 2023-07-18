@@ -24,7 +24,4 @@ public class Actor {
 	
 	@Column(name = "PROFILE_IMAGE")
 	private String profileImage;
-	
-	@OneToMany(mappedBy = "actorId")  
-    private List<Casting> castings = new ArrayList<>();
 }

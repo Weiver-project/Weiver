@@ -1,9 +1,14 @@
-package weiver.entity;
+package com.example.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import lombok.*;
-import org.springframework.lang.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import reactor.util.annotation.Nullable;
 
 import javax.persistence.*;
 
@@ -12,31 +17,40 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "MUSICAL")
+@Table (name = "MUSICAL")
 public class Musical {
 	@Id
 	@Column(name = "ID")
 	private String id;
-	@Column(name = "TITLE")
+	
 	@Nullable
+	@Column(name = "TITLE")
 	private String title;
+	
 	@Nullable
 	@Column(name = "THEATER")
 	private String theater;
+	
+	@Nullable
 	@Column(name = "POSTER_IMAGE")
 	private String posterImage;
+	
+	@Nullable
 	@Column(name = "STDATE")
-	@Nullable
 	private Date stDate;
+	
+	@Nullable
 	@Column(name = "EDDATE")
-	@Nullable
 	private Date edDate;
+	
+	@Nullable
 	@Column(name = "VIEW_AGE")
-	@Nullable
 	private String viewAge;
-	@Column(name = "RUNNING_TIME")
+	
 	@Nullable
+	@Column(name = "RUNNING_TIME")
 	private String runningTime;
+	
 	@Nullable
 	@Column(name = "MAIN_CHARACTER")
 	private String mainCharacter;
