@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import weiver.entity.Image;
 import weiver.entity.Post;
+import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
 import weiver.entity.User;
 import weiver.repository.CommunityRepository;
 import weiver.repository.ImageRepository;
+import weiver.repository.PostLikeRepository;
 import weiver.repository.ReReplyRepository;
 import weiver.repository.ReplyRepository;
 import weiver.repository.UserRepository;
@@ -32,6 +34,12 @@ public class CommunityService {
 	
 	@Autowired
 	private ReReplyRepository rereplyRepository;
+	
+	@Autowired
+	private ImageRepository imageRepository;
+	
+	@Autowired
+	private PostLikeRepository postlikeRepository;
 	
 	/*
 	 * 게시글 관련 기능
@@ -108,30 +116,31 @@ public class CommunityService {
 	 * */
 	
 	//댓글 삽입
-//	public boolean insertReply(Reply reply) throws Exception {
-//	    boolean result = false;
-//
-//	    // user_id와 post_id의 유효성 검증
-//	    User user = userRepository.getUserById(reply.getUser().getId());
-//	    if (user == null) {
-//	        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
-//	    }
-//
-//	    Post post = communityRepository.getPostById(reply.getPostId());
-//	    if (post == null) {
-//	        throw new Exception("게시물이 존재하지 않습니다.");
-//	    }
-//
-//	    // 댓글 삽입 로직
-//	    int res = replyRepository.insertReply(reply.getId(), post.getId(), user.getId(), reply.getContent(), reply.getCreatedTime());
-//	    if (res != 0) {
-//	        result = true;
-//	        System.out.println("댓글 생성 성공");
-//	    } else {
-//	        throw new Exception("댓글 생성 실패");
-//	    }
-//	    return result;
-//	}
+	public boolean insertReply(Reply reply) throws Exception {
+	    boolean result = false;
+
+	    // user_id와 post_id의 유효성 검증
+	    User user = userRepository.getUserById(reply.getUser().getId());
+	    if (user == null) {
+	        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
+	    }
+
+	    Post post = communityRepository.getPostById(reply.getPost().getId());
+	    if (post == null) {
+	        throw new Exception("게시물이 존재하지 않습니다.");
+	    }
+
+	    // 댓글 삽입 로직
+	    int res = replyRepository.insertReply(post.getId(), user.getId(), reply.getContent());
+	    if (res != 0) {
+	        result = true;
+	        System.out.println("댓글 생성 성공");
+	    } else {
+	        throw new Exception("댓글 생성 실패");
+	    }
+	    return result;
+	}
+
 
 	// post_id에 따라 댓글 가져오기
     public List<Reply> findReplyByPostId(Long postId) {
@@ -220,6 +229,117 @@ public class CommunityService {
 		
 		return result;
 	}
+
+	//게시글 작성
+	public boolean insertPost(Post post) throws SQLException, Exception {
+	    boolean result = false;
+	    
+	    String userId = post.getUser().getId(); // User 객체에서 userId 추출
+	    String type = post.getType();
+	    String title = post.getTitle();
+	    String content = post.getContent();
+	    
+	    int res = communityRepository.insertPost(userId, type, title, content);
+	    
+	    if (res != 0) {
+	        result = true;
+	    } else {
+	        throw new Exception("게시글 생성 실패");
+	    }
+	    System.out.println(res);
+	    return result;
+	}
+
+
+	public boolean insertImage(Image image) throws SQLException, Exception {
+		boolean result = false;
+		
+		Long postId = image.getPostId();
+		String path = image.getPath();
+		
+		int res = imageRepository.insertImage(postId, path);
+		
+		
+		if (res != 0) {
+	        result = true;
+	    } else {
+	        throw new Exception("이미지 생성 실패");
+	    }
+		System.out.println(res);
+	    return result;
+	}
+
+
+		//대댓글 삽입
+		public boolean insertRereply(ReReply rereply) throws Exception {
+		    boolean result = false;
+	
+		    // user_id, post_id, reply_id의 유효성 검증
+		    User user = userRepository.getUserById(rereply.getUser().getId());
+		    if (user == null) {
+		        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
+		    }
+	
+		    Post post = communityRepository.getPostById(rereply.getPost().getId());
+		    if (post == null) {
+		        throw new Exception("게시물이 존재하지 않습니다.");
+		    }
+	
+		    Reply reply = replyRepository.getReplyById(rereply.getReply().getId());
+		    if (reply == null) {
+		        throw new Exception("댓글이 존재하지 않습니다.");
+		    }
+	
+		    // 댓글 삽입 로직
+		    int res = rereplyRepository.insertRereply(post.getId(), user.getId(), reply.getId(), rereply.getContent());
+		    if (res != 0) {
+		        result = true;
+		        System.out.println("대댓글 생성 성공");
+		    } else {
+		        throw new Exception("대댓글 생성 실패");
+		    }
+		    return result;
+		}
+
+
+		/*
+		 * 기타
+		 * */
+		
+		public void incrementViewCount(Post post) {
+			// 현재 조회수를 가져옴
+		    Long currentViewCount = post.getViewed();
+
+		    // 조회수를 1 증가시킴
+		    post.setViewed(currentViewCount + 1);
+
+		    // 증가된 조회수를 업데이트
+		    communityRepository.save(post);
+		}
+
+
+		// 게시글 좋아요 데이터 삽입
+		public boolean insertPostlike(PostLike postlike) throws Exception {
+		    // 필요한 데이터가 비어있는지 먼저 확인
+		    if (postlike == null || postlike.getPostId() == null || postlike.getUser().getId() == null) {
+		        throw new Exception("필수 데이터가 누락되었습니다.");
+		    }
+
+		    // 게시글에 해당하는 Post 객체가 데이터베이스에 존재하는지 확인 (생략되었다고 가정)
+		    Post post = communityRepository.findById(postlike.getPostId()).orElse(null);
+		    if (post == null) {
+		        throw new Exception("해당하는 게시글이 존재하지 않습니다.");
+		    }
+
+		    try {
+		        // 게시글과 유저 정보를 설정한 후 저장
+		        postlikeRepository.save(postlike);
+		        return true;
+		    } catch (Exception e) {
+		        throw new Exception("좋아요 데이터 생성 실패");
+		    }
+		}
+
 
 
 

@@ -21,11 +21,12 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     //내가 쓴 댓글 리스트 개수
     int countByUserId(String userId);
     
-    // 댓글 삽입
-//    @Modifying
-//    @Query("INSERT INTO Reply (id, post, user, content, createdTime) SELECT :id, p, u, :content, :createdTime FROM Post p, User u WHERE p.id = :postId AND u.id = :userId")
-//    int insertReply(@Param("id") Long id, @Param("postId") Long postId, @Param("userId") String userId, @Param("content") String content, @Param("createdTime") Date createdTime);
-//    
+    //댓글 생성
+    @Modifying
+    @Query("INSERT INTO Reply (post, user, content, createdTime) SELECT p, u, :content, CURRENT_TIMESTAMP FROM Post p, User u WHERE p.id = :postId AND u.id = :userId")
+    int insertReply(@Param("postId") Long postId, @Param("userId") String userId, @Param("content") String content);
+
+
     //아이디에 따라 게시글 1개 조회
 	Reply getReplyById(Long id);
 	
