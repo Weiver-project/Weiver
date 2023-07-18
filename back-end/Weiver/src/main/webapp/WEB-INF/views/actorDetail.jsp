@@ -35,7 +35,7 @@
 <div  >
 	<div >
 		<div class="nameTag">
-			<img src="${actor.profileImage}"  alt="logo" height="200" width="150">
+			<img src="${actor.profileImage}"  alt="logo" height="200" width="200" style="border-radius: 300px">
 		</div>
 		<table>
 	    	<tr class="td-margin">
@@ -44,10 +44,10 @@
 	    		</td>
 	    	</tr>
 	    	<tr>
-	    		<td class="td-margin">
+	    		<td class="td-margin" style="display:flex; flex-wrap: wrap">
 		    		<c:forEach items="${requestScope.musicalList}" var="musical">
 		    		<div>
-		    			<a href="/musical-detail/${musical.getId()}"><img src="${musical.getPosterImage()}" alt="logo" height="150" width="200" class="img-margin"></a>
+		    			<a href="/musical-detail/${musical.getId()}"><img src="${musical.getPosterImage()}" alt="logo" height="200" width="200" class="img-margin"></a>
 		    		</div>
 		    		</c:forEach>
 	    		</td>
