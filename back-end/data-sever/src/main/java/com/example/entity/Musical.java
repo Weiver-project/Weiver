@@ -25,7 +25,6 @@ public class Musical {
 	
 	@Nullable
 	@Column(name = "TITLE")
-	@Nullable
 	private String title;
 	
 	@Nullable

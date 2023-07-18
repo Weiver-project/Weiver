@@ -19,21 +19,13 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-	
-	// Id로 유저 검색
-	Optional<User> findById(String id);
 
 	// 동일 아이디 찾기
 	boolean existsById(String userId);
 
-	
 	// 동일 닉네임 찾기
 	boolean existsByNickname(String nickname);
 	
-
-	// 인증된 유저 검색
-	@EntityGraph(attributePaths = "authorities")	// User Entity 조회 시 authorities 필드를 함께 조회함, @EntityGraph = Eager 조회
-	Optional<User> findOneWithAuthoritiesByid(String id);
 
 	//id에 따라 하나의 유저 정보만 가져옴. >> communityService에 사용
 	User getUserById(String id);

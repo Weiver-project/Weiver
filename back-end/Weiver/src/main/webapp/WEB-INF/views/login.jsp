@@ -30,8 +30,8 @@
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
-      <a href="/signupPage">회원가입</a>
-      <a href="/html/search_pw.html">비밀번호를 잊으셨나요?</a>
+      <a href="/signup">회원가입</a>
+      <a href="/">비밀번호를 잊으셨나요?</a>
     </div>
     <!-- 간편로그인 구분 선 -->
     <div class="dividing-line">
@@ -59,7 +59,7 @@
     	event.preventDefault(); // 기본 제출 동작 방지
     	
     	/* 로그인 axios 요청 */
-        axios.post("/signin", requestData)
+        axios.post("/loginTest", requestData)
         		.then(response => {
         			const data = response.data;
         			if(response.status === 200) {
