@@ -85,6 +85,7 @@ public class MusicalService {
     @SneakyThrows
     public void saveAllMusical(List<String> musicalIds){
         List<Musical> musicals = new ArrayList<>();
+
         for(int i =0; i < musicalIds.size(); i++){
             if(i != 0 && i % 1000 == 0){
                 musicalRepository.saveAll(musicals);
@@ -94,11 +95,8 @@ public class MusicalService {
             Musical musical = saveMusical(musicalIds.get(i));
             log.info(i + "번 MUSICAL(" +musicalIds.get(i) +") 저장: " + musical);
             musicals.add(musical);
-
-            //배우 저장 로직
-            actorService.saveData(musicalIds.get(i));
         }
-
+        musicalRepository.saveAll(musicals);
     }
 
     /**뮤지컬 상세 페이지에서 정보 크롤링 후 저장*/
