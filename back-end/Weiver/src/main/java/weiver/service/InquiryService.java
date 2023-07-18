@@ -29,10 +29,14 @@ public class InquiryService {
                                     .content(content)
                                     .createdTime(date).build();
 
-        System.out.println(inquiry);
+        Inquiry result = inquiryRepository.save(inquiry);
+        if(!result.getTitle().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 
-        int result = inquiryRepository.insert(inquiry);
-        System.out.println(result);
-        return true;
+    public Inquiry findById(Long id) {
+        return inquiryRepository.getInquiryById(id);
     }
 }

@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 import weiver.dto.UserDTO;
+import weiver.entity.Post;
 import weiver.entity.User;
 import weiver.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -77,6 +80,8 @@ public class UserController {
 	public String profileUpdateForm(@PathVariable String userid,
 									Model model) {
 		User userInfo = userservice.findById(userid);
+		System.out.println(userInfo.getId());
+		System.out.println(userInfo.getPassword());
 		// DTO 바꿔야함 (issue: 비밀번호 노출)
 		model.addAttribute("userInfo", userInfo);
 
@@ -161,5 +166,16 @@ public class UserController {
 		}
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("비밀번호 변경 중 에러가 발생했습니다.");
+	}
+
+	@GetMapping("/myBoard/{userid}")
+	public String myBoard(@PathVariable String userid,
+						  Model model) {
+		List<Post> postList = userservice.findPostsByUserId(userid);
+		int postCount = userservice.countPostsByUserId(userid);
+		model.addAttribute("postList", postList);
+		model.addAttribute("postCount", postCount);
+
+		return "myBoard";
 	}
 }

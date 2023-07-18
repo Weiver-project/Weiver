@@ -13,10 +13,9 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
-@Table(name = "inquiry")
+@Table(name = "INQUIRY")
 public class Inquiry {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "user_id")

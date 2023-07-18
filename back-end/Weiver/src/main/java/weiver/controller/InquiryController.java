@@ -44,12 +44,14 @@ public class InquiryController {
             e.printStackTrace();
         }
 
-        return "inquiry" ;
+        return "redirect:/inquiry/asdf@naver.com" ;
     }
 
     @GetMapping("/inquiryDetail/{inquiryId}")
-    public String inquiryDetail() {
-
+    public String inquiryDetail(@PathVariable Long inquiryId,
+                                Model model) {
+        Inquiry inquiry = inquiryService.findById(inquiryId);
+        model.addAttribute("inquiry", inquiry);
 
         return "inquiryDetail";
     }

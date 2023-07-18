@@ -26,7 +26,7 @@ public class Answer {
     private Admin admin;
 
     @Column(name = "answer")
-    String answer;
+    private String answer;
 
     @Column(name = "created_time")
     private Date createdTime;

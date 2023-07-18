@@ -29,8 +29,8 @@ public class UserService {
 
     @Autowired
     private SubscribeRepository subscribeRepository;
-    
-    private PasswordEncoder passwordEncoder;
+
+//    private PasswordEncoder passwordEncoder;
 
 
     // 전체 조회
@@ -48,14 +48,13 @@ public class UserService {
     }
     
     // 유저가 쓴 게시글 조회
-    public void findPostsByUserId(String id) {
-        // 게시글 리스트
-        List<Post> result = communityRepository.findByUserId(id);
-        // 게시글 개수
-        int countresult = communityRepository.countByUserId(id);
+    public List<Post> findPostsByUserId(String id) {
+        return communityRepository.findByUserId(id);
+    }
 
-        System.out.println(result);
-        System.out.println(countresult);
+    // 유저가 쓴 게시글 개수
+    public int countPostsByUserId(String id) {
+        return communityRepository.countByUserId(id);
     }
 
     // 유저가 쓴 댓글 조회

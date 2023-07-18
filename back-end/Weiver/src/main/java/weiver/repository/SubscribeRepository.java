@@ -22,5 +22,6 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
     List<Object[]> findMusicalIdByUserIdAndType(String userId, String type);
 
 	//유저의 봤어요, 찜 목록 카운팅
+	@Query("SELECT COUNT(?1) FROM Subscribe s WHERE s.userId = ?1 AND s.type = ?2")
 	int countByUserIdAndType(String userId, String type);
 }
