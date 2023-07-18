@@ -1,8 +1,6 @@
 package com.example.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
