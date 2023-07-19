@@ -36,7 +36,7 @@
 <div class="mainSearch-container">
   <input type="text">
   <button>
-    <a href="검색페이지 URL">
+    <a href="/musical-search">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
         <path

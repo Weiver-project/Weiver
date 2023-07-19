@@ -39,7 +39,7 @@ public class LoginViewController {
 	}
 	
 	// 회원 탈퇴
-	@GetMapping(value = "remove")
+	@GetMapping(value = "/remove")
 	public String removeUser(HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
 		
