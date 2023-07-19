@@ -1,6 +1,8 @@
 package weiver.controller;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +13,10 @@ import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
+import weiver.service.GoogleAPIService;
 import weiver.service.MusicalService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +24,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MusicalController {
     private final MusicalService musicalService;
+   
+	private final GoogleAPIService googleAPI;
 
     @GetMapping("/main")
     public String getMainPage(Model model){
@@ -54,6 +60,18 @@ public class MusicalController {
     		List<SimpleMusicalDTO> musicals = musicalService.getMusicalByKeyword(keyword);
     		model.addAttribute("musicals", musicals);
     	}    	
+    	
+    	return "musicalSearch";
+    }
+    
+    @GetMapping("/googleAPI")
+    public String getGoogleAPI(Model model){
+    	try {
+			System.out.println(googleAPI.search("슈카월드"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	return "musicalSearch";
     }
