@@ -20,17 +20,21 @@ public class GoogleAPIService {
 		
 		List<String> clips = new ArrayList<String>();
 		
+		// 조건 추가
 		String apiurl = "https://www.googleapis.com/youtube/v3/search";
 		apiurl += "?key=" + API_KEY;
 		apiurl += "&part=snippet&type=video&maxResults=4&videoEmbeddable=true";
 		apiurl += "&q="+URLEncoder.encode(keyword,"UTF-8");
 		
+		// 가져오기
 		URL url = new URL(apiurl);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
 		
+		// 값들을 buffer에 추가
 		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 		
+		// 하나씩 가져온다.
 		String inputLine;
 		while((inputLine = br.readLine()) != null) {
 			String videoId = inputLine;
@@ -39,10 +43,6 @@ public class GoogleAPIService {
 			}
 		}
 		br.close();
-		
-		for(String s : clips) {
-			System.out.println(s);
-		}
 		
 		return clips;
 	}
