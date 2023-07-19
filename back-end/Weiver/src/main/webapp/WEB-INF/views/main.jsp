@@ -159,27 +159,28 @@
 <div class="today_actor" style="max-height: 180px">
   <div class="actor_img">
     <div>
-    	<img src="${randomActor.profileImage}" style="border-radius: 50%; max-height: 180px;">
-    	<span class="actor-name">${randomActor.name}</span>
+    	<a href="/actorDetail/${randomActor.id}">
+		   	<img src="${randomActor.profileImage}" style="border-radius: 50%; max-height: 180px;">
+		   	<span class="actor-name">${randomActor.name}</span>
+    	</a>
     </div>
   </div>
   <div class="actor-details" style="max-height: 180px;">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-	        <c:forEach items="${limitedMusicalList}" var="limitedMusical" step="2">
-	          <div class="poster-container">
+       	<c:forEach items="${limitedMusicalList}" var="limitedMusical" varStatus="status">
+       		<c:if test="${status.index % 2 == 0}">
+       			<div class="swiper-slide">
+	          		<div class="poster-container"> 
+       		</c:if>
 	            <div class="poster">
 	              <img src="${limitedMusical.getPosterImage()}">
 	            </div>
-	            <div class="poster">
-	              <img src="${limitedMusical.getPosterImage()}">
-	            </div>
-	          </div>
-	    	</c:forEach>
-        </div>
-      <div class="swiper-slide">
-      </div>
+               <c:if test="${status.index % 2 == 1 or status.last}">
+		           </div>
+		       </div>
+               </c:if>
+    		</c:forEach>
       </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
