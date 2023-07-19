@@ -17,7 +17,7 @@ ALTER TABLE scott.admin
 CREATE TABLE scott.answer (
     id           VARCHAR2(30 BYTE) NOT NULL,
     inquiry_id   NUMBER NOT NULL,
-    admin_id     VARCHAR2(30),
+    admin_id     VARCHAR2(30) NOT NULL,
     answer       VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL
 )
@@ -50,8 +50,8 @@ ALTER TABLE scott.inquiry
 
 CREATE TABLE scott.actor (
     id            VARCHAR2(100 BYTE) NOT NULL,
-    name          VARCHAR2(100 BYTE) NOT NULL,
-    profile_image VARCHAR2(1000 BYTE) NOT NULL
+    name          VARCHAR2(100 BYTE),
+    profile_image VARCHAR2(1000 BYTE)
 );
 
 CREATE UNIQUE INDEX scott.actor_pk ON
@@ -66,7 +66,7 @@ ALTER TABLE scott.actor
 CREATE TABLE scott.casting (
     id         NUMBER NOT NULL,
     actor_id   VARCHAR2(100 BYTE) NOT NULL,
-    role       VARCHAR2(100 BYTE) NOT NULL,
+    role       VARCHAR2(100 BYTE),
     musical_id VARCHAR2(100 BYTE) NOT NULL
 );
 
@@ -103,7 +103,7 @@ CREATE TABLE scott.musical (
     view_age       VARCHAR2(100 BYTE),
     running_time   VARCHAR2(100 BYTE),
     main_character VARCHAR2(100 BYTE),
-    poster_image   VARCHAR2(1000 BYTE) NOT NULL
+    poster_image   VARCHAR2(1000 BYTE)
 );
 
 CREATE UNIQUE INDEX scott.musical_pk ON
@@ -136,7 +136,7 @@ ALTER TABLE scott.post
 
 CREATE TABLE scott.post_like (
     id      NUMBER NOT NULL,
-    user_id VARCHAR2(20 BYTE) NOT NULL,
+    user_id VARCHAR2(30 BYTE) NOT NULL,
     post_id NUMBER NOT NULL
 );
 
@@ -154,7 +154,7 @@ CREATE TABLE scott.re_reply (
     post_id      NUMBER NOT NULL,
     user_id      VARCHAR2(30 BYTE) NOT NULL,
     reply_id     NUMBER NOT NULL,
-    content      VARCHAR2(1000 BYTE) NOT NULL,
+    content      VARCHAR2(2000 BYTE) NOT NULL,
     created_time DATE NOT NULL
 );
 
@@ -267,11 +267,13 @@ ALTER TABLE scott.user_tb
 ALTER TABLE scott.casting
     ADD CONSTRAINT casting_actor_fk FOREIGN KEY ( actor_id )
         REFERENCES scott.actor ( id )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.casting
     ADD CONSTRAINT casting_musical_fk FOREIGN KEY ( musical_id )
         REFERENCES scott.musical ( id )
+            ON DELETE CASCADE
     NOT DEFERRABLE;
 
 ALTER TABLE scott.image

@@ -1,6 +1,5 @@
 package weiver.dto;
 
-import lombok.Builder;
 
 import java.util.Date;
 

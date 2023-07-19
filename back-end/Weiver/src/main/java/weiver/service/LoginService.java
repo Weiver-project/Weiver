@@ -74,4 +74,9 @@ public class LoginService {
 		return null;
 	}
 
+	// 회원 탈퇴
+	public void removeUser(String userId) throws Exception{	
+		userRepository.deleteById(userId);
+	}
+
 }

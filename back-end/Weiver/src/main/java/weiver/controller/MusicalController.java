@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
+import weiver.dto.ResponseCastingDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
+import weiver.service.ActorService;
 import weiver.service.MusicalService;
 
 import java.util.List;
@@ -20,20 +22,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MusicalController {
     private final MusicalService musicalService;
-
+    private final ActorService actorService;
+    
     @GetMapping("/main")
     public String getMainPage(Model model){
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
 
-        System.out.println(performingMusicals.size());
-        
-        for(PerformingMusical p: performingMusicals) {
-        	System.out.println(p.getId());
-        	System.out.println(p.getPosterImage());
-        }
+        	
+        //인기 뮤지컬 추가
+        System.out.println(poPularMusicalDTOs.get(0).getTitle());
         
         model.addAttribute("popularMusicals", poPularMusicalDTOs);
+        //공연 중인 뮤지컬 추가
         model.addAttribute("performingMusicals", performingMusicals);
 
         return "main";
@@ -47,6 +48,10 @@ public class MusicalController {
     		model.addAttribute("musical", musical.get());
     	}
     	
+//    	ResponseCastingDTO casting = actorService.getCastingByMusicalId(musical.get().getId());
+//    	if (casting != null){
+//    		model.addAttribute("casting", casting);
+//    	}
     	return "musicalDetail";
     }
     
@@ -55,8 +60,6 @@ public class MusicalController {
     	if(keyword != null) {
     		List<SimpleMusicalDTO> musicals = musicalService.getMusicalByKeyword(keyword);
     		model.addAttribute("musicals", musicals);
-    		
-    		System.out.println(musicals.size());
     	}    	
     	
     	return "musicalSearch";

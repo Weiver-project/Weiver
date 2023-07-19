@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"essentialAgree","personalAgree","ageAgree","activated"})
+@ToString(exclude = {"essentialAgree","personalAgree","ageAgree"})
 @Entity
 @Builder
 @Table(name = "user_tb")

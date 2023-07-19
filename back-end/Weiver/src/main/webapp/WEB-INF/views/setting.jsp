@@ -33,16 +33,16 @@
         <!-- 카테고리(선택창) -->
         <div class="category">
             <div class="card">
-                <a href="/">로그아웃</a>
+                <a href="/logout">로그아웃</a>
             </div>
             <div class="card">
-                <a href="/password">비밀번호 변경</a>
+                <a href="/password/${userId}">비밀번호 변경</a>
             </div>
             <div class="card">
-                <a href="/">문의하기</a>
+                <a href="/inquiry/${userId}">문의하기</a>
             </div>
             <div class="card">
-                <a href="/">회원 탈퇴</a>
+                <a href="/remove">회원 탈퇴</a>
             </div>
         </div>
     </div>

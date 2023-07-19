@@ -143,14 +143,14 @@ public class UserController {
 //										   @RequestParam("checkPw") String checkPw) {
 //
 //		String password = userservice.findById(userId).getPassword();
-//		boolean result = passwordEncoder.matches(userPw, password);
+////		boolean result = passwordEncoder.matches(userPw, password);
+////
+////		// 기존 비밀번호 확인
+////		if (!result) {
+////			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
+////		}
 //
-//		// 기존 비밀번호 확인
-//		if (!result) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
-//		}
-
-	// 새 패스워드, 패스워드 확인 체크
+//		// 새 패스워드, 패스워드 확인 체크
 //		if(!newPw.equals(checkPw)) {
 //			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
 //		}
@@ -225,3 +225,4 @@ public class UserController {
 		return "myLike";
 	}
 }
+

@@ -19,7 +19,7 @@
 <body class="container">
   <header>
     <img id="logo" src="/img/logo.png" alt="logo" height="70" width="300">
-    <a href="#"><i class="bi bi-chevron-left"></i></a>
+    <a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a>
   </header>
   <article>
      <!-- 댓글 컨테이너 -->
