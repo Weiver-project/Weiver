@@ -63,7 +63,7 @@
         			const data = response.data;
         			if(response.status === 200) {
         				alert(data);
-        				window.location.href = "/community";
+        				window.location.href = "/main";
         			}
   	   			})
   	   			.catch((error) => {

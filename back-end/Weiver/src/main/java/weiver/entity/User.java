@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"essentialAgree","personalAgree","ageAgree","activated"})
+@ToString(exclude = {"essentialAgree","personalAgree","ageAgree"})
 @Entity
 @Builder
 @Table(name = "user_tb")
@@ -42,6 +42,6 @@ public class User{
 	@Column(name = "age_agree")
 	private String ageAgree;
 
-	@Column(name = "activated")
-	private String activated;
+//	@Column(name = "activated")
+//	private String activated;
 }
