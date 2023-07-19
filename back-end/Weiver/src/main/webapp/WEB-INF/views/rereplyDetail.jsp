@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,48 +21,41 @@
     <a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a>
   </header>
   <article>
-     <!-- 댓글 컨테이너 -->
-            <!-- 작성된 댓글 (아이디, 댓글, 좋아요 아이콘, 대댓글 링크, 버튼) -->
-            
-            <br>
-            <c:forEach var="reply" items="${reply}">
-                <div class="commentAndBtn" data-comment-id="${reply.id}">
-        <div class="commentIDAndContent">
-            <div class="commentID">${reply.user.nickname}</div>
-            <div class="commentContent" id="commentContent_${reply.id}">${reply.content}</div>
-            <div class="likeAndRecomment">
-                <i class="bi-suit-heart"></i>
-                <span>${reply.id}</span>
-                <a href="#" style="text-decoration: none;">
-                    <span class="recommentBtn">대댓글</span>
-                </a>
-                        </div>
-                    </div>
-                    </div>
+    <!-- 댓글 컨테이너 -->
+    <!-- 작성된 댓글 (아이디, 댓글, 좋아요 아이콘, 대댓글 링크, 버튼) -->
 
-                <!-- 대댓글 컨테이너 -->
-                <c:forEach var="rereply" items="${rereply}">
-                    <c:if test="${rereply.reply.id == reply.id}">
-                        <div class="recommentWrap">
-                            <div class="recommentGroup">
-                                <i class="bi-arrow-return-right"></i>
-                                <div class="recommentInfo">
-                                    <div class="commentID">${rereply.user.nickname}</div>
-                                    <div class="commentContent">${rereply.content}</div>
-                                    <div class="likeAndRecomment">
-                                        <i class="bi-suit-heart"></i>
-                                        <span>${rerepliesForReply.size()}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="commentBtnGroup">
-                                <button type="button" class="replyUpdateBtn" data-id="${reply.id}">수정</button>
-                                <button type="button" class="replyDeleteBtn" data-id="${reply.id}">삭제</button>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </c:forEach>
+    <br>
+    <div class="commentAndBtn" data-comment-id="${reply.id}">
+      <div class="commentIDAndContent">
+        <div class="commentID">${reply.user.nickname}</div>
+        <div class="commentContent" id="commentContent_${reply.id}">${reply.content}</div>
+        <div class="likeAndRecomment">
+          <i class="bi-suit-heart"></i>
+          <span>${reply.id}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 대댓글 컨테이너 -->
+    <c:forEach var="reReply" items="${rereply}">
+      <div class="recommentWrap">
+        <div class="recommentGroup">
+          <i class="bi-arrow-return-right"></i>
+          <div class="recommentInfo">
+            <div class="commentID">${reReply.user.nickname}</div>
+            <div class="commentContent">${reReply.content}</div>
+            <div class="likeAndRecomment">
+              <i class="bi-suit-heart"></i>
+              <span>${reReply.id}</span>
+            </div>
+          </div>
+        </div>
+        <div class="commentBtnGroup">
+          <button type="button" class="replyUpdateBtn" data-id="${reReply.id}">수정</button>
+          <button type="button" class="replyDeleteBtn" data-id="${reReply.id}">삭제</button>
+        </div>
+      </div>
+    </c:forEach>
   </article>
   <form class="input-reple">
     <input type="text">
