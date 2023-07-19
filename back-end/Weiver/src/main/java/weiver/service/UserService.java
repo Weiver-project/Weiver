@@ -2,12 +2,13 @@ package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import weiver.dto.ReplyDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.*;
 import weiver.repository.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -30,6 +31,12 @@ public class UserService {
     @Autowired
     private SubscribeRepository subscribeRepository;
 
+    @Autowired
+    private ReplyLikeRepository replyLikeRepository;
+
+    @Autowired
+    private ReReplyLikeRepository reReplyLikeRepository;
+
     // 전체 조회
     public void test() {
         List<User> result = userRepository.findAll();
@@ -44,9 +51,14 @@ public class UserService {
         return result;
     }
     
-    // 유저가 쓴 게시글 조회
-    public List<Post> findPostsByUserId(String id) {
-        return communityRepository.findByUserId(id);
+    // 유저가 쓴 게시글 작성순 조회
+    public List<Post> findPostsByUserIdTime(String id) {
+        return communityRepository.findByUserIdOrderByCreatedTimeDesc(id);
+    }
+
+    // 유저가 쓴 게시글 추천순 조회
+    public List<Post> findPostsByUserIdLike(String id) {
+        return communityRepository.findByUserIdOrderByPostlikesDesc(id);
     }
 
     // 유저가 쓴 게시글 개수
@@ -54,33 +66,53 @@ public class UserService {
         return communityRepository.countByUserId(id);
     }
 
-    // 유저가 쓴 댓글 조회
-    public void findRepliesByUserId(String id) {
-        // 댓글 리스트
-        List<Reply> replyResult = replyRepository.findByUserId(id);
-        // 대댓글 리스트
-        List<ReReply> reReplyResult = reReplyRepository.findByUserId(id);
-        // 댓글 개수 합계
-        int countResult = replyRepository.countByUserId(id) + reReplyRepository.countByUserId(id);
+    // 유저가 쓴 댓글/대댓글 조회
+    public List<ReplyDTO> findRepliesByUserId(String id) {
+        List<Reply> replyList = replyRepository.findByUserId(id);
+        List<ReReply> reReplyList = reReplyRepository.findByUserId(id);
+        List<ReplyDTO> replyDTOList = new ArrayList<>();
 
-        System.out.println(replyResult);
-        System.out.println(reReplyResult);
-        System.out.println(countResult);
+        for (Reply reply : replyList) {
+            replyDTOList.add(ReplyDTO.builder()
+                                        .id(reply.getId())
+                                        .postId(reply.getPost().getId())
+                                        .userId(reply.getUser().getId())
+                                        .content(reply.getContent())
+                                        .createdTime(reply.getCreatedTime())
+                                        .countLikes(replyLikeRepository.count(reply.getId())).build());
+        }
+
+        for (ReReply reReply : reReplyList) {
+            replyDTOList.add(ReplyDTO.builder()
+                    .id(reReply.getId())
+                    .postId(reReply.getPost().getId())
+                    .userId(reReply.getUser().getId())
+                    .content(reReply.getContent())
+                    .createdTime(reReply.getCreatedTime())
+                    .countLikes(reReplyLikeRepository.count(reReply.getId())).build());
+        }
+
+        return replyDTOList;
+    }
+
+    // 유저가 쓴 댓글 개수
+    public int countRepliesByUserId(String id) {
+        return replyRepository.countByUserId(id) + reReplyRepository.countByUserId(id);
     }
 
     // 유저가 좋아요 누른 게시글 조회
-    public void findPostLikeByUserId(String id) {
-        // 좋아요누른 ID 기준으로 postId 리스트 조회
+    public List<Post> findPostLikeByUserId(String id) {
         List<PostLike> postIdList = postLikeRepository.findByUserId(id);
+        List<Post> postList = new ArrayList<>();
 
-        // 게시글 리스트 매핑
         for (PostLike postLike : postIdList) {
             Long postId = postLike.getPostId();
-            Optional<Post> result = communityRepository.findById(postId);
+            Post result = communityRepository.getPostById(postId);
 
-            System.out.println(result);
+            postList.add(result);
         }
 
+        return postList;
     }
 
     // 유저가 찜하거나 봤던 뮤지컬 조회
