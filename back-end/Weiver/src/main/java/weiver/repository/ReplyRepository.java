@@ -22,9 +22,6 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     int countByUserId(String userId);
     
     //댓글 생성
-    @Modifying
-    @Query("INSERT INTO Reply (post, user, content, createdTime) SELECT p, u, :content, CURRENT_TIMESTAMP FROM Post p, User u WHERE p.id = :postId AND u.id = :userId")
-    int insertReply(@Param("postId") Long postId, @Param("userId") String userId, @Param("content") String content);
 
 
     //아이디에 따라 게시글 1개 조회

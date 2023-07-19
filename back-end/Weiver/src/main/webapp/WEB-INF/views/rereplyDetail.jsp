@@ -57,8 +57,8 @@
       </div>
     </c:forEach>
   </article>
-  <form class="input-reple">
-    <input type="text">
+  <form class="input-reple" action="/community/insert/rereply/${postId}/${reply.id}" method="post">
+    <input type="text"  name="content">
     <input type="submit">
   </form>
   <footer>Copyright Weiver 2023 All Rights Reserved</footer>

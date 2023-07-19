@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Admin {
     @Id
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "admin_pw")
     private String password;
