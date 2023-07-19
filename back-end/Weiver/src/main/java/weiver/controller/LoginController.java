@@ -35,7 +35,7 @@ public class LoginController {
 		boolean userIdExists = loginService.checkUserExists(userId);
 		boolean userNicknameExists = loginService.checkUserNicknameExists(userNickname);
 		
-		// front required 속성으로 굳이 필요 없어짐
+		// front required 속성으로 굳이 필요 없어짐.
 		if(userId == null || userId.equals("") || 
 			userPw == null || userPw.equals("") || 
 			userNickname == null || userNickname.equals("")) {
