@@ -17,7 +17,6 @@ import weiver.service.GoogleAPIService;
 
 import weiver.service.MusicalService;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +24,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MusicalController {
     private final MusicalService musicalService;
-
-   
-	private final GoogleAPIService googleAPI;
     
     @GetMapping("/main")
     public String getMainPage(Model model){
@@ -70,15 +66,4 @@ public class MusicalController {
     	return "musicalSearch";
     }
     
-    @GetMapping("/googleAPI")
-    public String getGoogleAPI(Model model){
-    	try {
-			System.out.println(googleAPI.search("슈카월드"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	return "musicalSearch";
-    }
 }
