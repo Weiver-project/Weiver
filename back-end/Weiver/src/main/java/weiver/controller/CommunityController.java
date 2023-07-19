@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import weiver.entity.Image;
 import weiver.entity.Post;
@@ -207,33 +208,25 @@ public class CommunityController {
 			return "registerPost";
 		}
 		
-		@RequestMapping(value="/community/board", method=RequestMethod.POST)
-		public String insertPost(@ModelAttribute Post newPost,
-					 @ModelAttribute Image newImage) {
-			String view = "error";
-			
-			boolean postResult = false;
-			boolean imageResult = false;
-			
-			try {
-				postResult = communityService.insertPost(newPost);
-				imageResult = communityService.insertImage(newImage);
-				
-				if(postResult && imageResult) {
-					view = "redirect:/community";
-					return view;
-				}
-				
-			} catch (Exception e) {
-				System.out.println("Exception occurred while inserting post or image: " + e.getMessage());
-
-				return view;
-			}
-			
-			return view;
-		}
-
-   
+//		@PostMapping("/community/board")
+//		public String insertInquiry(@ModelAttribute Post post, @RequestParam("images") MultipartFile imageFile) {
+//		    try {
+//		        // 게시글과 이미지를 저장하는 서비스 메서드를 호출
+//		        String imagePath = communityService.saveImage(imageFile);
+//		        boolean isPostSaved = communityService.savePost(post.getUser(), post.getType(), post.getTitle(), post.getContent(), imagePath);
+//
+//		        if (!isPostSaved) {
+//		            // 게시글 저장이 실패했을 경우에 대한 처리 (예: 오류 페이지로 리다이렉트)
+//		            return "errorPage";
+//		        }
+//		    } catch (Exception e) {
+//		        e.printStackTrace();
+//		        // 예외 처리 (예: 오류 페이지로 리다이렉트 또는 사용자에게 오류 메시지 전달)
+//		        return "errorPage";
+//		    }
+//
+//		    return "redirect:/community";
+//		}
 
 
     /*
