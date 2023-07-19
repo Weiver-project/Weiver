@@ -163,6 +163,30 @@ function deleteRereply(recommentId) {
     });
 }
 
+//댓글 삭제 함수
+function deleteReply(commentId) {
+    // 삭제를 확인하는 다이얼로그를 띄우기
+    const isConfirmed = confirm("댓글을 삭제하시겠습니까?");
+    if (!isConfirmed) {
+        return; // 삭제 취소
+    }
+
+    // AJAX로 댓글 삭제 컨트롤러 실행하기
+    $.ajax({
+        url: '/community/delete/reply/' + commentId,
+        type: 'DELETE',
+        success: function(response) {
+            console.log('댓글이 삭제되었습니다.');
+            // 댓글 삭제 성공 시 페이지 새로고침
+            location.reload();
+        },
+        error: function(xhr) {
+            // 작동 실패
+            console.error('댓글 삭제 실패:', xhr.responseText);
+        }
+    });
+}
+
 function changeHeartIcon(type, id, heartIcon) {
     // 서버로 보낼 데이터 준비
     const data = {
@@ -275,7 +299,7 @@ function changeHeartIcon(type, id, heartIcon) {
 		            <div class="likeAndRecomment">
 		                <i class="bi-suit-heart" onclick="changeHeartIcon('reply', ${reply.id}, this)"></i>
 		                <span>${reply.id}</span>
-		                <a href="/community/${posts.id}/reply/${reply.id}" style="text-decoration: none;">
+		                <a href="/community/${posts.id}/${reply.id}" style="text-decoration: none;">
 		                    <span class="recommentBtn">대댓글</span>
 		                </a>
                         </div>
@@ -318,10 +342,10 @@ function changeHeartIcon(type, id, heartIcon) {
 
         <!-- 댓글 입력 창 -->
         <div class="commentInputGroup">
-            <form action="" method="post">
-                <input class="commentInput" type="text">
-                <input class="commentInputBtn" type="submit" value="작성하기">
-            </form>
+        	<form action="/community/insert/reply/${posts.id}" method="post">
+	            <input name="content" class="commentInput" type="text">
+    	        <input class="commentInputBtn" type="submit">
+        	</form>
         </div>
 
     </div>

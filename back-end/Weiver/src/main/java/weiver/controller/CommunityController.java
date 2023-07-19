@@ -1,9 +1,12 @@
 package weiver.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,7 @@ import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
+import weiver.entity.User;
 import weiver.service.CommunityService;
 
 @Controller
@@ -136,24 +140,17 @@ public class CommunityController {
 		* 커뮤니티 대댓글 페이지
 		* */
 
-		@GetMapping("/community/{id}/reply/{replyId}")
-		public String replyDetail(@PathVariable Long id, Model model) {
-		   //id에 따라 게시글 가져오기
-		   Post post = communityService.getPostById(id);
-		        
-		   //post_id에 따라 댓글 가져오기
-		   List<Reply> replies = communityService.findReplyByPostId(post.getId());
-
-		   //post_id와 reply_id에 따라 대댓글 가져오기
-		   List<ReReply> rereplies = new ArrayList<>();
-		   for (Reply reply : replies) {
-		       List<ReReply> rerepliesForReply = communityService.getReReplyByPostIdAndReplyId(post.getId(), reply.getId());
-		       rereplies.addAll(rerepliesForReply);
-		   }
-
-		       model.addAttribute("reply", replies);
-		       model.addAttribute("rereply", rereplies);
-
+		@GetMapping("/community/{postId}/{replyId}")
+		public String replyDetail(@PathVariable Long postId, @PathVariable Long replyId, Model model) {
+		  
+			   Reply reply = communityService.findReply(replyId);
+			   
+			   List<ReReply> rereplys = communityService.getReReplyByReplyId(replyId);
+		   
+		   	   model.addAttribute("postId", postId);
+		       model.addAttribute("reply", reply);
+		       model.addAttribute("rereply", rereplys);
+		       
 		       return "rereplyDetail";
 		  }
 
@@ -265,21 +262,28 @@ public class CommunityController {
 	        return view;
 	    }
 
-	 // 댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-	    @RequestMapping(value = "/community/insert/reply/{id}", method = RequestMethod.POST)
-	    public void insertReply(@RequestBody Reply reply) {
-	        String view = "error";
-	        boolean result = false;
-	        
-	        try {
-	            result = communityService.insertReply(reply);
-	            
-	            if (result) {
-	                System.out.println("댓글 삽입 성공");
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
+	    // 댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	    @RequestMapping(value = "/community/insert/reply/{postId}", method = RequestMethod.POST)
+	    public String insertReply(@PathVariable String postId, @RequestParam String content, HttpSession Session) {
+	    	Post post = new Post();	
+	    	post.setId(Long.parseLong(postId));
+	    	
+	    	String userId = Session.getAttribute("userId").toString();
+	    	User user = new User();
+	    	user.setId(userId);
+	    	
+	    	Reply reply = Reply.builder()
+	    			.post(post)
+	    			.user(user)
+	    			.content(content)
+	    			.createdTime(new Date())
+	    			.build();
+	    	
+	    	if(communityService.insertReply(reply)) {	        	
+	        	return "redirect:/community/" + postId;
 	        }
+	        
+	        return "error";   
 	    }
 	    
 	    //댓글 삭제
@@ -348,23 +352,35 @@ public class CommunityController {
 	        }
 	    
 
-		 // 대댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-		    @RequestMapping(value = "/community/insert/rereply/{id}", method = RequestMethod.POST)
-		    public void insertReply(@RequestBody ReReply rereply) {
-		        String view = "error";
-		        boolean result = false;
-		        
-		        try {
-		            result = communityService.insertRereply(rereply);
-		            
-		            if (result) {
-		                System.out.println("대댓글 삽입 성공");
-		            }
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		    }
+	    //대댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	    @RequestMapping(value = "/community/insert/rereply/{postId}/{replyId}", method = RequestMethod.POST)
+	    public String insertReReply(@PathVariable String postId, @PathVariable String replyId,  @RequestParam String content, HttpSession Session) {
+	    	Post post = new Post();	
+	    	post.setId(Long.parseLong(postId));
+	    	
+	    	String userId = Session.getAttribute("userId").toString();
+	    	User user = new User();
+	    	user.setId(userId);
+	    	
+	    	Reply reply  = new Reply();
+	    	reply.setId(Long.parseLong(replyId));
+	    	
+	    	ReReply reReply = ReReply.builder()
+	    			.post(post)
+	    			.reply(reply)
+	    			.user(user)
+	    			.content(content)
+	    			.createdTime(new Date())
+	    			.build();
+	    	
+	    	if(communityService.insertRereply(reReply)) {	        	
+	        	return "redirect:/community/" + postId;
+	        }
+	        
+	        return "error";   
+	    }
 	    
+	   
 		  //대댓글 삭제
 		    @RequestMapping(value = "/community/delete/rereply/{id}", method = RequestMethod.DELETE)
 			 public String deleteRereply(@PathVariable Long id) {

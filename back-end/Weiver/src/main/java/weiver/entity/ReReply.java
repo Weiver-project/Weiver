@@ -1,5 +1,7 @@
 package weiver.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,12 +10,15 @@ import java.util.Date;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "re_reply")
 public class ReReply {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rereply_sequence_generator")
+    @SequenceGenerator(name = "rereply_sequence_generator", sequenceName = "re_reply_sequence", allocationSize = 1)
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
