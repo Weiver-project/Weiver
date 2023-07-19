@@ -1,4 +1,4 @@
-package weiver.service;
+	package weiver.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -152,31 +152,32 @@ public class CommunityService {
 	/*
 	 * 댓글 관련 기능
 	 * */
+	//댓글 조회
+	public Reply findReply(Long id) {
+		return replyRepository.findById(id).get();
+	}
+	
 	
 	//댓글 삽입
-	public boolean insertReply(Reply reply) throws Exception {
-	    boolean result = false;
+	public boolean insertReply(Reply reply) {
 
-	    // user_id와 post_id의 유효성 검증
+		// user_id와 post_id의 유효성 검증
 	    User user = userRepository.getUserById(reply.getUser().getId());
 	    if (user == null) {
-	        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
+	        return false;
 	    }
 
 	    Post post = communityRepository.getPostById(reply.getPost().getId());
 	    if (post == null) {
-	        throw new Exception("게시물이 존재하지 않습니다.");
+	    	return false;
 	    }
 
 	    // 댓글 삽입 로직
-	    int res = replyRepository.insertReply(post.getId(), user.getId(), reply.getContent());
-	    if (res != 0) {
-	        result = true;
-	        System.out.println("댓글 생성 성공");
+	    if (replyRepository.save(reply) != null) {
+	        return true;
 	    } else {
-	        throw new Exception("댓글 생성 실패");
+	    	return false;
 	    }
-	    return result;
 	}
 
 
@@ -242,6 +243,11 @@ public class CommunityService {
 		   }
 
 	
+		public List<ReReply> getReReplyByReplyId(Long replyId) {
+	    	return rereplyRepository.findByReplyId(replyId);
+	   }
+		
+		
 	//대댓글 수정
 	public boolean updateRereply(Long id, String content)throws Exception, SQLException {
 		int res = rereplyRepository.updateRereply(id, content);
@@ -291,34 +297,33 @@ public class CommunityService {
 
 
 		//대댓글 삽입
-		public boolean insertRereply(ReReply rereply) throws Exception {
+		public boolean insertRereply(ReReply rereply) {
 		    boolean result = false;
 	
 		    // user_id, post_id, reply_id의 유효성 검증
 		    User user = userRepository.getUserById(rereply.getUser().getId());
 		    if (user == null) {
-		        throw new Exception("댓글 작성자 정보가 존재하지 않습니다.");
+		        return false;
 		    }
-	
+
 		    Post post = communityRepository.getPostById(rereply.getPost().getId());
 		    if (post == null) {
-		        throw new Exception("게시물이 존재하지 않습니다.");
+		    	return false;
 		    }
-	
 		    Reply reply = replyRepository.getReplyById(rereply.getReply().getId());
 		    if (reply == null) {
-		        throw new Exception("댓글이 존재하지 않습니다.");
+		    	return false;
 		    }
 	
 		    // 댓글 삽입 로직
-		    int res = rereplyRepository.insertRereply(post.getId(), user.getId(), reply.getId(), rereply.getContent());
-		    if (res != 0) {
-		        result = true;
-		        System.out.println("대댓글 생성 성공");
+		    if (rereplyRepository.save(rereply) != null) {
+		        return true;
 		    } else {
-		        throw new Exception("대댓글 생성 실패");
+		    	return false;
 		    }
-		    return result;
+		   
+
+		    
 		}
 
 

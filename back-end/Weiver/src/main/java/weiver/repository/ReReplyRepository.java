@@ -25,6 +25,8 @@ public interface ReReplyRepository extends JpaRepository<ReReply, Long> {
 	//post_id와 reply_id으로 대댓글 하나 조회
 	List<ReReply> findByPostIdAndReplyId(Long postId, Long replyId);
 	
+	List<ReReply> findByReplyId(Long replyId);
+	
 	//대댓글 수정
 	@Modifying
 	@Transactional
@@ -36,13 +38,5 @@ public interface ReReplyRepository extends JpaRepository<ReReply, Long> {
 	@Modifying
 	@Transactional
 	int deleteRereplyById(Long id);
-
-	//대댓글 생성
-	@Modifying
-	@Query("INSERT INTO ReReply (post, user, reply, content, createdTime) " +
-	       "SELECT p, u, r, :content, CURRENT_TIMESTAMP FROM Post p, User u, Reply r " +
-	       "WHERE p.id = :postId AND u.id = :userId AND r.id = :replyId")
-	int insertRereply(@Param("postId") Long postId, @Param("userId") String userId, @Param("replyId") Long replyId, @Param("content") String content);
-
 
 }
