@@ -69,6 +69,7 @@ public class UserController {
 		userservice.findSubscribe(id,type);
 	}
 
+	// 마이 페이지
 	@GetMapping("/mypage/{userid}")
 	public String mypage(@PathVariable String userid,
 						 Model model) {
@@ -79,6 +80,7 @@ public class UserController {
 		return "mypage";
 	}
 
+	// 프로필 수정 페이지
 	@GetMapping("/profileUpdate/{userid}")
 	public String profileUpdateForm(@PathVariable String userid,
 									Model model) {
@@ -91,6 +93,7 @@ public class UserController {
 		return "profileUpdate";
 	}
 
+	// 프로필 수정
 	@PostMapping("/update")
 	public String profileUpdate(@RequestParam(value = "userId") String id,
 								@RequestParam(value = "nickname") String nickname,
@@ -125,11 +128,13 @@ public class UserController {
 		return "redirect:/profileUpdate/" + id;
 	}
 
+	// 설정 페이지
 	@GetMapping("/setting")
 	public String setting() {
 		return "setting";
 	}
 
+	// 비밀번호 수정 페이지
 	@GetMapping("/password/{userid}")
 	public String passwordUpdateForm(@PathVariable String userid,
 									 Model model) {
@@ -139,6 +144,7 @@ public class UserController {
 		return "passwordUpdate";
 	}
 
+	// 비밀번호 수정
 	@PostMapping("/updatePW")
 	public ResponseEntity<String> updatePW(@RequestParam("userId") String userId,
 										   @RequestParam("myPw") String userPw,
@@ -171,6 +177,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("비밀번호 변경 중 에러가 발생했습니다.");
 	}
 
+	// 내가 쓴 글 페이지
 	@GetMapping("/myBoard/{userid}")
 	public String myBoard(@PathVariable String userid,
 						  Model model) {
@@ -184,6 +191,7 @@ public class UserController {
 		return "myBoard";
 	}
 
+	// 내가 쓴 댓글 페이지
 	@GetMapping("/myComment/{userid}")
 	public String myComment(@PathVariable String userid,
 							Model model) {
@@ -206,6 +214,7 @@ public class UserController {
 		return "myComment";
 	}
 
+	// 내가 좋아요 누른 글들 
 	@GetMapping("/myLike/{userid}")
 	public String myLike(@PathVariable String userid,
 						 Model model) {
