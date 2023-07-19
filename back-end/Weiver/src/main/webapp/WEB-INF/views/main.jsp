@@ -174,7 +174,7 @@
 	          		<div class="poster-container"> 
        		</c:if>
 	            <div class="poster">
-	              <img src="${limitedMusical.getPosterImage()}">
+	            <a href="/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}"></a>
 	            </div>
                <c:if test="${status.index % 2 == 1 or status.last}">
 		           </div>
