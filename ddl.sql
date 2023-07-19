@@ -394,3 +394,16 @@ ALTER TABLE scott.inquiry
         REFERENCES scott.user_tb ( id )
             ON DELETE CASCADE
     NOT DEFERRABLE;
+
+create SEQUENCE answer_sequence;
+create SEQUENCE casting_sequence;
+create SEQUENCE image_sequence;
+create SEQUENCE inquiry_sequence;
+create SEQUENCE post_sequence;
+create SEQUENCE post_like_sequence;
+create SEQUENCE reply_sequence;
+create SEQUENCE reply_like_sequence;
+create SEQUENCE re_reply_sequence;
+create SEQUENCE re_reply_like_sequence;
+create SEQUENCE SUBSCRIBE_sequence;
+create SEQUENCE user_tb_sequence;
