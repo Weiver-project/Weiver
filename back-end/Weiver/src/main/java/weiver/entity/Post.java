@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Data
 @Entity
 @Table(name = "post")
@@ -38,7 +39,7 @@ public class Post {
     private Date createdTime;
 
     @Column(name = "viewed")
-    private Long viewed;
+    private Long viewed = 0L;
 
     //이미지 데이터 받아와서 저장
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

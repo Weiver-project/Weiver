@@ -37,13 +37,13 @@
 
 	    <br>
 
-		<form action="/board" method="post" enctype="multipart/form-data">
-				<div class = selectbtn>	
+		<form action="/community/board" method="post" enctype="multipart/form-data">
+				<div class="selectbtn">	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
-					<select id="selectFormType" onchange="postTypeChange()">
+					<select id="selectFormType" name="type" onchange="postTypeChange()">
 						<option value="select">글 종류</option>
-                        <option value="잡담">잡담</option>
-                        <option value="리뷰">리뷰</option>
+                        <option value="Chat">잡담</option>
+                        <option value="Review">리뷰</option>
 					</select>
 				</div>
 
@@ -52,7 +52,7 @@
 				<!-- 제목 작성 칸-->
 				<span>제목</span>
 				<div>
-					<textarea class="title" id="title"></textarea>
+					<textarea class="title" name="title" id="title" required></textarea>
 				</div>
 
 
@@ -61,7 +61,7 @@
 					<br>
 					작품명
 					<div>
-						<textarea class="title" id="reviewPerformance" oninput="searchPerformance()"></textarea>
+						<textarea class="title" name="reviewPerformance" id="reviewPerformance" oninput="searchPerformance()" required></textarea>
 					</div>
 				</div>
 
@@ -96,8 +96,8 @@
 					</div>
 
 						<!-- 내용칸 -->
-							<div id="editor" contenteditable="true">
-							<input id="img-selector" type="file" accept="image/*" />                         
+							<div id="editor" name="content" contenteditable="true" required>
+							<input id="img-selector" name="images" type="file" accept="image/*" />                         
 						</div>
 				
 				<br>
@@ -132,17 +132,17 @@ function postTypeChange(){
 	  let selectFormType = document.getElementById("selectFormType");
 	  
 	  let formType = selectFormType.options[selectFormType.selectedIndex].value;
-	  if(formType == '리뷰'){
+	  if(formType == 'Review'){
 		  document.getElementById("reviewForm").style.display="";
 		  document.getElementById("reviewPerformance").required="required";
 
-		  console.log("리뷰");
+		  console.log("Review");
 		  
-	  }else if(formType == '잡담'){
+	  }else if(formType == 'Chat'){
 		  document.getElementById("reviewForm").style.display="none";
 		  document.getElementById("reviewPerformance").required="";
 
-		  console.log("잡담");
+		  console.log("Chat");
 	  }
 	  
 }
