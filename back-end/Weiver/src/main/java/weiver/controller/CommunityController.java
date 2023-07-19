@@ -149,7 +149,7 @@ public class CommunityController {
 		   
 		   	   model.addAttribute("postId", postId);
 		       model.addAttribute("reply", reply);
-		       model.addAttribute("reply", rereplys);
+		       model.addAttribute("rereply", rereplys);
 		       
 		       return "rereplyDetail";
 		  }
