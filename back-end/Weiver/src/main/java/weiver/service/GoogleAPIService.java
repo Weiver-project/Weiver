@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class GoogleAPIService {
 	
 	// keyword에 맞는 GoogleAPI youtube clip videoId 값들을 반환해 준다.
-	public List<String> search(String keyword) throws IOException {
+	public static List<String> search(String keyword) throws IOException {
 		String API_KEY = "AIzaSyBWqVIZqxy91VIx5Hzc8RlBYxpbOqs9GYg";
 		
 		List<String> clips = new ArrayList<String>();
@@ -46,4 +46,11 @@ public class GoogleAPIService {
 		
 		return clips;
 	}
+	
+	// 위에서 받은 Clips를 하나하나 가져와 "영상ID" 값에 집어넣어주면 영상을 띄울 수 있다.
+	
+//	<iframe id="ytplayer" type="text/html" width="720" height="405"
+//			src="https://www.youtube.com/embed/영상ID
+//			frameborder="0" allowfullscreen>
+	
 }
