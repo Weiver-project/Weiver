@@ -1,5 +1,6 @@
 package weiver.service;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import weiver.dto.ReplyDTO;
@@ -143,21 +144,19 @@ public class UserService {
     }
 
     // 유저 정보 수정(비밀번호 암호화)
+    public boolean updateBcryptPassword(String password, String id) throws Exception {
+        String user_password = userRepository.getUserById(id).getPassword();
+        boolean result = BCrypt.checkpw(password, user_password);
+        String bcryptPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
+        if(!result) {
+            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
+            if(updateResult == 1) {
+                return true;
+            }
+        }
 
-//    public boolean updateBcryptPassword(String password, String id) throws Exception {
-//        String user_password = userRepository.getUserById(id).getPassword();
-//        boolean result = passwordEncoder.matches(password,user_password);
-//
-//        if(!result) {
-//            String bcryptPassword = passwordEncoder.encode(password);
-//            int updateResult = userRepository.updatePasswordById(bcryptPassword, id);
-//            if(updateResult == 1) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
+        return false;
+    }
 
     // 마이페이지 정보 출력
     public UserDTO userInfo(String id) {

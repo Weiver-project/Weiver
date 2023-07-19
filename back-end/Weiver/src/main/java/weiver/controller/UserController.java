@@ -1,6 +1,9 @@
 package weiver.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -136,37 +139,37 @@ public class UserController {
 		return "passwordUpdate";
 	}
 
-//	@PostMapping("/updatePW")
-//	public ResponseEntity<String> updatePW(@RequestParam("userId") String userId,
-//										   @RequestParam("myPw") String userPw,
-//										   @RequestParam("newPw") String newPw,
-//										   @RequestParam("checkPw") String checkPw) {
-//
-//		String password = userservice.findById(userId).getPassword();
-////		boolean result = passwordEncoder.matches(userPw, password);
-////
-////		// 기존 비밀번호 확인
-////		if (!result) {
-////			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
-////		}
-//
-//		// 새 패스워드, 패스워드 확인 체크
-//		if(!newPw.equals(checkPw)) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
-//		}
-//
-//		try {
-//			boolean updateResult = userservice.updateBcryptPassword(newPw,userId);
-//			if (updateResult) {
-//				return ResponseEntity.ok("변경이 완료되었습니다.");
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 내부 에러가 발생했습니다.");
-//		}
-//
-//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("비밀번호 변경 중 에러가 발생했습니다.");
-//	}
+	@PostMapping("/updatePW")
+	public ResponseEntity<String> updatePW(@RequestParam("userId") String userId,
+										   @RequestParam("myPw") String userPw,
+										   @RequestParam("newPw") String newPw,
+										   @RequestParam("checkPw") String checkPw) {
+
+		String password = userservice.findById(userId).getPassword();
+		boolean result = BCrypt.checkpw(userPw, password);
+
+		// 기존 비밀번호 확인
+		if (!result) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 틀렸습니다.");
+		}
+
+		// 새 패스워드, 패스워드 확인 체크
+		if(!newPw.equals(checkPw)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력하신 비밀번호와 확인 비밀번호가 다릅니다.");
+		}
+
+		try {
+			boolean updateResult = userservice.updateBcryptPassword(newPw,userId);
+			if (updateResult) {
+				return ResponseEntity.ok("변경이 완료되었습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 내부 에러가 발생했습니다.");
+		}
+
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("비밀번호 변경 중 에러가 발생했습니다.");
+	}
 
 	@GetMapping("/myBoard/{userid}")
 	public String myBoard(@PathVariable String userid,

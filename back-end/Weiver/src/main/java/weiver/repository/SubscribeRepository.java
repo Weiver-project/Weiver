@@ -16,7 +16,6 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	 * 인기 뮤지컬 조회
 	 * 찜, 봤어요 중 원하는 타입이 가장 많은 뮤지컬 3개 가져오기
 	 */
-
 	@Query("SELECT s.musicalId.id as id, s.musicalId.title as title FROM Subscribe s WHERE s.type = '봤어요' GROUP BY s.musicalId.id, s.musicalId.title ORDER BY COUNT(s.musicalId) DESC")
 	List<PoPularMusicalDTO> findTop3MusicalByDesiredType(org.springframework.data.domain.Pageable pageable);
 
