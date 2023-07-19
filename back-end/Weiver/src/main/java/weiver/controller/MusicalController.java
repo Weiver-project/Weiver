@@ -53,6 +53,7 @@ public class MusicalController {
 //    		model.addAttribute("casting", casting);
 //    	}
     	
+    	// Youtube API 가져오기
     	try {
 			List<String> clips = GoogleAPIService.search("뮤지컬" + musical.get().getTitle());
 			model.addAttribute("clips", clips);
