@@ -39,9 +39,10 @@
 
 		<form action="/community/${posts.id}" method="post" enctype="multipart/form-data">
              <input type="hidden" name="_method" value="PUT" />
+             
 				<div class = selectbtn>	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
-					<select id="selectFormType" onchange="postTypeChange()">
+					<select name = "type" id="selectFormType" onchange="postTypeChange()">
 						<option value="select">글 종류</option>
                         <option value="잡담" ${posts.type == 'Chat' ? 'selected' : ''}>잡담</option>
                         <option value="리뷰" ${posts.type == 'Result' ? 'selected' : ''}>리뷰</option>
@@ -53,7 +54,7 @@
 				<!-- 제목 작성 칸-->
 				<span>제목</span>
 				<div>
-					<textarea class="title" id="title">${posts.title}</textarea>
+					<textarea name = "title" class="title" id="title">${posts.title}</textarea>
 				</div>
 
 
@@ -62,7 +63,7 @@
 					<br>
 					작품명
 					<div>
-						<textarea class="title" id="reviewPerformance" oninput="searchPerformance()">${posts.type == 'Result' ? posts.title : ''}</textarea>
+						<textarea name = "#" class="title" id="reviewPerformance" oninput="searchPerformance()">${posts.type == 'Result' ? posts.title : ''}</textarea>
 					</div>
 				</div>
 
@@ -97,14 +98,9 @@
 					</div>
 
 						<!-- 내용칸 -->
-							<div id="editor" contenteditable="true">
-							<input id="img-selector" type="file" accept="image/*" />
-							<c:forEach items="${posts.images}" var="image">
-							  <!-- 이미지 미리보기 -->
-							  <img src="${image.path}" alt="Image Preview" height="200" width="200" />
-							</c:forEach>
-                            ${posts.content}
-						</div>
+					<div>
+						<textarea name="content" type="text" class="content" id="editor">${posts.content}</textarea>
+					</div>
 				
 				<br>
 					<!-- 작성하기 버튼 -->
