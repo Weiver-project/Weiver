@@ -32,9 +32,9 @@ public class ActorService {
 		return musicalPosterImgList;
 	}
 
-//	public ResponseCastingDTO getCastingByMusicalId(String id) {
-//		ResponseCastingDTO casting = castingRepository.getCastingByMusicalId(id);
-//		return casting;
-//	}
+	public List<ResponseCastingDTO> getCastingByMusicalId(String id) {
+		List<ResponseCastingDTO> casting = castingRepository.getCastingByMusicalId(id);
+		return casting;
+	}
 	
 }
