@@ -20,7 +20,7 @@ CREATE TABLE scott.answer (
     admin_id     VARCHAR2(30) NOT NULL,
     answer       VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL
-)
+);
 
 CREATE UNIQUE INDEX scott.pk_answer ON
     scott.answer (

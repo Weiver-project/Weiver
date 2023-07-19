@@ -38,5 +38,11 @@ public class ActorService {
 		List<ResponseCastingDTO> casting = castingRepository.getCastingByMusicalId(id);
 		return casting;
 	}
+
+	// 오늘의 배우
+	public Actor getRandomActor() throws Exception{	
+		Actor actor = actorRepository.getRandomActor();
+		return actor;
+	}
 	
 }

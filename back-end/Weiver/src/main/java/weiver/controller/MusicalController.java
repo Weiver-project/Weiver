@@ -11,6 +11,7 @@ import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.ResponseCastingDTO;
 import weiver.dto.SimpleMusicalDTO;
+import weiver.entity.Actor;
 import weiver.entity.Musical;
 import weiver.service.ActorService;
 import weiver.service.MusicalService;
@@ -28,7 +29,18 @@ public class MusicalController {
     public String getMainPage(Model model){
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
-
+        
+        try {
+			Actor randomActor = actorService.getRandomActor();
+			List<SimpleMusicalDTO> musicalList = actorService.getmusicalListByActorId(randomActor.getId());
+			List<SimpleMusicalDTO> limitedMusicalList = musicalList.subList(0, Math.min(musicalList.size(), 8));
+			
+			model.addAttribute("randomActor", randomActor);
+			model.addAttribute("limitedMusicalList", limitedMusicalList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         	
         //인기 뮤지컬 추가
         System.out.println(poPularMusicalDTOs.get(0).getTitle());
