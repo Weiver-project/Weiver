@@ -24,26 +24,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
 import weiver.entity.Image;
+import weiver.entity.Musical;
 import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
 import weiver.entity.User;
 import weiver.service.CommunityService;
+import weiver.service.MusicalService;
 import weiver.service.UserService;
 
 @Controller
+@RequiredArgsConstructor
 public class CommunityController {
 
 	private final CommunityService communityService;
     private final UserService userService;
+    private final MusicalService MusicalService;
 
-    @Autowired
-    public CommunityController(CommunityService communityService, UserService userService) {
-        this.communityService = communityService;
-		this.userService = userService;
-    }
 
     /*
      * 커뮤니티 메인 페이지
@@ -206,7 +206,11 @@ public class CommunityController {
 		 * 게시글 작성 페이지
 		 * */
 		@RequestMapping(value="/community/board", method=RequestMethod.GET)
-		public String insertPostForm() {
+		public String insertPostForm(Model model) {
+			List<Musical> musicals = MusicalService.getAllMusical();
+			
+			model.addAttribute(musicals);
+			
 			return "registerPost";
 		}
 		
