@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
+import weiver.dto.ResponseCastingDTO;
 import weiver.dto.SimpleMusicalDTO;
+import weiver.entity.Actor;
 import weiver.entity.Musical;
+import weiver.service.ActorService;
 import weiver.service.GoogleAPIService;
 
 import weiver.service.MusicalService;
@@ -24,12 +27,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MusicalController {
     private final MusicalService musicalService;
+    private final ActorService actorService;
     
     @GetMapping("/main")
     public String getMainPage(Model model){
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
         
+
+        try {
+        	// 오늘의 배우 뮤지컬 정보.
+			Actor randomActor = actorService.getRandomActor();
+			List<SimpleMusicalDTO> musicalList = actorService.getmusicalListByActorId(randomActor.getId());
+			List<SimpleMusicalDTO> limitedMusicalList = musicalList.subList(0, Math.min(musicalList.size(), 8));
+			System.out.println("size : " + limitedMusicalList.size());
+			
+			model.addAttribute("randomActor", randomActor);
+			model.addAttribute("limitedMusicalList", limitedMusicalList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        	
+
         //인기 뮤지컬 추가
         System.out.println(poPularMusicalDTOs.get(0).getTitle());
         

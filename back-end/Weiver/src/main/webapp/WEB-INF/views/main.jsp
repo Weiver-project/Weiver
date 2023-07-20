@@ -156,44 +156,31 @@
 
 <!--오늘의 배우 2개씩 총 8개 출력-->
 <h1 class="title">오늘의 배우✨</h1>
-<div class="today_actor">
+<div class="today_actor" style="max-height: 180px">
   <div class="actor_img">
-    <img src="image1.jpg" alt="이미지 1">
-    <span class="actor-name">배역 명 뿌려주세요</span>
+    <div>
+    	<a href="/actorDetail/${randomActor.id}">
+		   	<img src="${randomActor.profileImage}" style="border-radius: 50%; max-height: 180px;">
+		   	<span class="actor-name">${randomActor.name}</span>
+    	</a>
+    </div>
   </div>
-  <div class="actor-details">
+  <div class="actor-details" style="max-height: 180px;">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="poster-container">
-            <div class="poster">
-              <img src="image1.jpg" alt="이미지 1">
-            </div>
-            <div class="poster">
-              <img src="image2.jpg" alt="이미지 2">
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="poster-container">
-            <div class="poster">
-              <img src="image4.jpg" alt="이미지 3">
-            </div>
-            <div class="poster">
-              <img src="image5.jpg" alt="이미지 4">
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="poster-container">
-            <div class="poster">
-              <img src="image7.jpg" alt="이미지 5">
-            </div>
-            <div class="poster">
-              <img src="image8.jpg" alt="이미지 6">
-            </div>
-          </div>
-        </div>
+       	<c:forEach items="${limitedMusicalList}" var="limitedMusical" varStatus="status">
+       		<c:if test="${status.index % 2 == 0}">
+       			<div class="swiper-slide">
+	          		<div class="poster-container"> 
+       		</c:if>
+	            <div class="poster">
+	            <a href="/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}"></a>
+	            </div>
+               <c:if test="${status.index % 2 == 1 or status.last}">
+		           </div>
+		       </div>
+               </c:if>
+    		</c:forEach>
       </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
