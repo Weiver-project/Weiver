@@ -17,9 +17,12 @@
 
 <script>
 function handleSearchBoxChange(musicals) {
+	
   //기존 검색 리스트를 지우는 코드가 들어가야함
   var searchTerm = document.getElementById("searchBox").value;
-	
+  
+  console.log("키워드 입력되는 중");
+  /*
   //뮤지컬 키워드에 해당하는 뮤지컬 리스트 필터링
   var filteredMusicals = musicalsData.filter(function (musicals) {
     return musical.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -52,6 +55,8 @@ function handleSearchBoxChange(musicals) {
 
 
   musicalInfoContainer.style.display = "block";
+  
+	*/
 }
 </script>
 
@@ -105,19 +110,18 @@ function handleSearchBoxChange(musicals) {
 					 <input
 					    type="text"
 					    id="searchBox"
-					    placeholder="작품명을 입력해주세요."
+					    placeholder="${musicals.get(0).id}"
 					    autocomplete="off"
+					     oninput="handleSearchBoxChange(${musicals})"
 					  />
 					</div>
 					
-					<div id="musicalInfoContainer" style="display:none">
-					  <ul class="musical_list">
-					    <li>
-					      <img src="${musical.getPosterImage()}" alt="poster">
-					      <h2>${musical.getTitle()}</h2>
-					      <span><fmt:formatDate value="${musical.getStDate()}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${musical.getEdDate()}" pattern="yyyy-MM-dd" /></span>
-					    </li>
-					  </ul>
+				   <div id="musicalInfoContainer">
+					  <c:forEach var="performingMusical" items="${musicals}" varStatus="status">
+				        <div class="poster" id="${performingMusical.getId()}">
+				          <img src="${performingMusical.getPosterImage()}" alt="image">
+				        </div>
+				      </c:forEach>
 					</div>
 
 				</div>
