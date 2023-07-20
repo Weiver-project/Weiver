@@ -96,9 +96,9 @@
 					</div>
 
 						<!-- 내용칸 -->
-							<div id="editor" name="content" contenteditable="true" required>
-							<input id="img-selector" name="images" type="file" accept="image/*" />                         
-						</div>
+					<div>
+						<textarea name="content" type="text" class="content" id="editor"></textarea>
+					</div>
 				
 				<br>
 					<!-- 작성하기 버튼 -->

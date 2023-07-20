@@ -11,16 +11,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "post_like")
 public class PostLike {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_like_seq_gen")
+    @SequenceGenerator(name = "post_like_seq_gen", sequenceName = "post_like_sequence", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "post_id")
-    private Long postId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
 }
 
 
