@@ -3,7 +3,6 @@ package weiver.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Subscribe;
@@ -19,7 +18,6 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	@Query("SELECT s.musicalId.id as id, s.musicalId.title as title FROM Subscribe s WHERE s.type = '봤어요' GROUP BY s.musicalId.id, s.musicalId.title ORDER BY COUNT(s.musicalId) DESC")
 	List<PoPularMusicalDTO> findTop3MusicalByDesiredType(org.springframework.data.domain.Pageable pageable);
 
-
 	//유저의 봤어요, 찜 목록 조회
 	@Query("SELECT s.musicalId.id as id, s.musicalId.title as title, s.musicalId.posterImage as posterImage, s.musicalId.stDate as stDate, s.musicalId.edDate as edDate FROM Subscribe s WHERE s.userId = ?1 AND s.type = ?2")
     List<SimpleMusicalDTO> findMusicalIdByUserIdAndType(String userId, String type);
@@ -27,4 +25,8 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	//유저의 봤어요, 찜 목록 카운팅
 	@Query("SELECT COUNT(?1) FROM Subscribe s WHERE s.userId.id = ?1 AND s.type = ?2")
 	int countByUserIdAndType(String userId, String type);
+
+	//중복 여부
+	@Query("SELECT s FROM Subscribe s WHERE s.userId = ?1 AND s.musicalId = ?2 AND s.type = ?3")
+	Subscribe findByUserIdAndTypeAndMusicalId(String userId, String musicalId, String type);
 }
