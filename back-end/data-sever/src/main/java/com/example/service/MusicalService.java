@@ -69,7 +69,7 @@ public class MusicalService {
             List<String> musicalIds = setMusicalIds(genre, CrawlingType, maxPage);
 
             log.info("가져온 MUSICAL ID 개수: " + musicalIds.size());
-            log.info("MUSICAL ID LIST: " + musicalIds);
+//            log.info("MUSICAL ID LIST: " + musicalIds);
 
             saveAllMusical(musicalIds);
         }
