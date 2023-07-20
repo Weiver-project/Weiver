@@ -209,7 +209,7 @@ public class CommunityController {
 		public String insertPostForm(Model model) {
 			List<Musical> musicals = MusicalService.getAllMusical();
 			
-			model.addAttribute(musicals);
+			model.addAttribute("musicals",musicals);
 			
 			return "registerPost";
 		}
