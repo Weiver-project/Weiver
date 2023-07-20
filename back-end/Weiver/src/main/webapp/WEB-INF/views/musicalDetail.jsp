@@ -162,7 +162,6 @@
 
 <script>
 function addSubscirbe(musicalId, type){
-	console.log('addJjim' + musicalId + ", " + type);
 
     // 서버에 데이터 전송 (AJAX 사용)
     $.ajax({
@@ -171,15 +170,7 @@ function addSubscirbe(musicalId, type){
         contentType: 'application/json'
         
     });
-	
-}
-
-
-
-       
-function addWatched(){
-	console.log('addWatched');
-	
+    
 }
 
 </script>

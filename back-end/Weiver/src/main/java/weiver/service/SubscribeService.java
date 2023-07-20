@@ -27,26 +27,19 @@ public class SubscribeService {
 
     /*찜, 봤어요 저장*/
     public boolean insertSubscribe(String userId, String musicalId, String type) {
-    	System.out.println("insertSubscribe");
-    	System.out.println(userId);
-    	System.out.println(musicalId);
-    	System.out.println(type);
     	
+    	List<String> findSubscribes = subscribeRepository.findByUserIdAndMusicalIdAndType(userId, musicalId, type);
     	
-    	Subscribe findSubscribe = subscribeRepository.findByUserIdAndMusicalIdAndType(userId, musicalId, type);
-    	System.out.println("findSubscribe 완료");
-    	if(findSubscribe == null) { // 데이터가 없다면 추가
+    	if(findSubscribes.size() == 0) { // 데이터가 없다면 추가
 	        subscribeRepository.save(Subscribe.builder()
                                             .userId(userRepository.getUserById(userId))
                                             .musicalId(Musical.builder()
                                             				  .id(musicalId)
                                             				  .build())
                                             .type(type).build());
-	        System.out.println(musicalId + " " + type + " Subscribe 추가");
 	        return true;
     	}else { // 데이터가 있다면 삭제
     		subscribeRepository.deleteByUserIdAndMusicalIdAndType(userId, musicalId, type);
-    		System.out.println(musicalId + " " + type + " Subscribe 삭제");
     	}
     	
         return false;

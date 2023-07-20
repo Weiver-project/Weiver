@@ -22,10 +22,8 @@ public class SubscribeController {
     @GetMapping("/addSubscribe/{musicalId}/{type}")
     public String addSubscribe(@PathVariable String musicalId, @PathVariable String type,
     							Model model, HttpSession Session){
-    	System.out.println("addSubscribe");
     	
     	String userId = Session.getAttribute("userId").toString();
-    	System.out.println(userId);
     	
     	if(musicalId != null) {
     		subscribeService.insertSubscribe(userId, musicalId, type);
