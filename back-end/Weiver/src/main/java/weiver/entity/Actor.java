@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.springframework.lang.Nullable;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -21,9 +23,11 @@ public class Actor {
 	@Column(name = "ID")
 	private String id;
 
+	@Nullable
 	@Column(name = "NAME")
 	private String name;
 
+	@Nullable
 	@Column(name = "PROFILE_IMAGE")
 	private String profileImage;
 }
