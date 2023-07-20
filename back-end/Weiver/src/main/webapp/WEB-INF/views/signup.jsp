@@ -26,7 +26,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a>
+                <a href="/login"><i class="bi bi-chevron-left"></i></a>
             </div>
         </div>
     </header>
@@ -163,16 +163,16 @@
 
         <!-- navibar -->
         <nav>
-            <a href="#"><i class="bi bi-house-door-fill"></i>
-                <div>HOME</div>
-            </a>
-            <a href="#"><i class="bi bi-chat-dots-fill"></i>
-                <div>COMMUNITY</div>
-            </a>
-            <a href="#"><i class="bi bi-person-fill"></i>
-                <div>MY PAGE</div>
-            </a>
-        </nav>
+		    <a href="/main"><i class="bi bi-house-door-fill"></i>
+		        <div>HOME</div>
+		    </a>
+		    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+		        <div>COMMUNITY</div>
+		    </a>
+		    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+		        <div>MY PAGE</div>
+		    </a>
+		</nav>
 
         <!-- script -->
         <script>

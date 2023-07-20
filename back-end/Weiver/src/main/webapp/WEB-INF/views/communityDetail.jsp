@@ -187,30 +187,45 @@ function deleteReply(commentId) {
     });
 }
 
-function changeHeartIcon(type, id, heartIcon) {
-    // 서버로 보낼 데이터 준비
-    const data = {
-        type: type, // 'post', 'reply', 'rereply' 중 하나
-        id: id // 게시글, 댓글 또는 대댓글의 ID 값
-    };
+//페이지 로드 시 이전 상태를 복원하는 함수
+function restoreLikeState() {
+    var likeIcon = document.getElementById("likeIcon");
+    var postId = "${posts.id}";
 
-    // 서버에 데이터 전송 (AJAX 사용)
-    $.ajax({
-        type: 'POST',
-        url: '/community/insert/postlike/' + id, // 좋아요 처리를 담당하는 컨트롤러 URL
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        success: function (response) {
-            // 서버에서 응답을 받으면 좋아요 개수를 업데이트
-            const likesCount = response.likesCount;
-            $(heartIcon).next().text(likesCount);
-        },
-        error: function (error) {
-            // 에러 처리
-            console.error('Error occurred:', error);
-        }
-    });
+    // Local Storage에서 해당 게시물의 좋아요 상태를 가져옴
+    var likeState = localStorage.getItem("like_" + postId);
+
+    if (likeState === "liked") {
+        likeIcon.classList.remove("bi-suit-heart");
+        likeIcon.classList.add("bi-heart-fill");
+    }
 }
+
+// 좋아요 상태를 Local Storage에 저장하는 함수
+function saveLikeState() {
+    var postId = "${posts.id}";
+
+    // 해당 게시물의 좋아요 상태를 Local Storage에 저장
+    localStorage.setItem("like_" + postId, "liked");
+}
+
+function submitForm() {
+    var likeIcon = document.getElementById("likeIcon");
+    var form = document.getElementById("likeForm");
+
+    // "bi-suit-heart"에서 "bi-heart-fill"로 아이콘 변경
+    likeIcon.classList.remove("bi-suit-heart");
+    likeIcon.classList.add("bi-heart-fill");
+
+    // 좋아요 상태를 Local Storage에 저장
+    saveLikeState();
+
+    // Ajax 요청으로 폼 전송 (생략 가능)
+    form.submit();
+}
+
+// 페이지 로드 시 이전 상태를 복원
+document.addEventListener("DOMContentLoaded", restoreLikeState);
 </script>
 
 
@@ -246,34 +261,40 @@ function changeHeartIcon(type, id, heartIcon) {
             <hr>
 
             <!-- 연결된 작품 -->
-            <c:if test="${posts.type eq 'Review'}">
-                <div class="currentMusical">
-                    <img src="/img/poster.jpg" alt="X">
-                    <div class="currentMusicalInfo">
-                        <div class="musicalTitle">웃는 남자</div>
-                        <div class="musicalPeriod">2022-06-10~2012-08-22</div>
-                    </div>
-                </div>
-                <hr>
-            </c:if>
+             <c:if test="${posts.type eq 'Review'}">
+			    <div class="currentMusical">
+			        <img src="${reviews.musical.getPosterImage()}" alt="X">
+			        <div class="currentMusicalInfo">
+			            <div class="musicalTitle">${reviews.musical.getTitle()}</div>
+			            <div class="musicalPeriod">${reviews.musical.getStDate()} ~ ${reviews.musical.getEdDate()}</div>
+			        </div>
+			    </div>
+			    <hr>
+			</c:if>
 
             <!-- 게시글 내용 (텍스트, 이미지) -->
             <div class="postContent">${posts.content}</div>
-            <img class="postImg" src="${posts.images}" alt="게시글 이미지">
+            <c:if test="${not empty posts.images}">
+			    <img class="postImg" src="${posts.images}" alt="게시글 이미지">
+			</c:if>
+
 
             <!-- 조회, 댓글, 좋아요 아이콘 그룹 -->
-            <div class="iconGroup">
+            <div class="iconGroup2">
                 <div>
                     <i class="bi-eye"></i>
                     <span>${posts.viewed}</span>
                 </div>
                 <div>
                     <i class="bi-chat"></i>
-                    <span>${posts.viewed}</span>
+                    <span>${reply.size()}</span>
                 </div>
                 <div>
-				    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
-				    <span>${post.postlikes.size()}</span>
+				    <form id="likeForm" method="post" action="/community/postlike/${posts.id}">
+				    <input type="hidden" name="postId" value="${posts.id}">
+				        <i id="likeIcon" class="bi-suit-heart" onclick="submitForm()" style="width: 24px; height: 24px;"></i>
+				        <span>${post.viewed}</span>
+					</form>
 				</div>
             </div>
         </div>
@@ -287,7 +308,7 @@ function changeHeartIcon(type, id, heartIcon) {
         <!-- 댓글 컨테이너 -->
         <div class="commentWrap">
             <!-- 총 댓글 수 조회 -->
-            <div class="totalComment">총 댓글 수 : <span>${posts.viewed}</span></div>
+            <div class="totalComment">총 댓글 수 : <span>${reply.size()}</span></div>
 
             <!-- 작성된 댓글 (아이디, 댓글, 좋아요 아이콘, 대댓글 링크, 버튼) -->
             <hr>
@@ -352,13 +373,13 @@ function changeHeartIcon(type, id, heartIcon) {
 
     <footer>Copyright Weiver 2023 All Rights Reserved</footer>
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
+        <a href="/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
         <a href="/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
+        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>

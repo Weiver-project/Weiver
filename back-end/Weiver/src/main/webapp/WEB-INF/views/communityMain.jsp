@@ -68,64 +68,71 @@
         </div>
         <p style="font-weight:bold; font-size: 17px;">인기글🔥</p>
         <div class="popular_community">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="card-container">
-                            <c:forEach var="card" items="${bestPost}">
-                            <a href="/community/${card.id}">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">${card.title}</h3>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="author">${card.user.nickname}</span>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-container">
-                            <c:forEach var="card" items="${bestPost}">
-                           		<a href="/community/${card.id}">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">${card.title}</h3>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="author">${card.user.nickname}</span>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-container">
-                            <c:forEach var="card" items="${bestPost}">
-                                <a href="/community/${card.id}">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">${card.title}</h3>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="author">${card.user.nickname}</span>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Navigation -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
+		    <div class="swiper-container">
+		        <div class="swiper-wrapper">
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index < 3}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index >= 3 and status.index < 6}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index >= 6}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- Add Pagination -->
+		        <div class="swiper-pagination"></div>
+		        <!-- Add Navigation -->
+		        <div class="swiper-button-next"></div>
+		        <div class="swiper-button-prev"></div>
+		    </div>
+		</div>
+
 
         <hr style="margin-top: 22px; margin-bottom: 22px; color: #D4D9E1;">
 
@@ -147,7 +154,12 @@
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
 							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+								 <c:if test="${not empty post.images}">
+								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+								</c:if>
+								<c:if test="${empty post.images}">
+								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+								</c:if>
                             <div class="iconGroup">
                                 <div>
                                     <i class="bi-eye"></i>
@@ -155,7 +167,6 @@
                                 </div>
                                 <div>
                                     <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
-                                    <span>${post.postlikes.size()}</span>
                                 </div>
                                 <div>
                                     <i class="bi-chat"></i>
@@ -181,7 +192,7 @@
                                     </div>
                                     <div>
                                         <i class="bi-suit-heart" onclick="changeHeartIcon(this)"></i>
-                                        <span>${post.postlikes.size()}</span>
+                                        <span>${post.viewed}</span>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +216,7 @@
                                     </div>
                                     <div>
 								    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
-								    <span>${post.postlikes.size()}</span>
+								    <span>${post.viewed}</span>
 								 </div>
                                 </div>
                             </div>
@@ -244,13 +255,13 @@
 
     <footer>&copy; Weiver 2023 All Rights Reserved</footer>
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
+        <a href="/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
         <a href="/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
+        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>

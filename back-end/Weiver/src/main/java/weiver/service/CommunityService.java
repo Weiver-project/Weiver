@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,12 +20,14 @@ import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
+import weiver.entity.Review;
 import weiver.entity.User;
 import weiver.repository.CommunityRepository;
 import weiver.repository.ImageRepository;
 import weiver.repository.PostLikeRepository;
 import weiver.repository.ReReplyRepository;
 import weiver.repository.ReplyRepository;
+import weiver.repository.ReviewRepository;
 import weiver.repository.UserRepository;
 
 @Service
@@ -46,6 +50,9 @@ public class CommunityService {
 	
 	@Autowired
 	private PostLikeRepository postlikeRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
 	
 	// 이미지를 저장하는 디렉토리 경로
     private static final String IMAGE_UPLOAD_DIR = "C:/multi/Weiver/back-end/Weiver/src/main/resources/static/img/image";
@@ -84,6 +91,12 @@ public class CommunityService {
 		
 		return post;
 	}
+	
+	public Review getReviewByPostId(Long PostId) {
+		Review review = reviewRepository.getReviewByPostId(PostId);
+		System.out.println(review);
+		return review;
+	}
 
 	//title, content에 들어 있는 키워드에 따라 게시글 가져오기 > 커뮤니티 검색 페이지
 		public List<Post> getPostByKeyword(String keyword) {
@@ -119,33 +132,38 @@ public class CommunityService {
 		return result;
 	}
 	
-	 // 게시글 작성
-	public boolean savePost(User user, String type, String title, String content, String imagePath) throws Exception {
-        Date date = new Date();
+	// 게시글 작성
+		 public boolean savePost(User user, String type, String title, String content, List<String> imagePaths) throws Exception {
+		        Date date = new Date();
 
-        Post post = Post.builder()
-                        .user(user)
-                        .type(type)
-                        .title(title)
-                        .content(content)
-                        .createdTime(date)
-                        .viewed(0L)
-                        .build();
+		        Post post = Post.builder()
+		                        .user(user)
+		                        .type(type)
+		                        .title(title)
+		                        .content(content)
+		                        .createdTime(date)
+		                        .viewed(0L)
+		                        .build();
 
-        Post resultPost = communityRepository.save(post);
-        if (resultPost.getId() == null) {
-            return false;
-        }
+		        Post resultPost = communityRepository.save(post);
+		        if (resultPost.getId() == null) {
+		            return false;
+		        }
 
-        // 이미지 삽입
-        Image image = Image.builder()
-                            .postId(resultPost.getId())
-                            .path(imagePath)
-                            .build();
+		        // 이미지 삽입
+		        if (imagePaths != null && !imagePaths.isEmpty()) {
+		            for (String imagePath : imagePaths) {
+		                Image image = Image.builder()
+		                                    .postId(resultPost.getId())
+		                                    .path(imagePath)
+		                                    .build();
 
-        Image resultImage = imageRepository.save(image);
-        return resultImage.getId() != null;
-    }
+		                imageRepository.save(image);
+		            }
+		        }
+
+		        return true;
+		    }
 
     
 	
@@ -274,27 +292,6 @@ public class CommunityService {
 		return result;
 	}
 
-	
-
-
-	public boolean insertImage(Image image) throws SQLException, Exception {
-		boolean result = false;
-		
-		Long postId = image.getPostId();
-		String path = image.getPath();
-		
-		int res = imageRepository.insertImage(postId, path);
-		
-		
-		if (res != 0) {
-	        result = true;
-	    } else {
-	        throw new Exception("이미지 생성 실패");
-	    }
-		System.out.println(res);
-	    return result;
-	}
-
 
 		//대댓글 삽입
 		public boolean insertRereply(ReReply rereply) {
@@ -331,6 +328,24 @@ public class CommunityService {
 		 * 기타
 		 * */
 		
+		public boolean insertImage(Image image) throws SQLException, Exception {
+			boolean result = false;
+			
+			Long postId = image.getPostId();
+			String path = image.getPath();
+			
+			int res = imageRepository.insertImage(postId, path);
+			
+			
+			if (res != 0) {
+		        result = true;
+		    } else {
+		        throw new Exception("이미지 생성 실패");
+		    }
+			System.out.println(res);
+		    return result;
+		}
+		
 		public void incrementViewCount(Post post) {
 			// 현재 조회수를 가져옴
 		    Long currentViewCount = post.getViewed();
@@ -343,42 +358,70 @@ public class CommunityService {
 		}
 
 
-		// 게시글 좋아요 데이터 삽입
-		public boolean insertPostlike(PostLike postlike) throws Exception {
-		    // 필요한 데이터가 비어있는지 먼저 확인
-		    if (postlike == null || postlike.getPostId() == null || postlike.getUser().getId() == null) {
-		        throw new Exception("필수 데이터가 누락되었습니다.");
+		public String saveImage(MultipartFile imageFile) throws IOException {
+	        // 이미지 파일의 확장자를 추출
+	        String fileExtension = FilenameUtils.getExtension(imageFile.getOriginalFilename());
+
+	        // 서버에 저장할 새 파일 이름 생성 (랜덤 문자열 사용 또는 업로드 시간 기반 이름 등)
+	        String newFileName = UUID.randomUUID().toString() + "." + fileExtension;
+
+	        // 이미지 파일을 서버의 지정된 디렉토리로 저장
+	        Path filePath = Paths.get(IMAGE_UPLOAD_DIR, newFileName);
+	        Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+	        // 이미지 파일의 경로를 반환
+	        return IMAGE_UPLOAD_DIR + "/" + newFileName;
+	    }
+
+		
+		// 게시글 좋아요 삽입
+		public boolean insertPostLike(PostLike postlike) {
+
+			// user_id와 post_id의 유효성 검증
+		    User user = userRepository.getUserById(postlike.getUser().getId());
+		    if (user == null) {
+		        return false;
 		    }
 
-		    // 게시글에 해당하는 Post 객체가 데이터베이스에 존재하는지 확인 (생략되었다고 가정)
-		    Post post = communityRepository.findById(postlike.getPostId()).orElse(null);
+		    Post post = communityRepository.getPostById(postlike.getPost().getId());
 		    if (post == null) {
-		        throw new Exception("해당하는 게시글이 존재하지 않습니다.");
+		    	return false;
 		    }
 
-		    try {
-		        // 게시글과 유저 정보를 설정한 후 저장
-		        postlikeRepository.save(postlike);
+		    // 좋아요 삽입 로직
+		    if (postlikeRepository.save(postlike) != null) {
 		        return true;
-		    } catch (Exception e) {
-		        throw new Exception("좋아요 데이터 생성 실패");
+		    } else {
+		    	return false;
 		    }
 		}
+
+
+
+		public PostLike getpostlikeById(Long id) {
+			PostLike postlike = postlikeRepository.getPostLikeById(id);
+			
+			return postlike;
+		}
+
+
+		public boolean deletePostlike(Long id) throws Exception, SQLException {
+			boolean result = false;
+			
+			int res = postlikeRepository.deletePostLikeById(id);
+			
+			if(res != 0) {
+				result = true;
+			} else {
+				throw new Exception("좋아요 취소 실패");
+			}
+			
+			return result;
+			
+		}
+
+
 		
-//		public String saveImage(MultipartFile imageFile) throws IOException {
-//	        // 이미지 파일의 확장자를 추출
-//	        String fileExtension = FilenameUtils.getExtension(imageFile.getOriginalFilename());
-//
-//	        // 서버에 저장할 새 파일 이름 생성 (랜덤 문자열 사용 또는 업로드 시간 기반 이름 등)
-//	        String newFileName = UUID.randomUUID().toString() + "." + fileExtension;
-//
-//	        // 이미지 파일을 서버의 지정된 디렉토리로 저장
-//	        Path filePath = Paths.get(IMAGE_UPLOAD_DIR, newFileName);
-//	        Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-//
-//	        // 이미지 파일의 경로를 반환
-//	        return IMAGE_UPLOAD_DIR + "/" + newFileName;
-//	    }
 
 
 

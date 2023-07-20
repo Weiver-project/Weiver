@@ -22,8 +22,8 @@
 
         <!-- 설정 -->
         <div class="setting">
-            <a href="#"><i class="bi bi-person-lines-fill"></i></a>
-            <a href="#"><i class="bi bi-gear-wide"></i></a>
+            <a href="profileUpdate"><i class="bi bi-person-lines-fill"></i></a>
+            <a href="setting"><i class="bi bi-gear-wide"></i></a>
         </div>
     
         <!-- 프로필 -->
@@ -34,14 +34,14 @@
     
         <!-- 찜했어요/ 봤어요 -->
         <div class="subscribe">
-            <a href="#">
+            <a href="mySubscribe">
                 <div>${requestScope.userInfo.countJjim}</div>
                 찜했어요
             </a>
         
             <div class="line"></div>
                 
-            <a href="#">
+            <a href="mySubscribe">
                 <div>${requestScope.userInfo.countIsWatched}</div>
                 봤어요
             </a>
@@ -51,7 +51,7 @@
         <!-- 내가 쓴 글/ 내가 쓴 댓글/ 좋아요한 글 -->
         <div class="board">
             
-            <a href="#">
+            <a href="myBoard">
                 <div>내가 쓴 글</div>
                 <div>
                     ${requestScope.userInfo.countPosts}
@@ -61,7 +61,7 @@
             
             <hr>
             
-            <a href="#">
+            <a href="myComment">
                 <div>내가 쓴 댓글</div>
                 <div>
                     ${requestScope.userInfo.countReplies}
@@ -71,7 +71,7 @@
             
             <hr>
             
-            <a href="#">
+            <a href="myLike">
                 <div>좋아요한 글</div>
                 <div>
                     ${requestScope.userInfo.countPostLikes}
@@ -88,15 +88,15 @@
 
     <!-- navibar -->
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
-            <div>HOME</div>
-        </a>
-        <a href="#"><i class="bi bi-chat-dots-fill"></i>
-            <div>COMMUNITY</div>
-        </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
-            <div>MY PAGE</div>
-        </a>
-    </nav>
+	    <a href="/main"><i class="bi bi-house-door-fill"></i>
+	        <div>HOME</div>
+	    </a>
+	    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+	        <div>COMMUNITY</div>
+	    </a>
+	    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+	        <div>MY PAGE</div>
+	    </a>
+	</nav>
 </body>
 </html>

@@ -20,7 +20,7 @@ CREATE TABLE scott.answer (
     admin_id     VARCHAR2(30) NOT NULL,
     answer       VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL
-)
+);
 
 CREATE UNIQUE INDEX scott.pk_answer ON
     scott.answer (
@@ -218,7 +218,7 @@ CREATE TABLE scott.review (
     id         NUMBER NOT NULL,
     post_id    NUMBER NOT NULL,
     musical_id VARCHAR2(100 BYTE)
-)
+);
 
 CREATE UNIQUE INDEX scott.pk_review ON
     scott.review (
@@ -407,3 +407,4 @@ create SEQUENCE re_reply_sequence;
 create SEQUENCE re_reply_like_sequence;
 create SEQUENCE SUBSCRIBE_sequence;
 create SEQUENCE user_tb_sequence;
+create SEQUENCE review_sequence;

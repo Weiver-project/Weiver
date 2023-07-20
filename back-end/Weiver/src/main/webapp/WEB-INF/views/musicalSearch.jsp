@@ -19,7 +19,7 @@
 <body class="container">
   <header>
     <img id="logo" src="/img/logo.png" alt="logo" height="70" width="300">
-    <a href="#"><i class="bi bi-chevron-left"></i></a>
+    <a href="/main"><i class="bi bi-chevron-left"></i></a>
     <h2>검색결과</h2>
   </header>
   <article>
@@ -42,15 +42,15 @@
   </article>
   <footer>Copyright Weiver 2023 All Rights Reserved</footer>
     <nav>
-      <a href="#"><i class="bi bi-house-door-fill"></i>
-        <div>HOME</div>
-      </a>
-      <a href="#"><i class="bi bi-chat-dots-fill"></i>
-        <div>COMMUNITY</div>
-      </a>
-      <a href="#"><i class="bi bi-person-fill"></i>
-        <div>MY PAGE</div>
-      </a>
+        <a href="/main"><i class="bi bi-house-door-fill"></i>
+            <div>HOME</div>
+        </a>
+        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+            <div>COMMUNITY</div>
+        </a>
+        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+            <div>MY PAGE</div>
+        </a>
     </nav>
 </body>
 

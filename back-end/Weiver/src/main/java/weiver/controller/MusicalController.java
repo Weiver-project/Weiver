@@ -1,6 +1,7 @@
 package weiver.controller;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,16 @@ import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.ResponseCastingDTO;
 import weiver.dto.SimpleMusicalDTO;
+import weiver.entity.Actor;
 import weiver.entity.Musical;
+import weiver.entity.Post;
 import weiver.service.ActorService;
+import weiver.service.CommunityService;
+import weiver.service.GoogleAPIService;
+
 import weiver.service.MusicalService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,20 +30,39 @@ import java.util.Optional;
 public class MusicalController {
     private final MusicalService musicalService;
     private final ActorService actorService;
+    private final CommunityService communityService;
     
     @GetMapping("/main")
     public String getMainPage(Model model){
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
-
-        	
-        //인기 뮤지컬 추가
-        System.out.println(poPularMusicalDTOs.get(0).getTitle());
         
+        //인기 게시글 리스트 가져오기.
+	    List<Post> bestPostList = communityService.getBestPostDesc();
+	    
+	    //댓글 개수 가져오기
+	    model.addAttribute("bestPost", bestPostList);
+
+        try {
+        	// 오늘의 배우 뮤지컬 정보.
+			Actor randomActor = actorService.getRandomActor();
+			List<SimpleMusicalDTO> musicalList = actorService.getmusicalListByActorId(randomActor.getId());
+			List<SimpleMusicalDTO> limitedMusicalList = musicalList.subList(0, Math.min(musicalList.size(), 8));
+			System.out.println("size : " + limitedMusicalList.size());
+			
+			model.addAttribute("randomActor", randomActor);
+			model.addAttribute("limitedMusicalList", limitedMusicalList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        	
+
+        //인기 뮤지컬 추가
         model.addAttribute("popularMusicals", poPularMusicalDTOs);
         //공연 중인 뮤지컬 추가
         model.addAttribute("performingMusicals", performingMusicals);
-
+        
         return "main";
     }
     
@@ -46,12 +72,28 @@ public class MusicalController {
     	
     	if(musical.isPresent()) {
     		model.addAttribute("musical", musical.get());
+    		List<ResponseCastingDTO> castingList = actorService.getCastingByMusicalId(musical.get().getId());
+            
+            if (castingList != null) {
+                List<ResponseCastingDTO> limitedCastingList = castingList.subList(0, Math.min(castingList.size(), 10));
+                model.addAttribute("castingList", limitedCastingList);
+            }
     	}
     	
 //    	ResponseCastingDTO casting = actorService.getCastingByMusicalId(musical.get().getId());
 //    	if (casting != null){
 //    		model.addAttribute("casting", casting);
 //    	}
+    	
+    	// Youtube API 가져오기
+    	try {
+			List<String> clips = GoogleAPIService.search("뮤지컬" + musical.get().getTitle());
+			model.addAttribute("clips", clips);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     	return "musicalDetail";
     }
     
@@ -64,4 +106,5 @@ public class MusicalController {
     	
     	return "musicalSearch";
     }
+    
 }

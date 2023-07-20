@@ -25,7 +25,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="javascript:history.back()"><i class="bi bi-chevron-left"></i></a>
+                <a href="setting"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="name">비밀번호 변경</div>
         </div>
@@ -34,7 +34,7 @@
     <div class="page">
 
             
-        <form id="updatePasswordForm" action="/updatePassword" method="POST">
+        <form id="updatePasswordForm" action="updatePW" method="POST">
             <!-- 입력 칸 -->
             <div class="text_input">
 
@@ -75,16 +75,17 @@
 
     <!-- navibar -->
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
+        <a href="/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="#"><i class="bi bi-chat-dots-fill"></i>
+        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
+        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
+    
     <script type="text/javascript">
         /* 버튼 활성화 */
         $(document).ready( function () {
@@ -102,12 +103,12 @@
             if(Button.checkValidity()) {
                 const formData = new FormData(Form);
 
-                axios.post("/updatePW", formData)
+                axios.post("updatePW", formData)
                     .then(response => {
                         const data = response.data;
                         if(response.status === 200) {
                             alert(data);
-                            window.location.href = "/mypage/${requestScope.userInfo.id}";
+                            window.location.href = "/mypage/myinfo";
                         }
                     })
                     .catch((error) => {

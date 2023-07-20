@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.springframework.lang.Nullable;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -23,6 +25,7 @@ public class Casting {
     @JoinColumn(name = "ACTOR_ID", referencedColumnName = "ID")
     private Actor actorId;
     
+    @Nullable
     @Column(name = "ROLE")
     private String role;
     
