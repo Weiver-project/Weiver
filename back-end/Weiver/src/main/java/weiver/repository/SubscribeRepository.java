@@ -8,9 +8,8 @@ import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Subscribe;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
@@ -22,7 +21,7 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	List<PoPularMusicalDTO> findTop3MusicalByDesiredType(org.springframework.data.domain.Pageable pageable);
 
 	//유저의 봤어요, 찜 목록 조회
-	@Query("SELECT s.musicalId.id as id, s.musicalId.title as title, s.musicalId.posterImage as posterImage, s.musicalId.stDate as stDate, s.musicalId.edDate as edDate FROM Subscribe s WHERE s.userId = ?1 AND s.type = ?2")
+	@Query("SELECT s.musicalId.id as id, s.musicalId.title as title, s.musicalId.posterImage as posterImage, s.musicalId.stDate as stDate, s.musicalId.edDate as edDate FROM Subscribe s WHERE s.userId.id = ?1 AND s.type = ?2")
     List<SimpleMusicalDTO> findMusicalIdByUserIdAndType(String userId, String type);
 
 	//유저의 봤어요, 찜 목록 카운팅

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Musical;
 import weiver.entity.Subscribe;
-import weiver.entity.User;
 import weiver.repository.MusicalRepository;
 import weiver.repository.SubscribeRepository;
 import weiver.repository.UserRepository;

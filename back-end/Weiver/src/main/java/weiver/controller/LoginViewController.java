@@ -1,15 +1,13 @@
 package weiver.controller;
 
 
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import lombok.extern.slf4j.Slf4j;
 import weiver.service.LoginService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j

@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import weiver.dto.PostDTO;
 import weiver.dto.ReplyDTO;
+import weiver.dto.SimpleMusicalDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
+import weiver.service.SubscribeService;
 import weiver.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "mypage")
@@ -26,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userservice;
+
+	@Autowired
+	private SubscribeService subscribeService;
 
 	// 유저 아이디로 조회
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
@@ -229,6 +233,7 @@ public class UserController {
 		return "myComment";
 	}
 
+
 	// 내가 좋아요 누른 글들 
 	@GetMapping("/myLike")
 	public String myLike(HttpSession session,Model model) {
@@ -252,6 +257,23 @@ public class UserController {
 		model.addAttribute("postCount", likeCount);
 
 		return "myLike";
+	}
+
+	// 내가 찜한 목록
+	@GetMapping("/mySubscribe")
+	public String mySubscribe(HttpSession session,
+							  Model model) {
+		String userId = (String) session.getAttribute("userId");
+
+		List<SimpleMusicalDTO> JjimList = subscribeService.getSubscribeMusical(userId,"찜");
+		List<SimpleMusicalDTO> WatchedList = subscribeService.getSubscribeMusical(userId,"봤어요");
+		for (SimpleMusicalDTO dto : JjimList ) {
+			System.out.println(dto.getTitle());
+		}
+		model.addAttribute("JjimList", JjimList);
+		model.addAttribute("WatchedList", WatchedList);
+
+		return "mySubscribe";
 	}
 }
 
