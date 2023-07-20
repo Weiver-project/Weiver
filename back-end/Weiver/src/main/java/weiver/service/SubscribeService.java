@@ -3,6 +3,7 @@ package weiver.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import weiver.dto.SimpleMusicalDTO;
+import weiver.entity.Musical;
 import weiver.entity.Subscribe;
 import weiver.repository.MusicalRepository;
 import weiver.repository.SubscribeRepository;
@@ -25,14 +26,21 @@ public class SubscribeService {
 
     /*찜, 봤어요 저장*/
     public boolean insertSubscribe(String userId, String musicalId, String type) {
-
-        Subscribe subscribe = subscribeRepository.save(Subscribe.builder()
-                                                            .userId(userRepository.getUserById(userId))
-                                                            .musicalId(musicalRepository.getMusicalById(musicalId))
-                                                            .type(type).build());
-        if (subscribe.getType().isEmpty()) {
-            return true;
-        }
+    	
+    	List<String> findSubscribes = subscribeRepository.findByUserIdAndMusicalIdAndType(userId, musicalId, type);
+    	
+    	if(findSubscribes.size() == 0) { // 데이터가 없다면 추가
+	        subscribeRepository.save(Subscribe.builder()
+                                            .userId(userRepository.getUserById(userId))
+                                            .musicalId(Musical.builder()
+                                            				  .id(musicalId)
+                                            				  .build())
+                                            .type(type).build());
+	        return true;
+    	}else { // 데이터가 있다면 삭제
+    		subscribeRepository.deleteByUserIdAndMusicalIdAndType(userId, musicalId, type);
+    	}
+    	
         return false;
     }
 }

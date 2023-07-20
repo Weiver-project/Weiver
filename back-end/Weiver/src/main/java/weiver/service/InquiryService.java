@@ -18,13 +18,12 @@ public class InquiryService {
         return inquiryRepository.findByUserId(userId);
     }
 
-    public boolean save(String id, String title, String content) throws Exception {
+    public boolean save(String userId, String title, String content) throws Exception {
 
         Date date = new Date();
 
         Inquiry inquiry = Inquiry.builder()
-                                    .id(3L)
-                                    .userId(id)
+                                    .userId(userId)
                                     .title(title)
                                     .content(content)
                                     .createdTime(date).build();

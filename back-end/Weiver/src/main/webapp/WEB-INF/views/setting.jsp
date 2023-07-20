@@ -21,7 +21,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="javascript:history.back()"><i class="bi bi-chevron-left"></i></a>
+                <a href="/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="name">설정</div>
         </div>
@@ -33,16 +33,16 @@
         <!-- 카테고리(선택창) -->
         <div class="category">
             <div class="card">
-                <a href="/logout">로그아웃</a>
+                <a onclick="logutConfirm()" style="cursor: pointer;">로그아웃</a>
             </div>
             <div class="card">
-                <a href="/password/${userId}">비밀번호 변경</a>
+                <a href="password">비밀번호 변경</a>
             </div>
             <div class="card">
-                <a href="/inquiry/${userId}">문의하기</a>
+                <a href="/inquiry/inquiryMain">문의하기</a>
             </div>
             <div class="card">
-                <a href="/remove">회원 탈퇴</a>
+                <a onclick="signOut()" style="cursor: pointer;">회원 탈퇴</a>
             </div>
         </div>
     </div>
@@ -52,15 +52,35 @@
 
     <!-- navibar -->
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
+        <a href="/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="#"><i class="bi bi-chat-dots-fill"></i>
+        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
+        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
+    
+    <script type="text/javascript">
+    	function logutConfirm() {
+    		const result = confirm("로그아웃 하시겠습니까?");
+    		
+    		if(result) {
+    			alert("로그아웃 되었습니다.");
+    			window.location.href = "/logout";
+    		} 
+    	}
+    	
+    	function signOut() {
+    		const result = confirm("클릭하시면 즉시 회원탈퇴 됩니다.");
+    		
+    		if(result) {
+    			alert("정상적으로 탈퇴 되었습니다.");
+    			window.location.href = "/signOut";
+    		} 
+    	}
+    </script>
 </body>
 </html>

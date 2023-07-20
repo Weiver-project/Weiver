@@ -14,10 +14,11 @@ import reactor.util.annotation.Nullable;
 @AllArgsConstructor
 @Entity
 @Table (name = "CASTING")
-@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "CASTING_SEQUENCE", initialValue = 1, allocationSize = 1)
+
 public class Casting {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "casting_sequence_generator")
+    @SequenceGenerator(name = "casting_sequence_generator", sequenceName = "casting_sequence", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

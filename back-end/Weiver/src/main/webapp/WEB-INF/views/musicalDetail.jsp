@@ -22,12 +22,15 @@
 
     <!--부트스트랩 아이콘 연결-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
 <header>
   <img src="../img/logo.png" alt="logo" height="70" width="300">
   <div class="title-container">
-    <a href="#" class="back-button">
+    <a href="javascript:history.back();" class="back-button">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
       </svg>
@@ -73,22 +76,22 @@
       
       <div class="like-jjim-btn">
         <div class="button">
-          <a href="페이지 뿌려주세요">
+          <button onclick="addSubscirbe(${musical.getId()}, '찜했어요')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
               <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
               <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
             </svg>
-          </a>
+          </button>
           <span>찜하기</span>
 
         </div>
         <div class="button">
-          <a href="페이지 뿌려주세요.">
+          <button onclick="addSubscirbe(${musical.getId()}, '봤어요')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
               <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
               <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
             </svg>
-          </a>
+          </button>
           <span>봤어요</span>
         </div>
       </div>
@@ -97,83 +100,29 @@
       <div class="casting">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="profile-container">
-                    	<c:forEach items="${castingList}" var="casting">
-                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
-                            <img src="${casting.profileImage}" style="max-width: 110px; max-height: 110px;">
-                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
-                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
-                        </div>
-                        </c:forEach>
-                        <!-- <div class="casting-actor">
-                            <img src="image12.jpg" alt="이미지 2">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image13.jpg" alt="이미지 3">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image14.jpg" alt="이미지 4">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 5">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 6">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div> -->
-                    </div>
-                </div>
-
-               <div class="swiper-slide">
-                    <div class="profile-container">
-                        <div class="casting-actor">
-                            <img src="image11.jpg" alt="이미지 1">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image12.jpg" alt="이미지 2">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image13.jpg" alt="이미지 3">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image14.jpg" alt="이미지 4">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 5">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 6">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+               	<c:forEach items="${castingList}" var="casting"  varStatus="status">
+	               	<c:if test="${status.index % 6 == 0}">
+		                <div class="swiper-slide">
+		                    <div class="profile-container">
+                    </c:if>
+		                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
+		                            <a href="/actorDetail/${casting.id }"><img src="${casting.profileImage}" style="max-width: 90px; max-height: 90px;"></a>
+		                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
+		                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
+		                        </div>
+         			<c:if test="${status.index % 6 == 5 or status.last}">
+		           			</div>
+		       			</div>
+	       			</c:if>
+                </c:forEach>
+             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Navigation -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
+         </div>
+     	</div>
         </div>
     </div>
 
@@ -210,6 +159,21 @@
       <div>MY PAGE</div>
     </a>
 </nav>  
+
+<script>
+function addSubscirbe(musicalId, type){
+
+    // 서버에 데이터 전송 (AJAX 사용)
+    $.ajax({
+        type: 'GET',
+        url: '/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
+        contentType: 'application/json'
+        
+    });
+    
+}
+
+</script>
 
 </body>
 </html>
