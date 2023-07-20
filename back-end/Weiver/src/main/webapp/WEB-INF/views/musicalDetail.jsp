@@ -116,13 +116,13 @@
 	       			</c:if>
                 </c:forEach>
              </div>
-         </div>
-     	</div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Navigation -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
+         </div>
+     	</div>
         </div>
     </div>
 
