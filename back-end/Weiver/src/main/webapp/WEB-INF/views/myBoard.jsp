@@ -55,7 +55,7 @@
 						<span class="like">
 							<i class="bi-suit-heart" style="font-size: 40px"></i>
 							<div>
-								${post.postlikes.size()}
+								${post.countLikes}
 							</div>
 						</span>
 					</a>
@@ -73,7 +73,7 @@
 						<span class="like">
 							<i class="bi-suit-heart" style="font-size: 40px"></i>
 							<div>
-									${post.postlikes.size()}
+									${post.countLikes}
 							</div>
 						</span>
 					</a>
