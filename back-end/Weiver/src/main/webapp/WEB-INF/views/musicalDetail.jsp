@@ -181,21 +181,13 @@
     <div class="youtube-api">
       <div class="swiper-container">
           <div class="swiper-wrapper">
+          	<c:forEach var="clip" items="${clips }" begin="0" end="3" step="1">
               <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
+                  <iframe id="ytplayer" type="text/html" width="720" height="405"
+						src="https://www.youtube.com/embed/${clip}"
+						frameborder="0" allowfullscreen></iframe>
               </div>
-              <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
-              </div>
-              <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
-              </div>
+          	</c:forEach>
           </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
