@@ -51,9 +51,9 @@
 <h1 class="title">인기 뮤지컬 🔥</h1>
 <div class="popular_musical_list">
   <ul>
-  	<a href="/musical-detail/${popularMusicals.get(0).getId()}"><li>1. ${popularMusicals.get(0).getTitle()}</li></a>
-  	<a href="/musical-detail/${popularMusicals.get(1).getId()}"><li>2. ${popularMusicals.get(1).getTitle()}</li></a>
-    <a href="/musical-detail/${popularMusicals.get(2).getId()}"><li>3. ${popularMusicals.get(2).getTitle()}</li></a>
+  <c:forEach var="musical" items="${popularMusicals}" varStatus="status">
+  	<a href="/musical-detail/${musical.id}"><li>${status.index+1} ${musical.title}</li></a>
+  </c:forEach>
   </ul>
 </div>
 
