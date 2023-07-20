@@ -29,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer{
 					.excludePathPatterns("/community/**")
 					.excludePathPatterns("/musical/**")
 					.excludePathPatterns("/actor/**");
+						
 					
 	}
 	

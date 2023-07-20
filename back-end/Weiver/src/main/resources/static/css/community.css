@@ -168,17 +168,48 @@ a {
     background-color: #172036;
 }
 
-.iconGroup > div > span {
+.iconGroup2 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    height: 24px;
     background:none;
+
+    bottom: 0;
 }
+
+.iconGroup2 > div {
+    background: none;
+    margin-right: 10px;
+}
+
+.iconGroup2 > div > i {
+    font-size: 24px;
+    background-color: #172036;
+}
+
 
 .bi-suit-heart {
     cursor: pointer;
 }
 
-.bi-heart-fill {
-     color: red;
+.iconGroup2 .bi-heart-fill {
+    color: red;
+    width: 24px;
+    height: 24px;
 }
+
+
+#likeForm {
+  width: 24px;
+  height: 24px;
+}
+
+#likeIcon {
+  width: 24px;
+  height: 24px;
+}
+
 
 /*유저 사이드 네비 바*/
 
@@ -363,7 +394,7 @@ hr {
 /* 게시글 수정, 삭제버튼 그룹 */
 .postBtnGroup {
     margin: 10px 0px 20px auto;
-    max-width: 200px;
+    max-width: 210px;
     display: flex;
 }
 
@@ -378,6 +409,7 @@ hr {
     height: 25px;
     background-color: #4263EB;
     cursor: pointer;
+
 }
 
 /* 게시글 삭제하기 버튼 */
@@ -391,6 +423,7 @@ hr {
     height: 25px;
     background-color: #ff3146cd;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 /* 댓글 컨테이너 */

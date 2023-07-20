@@ -395,7 +395,6 @@ ALTER TABLE scott.inquiry
             ON DELETE CASCADE
     NOT DEFERRABLE;
 
-create SEQUENCE reply_sequence; 
 create SEQUENCE answer_sequence;
 create SEQUENCE casting_sequence;
 create SEQUENCE image_sequence;

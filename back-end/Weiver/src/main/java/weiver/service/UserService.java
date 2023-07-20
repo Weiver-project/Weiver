@@ -107,8 +107,13 @@ public class UserService {
         List<Post> postList = new ArrayList<>();
 
         for (PostLike postLike : postIdList) {
+
             Long postId = postLike.getPostId();
             Post result = communityRepository.getPostById(postId);
+
+            //Long postId = postLike.getPost().getId();
+            //Optional<Post> result = communityRepository.findById(postId);
+
 
             postList.add(result);
         }

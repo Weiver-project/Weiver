@@ -99,12 +99,14 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="profile-container">
-                        <div class="casting-actor">
-                            <img src="image11.jpg" alt="이미지 1">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
+                    	<c:forEach items="${castingList}" var="casting">
+                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
+                            <img src="${casting.profileImage}" style="max-width: 110px; max-height: 110px;">
+                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
+                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
                         </div>
-                        <div class="casting-actor">
+                        </c:forEach>
+                        <!-- <div class="casting-actor">
                             <img src="image12.jpg" alt="이미지 2">
                             <span>배우 이름 뿌려주세요</span>
                             <span>배역 명 뿌려주세요</span>
@@ -128,7 +130,7 @@
                             <img src="image15.jpg" alt="이미지 6">
                             <span>배우 이름 뿌려주세요</span>
                             <span>배역 명 뿌려주세요</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -179,21 +181,13 @@
     <div class="youtube-api">
       <div class="swiper-container">
           <div class="swiper-wrapper">
+          	<c:forEach var="clip" items="${clips }" begin="0" end="3" step="1">
               <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
+                  <iframe id="ytplayer" type="text/html" width="720" height="405"
+						src="https://www.youtube.com/embed/${clip}"
+						frameborder="0" allowfullscreen></iframe>
               </div>
-              <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
-              </div>
-              <div class="swiper-slide">
-                  <div class="youtube-container">
-                      <div class="youtube">영상 API를 뿌려주세요.</div>
-                  </div>
-              </div>
+          	</c:forEach>
           </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>

@@ -4,16 +4,21 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "reply")
 public class Reply {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reply_sequence_generator")
+    @SequenceGenerator(name = "reply_sequence_generator", sequenceName = "reply_sequence", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
