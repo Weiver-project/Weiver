@@ -59,100 +59,70 @@
 <!--커뮤니티 인기글 3개씩 총 9개 출력-->
 <h1 class="title">커뮤니티 인기글 🔥</h1>
 <div class="popular_community">
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="card-container">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 1</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 2</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 3</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="card-container">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 4</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 5</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 6</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="card-container">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 7</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 8</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">카드 9</h3>
-            </div>
-            <div class="card-footer">
-              <span class="author">작성자</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
-    <!-- Add Navigation -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</div>
+		    <div class="swiper-container">
+		        <div class="swiper-wrapper">
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index < 3}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index >= 3 and status.index < 6}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		            <div class="swiper-slide">
+		                <div class="card-container">
+		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
+		                        <c:if test="${status.index >= 6}">
+		                            <a href="/community/${card.id}">
+		                                <div class="card">
+		                                    <div class="card-header">
+		                                        <h3 class="card-title">${card.title}</h3>
+		                                    </div>
+		                                    <div class="card-footer">
+		                                        <span class="author">${card.user.nickname}</span>
+		                                    </div>
+		                                </div>
+		                            </a>
+		                        </c:if>
+		                    </c:forEach>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- Add Pagination -->
+		        <div class="swiper-pagination"></div>
+		        <!-- Add Navigation -->
+		        <div class="swiper-button-next"></div>
+		        <div class="swiper-button-prev"></div>
+		    </div>
+		</div>
 
 <!--오늘의 배우 2개씩 총 8개 출력-->
 <h1 class="title">오늘의 배우✨</h1>
