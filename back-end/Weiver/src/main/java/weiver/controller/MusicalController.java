@@ -46,12 +46,14 @@ public class MusicalController {
     	
     	if(musical.isPresent()) {
     		model.addAttribute("musical", musical.get());
+    		List<ResponseCastingDTO> castingList = actorService.getCastingByMusicalId(musical.get().getId());
+            
+            if (castingList != null) {
+                List<ResponseCastingDTO> limitedCastingList = castingList.subList(0, Math.min(castingList.size(), 10));
+                model.addAttribute("castingList", limitedCastingList);
+            }
     	}
     	
-//    	ResponseCastingDTO casting = actorService.getCastingByMusicalId(musical.get().getId());
-//    	if (casting != null){
-//    		model.addAttribute("casting", casting);
-//    	}
     	return "musicalDetail";
     }
     

@@ -25,16 +25,18 @@ public class ActorService {
 		
 		return actor;
 	}
-
+	
+	// 배우 상세 페이지 뮤지컬 리스트 조회
 	public List<SimpleMusicalDTO> getmusicalListByActorId(String actorId) throws Exception{
 		List<SimpleMusicalDTO> musicalPosterImgList = musicalRepository.findMusicalsByActorId(actorId);
 		
 		return musicalPosterImgList;
 	}
-
-//	public ResponseCastingDTO getCastingByMusicalId(String id) {
-//		ResponseCastingDTO casting = castingRepository.getCastingByMusicalId(id);
-//		return casting;
-//	}
+	
+	// 뮤지컬 상세 페이지 캐스팅 조회
+	public List<ResponseCastingDTO> getCastingByMusicalId(String id) {
+		List<ResponseCastingDTO> casting = castingRepository.getCastingByMusicalId(id);
+		return casting;
+	}
 	
 }
