@@ -178,7 +178,7 @@ public class UserService {
                 .userId(id)
                 .nickname(user.getNickname())
                 .profileImg(user.getProfileImg())
-                .countJjim(subscribeRepository.countByUserIdAndType(id,"찜"))
+                .countJjim(subscribeRepository.countByUserIdAndType(id,"찜했어요"))
                 .countIsWatched(subscribeRepository.countByUserIdAndType(id,"봤어요"))
                 .countPosts(communityRepository.countByUserId(id))
                 .countReplies(replyRepository.countByUserId(id) + reReplyRepository.countByUserId(id))

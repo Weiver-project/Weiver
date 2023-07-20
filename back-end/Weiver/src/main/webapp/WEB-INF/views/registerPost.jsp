@@ -23,7 +23,7 @@
 	    <c:forEach var="musical" items="${musicals}">
 	      {
 	        id: '${musical.id}',
-	        title: '${musical.title}',
+	        title: `${musical.title.replace('\\',"")}`,
 	        theater: '${musical.theater}',
 	        posterImage: '${musical.posterImage}',
 	        // Add other properties as needed

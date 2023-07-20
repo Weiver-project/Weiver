@@ -19,7 +19,7 @@
 <body class="container">
   <header>
     <img id="logo" src="/img/logo.png" alt="logo" height="70" width="300">
-    <a href="#"><i class="bi bi-chevron-left"></i></a>
+    <a href="myinfo"><i class="bi bi-chevron-left"></i></a>
     <h2>작품 목록</h2>
     <!-- 검색 타입 지정 -->
     <div class="select">
@@ -50,14 +50,16 @@
         <div id="musical_IsWatched" style="display: none">
           <c:forEach var="IsWatched" items="${WatchedList}">
             <li>
-              <img src="${IsWatched.getPosterImage()}" alt="poster">
-              <h2>${Jjim.getTitle()}</h2>
-              <c:if test="${IsWatched.getStDate() != null && IsWatched.getEdDate() != null}">
-                  <span>
-                    <fmt:formatDate value="${IsWatched.getStDate()}" pattern="yyyy-MM-dd"/> ~
-                    <fmt:formatDate value="${IsWatched.getEdDate()}" pattern="yyyy-MM-dd"/>
-                  </span>
-              </c:if>
+              <a href="/musical-detail/${IsWatched.getId()}">
+                <img src="${IsWatched.getPosterImage()}" alt="poster">
+                <h2>${IsWatched.getTitle()}</h2>
+                <c:if test="${IsWatched.getStDate() != null && IsWatched.getEdDate() != null}">
+                    <span>
+                      <fmt:formatDate value="${IsWatched.getStDate()}" pattern="yyyy-MM-dd"/> ~
+                      <fmt:formatDate value="${IsWatched.getEdDate()}" pattern="yyyy-MM-dd"/>
+                    </span>
+                </c:if>
+              </a>
             </li>
           </c:forEach>
         </div>
@@ -65,13 +67,13 @@
   </article>
   <footer>Copyright Weiver 2023 All Rights Reserved</footer>
     <nav>
-      <a href="#"><i class="bi bi-house-door-fill"></i>
+      <a href="/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
       </a>
-      <a href="#"><i class="bi bi-chat-dots-fill"></i>
+      <a href="/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
       </a>
-      <a href="#"><i class="bi bi-person-fill"></i>
+      <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
       </a>
     </nav>

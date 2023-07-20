@@ -265,11 +265,9 @@ public class UserController {
 							  Model model) {
 		String userId = (String) session.getAttribute("userId");
 
-		List<SimpleMusicalDTO> JjimList = subscribeService.getSubscribeMusical(userId,"찜");
+		List<SimpleMusicalDTO> JjimList = subscribeService.getSubscribeMusical(userId,"찜했어요");
 		List<SimpleMusicalDTO> WatchedList = subscribeService.getSubscribeMusical(userId,"봤어요");
-		for (SimpleMusicalDTO dto : JjimList ) {
-			System.out.println(dto.getTitle());
-		}
+
 		model.addAttribute("JjimList", JjimList);
 		model.addAttribute("WatchedList", WatchedList);
 

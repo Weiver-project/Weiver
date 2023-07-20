@@ -1,15 +1,12 @@
 package weiver.service;
 
 
-import java.util.Optional;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import weiver.entity.User;
 import weiver.repository.UserRepository;
 
@@ -46,7 +43,7 @@ public class LoginService {
 							.id(userId)
 							.password(encodedPassword)
 							.nickname(userNickname)
-							.profileImg("defaultProfileImgSrc")
+							.profileImg("Default_Profile.png")
 							.essentialAgree("Y")
 							.personalAgree("Y")
 							.ageAgree("Y")
