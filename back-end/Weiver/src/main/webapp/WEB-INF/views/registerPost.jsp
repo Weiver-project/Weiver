@@ -15,6 +15,46 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
+<script>
+function handleSearchBoxChange(musicals) {
+  //기존 검색 리스트를 지우는 코드가 들어가야함
+  var searchTerm = document.getElementById("searchBox").value;
+	
+  //뮤지컬 키워드에 해당하는 뮤지컬 리스트 필터링
+  var filteredMusicals = musicalsData.filter(function (musicals) {
+    return musical.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  //검색 리스트 초기화 후 새로운 검색 결과로 다시 채우기
+  var musicalInfoContainer = document.getElementById("musicalInfoContainer");
+  musicalInfoContainer.innerHTML = "";
+
+  var musicalList = document.getElementById("musicalList");
+  musicalList.innerHTML = "";
+
+  		filteredMusicals.forEach(function (musical) {
+	    var musicalElement = document.createElement("li");
+	    var imgElement = document.createElement("img");
+	    imgElement.src = musical.posterImage;
+	    imgElement.alt = "poster";
+
+	    var h2Element = document.createElement("h2");
+	    h2Element.textContent = musical.title;
+
+	    var spanElement = document.createElement("span");
+	    spanElement.textContent = musical.stDate + " ~ " + musical.edDate;
+
+	    musicalElement.appendChild(imgElement);
+	    musicalElement.appendChild(h2Element);
+	    musicalElement.appendChild(spanElement);
+	    musicalInfoContainer.appendChild(musicalElement);
+	  });
+
+
+  musicalInfoContainer.style.display = "block";
+}
+</script>
+
 <body>
 
 	<!-- 전체 컨테이너 -->
@@ -60,11 +100,28 @@
 				<div align="left" id="reviewForm" style="display:none">
 					<br>
 					작품명
+					
 					<div>
-						<textarea class="title" name="reviewPerformance" id="reviewPerformance" oninput="searchPerformance()" required></textarea>
+					 <input
+					    type="text"
+					    id="searchBox"
+					    placeholder="작품명을 입력해주세요."
+					    autocomplete="off"
+					  />
 					</div>
-				</div>
+					
+					<div id="musicalInfoContainer" style="display:none">
+					  <ul class="musical_list">
+					    <li>
+					      <img src="${musical.getPosterImage()}" alt="poster">
+					      <h2>${musical.getTitle()}</h2>
+					      <span><fmt:formatDate value="${musical.getStDate()}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${musical.getEdDate()}" pattern="yyyy-MM-dd" /></span>
+					    </li>
+					  </ul>
+					</div>
 
+				</div>
+					
 				<br>
 
 				<!-- 내용 작성칸 -->
