@@ -27,6 +27,16 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	int countByUserIdAndType(String userId, String type);
 
 	//중복 여부
-	@Query("SELECT s FROM Subscribe s WHERE s.userId = ?1 AND s.musicalId = ?2 AND s.type = ?3")
-	Subscribe findByUserIdAndTypeAndMusicalId(String userId, String musicalId, String type);
+//	@Query("SELECT s FROM Subscribe s WHERE s.userId = ?1 AND s.musicalId = ?2 AND s.type = ?3")
+//	Subscribe findByUserIdAndTypeAndMusicalId(String userId, String musicalId, String type);
+	
+	// ============================================================================================
+	
+	// UserId와 MusicalId, type으로 찜을 했는지 확인
+	@Query("SELECT s  FROM Subscribe s WHERE s.userId = ?1 AND s.musicalId = ?2 AND s.type =?3")
+	Subscribe findByUserIdAndMusicalIdAndType(String userId, String musicalId, String type);
+	
+	// UserId와 MusicalId로 subscribe 내역 삭제
+	@Query("DELETE Subscribe s WHERE s.userId = ?1 AND s.musicalId = ?2 AND s.type =?3")
+	boolean deleteByUserIdAndMusicalIdAndType(String userId, String musicalId, String type);
 }
