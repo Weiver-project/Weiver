@@ -32,52 +32,84 @@
 </header>
 
 <body>
-<div>
-	<div class="sortTag">
-		<span class="boardNum">${postCount} 개의 글</span>
-		
-		<!-- 셀렉트 버튼(작성, 추천) -->
-	    <select id="sortType" onchange="sortTypeChange()">
-	        <option disabled>정렬 기준</option>
-	        <option value="작성" selected>작성 순</option>
-	        <option value="추천">추천 순</option>
-	    </select>		
-	</div>  
-	
 	<div>
-		<c:forEach var="post" items="${postList}">
-			<div class="myBoardCard">
-				<a href="/community/${post.id}">
-					<span class="card">
-						<div class="date">${post.createdTime}</div>
-						<div>${post.title}</div>
-					</span>
-					<span class="like">
-						<i class="bi-suit-heart" style="font-size: 40px"></i>
-						<div>
-							${post.postlikes.size()}
-						</div>
-					</span>
-				</a>
-			</div>
-		</c:forEach>
+		<div class="sortTag">
+			<span class="boardNum">${postCount} 개의 글</span>
+
+			<!-- 셀렉트 버튼(작성, 추천) -->
+			<select id="sortType" onchange="sortTypeChange(this.value)">
+				<option disabled>정렬 기준</option>
+				<option value="작성" selected>작성 순</option>
+				<option value="추천">추천 순</option>
+			</select>
+		</div>
+
+		<div id="sortDate">
+			<c:forEach var="post" items="${postListTime}">
+				<div class="myBoardCard">
+					<a href="/community/${post.id}">
+						<span class="card">
+							<div class="date">${post.createdTime}</div>
+							<div>${post.title}</div>
+						</span>
+						<span class="like">
+							<i class="bi-suit-heart" style="font-size: 40px"></i>
+							<div>
+								${post.postlikes.size()}
+							</div>
+						</span>
+					</a>
+				</div>
+			</c:forEach>
+		</div>
+		<div id="sortLike" style="display: none">
+			<c:forEach var="post" items="${postListLike}">
+				<div class="myBoardCard">
+					<a href="/community/${post.id}">
+						<span class="card">
+							<div class="date">${post.createdTime}</div>
+							<div>${post.title}</div>
+						</span>
+						<span class="like">
+							<i class="bi-suit-heart" style="font-size: 40px"></i>
+							<div>
+									${post.postlikes.size()}
+							</div>
+						</span>
+					</a>
+				</div>
+			</c:forEach>
+		</div>
 	</div>
-</div>
 
-<footer>Copyright Weiver 2023 All Rights Reserved</footer>
+	<footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
-<nav>
-    <a href="#"><i class="bi bi-house-door-fill"></i>
-      <div>HOME</div>
-    </a>
-    <a href="#"><i class="bi bi-chat-dots-fill"></i>
-      <div>COMMUNITY</div>
-    </a>
-    <a href="#"><i class="bi bi-person-fill"></i>
-      <div>MY PAGE</div>
-    </a>
-  </nav>
+	<nav>
+		<a href="#"><i class="bi bi-house-door-fill"></i>
+		  	<div>HOME</div>
+		</a>
+		<a href="#"><i class="bi bi-chat-dots-fill"></i>
+			<div>COMMUNITY</div>
+		</a>
+		<a href="#"><i class="bi bi-person-fill"></i>
+		  	<div>MY PAGE</div>
+		</a>
+	</nav>
 
+	<script type="text/javascript">
+		function sortTypeChange(value) {
+			const sortDate = document.getElementById('sortDate');
+			const sortLike = document.getElementById('sortLike');
+
+			if (value === '작성') {
+				sortDate.style.display = "block";
+				sortLike.style.display = "none";
+			} else if (value === '추천') {
+				sortDate.style.display = "none";
+				sortLike.style.display = "block";
+			}
+		}
+	</script>
 
 </body>
 

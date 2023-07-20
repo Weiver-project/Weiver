@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
 
 	<div>
 		<div>
-			<a href="#"><i class="bi-chevron-left"></i></a>
+			<a href="javascript:history.back()"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
@@ -31,64 +32,87 @@
 </header>
 
 <body>
-<div id="contents">
+	<div id="contents">
 	  
-	<div class="sortTag">
-		<span class="boardNum">N 개의 댓글</span>
-		
-		<!-- 셀렉트 버튼(작성, 추천) -->
-	    <select id="sortType" onchange="sortTypeChange()">
-	        <option value="select">정렬 기준</option>
-	        <option value="작성">작성 순</option>
-	        <option value="추천">추천 순</option>
-	    </select>		
-	</div>  
-	
-	<div>
-		<!-- <%-- <c:forEach items="" var="" begin="" end=""> --%> -->
-			<div class="myBoardCard">
-				<span class="card">
-					<div class="date">기간</div>
-					<div>내용</div>
-				</span>
-				<span>
-					<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-						<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-					  </svg></a>
-				</span>
-				
-			</div>
-		
-			<div class="myBoardCard">
-				<span class="card">
-					<div class="date">기간</div>
-					<div>내용</div>
-				</span>
-				<span>
-					<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-						<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-					  </svg></a>
-				</span>
-				
-			</div>
-			
-		<!-- <%-- </c:forEach> --%> -->
+		<div class="sortTag">
+			<span class="boardNum">${replyCount} 개의 댓글</span>
 
+			<!-- 셀렉트 버튼(작성, 추천) -->
+			<select id="sortType" onchange="sortTypeChange(this.value)">
+				<option disabled>정렬 기준</option>
+				<option value="작성" selected>작성 순</option>
+				<option value="추천">추천 순</option>
+			</select>
+		</div>
 
+		<div id="sortDate">
+			<c:forEach var="reply" items="${replyListTime}">
+				<div class="myBoardCard">
+					<a href="/community/${reply.postId}">
+						<span class="card">
+							<div class="date">${reply.createdTime}</div>
+							<div>${reply.content}</div>
+						</span>
+						<span class="like">
+							<i class="bi-suit-heart" style="font-size: 40px"></i>
+							<div>
+									${reply.countLikes}
+							</div>
+						</span>
+					</a>
+				</div>
+			</c:forEach>
+		</div>
 
-<nav>
-    <a href="#"><i class="bi bi-house-door-fill"></i>
-      <div>HOME</div>
-    </a>
-    <a href="#"><i class="bi bi-chat-dots-fill"></i>
-      <div>COMMUNITY</div>
-    </a>
-    <a href="#"><i class="bi bi-person-fill"></i>
-      <div>MY PAGE</div>
-    </a>
-  </nav>
+		<div id="sortLike" style="display: none">
+			<c:forEach var="reply" items="${replyListLike}">
+				<div class="myBoardCard">
+					<a href="/community/${reply.postId}">
+						<span class="card">
+							<div class="date">${reply.createdTime}</div>
+							<div>${reply.content}</div>
+						</span>
+						<span class="like">
+							<i class="bi-suit-heart" style="font-size: 40px"></i>
+							<div>
+									${reply.countLikes}
+							</div>
+						</span>
+					</a>
+				</div>
+			</c:forEach>
+		</div>
 
-  <footer>Copyright Weiver 2023 All Rights Reserved</footer>
+	</div>
+
+	<footer>Copyright Weiver 2023 All Rights Reserved</footer>
+
+	<nav>
+		<a href="#"><i class="bi bi-house-door-fill"></i>
+			<div>HOME</div>
+		</a>
+		<a href="#"><i class="bi bi-chat-dots-fill"></i>
+			<div>COMMUNITY</div>
+		</a>
+		<a href="#"><i class="bi bi-person-fill"></i>
+			<div>MY PAGE</div>
+		</a>
+	</nav>
+
+	<script type="text/javascript">
+		function sortTypeChange(value) {
+			const sortDate = document.getElementById('sortDate');
+			const sortLike = document.getElementById('sortLike');
+
+			if (value === '작성') {
+				sortDate.style.display = "block";
+				sortLike.style.display = "none";
+			} else if (value === '추천') {
+				sortDate.style.display = "none";
+				sortLike.style.display = "block";
+			}
+		}
+	</script>
 
 </body>
 

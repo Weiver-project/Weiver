@@ -15,7 +15,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
-    //내가 쓴 댓글 리스트 조회
+    //내가 쓴 댓글 리스트 조회 작성순
     List<Reply> findByUserId(String userId);
 
     //내가 쓴 댓글 리스트 개수
