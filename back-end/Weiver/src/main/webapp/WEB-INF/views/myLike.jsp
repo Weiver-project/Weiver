@@ -22,7 +22,7 @@
 
 	<div>
 		<div>
-			<a href="javascript:history.back()"><i class="bi-chevron-left"></i></a>
+			<a href="/mypage/myinfo"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
@@ -87,15 +87,15 @@
 	<footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 	<nav>
-		<a href="#"><i class="bi bi-house-door-fill"></i>
-		  	<div>HOME</div>
-		</a>
-		<a href="#"><i class="bi bi-chat-dots-fill"></i>
-		  	<div>COMMUNITY</div>
-		</a>
-		<a href="#"><i class="bi bi-person-fill"></i>
-		  	<div>MY PAGE</div>
-		</a>
+	    <a href="/main"><i class="bi bi-house-door-fill"></i>
+	        <div>HOME</div>
+	    </a>
+	    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+	        <div>COMMUNITY</div>
+	    </a>
+	    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+	        <div>MY PAGE</div>
+	    </a>
 	</nav>
 
 	<script type="text/javascript">

@@ -112,16 +112,16 @@
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="#"><i class="bi bi-house-door-fill"></i>
-      <div>HOME</div>
+    <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <div>HOME</div>
     </a>
     <a href="/community"><i class="bi bi-chat-dots-fill"></i>
-      <div>COMMUNITY</div>
+        <div>COMMUNITY</div>
     </a>
-    <a href="#"><i class="bi bi-person-fill"></i>
-      <div>MY PAGE</div>
+    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <div>MY PAGE</div>
     </a>
-  </nav>
+</nav>
 
 </div>
 </body>

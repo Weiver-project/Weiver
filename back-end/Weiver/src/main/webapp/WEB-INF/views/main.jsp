@@ -202,7 +202,7 @@
   <a href="/community"><i class="bi bi-chat-dots-fill"></i>
     <div>COMMUNITY</div>
   </a>
-  <a href="/mypage"><i class="bi bi-person-fill"></i>
+  <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
     <div>MY PAGE</div>
   </a>
 </nav>

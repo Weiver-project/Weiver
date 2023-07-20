@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import lombok.extern.slf4j.Slf4j;
 import weiver.entity.User;
 import weiver.service.LoginService;
 
 
 @RestController
+@Slf4j
 public class LoginController {
 	
-	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private LoginService loginService;
@@ -82,9 +83,8 @@ public class LoginController {
 	public ResponseEntity<String> loginTest(@RequestParam(value = "userId") String userId, 
 											@RequestParam(value = "userPw") String userPw,
 											HttpSession session) {
-		System.out.println("요청 아이디 : " + userId);
-		System.out.println("요청 비밀번호 : " + userPw);
-		
+		logger.info("요청 아이디 : " + userId);
+		logger.info("요청 비밀번호 : " + userPw);
 		
 		try {			
 			if(userId == null || userId.isEmpty() || userPw == null || userPw.isEmpty()) {

@@ -4,6 +4,7 @@ package weiver.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,7 +19,12 @@ public class LoginViewController {
 	
 	// 로그인 페이지
 	@GetMapping(value = "/login")
-	public String loginPage() {
+	public String loginPage(HttpSession session) {
+		
+		if(session.getAttribute("userId") != null || !session.getAttribute("userId").equals("")) {
+			return "redirect:/main";
+		}
+		
 		return "login";
 	}
 	
@@ -39,7 +45,7 @@ public class LoginViewController {
 	}
 	
 	// 회원 탈퇴
-	@GetMapping(value = "/remove")
+	@GetMapping(value = "/signOut")
 	public String removeUser(HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
 		
@@ -52,6 +58,6 @@ public class LoginViewController {
 		}
 		
 //		return "redirect:/main";
-		return "main";
+		return "redirect:/main";
 	}
 }
