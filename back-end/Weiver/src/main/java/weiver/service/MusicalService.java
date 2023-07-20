@@ -47,6 +47,11 @@ public class MusicalService {
 	public Optional<Musical> getMusicalById(String id){
 		return musicalRepository.findById(id);
 	}
+	
+	/*모든 뮤지컬 조회*/
+	public List<Musical> getAllMusical(){
+		return musicalRepository.findAll();
+	}
 
 	/*배우 출연작 조회*/
 	public List<PerformingMusical> getMusicalByActor(Long actorId){
