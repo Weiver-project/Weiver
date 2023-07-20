@@ -3,6 +3,7 @@ package weiver.service;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import weiver.dto.PostDTO;
 import weiver.dto.ReplyDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.*;
@@ -52,9 +53,21 @@ public class UserService {
         return result;
     }
     
-    // 유저가 쓴 게시글 작성순 조회
-    public List<Post> findPostsByUserIdTime(String id) {
-        return communityRepository.findByUserIdOrderByCreatedTimeDesc(id);
+    // 유저가 쓴 게시글 조회
+    public List<PostDTO> findPostsByUserId(String id) {
+        List<Post> postList = communityRepository.findByUserId(id);
+        List<PostDTO> postDTOList = new ArrayList<>();
+
+        for(Post post : postList) {
+            postDTOList.add(PostDTO.builder()
+                    .id(post.getId())
+                    .user_id(id)
+                    .title(post.getTitle())
+                    .createdTime(post.getCreatedTime())
+                    .countLikes(postLikeRepository.countByPostId(post.getId())).build());
+        }
+
+        return postDTOList;
     }
 
     // 유저가 쓴 게시글 개수
@@ -97,19 +110,22 @@ public class UserService {
     }
 
     // 유저가 좋아요 누른 게시글 조회
-    public List<Post> findPostLikeByUserId(String id) {
+    public List<PostDTO> findPostLikeByUserId(String id) {
         List<PostLike> postIdList = postLikeRepository.findByUserId(id);
-        List<Post> postList = new ArrayList<>();
+        List<PostDTO> postDTOList = new ArrayList<>();
 
         for (PostLike postLike : postIdList) {
+            Post post = postLike.getPost();
 
-            Long postId = postLike.getPost().getId();
-            Post result = communityRepository.getPostById(postId);
-
-            postList.add(result);
+            postDTOList.add(PostDTO.builder()
+                    .id(post.getId())
+                    .user_id(id)
+                    .title(post.getTitle())
+                    .createdTime(post.getCreatedTime())
+                    .countLikes(postLikeRepository.countByPostId(post.getId())).build());
         }
 
-        return postList;
+        return postDTOList;
     }
 
     // 유저가 찜하거나 봤던 뮤지컬 조회

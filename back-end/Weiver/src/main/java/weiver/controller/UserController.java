@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import weiver.dto.PostDTO;
 import weiver.dto.ReplyDTO;
 import weiver.dto.UserDTO;
-import weiver.entity.Post;
 import weiver.entity.User;
 import weiver.service.UserService;
 
@@ -184,11 +184,19 @@ public class UserController {
 	@GetMapping("/myBoard/{userid}")
 	public String myBoard(@PathVariable String userid,
 						  Model model) {
-		List<Post> postListTime = userservice.findPostsByUserIdTime(userid);
-//		List<Post> postListLike = userservice.findPostsByUserIdLike(userid);
+		List<PostDTO> postDTOList = userservice.findPostsByUserId(userid);
+
+		List<PostDTO> postListTime = postDTOList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCreatedTime).reversed())
+				.collect(Collectors.toList());
+
+		List<PostDTO> postListLike = postDTOList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCountLikes).reversed())
+				.collect(Collectors.toList());
+
 		int postCount = userservice.countPostsByUserId(userid);
 		model.addAttribute("postListTime", postListTime);
-//		model.addAttribute("postListLike", postListLike);
+		model.addAttribute("postListLike", postListLike);
 		model.addAttribute("postCount", postCount);
 
 		return "myBoard";
@@ -221,20 +229,20 @@ public class UserController {
 	@GetMapping("/myLike/{userid}")
 	public String myLike(@PathVariable String userid,
 						 Model model) {
-		List<Post> postLikeList = userservice.findPostLikeByUserId(userid);
+		List<PostDTO> postLikeList = userservice.findPostLikeByUserId(userid);
 
-		List<Post> postLikeListTime = postLikeList.stream()
-				.sorted(Comparator.comparing(Post::getCreatedTime).reversed())
+		List<PostDTO> postLikeListTime = postLikeList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCreatedTime).reversed())
 				.collect(Collectors.toList());
 
-//		List<Post> postLikeListLike = postLikeList.stream()
-//				.sorted((a,b) -> b.getPostlikes().size() - a.getPostlikes().size())
-//				.collect(Collectors.toList());
+		List<PostDTO> postLikeListLike = postLikeList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCountLikes).reversed())
+				.collect(Collectors.toList());
 
 		int likeCount = postLikeList.size();
 
 		model.addAttribute("postListTime", postLikeListTime);
-//		model.addAttribute("postListLike", postLikeListLike);
+		model.addAttribute("postListLike", postLikeListLike);
 		model.addAttribute("postCount", likeCount);
 
 		return "myLike";
