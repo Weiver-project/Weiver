@@ -23,7 +23,7 @@
         <!-- 설정 -->
         <div class="setting">
             <a href="#"><i class="bi bi-person-lines-fill"></i></a>
-            <a href="#"><i class="bi bi-gear-wide"></i></a>
+            <a href="setting"><i class="bi bi-gear-wide"></i></a>
         </div>
     
         <!-- 프로필 -->

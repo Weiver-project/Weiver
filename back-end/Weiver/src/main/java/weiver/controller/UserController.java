@@ -18,6 +18,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 
@@ -70,10 +72,11 @@ public class UserController {
 	}
 
 	// 마이 페이지
-	@GetMapping("/mypage/{userid}")
-	public String mypage(@PathVariable String userid,
-						 Model model) {
-		UserDTO userInfo = userservice.userInfo(userid);
+	@GetMapping("/mypage")
+	public String mypage(Model model, HttpSession session) {
+		
+		String userId = (String) session.getAttribute("userId");
+		UserDTO userInfo = userservice.userInfo(userId);
 
 		model.addAttribute("userInfo", userInfo);
 
