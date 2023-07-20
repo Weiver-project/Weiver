@@ -146,16 +146,16 @@
   <footer>Copyright 시난과 고련  2023 All Rights Reserved</footer>
 
   <nav>
-    <a href="#"><i class="bi bi-house-door-fill"></i>
-      <div>HOME</div>
-    </a>
-    <a href="#"><i class="bi bi-chat-dots-fill"></i>
-      <div>COMMUNITY</div>
-    </a>
-    <a href="#"><i class="bi bi-person-fill"></i>
-      <div>MY PAGE</div>
-    </a>
-</nav>  
+      <a href="/main"><i class="bi bi-house-door-fill"></i>
+          <div>HOME</div>
+      </a>
+      <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+          <div>COMMUNITY</div>
+      </a>
+      <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+          <div>MY PAGE</div>
+      </a>
+  </nav> 
 
 </body>
 </html>
