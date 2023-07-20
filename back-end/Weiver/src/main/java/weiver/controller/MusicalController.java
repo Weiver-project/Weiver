@@ -36,7 +36,7 @@ public class MusicalController {
         
 
         try {
-        	// 오늘의 배우 뮤지컬 정보
+        	// 오늘의 배우 뮤지컬 정보.
 			Actor randomActor = actorService.getRandomActor();
 			List<SimpleMusicalDTO> musicalList = actorService.getmusicalListByActorId(randomActor.getId());
 			List<SimpleMusicalDTO> limitedMusicalList = musicalList.subList(0, Math.min(musicalList.size(), 8));
