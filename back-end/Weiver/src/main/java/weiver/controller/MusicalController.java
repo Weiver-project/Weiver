@@ -92,10 +92,6 @@ public class MusicalController {
 			List<String> clips = GoogleAPIService.search("뮤지컬" + musical.get().getTitle());
 			model.addAttribute("clips", clips);
 			
-			for(String s : clips) {
-				System.out.println(s);
-			}
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

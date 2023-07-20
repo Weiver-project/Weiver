@@ -97,78 +97,24 @@
       <div class="casting">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="profile-container">
-                    	<c:forEach items="${castingList}" var="casting">
-                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
-                            <img src="${casting.profileImage}" style="max-width: 110px; max-height: 110px;">
-                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
-                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
-                        </div>
-                        </c:forEach>
-                        <!-- <div class="casting-actor">
-                            <img src="image12.jpg" alt="이미지 2">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image13.jpg" alt="이미지 3">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image14.jpg" alt="이미지 4">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 5">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 6">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div> -->
-                    </div>
-                </div>
-
-               <div class="swiper-slide">
-                    <div class="profile-container">
-                        <div class="casting-actor">
-                            <img src="image11.jpg" alt="이미지 1">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image12.jpg" alt="이미지 2">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image13.jpg" alt="이미지 3">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image14.jpg" alt="이미지 4">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 5">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                        <div class="casting-actor">
-                            <img src="image15.jpg" alt="이미지 6">
-                            <span>배우 이름 뿌려주세요</span>
-                            <span>배역 명 뿌려주세요</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+               	<c:forEach items="${castingList}" var="casting"  varStatus="status">
+	               	<c:if test="${status.index % 6 == 0}">
+		                <div class="swiper-slide">
+		                    <div class="profile-container">
+                    </c:if>
+		                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
+		                            <a href="/actorDetail/${casting.id }"><img src="${casting.profileImage}" style="max-width: 90px; max-height: 90px;"></a>
+		                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
+		                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
+		                        </div>
+         			<c:if test="${status.index % 6 == 5 or status.last}">
+		           			</div>
+		       			</div>
+	       			</c:if>
+                </c:forEach>
+             </div>
+         </div>
+     	</div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Navigation -->
