@@ -59,8 +59,6 @@ public class MusicalController {
         	
 
         //인기 뮤지컬 추가
-        System.out.println(poPularMusicalDTOs.get(0).getTitle());
-        
         model.addAttribute("popularMusicals", poPularMusicalDTOs);
         //공연 중인 뮤지컬 추가
         model.addAttribute("performingMusicals", performingMusicals);

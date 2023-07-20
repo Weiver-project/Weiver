@@ -20,12 +20,14 @@ import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
+import weiver.entity.Review;
 import weiver.entity.User;
 import weiver.repository.CommunityRepository;
 import weiver.repository.ImageRepository;
 import weiver.repository.PostLikeRepository;
 import weiver.repository.ReReplyRepository;
 import weiver.repository.ReplyRepository;
+import weiver.repository.ReviewRepository;
 import weiver.repository.UserRepository;
 
 @Service
@@ -48,6 +50,9 @@ public class CommunityService {
 	
 	@Autowired
 	private PostLikeRepository postlikeRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
 	
 	// 이미지를 저장하는 디렉토리 경로
     private static final String IMAGE_UPLOAD_DIR = "C:/multi/Weiver/back-end/Weiver/src/main/resources/static/img/image";
@@ -85,6 +90,12 @@ public class CommunityService {
 		System.out.println(post);
 		
 		return post;
+	}
+	
+	public Review getReviewByPostId(Long PostId) {
+		Review review = reviewRepository.getReviewByPostId(PostId);
+		System.out.println(review);
+		return review;
 	}
 
 	//title, content에 들어 있는 키워드에 따라 게시글 가져오기 > 커뮤니티 검색 페이지
@@ -408,6 +419,9 @@ public class CommunityService {
 			return result;
 			
 		}
+
+
+		
 
 
 
