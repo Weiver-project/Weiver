@@ -31,6 +31,7 @@ import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
 import weiver.entity.Reply;
+import weiver.entity.Review;
 import weiver.entity.User;
 import weiver.service.CommunityService;
 import weiver.service.MusicalService;
@@ -92,15 +93,21 @@ public class CommunityController {
             rereplies.addAll(rerepliesForReply);
         }
         
+        //post id에 따라 등록된 뮤지컬 정보 가져오기
+        Review review = communityService.getReviewByPostId(post.getId());
+        
+        
         // 조회수 +1
         communityService.incrementViewCount(post);
 
         model.addAttribute("posts", post);
         model.addAttribute("reply", replies);
         model.addAttribute("rereply", rereplies);
+        model.addAttribute("reviews", review);
 
         return "communityDetail";
     	}
+    
     
 
 	    @RequestMapping(value = "/community/delete/post/{id}", method = RequestMethod.DELETE)

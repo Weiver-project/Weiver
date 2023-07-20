@@ -261,16 +261,16 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
             <hr>
 
             <!-- 연결된 작품 -->
-            <c:if test="${posts.type eq 'Review'}">
-                <div class="currentMusical">
-                    <img src="/img/poster.jpg" alt="X">
-                    <div class="currentMusicalInfo">
-                        <div class="musicalTitle">웃는 남자</div>
-                        <div class="musicalPeriod">2022-06-10~2012-08-22</div>
-                    </div>
-                </div>
-                <hr>
-            </c:if>
+             <c:if test="${posts.type eq 'Review'}">
+			    <div class="currentMusical">
+			        <img src="${reviews.musical.getPosterImage()}" alt="X">
+			        <div class="currentMusicalInfo">
+			            <div class="musicalTitle">${reviews.musical.getTitle()}</div>
+			            <div class="musicalPeriod">${reviews.musical.getStDate()} ~ ${reviews.musical.getEdDate()}</div>
+			        </div>
+			    </div>
+			    <hr>
+			</c:if>
 
             <!-- 게시글 내용 (텍스트, 이미지) -->
             <div class="postContent">${posts.content}</div>
