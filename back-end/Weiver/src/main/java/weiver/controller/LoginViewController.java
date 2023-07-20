@@ -21,7 +21,7 @@ public class LoginViewController {
 	@GetMapping(value = "/login")
 	public String loginPage(HttpSession session) {
 		
-		if(session.getAttribute("userId") != null || !session.getAttribute("userId").equals("")) {
+		if(session.getAttribute("userId") != null) {
 			return "redirect:/main";
 		}
 		
