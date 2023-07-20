@@ -182,10 +182,10 @@ public class UserController {
 	public String myBoard(@PathVariable String userid,
 						  Model model) {
 		List<Post> postListTime = userservice.findPostsByUserIdTime(userid);
-		List<Post> postListLike = userservice.findPostsByUserIdLike(userid);
+//		List<Post> postListLike = userservice.findPostsByUserIdLike(userid);
 		int postCount = userservice.countPostsByUserId(userid);
 		model.addAttribute("postListTime", postListTime);
-		model.addAttribute("postListLike", postListLike);
+//		model.addAttribute("postListLike", postListLike);
 		model.addAttribute("postCount", postCount);
 
 		return "myBoard";
@@ -224,14 +224,14 @@ public class UserController {
 				.sorted(Comparator.comparing(Post::getCreatedTime).reversed())
 				.collect(Collectors.toList());
 
-		List<Post> postLikeListLike = postLikeList.stream()
-				.sorted((a,b) -> b.getPostlikes().size() - a.getPostlikes().size())
-				.collect(Collectors.toList());
+//		List<Post> postLikeListLike = postLikeList.stream()
+//				.sorted((a,b) -> b.getPostlikes().size() - a.getPostlikes().size())
+//				.collect(Collectors.toList());
 
 		int likeCount = postLikeList.size();
 
 		model.addAttribute("postListTime", postLikeListTime);
-		model.addAttribute("postListLike", postLikeListLike);
+//		model.addAttribute("postListLike", postLikeListLike);
 		model.addAttribute("postCount", likeCount);
 
 		return "myLike";
