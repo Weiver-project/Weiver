@@ -1,41 +1,19 @@
 package weiver.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import lombok.RequiredArgsConstructor;
-import weiver.entity.Image;
-import weiver.entity.Musical;
-import weiver.entity.Post;
-import weiver.entity.PostLike;
-import weiver.entity.ReReply;
-import weiver.entity.Reply;
-import weiver.entity.Review;
-import weiver.entity.User;
+import weiver.entity.*;
 import weiver.service.CommunityService;
 import weiver.service.MusicalService;
 import weiver.service.UserService;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,17 +29,17 @@ public class CommunityController {
      * */
     
     @GetMapping("/community")
-    public String communityMain(@RequestParam(required = false) String type, 
-    						  @RequestParam(required = false) Long id,
-    						  Model model) {
-    	
-    	//모든 게시글 가져오기
-    	List<Post> postList = communityService.getAllPosts();
-    	
-    	//게시글 타입(Review, Chat)에 따라 게시글 가져오기
-    	List<Post> postTypeList = communityService.getAllPostsByType(type);
-        
-    	//인기 게시글 리스트 가져오기
+    public String communityMain(@RequestParam(required = false) String type,
+								@RequestParam(required = false) Long id,
+								Model model) {
+
+		//모든 게시글 가져오기
+		List<Post> postList = communityService.getAllPosts();
+
+		//게시글 타입(Review, Chat)에 따라 게시글 가져오기
+		List<Post> postTypeList = communityService.getAllPostsByType(type);
+
+		//인기 게시글 리스트 가져오기
         List<Post> bestPostList = communityService.getBestPostDesc();
         
         //댓글 개수 가져오기
@@ -89,7 +67,7 @@ public class CommunityController {
         //post_id와 reply_id에 따라 대댓글 가져오기
         List<ReReply> rereplies = new ArrayList<>();
         for (Reply reply : replies) {
-        	List<ReReply> rerepliesForReply = communityService.getReReplyByPostIdAndReplyId(post.getId(), reply.getId());
+			List<ReReply> rerepliesForReply = communityService.getReReplyByPostIdAndReplyId(post.getId(), reply.getId());
             rereplies.addAll(rerepliesForReply);
         }
         
@@ -106,401 +84,387 @@ public class CommunityController {
         model.addAttribute("reviews", review);
 
         return "communityDetail";
-    	}
-    
-    
+	}
 
-	    @RequestMapping(value = "/community/delete/post/{id}", method = RequestMethod.DELETE)
-	    public String deletePost(@PathVariable Long id) {
-	        String view = "error";
 
-	        boolean postResult = false;
-	        boolean replyResult = false;
-	        boolean rereplyResult = false;
+	@RequestMapping(value = "/community/delete/post/{id}", method = RequestMethod.DELETE)
+	public String deletePost(@PathVariable Long id) {
+		String view = "error";
 
-	        try {
-	            postResult = communityService.deletePostById(id);
-	            replyResult = communityService.deleteReplyById(id);
-	            rereplyResult = communityService.deleteRereplyById(id);
+		boolean postResult = false;
+		boolean replyResult = false;
+		boolean rereplyResult = false;
 
-	            if (postResult) {
-	                view = "redirect:http://localhost:8081/community";
-	                return view;
-	            }
+		try {
+			postResult = communityService.deletePostById(id);
+			replyResult = communityService.deleteReplyById(id);
+			rereplyResult = communityService.deleteRereplyById(id);
 
-	        } catch (Exception e) {
-	            return view;
+			if (postResult) {
+				view = "redirect:http://localhost:8081/community";
+				return view;
+			}
 
-	        }
-	        return view;
-	    }
+		} catch (Exception e) {
+			return view;
 
-    
-	  /*
+		}
+		return view;
+	}
+
+
+	/*
 	   * 커뮤니티 검색 결과 페이지
 	   * */
-	   @GetMapping("/community/search")
-	   public String getPostByKeyword(@RequestParam(name = "keyword") String keyword, Model model) {
-		  List<Post> postList = communityService.getPostByKeyword(keyword);
-		  model.addAttribute("searchResults", postList);
-		  return "communitySearchResult";
-	   }
-	   
-	   /*
+	@GetMapping("/community/search")
+	public String getPostByKeyword(@RequestParam(name = "keyword") String keyword, Model model) {
+		List<Post> postList = communityService.getPostByKeyword(keyword);
+		model.addAttribute("searchResults", postList);
+		return "communitySearchResult";
+	}
+
+	/*
 	 	* 커뮤니티 대댓글 페이지
 	 	* */
 
-	 	   @GetMapping("/community/{id}/reply/{replyId}")
-	 	   public String replyDetail(@PathVariable Long id, @PathVariable Long replyId, Model model) {
-	 	       // id에 따라 게시글 가져오기
-	 	       Post post = communityService.getPostById(id);
+	@GetMapping("/community/{id}/reply/{replyId}")
+	public String replyDetail(@PathVariable Long id, @PathVariable Long replyId, Model model) {
+		// id에 따라 게시글 가져오기
+		Post post = communityService.getPostById(id);
 
-	 	       // replyId에 따라 댓글 하나만 가져오기
-	 	       Reply reply = communityService.getReplyById(replyId);
+		// replyId에 따라 댓글 하나만 가져오기
+		Reply reply = communityService.getReplyById(replyId);
 
-	 	       // post_id와 reply_id에 따라 대댓글 가져오기
-	 	       List<ReReply> rereplies = communityService.getReReplyByPostIdAndReplyId(post.getId(), replyId);
+		// post_id와 reply_id에 따라 대댓글 가져오기
+		List<ReReply> rereplies = communityService.getReReplyByPostIdAndReplyId(post.getId(), replyId);
 
-	 	       model.addAttribute("reply", reply);
-	 	       model.addAttribute("rereply", rereplies);
+		model.addAttribute("reply", reply);
+		model.addAttribute("rereply", rereplies);
 
-	 	       return "rereplyDetail";
-	 	   }
+		return "rereplyDetail";
+	}
 
 
-		 /*
+	/*
 		* 게시글 수정 페이지
 		* */
-		@RequestMapping(value = "community/update/{id}", method = RequestMethod.GET)
-	    public String updatePostById(@PathVariable Long id, Model model) {  	
-	    	Post post = communityService.getPostById(id);
-	    	
-	    	model.addAttribute("posts", post);
-	    	
-	    	return "updatePost";
-	    }
-	    
-		@RequestMapping(value = "community/{id}", method = RequestMethod.PUT)
-		public String updatePost(@PathVariable Long id,
-		                       @ModelAttribute("type") String type,
-		                       @ModelAttribute("title") String title,
-		                       @ModelAttribute("content") String content) {
+	@RequestMapping(value = "community/update/{id}", method = RequestMethod.GET)
+	public String updatePostById(@PathVariable Long id, Model model) {
+		Post post = communityService.getPostById(id);
 
-		    String view = "error";
+		model.addAttribute("posts", post);
 
-		    Post post = communityService.getPostById(id);
-		    post.setType(type);
-		    // title 값이 빈 문자열인 경우 null로 처리
-		    post.setTitle(title.isEmpty() ? null : title);
-		    
-		    // content 값이 빈 문자열인 경우 null로 처리
-		    post.setContent(content.isEmpty() ? null : content);
+		return "updatePost";
+	}
 
-		    boolean postResult = false;
-		    try {
-		        postResult = communityService.updatePost(id, type, title, content);
-		        if (postResult) {
-		            view = "redirect:/community/" + post.getId();
-		            return view;
-		        }
-		    } catch (Exception e) {
-		       return view;
-		    }
-		    return view;
+	@RequestMapping(value = "community/{id}", method = RequestMethod.PUT)
+	public String updatePost(@PathVariable Long id,
+							 @ModelAttribute("type") String type,
+							 @ModelAttribute("title") String title,
+							 @ModelAttribute("content") String content) {
+
+		String view = "error";
+
+		Post post = communityService.getPostById(id);
+		post.setType(type);
+		// title 값이 빈 문자열인 경우 null로 처리
+		post.setTitle(title.isEmpty() ? null : title);
+
+		// content 값이 빈 문자열인 경우 null로 처리
+		post.setContent(content.isEmpty() ? null : content);
+
+		boolean postResult = false;
+		try {
+			postResult = communityService.updatePost(id, type, title, content);
+			if (postResult) {
+				view = "redirect:/community/" + post.getId();
+				return view;
+			}
+		} catch (Exception e) {
+			return view;
 		}
-		
-		/*
+		return view;
+	}
+
+	/*
 		 * 게시글 작성 페이지
 		 * */
-		@RequestMapping(value="/community/board", method=RequestMethod.GET)
-		public String insertPostForm(Model model) {
-			List<Musical> musicals = MusicalService.getAllMusical();
-			
-			model.addAttribute("musicals",musicals);
-			
-			return "registerPost";
+	@RequestMapping(value="/community/board", method=RequestMethod.GET)
+	public String insertPostForm(Model model) {
+		List<Musical> musicals = MusicalService.getAllMusical();
+
+		model.addAttribute("musicals",musicals);
+
+		return "registerPost";
+	}
+
+	@PostMapping("/community/board")
+	public String insertPost(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		try {
+
+			// User 객체의 ID 설정
+			User user = userService.findById(userId);
+
+			List<String> imagePaths = new ArrayList<>();
+
+			if (images != null && !images.isEmpty()) {
+				for (MultipartFile imageFile : images) {
+					String imagePath = communityService.saveImage(imageFile);
+					imagePaths.add(imagePath);
+				}
+			}
+
+			boolean isPostSaved = communityService.savePost(user, post.getType(), post.getTitle(), post.getContent(), imagePaths);
+
+			if (!isPostSaved) {
+				return "errorPage";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "errorPage";
 		}
-		
-		@PostMapping("/community/board")
-		public String insertPost(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images) {
-		    try {
-		        // User 객체의 ID 설정
-		        User user = userService.findById("test1");
 
-		        List<String> imagePaths = new ArrayList<>();
-
-		        if (images != null && !images.isEmpty()) {
-		            for (MultipartFile imageFile : images) {
-		                String imagePath = communityService.saveImage(imageFile);
-		                imagePaths.add(imagePath);
-		            }
-		        }
-
-		        boolean isPostSaved = communityService.savePost(user, post.getType(), post.getTitle(), post.getContent(), imagePaths);
-
-		        if (!isPostSaved) {
-		            return "errorPage";
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return "errorPage";
-		    }
-
-		    return "redirect:/community";
-		}
+		return "redirect:/community";
+	}
 
 
 
     /*
      * 댓글 관련 기능
      * */
-		
-	    // 댓글 수정 페이지를 렌더링하는 GET 메서드 추가
-	    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.GET)
-	    public String showUpdateCommentPage(@PathVariable Long id, Model model) {
-	        Reply reply = communityService.getReplyById(id);
-	        model.addAttribute("reply", reply);
-	        return "updateComment";
-	    }
 
-	 // 댓글을 업데이트하는 POST 메서드 추가
-	    @RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.POST)
-	    public String updateComment(@PathVariable Long id,
-	                                @ModelAttribute("replyToUpdate") Reply updatedReply) {
-	        String view = "error";
+	// 댓글 수정 페이지를 렌더링하는 GET 메서드 추가
+	@RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.GET)
+	public String showUpdateCommentPage(@PathVariable Long id, Model model) {
+		Reply reply = communityService.getReplyById(id);
+		model.addAttribute("reply", reply);
+		return "updateComment";
+	}
 
-	        boolean result = false;
+	// 댓글을 업데이트하는 POST 메서드 추가
+	@RequestMapping(value = "/community/update/reply/{id}", method = RequestMethod.POST)
+	public String updateComment(@PathVariable Long id,
+								@ModelAttribute("replyToUpdate") Reply updatedReply) {
+		String view = "error";
 
-	        Reply reply = communityService.getReplyById(id);
-	        reply.setContent(updatedReply.getContent());
+		boolean result = false;
 
-	        try {
-	            result = communityService.updateReply(id, updatedReply.getContent());
+		Reply reply = communityService.getReplyById(id);
+		reply.setContent(updatedReply.getContent());
 
-	            if (result) {
-	                return "redirect:/community/" + reply.getPost().getId();
-	            }
-	        } catch (Exception e) {
-	            return view;
-	        }
+		try {
+			result = communityService.updateReply(id, updatedReply.getContent());
 
-	        return view;
-	    }
-
-	    // 댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-	    @RequestMapping(value = "/community/insert/reply/{postId}", method = RequestMethod.POST)
-	    public String insertReply(@PathVariable String postId, @RequestParam String content, HttpSession Session) {
-	    	Post post = new Post();	
-	    	post.setId(Long.parseLong(postId));
-	    	
-	    	String userId = Session.getAttribute("userId").toString();
-	    	User user = new User();
-	    	user.setId(userId);
-	    	
-	    	Reply reply = Reply.builder()
-	    			.post(post)
-	    			.user(user)
-	    			.content(content)
-	    			.createdTime(new Date())
-	    			.build();
-	    	
-	    	if(communityService.insertReply(reply)) {	        	
-	        	return "redirect:/community/" + postId;
-	        }
-	        
-	        return "error";   
-	    }
-	    
-	    //댓글 삭제
-	    @RequestMapping(value="/community/delete/reply/{id}", method=RequestMethod.DELETE)
-		public String deleteReply(@PathVariable Long id) {
-			String view = "error";
-			
-			boolean replyResult = false;
-			boolean rereplyResult = false;
-			
-			Reply reply = communityService.getReplyById(id);
-			
-			try {
-				// 댓글 삭제 시 대댓글도 같이 삭제
-
-				replyResult = communityService.deleteReplyById(id);
-				rereplyResult = communityService.deleteRereplyById(id);
-				
-				if(replyResult && rereplyResult) {
-					view ="redirect:/community/" + reply.getPost().getId();
-					return view;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				return view;
+			if (result) {
+				return "redirect:/community/" + reply.getPost().getId();
 			}
-			
+		} catch (Exception e) {
 			return view;
 		}
-	    
-	     
-	     /*
+
+		return view;
+	}
+
+	// 댓글 삽입
+	@RequestMapping(value = "/community/insert/reply/{postId}", method = RequestMethod.POST)
+	public String insertReply(@PathVariable String postId, @RequestParam String content, HttpSession Session) {
+		Post post = new Post();
+		post.setId(Long.parseLong(postId));
+
+		String userId = Session.getAttribute("userId").toString();
+		User user = new User();
+		user.setId(userId);
+
+		Reply reply = Reply.builder()
+				.post(post)
+				.user(user)
+				.content(content)
+				.createdTime(new Date())
+				.build();
+
+		if(communityService.insertReply(reply)) {
+			return "redirect:/community/" + postId;
+		}
+
+		return "error";
+	}
+
+	//댓글 삭제
+	@RequestMapping(value="/community/delete/reply/{id}", method=RequestMethod.DELETE)
+	public String deleteReply(@PathVariable Long id) {
+		String view = "error";
+
+		boolean replyResult = false;
+		boolean rereplyResult = false;
+
+		Reply reply = communityService.getReplyById(id);
+
+		try {
+			// 댓글 삭제 시 대댓글도 같이 삭제
+
+			replyResult = communityService.deleteReplyById(id);
+			rereplyResult = communityService.deleteRereplyById(id);
+
+			if(replyResult && rereplyResult) {
+				view ="redirect:/community/" + reply.getPost().getId();
+				return view;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return view;
+		}
+
+		return view;
+	}
+
+
+	/*
 	      * 대댓글 관련 기능
 	      * */
-	    
-	    //대댓글 수정 페이지를 랜더링
-	    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.GET)
-	    public String showUpdaterecommentPage(@PathVariable Long id, Model model) {
-	            ReReply rereply = communityService.getRereplyById(id);
-	            model.addAttribute("rereply", rereply);
-	            return "updateRecomment";
-	        }
 
-	    // 대댓글을 업데이트하는 POST 메서드 추가
-	    @RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.POST)
-	    public String updateRecomment(@PathVariable Long id,
-	                                @ModelAttribute("rereplyToUpdate") ReReply updatedRereply) {
-	            String view = "error";
+	//대댓글 수정 페이지를 랜더링
+	@RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.GET)
+	public String showUpdaterecommentPage(@PathVariable Long id, Model model) {
+		ReReply rereply = communityService.getRereplyById(id);
+		model.addAttribute("rereply", rereply);
+		return "updateRecomment";
+	}
 
-	            boolean result = false;
+	// 대댓글을 업데이트하는 POST 메서드 추가
+	@RequestMapping(value = "/community/update/rereply/{id}", method = RequestMethod.POST)
+	public String updateRecomment(@PathVariable Long id,
+								  @ModelAttribute("rereplyToUpdate") ReReply updatedRereply) {
+		String view = "error";
 
-	            ReReply rereply = communityService.getRereplyById(id);
-	            rereply.setContent(updatedRereply.getContent());
+		boolean result = false;
 
-	            try {
-	                result = communityService.updateRereply(id, updatedRereply.getContent());
+		ReReply rereply = communityService.getRereplyById(id);
+		rereply.setContent(updatedRereply.getContent());
 
-	                if (result) {
-	                    return "redirect:/community/" + rereply.getPost().getId();
-	                }
-	            } catch (Exception e) {
-	                return view;
-	            }
+		try {
+			result = communityService.updateRereply(id, updatedRereply.getContent());
 
-	            return view;
-	        }
-	    
+			if (result) {
+				return "redirect:/community/" + rereply.getPost().getId();
+			}
+		} catch (Exception e) {
+			return view;
+		}
 
-	    //대댓글 삽입                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-	    @RequestMapping(value = "/community/insert/rereply/{postId}/{replyId}", method = RequestMethod.POST)
-	    public String insertReReply(@PathVariable String postId, @PathVariable String replyId,  @RequestParam String content, HttpSession Session) {
-	    	Post post = new Post();	
-	    	post.setId(Long.parseLong(postId));
-	    	
-	    	String userId = Session.getAttribute("userId").toString();
-	    	User user = new User();
-	    	user.setId(userId);
-	    	
-	    	Reply reply  = new Reply();
-	    	reply.setId(Long.parseLong(replyId));
-	    	
-	    	ReReply reReply = ReReply.builder()
-	    			.post(post)
-	    			.reply(reply)
-	    			.user(user)
-	    			.content(content)
-	    			.createdTime(new Date())
-	    			.build();
-	    	
-	    	if(communityService.insertRereply(reReply)) {	        	
-	        	return "redirect:/community/" + postId;
-	        }
-	        
-	        return "error";   
-	    }
-	    
-	   
-		  //대댓글 삭제
-		    @RequestMapping(value = "/community/delete/rereply/{id}", method = RequestMethod.DELETE)
-			 public String deleteRereply(@PathVariable Long id) {
-				String view = "error";
-				
-				boolean rereplyResult = false;
-		
-				ReReply rereply = communityService.getRereplyById(id);
-				
-				try {
-					rereplyResult = communityService.deleteRereplyById(id);
-					
-					if(rereplyResult) {
-						view ="redirect:/community/" + rereply.getPost().getId();
-				return view;
-					}
-					
-				} catch (Exception e) {
-					return view;
-				
-				}
-				return view;
-		    }
-		    
-		    
-		    /*
-		     * 좋아요 기능
-		     * */
-		    
-		 // 게시글 좋아요 삽입
-		    @RequestMapping(value = "/community/postlike/{postId}", method = RequestMethod.POST)
-		    public String insertPostLike(@RequestParam String postId, HttpSession session) {
-		        // 세션에서 userId 가져오기
-		        String userId = session.getAttribute("userId").toString();
+		return view;
+	}
 
-		        // PostLike 객체 생성
-		        PostLike postlike = new PostLike();
 
-		        // Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
-		        Post post = new Post();
-		        post.setId(Long.parseLong(postId));
-		        postlike.setPost(post);
+	//대댓글 삽입
+	@RequestMapping(value = "/community/insert/rereply/{postId}/{replyId}", method = RequestMethod.POST)
+	public String insertReReply(@PathVariable String postId, @PathVariable String replyId,  @RequestParam String content, HttpSession Session) {
+		Post post = new Post();
+		post.setId(Long.parseLong(postId));
 
-		        // User 객체 설정
-		        User user = new User();
-		        user.setId(userId);
-		        postlike.setUser(user);
+		String userId = Session.getAttribute("userId").toString();
+		User user = new User();
+		user.setId(userId);
 
-		        // PostLike 삽입
-		        if (communityService.insertPostLike(postlike)) {
-		            return "redirect:/community/" + postId;
-		        }
+		Reply reply  = new Reply();
+		reply.setId(Long.parseLong(replyId));
 
-		        return "error";
-		    }
-		    
-		  //좋아요 취소 -> 좋아요 데이터 삭제
-		    @RequestMapping(value="/community/delete/postlike/{id}", method=RequestMethod.DELETE)
-			public String deletePostlike(@PathVariable Long id) {
-				String view = "error";
-				
-				boolean postlikeResult = false;
-				
-				PostLike postlike = communityService.getpostlikeById(id);
-				
-				try {
+		ReReply reReply = ReReply.builder()
+				.post(post)
+				.reply(reply)
+				.user(user)
+				.content(content)
+				.createdTime(new Date())
+				.build();
 
-					postlikeResult = communityService.deletePostlike(id);
-					
-					if(postlikeResult) {
-						view ="redirect:/community/" + postlike.getPost().getId();
-						return view;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					return view;
-				}
-				
+		if(communityService.insertRereply(reReply)) {
+			return "redirect:/community/" + postId;
+		}
+
+		return "error";
+	}
+
+
+	//대댓글 삭제
+	@RequestMapping(value = "/community/delete/rereply/{id}", method = RequestMethod.DELETE)
+	public String deleteRereply(@PathVariable Long id) {
+		String view = "error";
+
+		boolean rereplyResult = false;
+
+		ReReply rereply = communityService.getRereplyById(id);
+
+		try {
+			rereplyResult = communityService.deleteRereplyById(id);
+
+			if(rereplyResult) {
+				view ="redirect:/community/" + rereply.getPost().getId();
 				return view;
 			}
 
+		} catch (Exception e) {
+			return view;
 
-	    
-	     
-	     
-
-    
-
-
+		}
+		return view;
+	}
 
 
+	/*
+		     * 좋아요 기능
+		     * */
+
+	// 게시글 좋아요 삽입
+	@RequestMapping(value = "/community/postlike/{postId}", method = RequestMethod.POST)
+	public String insertPostLike(@RequestParam String postId, HttpSession session) {
+		// 세션에서 userId 가져오기
+		String userId = session.getAttribute("userId").toString();
+
+		// PostLike 객체 생성
+		PostLike postlike = new PostLike();
+
+		// Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
+		Post post = new Post();
+		post.setId(Long.parseLong(postId));
+		postlike.setPost(post);
+
+		// User 객체 설정
+		User user = new User();
+		user.setId(userId);
+		postlike.setUser(user);
+
+		// PostLike 삽입
+		if (communityService.insertPostLike(postlike)) {
+			return "redirect:/community/" + postId;
+		}
+
+		return "error";
+	}
+
+	//좋아요 취소 -> 좋아요 데이터 삭제
+	@RequestMapping(value="/community/delete/postlike/{id}", method=RequestMethod.DELETE)
+	public String deletePostlike(@PathVariable Long id) {
+		String view = "error";
+
+		boolean postlikeResult = false;
+
+		PostLike postlike = communityService.getpostlikeById(id);
+
+		try {
+
+			postlikeResult = communityService.deletePostlike(id);
+
+			if(postlikeResult) {
+				view ="redirect:/community/" + postlike.getPost().getId();
+				return view;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return view;
+		}
+
+		return view;
+	}
 
 
-
-    
-    
-    
 }
