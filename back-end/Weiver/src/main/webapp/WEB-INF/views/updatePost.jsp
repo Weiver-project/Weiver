@@ -44,8 +44,8 @@
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
 					<select name = "type" id="selectFormType" onchange="postTypeChange()">
 						<option value="select">글 종류</option>
-                        <option value="잡담" ${posts.type == 'Chat' ? 'selected' : ''}>잡담</option>
-                        <option value="리뷰" ${posts.type == 'Result' ? 'selected' : ''}>리뷰</option>
+                        <option value="Chat" ${posts.type == 'Chat' ? 'selected' : ''}>잡담</option>
+                        <option value="Review" ${posts.type == 'Result' ? 'selected' : ''}>리뷰</option>
 					</select>
 				</div>
 
@@ -134,17 +134,17 @@ function postTypeChange(){
 	  let selectFormType = document.getElementById("selectFormType");
 	  
 	  let formType = selectFormType.options[selectFormType.selectedIndex].value;
-	  if(formType == '리뷰'){
+	  if(formType == 'Review'){
 		  document.getElementById("reviewForm").style.display="";
 		  document.getElementById("reviewPerformance").required="required";
 
-		  console.log("리뷰");
+		  console.log("Review");
 		  
-	  }else if(formType == '잡담'){
+	  }else if(formType == 'Chat'){
 		  document.getElementById("reviewForm").style.display="none";
 		  document.getElementById("reviewPerformance").required="";
 
-		  console.log("잡담");
+		  console.log("Chat");
 	  }
 	  
 }

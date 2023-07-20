@@ -18,9 +18,10 @@ import java.util.List;
 @Entity
 @Table(name = "post")
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq_gen")
+	@SequenceGenerator(name = "post_seq_gen", sequenceName = "post_sequence", allocationSize = 1)
+	private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -53,17 +54,5 @@ public class Post {
     public void removeImage(Image image) {
         images.remove(image);
     }
-    
-    //좋아요 데이터 받아와서 저장
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
-    private List<PostLike> postlikes = new ArrayList<>();
-
-    public void addLike(PostLike postlike) {
-    	postlikes.add(postlike);
-    }
-
-    public void removeLike(PostLike postlike) {
-    	postlikes.remove(postlike);
-    }
+ 
 }
