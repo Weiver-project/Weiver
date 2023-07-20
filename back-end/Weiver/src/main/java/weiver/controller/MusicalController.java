@@ -37,7 +37,7 @@ public class MusicalController {
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
         
-        //인기 게시글 리스트 가져오기
+        //인기 게시글 리스트 가져오기.
 	    List<Post> bestPostList = communityService.getBestPostDesc();
 	    
 	    //댓글 개수 가져오기
