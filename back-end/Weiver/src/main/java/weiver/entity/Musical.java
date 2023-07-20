@@ -18,31 +18,32 @@ public class Musical {
 	@Column(name = "ID")
 	private String id;
 	
-	@Column(name = "TITLE")
 	@Nullable
+	@Column(name = "TITLE")
 	private String title;
 	
 	@Nullable
 	@Column(name = "THEATER")
 	private String theater;
 	
+	@Nullable
 	@Column(name = "POSTER_IMAGE")
 	private String posterImage;
 	
-	@Column(name = "STDATE")
 	@Nullable
+	@Column(name = "STDATE")
 	private Date stDate;
 	
-	@Column(name = "EDDATE")
 	@Nullable
+	@Column(name = "EDDATE")
 	private Date edDate;
 	
-	@Column(name = "VIEW_AGE")
 	@Nullable
+	@Column(name = "VIEW_AGE")
 	private String viewAge;
 	
-	@Column(name = "RUNNING_TIME")
 	@Nullable
+	@Column(name = "RUNNING_TIME")
 	private String runningTime;
 	
 	@Nullable
