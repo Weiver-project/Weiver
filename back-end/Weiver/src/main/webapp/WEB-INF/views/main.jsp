@@ -34,9 +34,9 @@
 
 <!--검색 창-->
 <div class="mainSearch-container">
-  <input type="text">
+	<form action="/musical-search">
+  <input type="text" name="keyword" style="border-radius: 8px; background: #25304A;">
   <button>
-    <a href="/musical-search">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
            class="bi bi-search" viewBox="0 0 16 16">
         <path
@@ -44,15 +44,16 @@
       </svg>
     </a>
   </button>
+  </form>
 </div>
 
 <!--인기 뮤지컬 리스트 최대 3개 출력-->
 <h1 class="title">인기 뮤지컬 🔥</h1>
 <div class="popular_musical_list">
   <ul>
-    <li>${popularMusicals.get(0).getTitle()}</li>
-    <li>${popularMusicals.get(1).getTitle()}</li>
-    <li>${popularMusicals.get(2).getTitle()}</li>
+  	<a href="/musical-detail/${popularMusicals.get(0).getId()}"><li>1. ${popularMusicals.get(0).getTitle()}</li></a>
+  	<a href="/musical-detail/${popularMusicals.get(1).getId()}"><li>2. ${popularMusicals.get(1).getTitle()}</li></a>
+    <a href="/musical-detail/${popularMusicals.get(2).getId()}"><li>3. ${popularMusicals.get(2).getTitle()}</li></a>
   </ul>
 </div>
 
@@ -177,7 +178,7 @@
             <div class="poster-container">
         </c:if>
         <div class="poster" id="${performingMusical.getId()}">
-          <img src="${performingMusical.getPosterImage()}" alt="image ${status.index + 1}">
+          <a href="/musical-detail/${performingMusical.getId()}"><img src="${performingMusical.getPosterImage()}" alt="image ${status.index + 1}"></a>
         </div>
         <c:if test="${status.index % 4 == 3 or status.last}">
             </div>
@@ -195,13 +196,13 @@
 
 
 <nav>
-  <a href="#"><i class="bi bi-house-door-fill"></i>
+  <a href="/main"><i class="bi bi-house-door-fill"></i>
     <div>HOME</div>
   </a>
-  <a href="#"><i class="bi bi-chat-dots-fill"></i>
+  <a href="/community"><i class="bi bi-chat-dots-fill"></i>
     <div>COMMUNITY</div>
   </a>
-  <a href="#"><i class="bi bi-person-fill"></i>
+  <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
     <div>MY PAGE</div>
   </a>
 </nav>

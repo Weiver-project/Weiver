@@ -25,14 +25,14 @@
             <!-- 타이틀 -->
             <div class="title">
                 <div class="back">
-                    <a href="javascript:history.back()"><i class="bi bi-chevron-left"></i></a>
+                    <a href="myinfo"><i class="bi bi-chevron-left"></i></a>
                 </div>
                 <div class="name">프로필 수정</div>
             </div>
         </header>
         
 
-        <form action="/update" method="POST" enctype="multipart/form-data">
+        <form action="update" method="POST" enctype="multipart/form-data">
 
             <!-- 프로필 -->
             <div class="profileChange">
