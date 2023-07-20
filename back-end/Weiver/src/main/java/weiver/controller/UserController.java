@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import weiver.dto.PostDTO;
 import weiver.dto.ReplyDTO;
+import weiver.dto.SimpleMusicalDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
+import weiver.service.SubscribeService;
 import weiver.service.UserService;
 
 import java.util.Comparator;
@@ -23,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userservice;
+
+	@Autowired
+	private SubscribeService subscribeService;
 
 	// 유저 아이디로 조회
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
@@ -222,7 +227,7 @@ public class UserController {
 		return "myComment";
 	}
 
-	// 내가 좋아요 누른 글들 
+	// 내가 좋아요 누른 글들
 	@GetMapping("/myLike/{userid}")
 	public String myLike(@PathVariable String userid,
 						 Model model) {
@@ -243,6 +248,21 @@ public class UserController {
 		model.addAttribute("postCount", likeCount);
 
 		return "myLike";
+	}
+
+	// 내가 찜한 목록
+	@GetMapping("/mySubscribe/{userid}")
+	public String mySubscribe(@PathVariable String userid,
+							  Model model) {
+		List<SimpleMusicalDTO> JjimList = subscribeService.getSubscribeMusical(userid,"찜");
+		List<SimpleMusicalDTO> WatchedList = subscribeService.getSubscribeMusical(userid,"봤어요");
+		for (SimpleMusicalDTO dto : JjimList ) {
+			System.out.println(dto.getTitle());
+		}
+		model.addAttribute("JjimList", JjimList);
+		model.addAttribute("WatchedList", WatchedList);
+
+		return "mySubscribe";
 	}
 }
 

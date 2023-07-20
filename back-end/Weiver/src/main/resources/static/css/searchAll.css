@@ -191,3 +191,8 @@ header hr{
   height: 1;
 }
 
+.musical_list a {
+    text-decoration: none;
+    color: #EFEFEF;
+}
+
