@@ -44,10 +44,6 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 	//내가 쓴 게시글 리스트 조회(작성순)
 	List<Post> findByUserIdOrderByCreatedTimeDesc(String userId);
 
-	//내가 쓴 게시글 리스트 조회(추천순)
-	@Query("SELECT p FROM Post p WHERE p.user.id = ?1 ORDER BY p.postlikes.size DESC")
-	List<Post> findByUserIdOrderByPostlikesDesc(String userId);
-
 	//내가 쓴 게시글 리스트 개수 조회
 	int countByUserId(String userId);
 

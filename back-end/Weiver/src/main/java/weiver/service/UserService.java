@@ -57,11 +57,6 @@ public class UserService {
         return communityRepository.findByUserIdOrderByCreatedTimeDesc(id);
     }
 
-    // 유저가 쓴 게시글 추천순 조회
-    public List<Post> findPostsByUserIdLike(String id) {
-        return communityRepository.findByUserIdOrderByPostlikesDesc(id);
-    }
-
     // 유저가 쓴 게시글 개수
     public int countPostsByUserId(String id) {
         return communityRepository.countByUserId(id);
@@ -108,12 +103,8 @@ public class UserService {
 
         for (PostLike postLike : postIdList) {
 
-            Long postId = postLike.getPostId();
+            Long postId = postLike.getPost().getId();
             Post result = communityRepository.getPostById(postId);
-
-            //Long postId = postLike.getPost().getId();
-            //Optional<Post> result = communityRepository.findById(postId);
-
 
             postList.add(result);
         }
