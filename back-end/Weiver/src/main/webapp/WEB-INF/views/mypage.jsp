@@ -34,14 +34,14 @@
     
         <!-- 찜했어요/ 봤어요 -->
         <div class="subscribe">
-            <a href="#">
+            <a href="mySubscribe">
                 <div>${requestScope.userInfo.countJjim}</div>
                 찜했어요
             </a>
         
             <div class="line"></div>
                 
-            <a href="#">
+            <a href="mySubscribe">
                 <div>${requestScope.userInfo.countIsWatched}</div>
                 봤어요
             </a>

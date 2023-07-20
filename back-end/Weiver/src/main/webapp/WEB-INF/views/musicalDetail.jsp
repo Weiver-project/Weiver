@@ -146,7 +146,7 @@
     </div>
   </div>  
       
-  <footer>Copyright 시난과 고련  2023 All Rights Reserved</footer>
+  <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
   <nav>
       <a href="/main"><i class="bi bi-house-door-fill"></i>
