@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import weiver.dto.PostDTO;
 import weiver.dto.ReplyDTO;
 import weiver.dto.UserDTO;
-import weiver.entity.Post;
 import weiver.entity.User;
 import weiver.service.UserService;
 
@@ -18,7 +18,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
+@RequestMapping(value = "mypage")
 public class UserController {
 
 	@Autowired
@@ -70,10 +73,11 @@ public class UserController {
 	}
 
 	// 마이 페이지
-	@GetMapping("/mypage/{userid}")
-	public String mypage(@PathVariable String userid,
-						 Model model) {
-		UserDTO userInfo = userservice.userInfo(userid);
+	@GetMapping("/myinfo")
+	public String mypage(Model model, HttpSession session) {
+		
+		String userId = (String) session.getAttribute("userId");
+		UserDTO userInfo = userservice.userInfo(userId);
 
 		model.addAttribute("userInfo", userInfo);
 
@@ -81,10 +85,12 @@ public class UserController {
 	}
 
 	// 프로필 수정 페이지
-	@GetMapping("/profileUpdate/{userid}")
-	public String profileUpdateForm(@PathVariable String userid,
+	@GetMapping("/profileUpdate")
+	public String profileUpdateForm(HttpSession session,
 									Model model) {
-		User userInfo = userservice.findById(userid);
+		
+		String userId = (String) session.getAttribute("userId");
+		User userInfo = userservice.findById(userId);
 		System.out.println(userInfo.getId());
 		System.out.println(userInfo.getPassword());
 		// DTO 바꿔야함 (issue: 비밀번호 노출)
@@ -125,7 +131,7 @@ public class UserController {
 			System.out.println(result);
 		}
 
-		return "redirect:/profileUpdate/" + id;
+		return "redirect:/mypage/profileUpdate";
 	}
 
 	// 설정 페이지
@@ -135,10 +141,10 @@ public class UserController {
 	}
 
 	// 비밀번호 수정 페이지
-	@GetMapping("/password/{userid}")
-	public String passwordUpdateForm(@PathVariable String userid,
-									 Model model) {
-		User userInfo = userservice.findById(userid);
+	@GetMapping("/password")
+	public String passwordUpdateForm(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("userId");
+		User userInfo = userservice.findById(userId);
 		// DTO 바꿔야함 (issue: 비밀번호 노출)
 		model.addAttribute("userInfo", userInfo);
 		return "passwordUpdate";
@@ -178,24 +184,33 @@ public class UserController {
 	}
 
 	// 내가 쓴 글 페이지
-	@GetMapping("/myBoard/{userid}")
-	public String myBoard(@PathVariable String userid,
-						  Model model) {
-		List<Post> postListTime = userservice.findPostsByUserIdTime(userid);
-//		List<Post> postListLike = userservice.findPostsByUserIdLike(userid);
-		int postCount = userservice.countPostsByUserId(userid);
+	@GetMapping("/myBoard")
+	public String myBoard(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("userId");
+		List<PostDTO> postDTOList = userservice.findPostsByUserId(userId);
+
+		List<PostDTO> postListTime = postDTOList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCreatedTime).reversed())
+				.collect(Collectors.toList());
+
+		List<PostDTO> postListLike = postDTOList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCountLikes).reversed())
+				.collect(Collectors.toList());
+
+		int postCount = userservice.countPostsByUserId(userId);
 		model.addAttribute("postListTime", postListTime);
-//		model.addAttribute("postListLike", postListLike);
+		model.addAttribute("postListLike", postListLike);
 		model.addAttribute("postCount", postCount);
 
 		return "myBoard";
 	}
 
 	// 내가 쓴 댓글 페이지
-	@GetMapping("/myComment/{userid}")
-	public String myComment(@PathVariable String userid,
-							Model model) {
-		List<ReplyDTO> replyDTOList = userservice.findRepliesByUserId(userid);
+	@GetMapping("/myComment")
+	public String myComment(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("userId");
+		
+		List<ReplyDTO> replyDTOList = userservice.findRepliesByUserId(userId);
 
 		List<ReplyDTO> replyDTOListTime = replyDTOList.stream()
 				.sorted(Comparator.comparing(ReplyDTO::getCreatedTime).reversed())
@@ -205,7 +220,7 @@ public class UserController {
 				.sorted(Comparator.comparing(ReplyDTO::getCountLikes).reversed())
 				.collect(Collectors.toList());
 
-		int replyCount = userservice.countRepliesByUserId(userid);
+		int replyCount = userservice.countRepliesByUserId(userId);
 
 		model.addAttribute("replyListTime", replyDTOListTime);
 		model.addAttribute("replyListLike", replyDTOListLike);
@@ -215,23 +230,25 @@ public class UserController {
 	}
 
 	// 내가 좋아요 누른 글들 
-	@GetMapping("/myLike/{userid}")
-	public String myLike(@PathVariable String userid,
-						 Model model) {
-		List<Post> postLikeList = userservice.findPostLikeByUserId(userid);
+	@GetMapping("/myLike")
+	public String myLike(HttpSession session,Model model) {
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		List<PostDTO> postLikeList = userservice.findPostLikeByUserId(userId);
 
-		List<Post> postLikeListTime = postLikeList.stream()
-				.sorted(Comparator.comparing(Post::getCreatedTime).reversed())
+		List<PostDTO> postLikeListTime = postLikeList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCreatedTime).reversed())
 				.collect(Collectors.toList());
 
-//		List<Post> postLikeListLike = postLikeList.stream()
-//				.sorted((a,b) -> b.getPostlikes().size() - a.getPostlikes().size())
-//				.collect(Collectors.toList());
+		List<PostDTO> postLikeListLike = postLikeList.stream()
+				.sorted(Comparator.comparing(PostDTO::getCountLikes).reversed())
+				.collect(Collectors.toList());
 
 		int likeCount = postLikeList.size();
 
 		model.addAttribute("postListTime", postLikeListTime);
-//		model.addAttribute("postListLike", postLikeListLike);
+		model.addAttribute("postListLike", postLikeListLike);
 		model.addAttribute("postCount", likeCount);
 
 		return "myLike";

@@ -42,7 +42,7 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 	int deletePostById(Long id);
 
 	//내가 쓴 게시글 리스트 조회(작성순)
-	List<Post> findByUserIdOrderByCreatedTimeDesc(String userId);
+	List<Post> findByUserId(String userId);
 
 	//내가 쓴 게시글 리스트 개수 조회
 	int countByUserId(String userId);

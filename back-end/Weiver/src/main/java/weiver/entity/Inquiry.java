@@ -14,8 +14,10 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "INQUIRY")
+@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "INQUIRY_SEQUENCE", initialValue = 1, allocationSize = 1)
 public class Inquiry {
     @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
     private Long id;
 
     @Column(name = "user_id")

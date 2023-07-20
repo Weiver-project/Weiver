@@ -18,7 +18,7 @@
 </head>
 
 <body class="container">
-  <header><a href="javascript:history.back();"><i class="bi bi-chevron-left"></i></a></header>
+  <header><a><i></i></a></header>
   <article>
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
@@ -31,7 +31,7 @@
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
       <a href="/signup">회원가입</a>
-      <a href="/">비밀번호를 잊으셨나요?</a>
+      <a href="#">비밀번호를 잊으셨나요?</a>
     </div>
     <!-- 간편로그인 구분 선 -->
     <div class="dividing-line">
@@ -44,7 +44,18 @@
       <a href="#"><img class="naver-login" src="/img/naver-icon.png" alt="네이버"></a>
     </div>
   </article>
-
+<footer>Copyright Weiver 2023 All Rights Reserved</footer>
+<nav>
+    <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <div>HOME</div>
+    </a>
+    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+        <div>COMMUNITY</div>
+    </a>
+    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <div>MY PAGE</div>
+    </a>
+</nav>
 
   <script>
   	const loginForm = document.querySelector("#login-form");
