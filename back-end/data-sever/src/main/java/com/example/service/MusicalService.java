@@ -63,8 +63,10 @@ public class MusicalService {
                     break;
             }
 
+            //max 페이지 가져오기
             int maxPage = setMaxPage(genre, CrawlingType);
 
+            //뮤지컬 아이디 리스트 가져오기
             List<String> musicalIds = setMusicalIds(genre, CrawlingType, maxPage);
 
             log.info("가져온 MUSICAL ID 개수: " + musicalIds.size());
@@ -73,13 +75,15 @@ public class MusicalService {
             saveAllMusical(musicalIds);
         }
 
-
         /*크롤링하는데 소요된 시간 출력*/
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        log.info("크롤링 경과 시간: " + elapsedTime/60000 + "분");
-    }
+        int minute = (int) (elapsedTime/60000);
+        int hour = minute / 60;
+        minute = minute % 60;
 
+        log.info("크롤링 경과 시간: " + hour + "시간" + minute + "분");
+    }
 
     /*뮤지컬 상세 페이지에서 뮤지컬 정보 저장*/
     @SneakyThrows
@@ -87,49 +91,34 @@ public class MusicalService {
       List<Musical> musicals = new ArrayList<>();
         
         for(int i =0; i < musicalIds.size(); i++){
-
-        		
-            //뮤지컬 저장 로직
-            Musical musical = saveMusical(musicalIds.get(i));
-//	            log.info(i + "번 MUSICAL(" + musicalIds.get(i) + ") 저장: " + musical);
+            //뮤지컬 1개에 대한 데이터 크롤링
+            Musical musical = getMusical(musicalIds.get(i));
             musicals.add(musical);
+            log.info(i + "번 MUSICAL(" + musicalIds.get(i) + ") 저장: " + musical);
 
-            
-        	
-            // 데이터를 100개씩 저장한다.
-            if(i != 0 && i % 500 == 0){
+            // 데이터를 1000개씩 저장
+            if(i != 0 && i % 1000 == 0){
             	// musical 저장
             	musicalRepository.saveAll(musicals);
-            	
-            	// actor, casting 저장
-            	List<String> musicalIdList = new ArrayList<String>();
-            	for(Musical m : musicals) {
-            		musicalIdList.add(m.getId());
-            	}
-            	actorService.saveData(musicalIdList);
-            	// 100개 묶음을 초기화 한다.
+
+            	// 새로운 MusicalId를 채우기 위해 기존 리스트 초기화
             	musicals.clear();
-            	System.out.println("500 save");
             }
         }
-        
-        // 100개 묶음을 제외한 나머지 처리
-        if(musicals.size() != 0) {        	
-	        musicalRepository.saveAll(musicals);
-	        
-	        List<String> musicalIdList = new ArrayList<String>();
-        	for(Musical m : musicals) {
-        		musicalIdList.add(m.getId());
-        	}
-	        actorService.saveData(musicalIdList);
-	        musicals.clear();
+
+        // 잔여 데이터 저장
+        if(musicals.size() != 0) {
+            musicalRepository.saveAll(musicals);
+            musicals.clear();
         }
-        System.out.println("save All");
+
+        // actor, casting 저장
+        actorService.saveData(musicalIds);
     }
 
     /**뮤지컬 상세 페이지에서 정보 크롤링 후 저장*/
     @SneakyThrows   //RuntimeException 같이 어떤 예외가 발생했는지 정확히 알 수 없는 경우에 사용
-    public Musical saveMusical(String musicalId){
+    public Musical getMusical(String musicalId){
         String url = URLs.MUSICAL_DETAIL_URL + musicalId;
 
         Document doc = Jsoup.connect(url).timeout(30000).get();
@@ -156,23 +145,15 @@ public class MusicalService {
             String[] dates = temporary.trim().split("~");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-            try {
-                //일시 정보를 Date 타입으로 변환해서 stDate, edDate로 저장
-                if(!dates[0].contains("오픈런")){
-                    stDate = dateFormat.parse(dates[0].trim());
-                }
-                if(!dates[1].contains("오픈런")){
-                    edDate = dateFormat.parse(dates[1].trim());
-                }
-            } catch (ParseException e) {
-            	if(dates[0].trim() == "2011" || dates[1].trim() == "2011") {
-            		System.out.println("2011은 date 타입으로 변환 할 수 없습니다.");
-            	}else {
-            		e.printStackTrace();
-            	}
+            //일시 정보를 Date 타입으로 변환해서 stDate, edDate로 저장
+            //지정된 포맷의 10글자가 맞을 경우에만 Date로 변환
+            if(dates[0].length() == 10){
+                stDate = dateFormat.parse(dates[0].trim());
+            }
+            if(dates[1].length() == 10){
+                edDate = dateFormat.parse(dates[1].trim());
             }
         }
-
         //장소
         String theater = element.selectFirst("img[alt=장소]").parent().nextElementSibling().text();
 
@@ -194,6 +175,7 @@ public class MusicalService {
         if(mainCharacterE != null)
             mainCharacter = mainCharacterE.text();
 
+        //크롤링한 데이터로 뮤지컬 객체 생성
         Musical musical = Musical.builder()
                 .id(musicalId)
                 .title(title)
@@ -207,7 +189,6 @@ public class MusicalService {
                 .build();
 
         return musical;
-//        return musicalRepository.save(musical);
     }
 
 
