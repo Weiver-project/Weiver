@@ -14,7 +14,9 @@ import weiver.dto.ResponseCastingDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Actor;
 import weiver.entity.Musical;
+import weiver.entity.Post;
 import weiver.service.ActorService;
+import weiver.service.CommunityService;
 import weiver.service.GoogleAPIService;
 
 import weiver.service.MusicalService;
@@ -28,12 +30,18 @@ import java.util.Optional;
 public class MusicalController {
     private final MusicalService musicalService;
     private final ActorService actorService;
+    private final CommunityService communityService;
     
     @GetMapping("/main")
     public String getMainPage(Model model){
         List<PoPularMusicalDTO> poPularMusicalDTOs = musicalService.getLikedMusical();
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
         
+        //인기 게시글 리스트 가져오기
+	    List<Post> bestPostList = communityService.getBestPostDesc();
+	    
+	    //댓글 개수 가져오기
+	    model.addAttribute("bestPost", bestPostList);
 
         try {
         	// 오늘의 배우 뮤지컬 정보.
