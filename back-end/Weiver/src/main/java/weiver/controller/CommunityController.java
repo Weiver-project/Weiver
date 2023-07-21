@@ -1,27 +1,46 @@
 package weiver.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import weiver.entity.*;
-import weiver.service.CommunityService;
-import weiver.service.MusicalService;
-import weiver.service.UserService;
-
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.RequiredArgsConstructor;
+import weiver.entity.Musical;
+import weiver.entity.Post;
+import weiver.entity.PostLike;
+import weiver.entity.ReReply;
+import weiver.entity.Reply;
+import weiver.entity.Review;
+import weiver.entity.User;
+import weiver.service.CommunityService;
+import weiver.service.MusicalService;
+import weiver.service.UserService;
+
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
-
+	@Autowired
 	private final CommunityService communityService;
-    private final UserService userService;
-    private final MusicalService MusicalService;
+    
+	@Autowired
+	private final UserService userService;
+    
+	@Autowired
+	private final MusicalService musicalService;
 
 
     /*
@@ -191,7 +210,7 @@ public class CommunityController {
 		 * */
 	@RequestMapping(value="/community/board", method=RequestMethod.GET)
 	public String insertPostForm(Model model) {
-		List<Musical> musicals = MusicalService.getAllMusical();
+		List<Musical> musicals = musicalService.getAllMusical();
 
 		model.addAttribute("musicals",musicals);
 
@@ -199,34 +218,67 @@ public class CommunityController {
 	}
 
 	@PostMapping("/community/board")
-	public String insertPost(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		try {
+	public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
+	                                  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
+	    String userId = (String) session.getAttribute("userId");
+	    
+	    System.out.println(musicalId);
+	    try {
+	        // 사용자 정보 가져오기
+	        User user = userService.findById(userId);
 
-			// User 객체의 ID 설정
-			User user = userService.findById(userId);
+	        List<String> imagePaths = new ArrayList<>();
+	        if (images != null && !images.isEmpty()) {
+	            for (MultipartFile imageFile : images) {
+	                String imagePath = communityService.saveImage(imageFile);
+	                imagePaths.add(imagePath);
+	            }
+	        }
 
-			List<String> imagePaths = new ArrayList<>();
+	        // 게시글 정보 저장
+	        Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
 
-			if (images != null && !images.isEmpty()) {
-				for (MultipartFile imageFile : images) {
-					String imagePath = communityService.saveImage(imageFile);
-					imagePaths.add(imagePath);
-				}
-			}
+//	        if (!isPostSaved) {
+//	            return "errorPage";
+//	        }
 
-			boolean isPostSaved = communityService.savePost(user, post.getType(), post.getTitle(), post.getContent(), imagePaths);
+	        // 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
+	        if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
+	            // Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
+	        
 
-			if (!isPostSaved) {
-				return "errorPage";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "errorPage";
-		}
+	            // Review 객체 생성
+	            Review review = new Review();
 
-		return "redirect:/community";
+	            // Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
+	            System.out.println(isPostSaved.getId());
+	            review.setPost(isPostSaved);
+
+	            // Musical 객체 설정
+	            Musical musical = new Musical();
+	            musical.setId(musicalId);
+	            review.setMusical(musical);
+
+	            // Review 삽입
+	            if (communityService.insertReview(review)) {
+	                return "redirect:/community";
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "errorPage";
+	    }
+
+	    return "redirect:/community";
 	}
+
+
+
+
+
+
+
+
 
 
 
