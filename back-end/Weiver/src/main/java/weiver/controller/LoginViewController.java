@@ -10,12 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import weiver.repository.UserRepository;
 import weiver.service.KakaoService;
 import weiver.service.LoginService;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,14 +24,18 @@ public class LoginViewController {
 	@Autowired
 	private LoginService loginService; 
 	
+	@Autowired
+	private KakaoService kakaoService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Value("${kakao.restapikey}")
 	private String kakaoAPIKey;
 	
 	@Value("${kakao.redirecturl}")
 	private String kakaoRedirectUrl;
 	
-	@Autowired
-	private KakaoService kakaoService;
 	
 	// 로그인 페이지
 	@GetMapping(value = "/login")
@@ -82,35 +85,32 @@ public class LoginViewController {
 	
 	// 카카오 로그인
 	@GetMapping(value = "/kakao")
-	public String kakaoLogin(@RequestParam("code") String code, Model model) {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session) {
 		try {
 			String accessToken = kakaoService.getKakaoAccessToken(code);
 			
 			System.out.println(accessToken);
 			Map<String, Object> userInfo = kakaoService.getUserInfo(accessToken);
 			
-			// 아이디있으면 로그인 처리 후 main
-			// if 로그인
-			// else 회원가입 페이지
-			
-			// 없으면 회원가입 main
-			// 이미 존재할 경우 회원가입 X, 로그인 페이지로
-			
-			System.out.println("유저 닉네임" + (String) userInfo.get("nickname"));
-			System.out.println("유저 이메일" + (String) userInfo.get("email"));
-			
 			Long currentTimeMillis = System.currentTimeMillis();
-			
-			String userId = (String) userInfo.get("email");
-			String userNickname = (String) userInfo.get("nickname");
+			String userId = userInfo.get("email").toString().replaceAll("\"", "");
+			String userNickname = userInfo.get("nickname").toString().replaceAll("\"", "");
 			String userPw = currentTimeMillis.toString();
-			System.out.println("비밀번호" + userPw);
 			
-			boolean result = loginService.saveUser(userId, userPw, userNickname);
+			// 아이디있으면 로그인 처리 후 main, 아이디가 없으면 회원가입 후 -> main
+			// 이미 존재할 경우 회원가입 X, 로그인 페이지로
+			boolean existsUser = userRepository.existsById(userId);
+			boolean result = false;
 			
-			if (result) {
-				model.addAttribute("userId", userId);
-				model.addAttribute("userNickname", userNickname);
+			if(!existsUser) {
+				result = loginService.saveUser(userId, userPw, userNickname);
+								
+			}
+			
+			if (result || existsUser) {
+				session.setAttribute("userId", userId);
+				session.setAttribute("userNickname", userNickname);
+				session.setAttribute("kakao", "kakao"); // 카카오 유저 비밀번호 변경 페이지 막을 때 사용
 				return "main";
 			} 
 			
