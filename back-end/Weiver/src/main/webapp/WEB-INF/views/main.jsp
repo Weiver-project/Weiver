@@ -130,8 +130,10 @@
 <div class="today_actor" style="max-height: 180px">
   <div class="actor_img">
     <div>
-    	<a href="/actorDetail/${randomActor.id}">
-		   	<img src="${randomActor.profileImage}" style="border-radius: 50%; max-height: 180px;">
+    	<a id="actorInfo" href="/actorDetail/${randomActor.id}">
+    		<c:if test="${not empty randomActor.profileImage}">
+    		<img id="actorImage" src="${randomActor.profileImage}" style="border-radius: 50%; width:180px; height: 180px;">
+    		</c:if>
 		   	<span class="actor-name">${randomActor.name}</span>
     	</a>
     </div>
@@ -145,7 +147,7 @@
 	          		<div class="poster-container"> 
        		</c:if>
 	            <div class="poster">
-	            <a href="/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}"></a>
+	            <a href="/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}" alt="${limitedMusical.getTitle()}"></a>
 	            </div>
                <c:if test="${status.index % 2 == 1 or status.last}">
 		           </div>
@@ -211,7 +213,16 @@
 
 
 
-
+<script type="text/javascript">
+	const actorInfo = document.getElementById('actorInfo');
+	const actorImage = document.getElementById('actorImage');
+	const spanElement = document.createElement('span');
+	
+	actorImage.onerror = () => { 
+		actorImage.remove();
+		spanElement.textContent = '배우 이미지가 없습니다.';
+	}
+</script>
 </body>
 
 </html>
