@@ -40,7 +40,7 @@
     <!-- 간편 로그인 -->
     <div id="simple-login">
       <a href="#"><img class="google-login" src="/img/google_icon.png" alt="구글"></a>
-      <a href="#"><img class="kakao-login" src="/img/kakako-icon.png" alt="카카오"></a>
+      <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoAPIKey}&redirect_uri=${kakaoRedirectUrl}"><img class="kakao-login" src="/img/kakako-icon.png" alt="카카오"></a>
       <a href="#"><img class="naver-login" src="/img/naver-icon.png" alt="네이버"></a>
     </div>
   </article>
