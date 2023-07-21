@@ -1,21 +1,20 @@
 package weiver.controller;
 
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import weiver.entity.Actor;
-import weiver.entity.Admin;
-import weiver.entity.Inquiry;
-import weiver.entity.Musical;
-import weiver.entity.Post;
-import weiver.entity.User;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import weiver.entity.*;
 import weiver.service.AdminService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
+@Slf4j
 @RequestMapping(value = "admin")
 public class AdminController {
 
@@ -29,7 +28,51 @@ public class AdminController {
 			model.addAttribute("actors", adminService.getAllActors());
 			return "adminActors";
 		}
-	
+
+	/*============================        Login         ===================================*/
+
+	// 로그인
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String adminLogin(HttpSession session) {
+		if(session.getAttribute("userId") != null) {
+			return "redirect:/admin/main";
+		}
+
+		return "adminLogin";
+	}
+
+	// 회원가입
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signupPage() {
+		return "adminSignup";
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		if(session != null) {
+			session.invalidate();
+			System.out.println("로그 아웃");
+		}
+		return "redirect:/admin/login";
+	}
+
+	// 회원 탈퇴
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public String removeUser(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+
+		try {
+//			loginService.removeUser(userId);
+			session.invalidate();
+			log.info("회원 탈퇴됨");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/admin/main";
+	}
+
 	/*============================        Actor         ===================================*/
 	
 	// 배우 리스트 조회

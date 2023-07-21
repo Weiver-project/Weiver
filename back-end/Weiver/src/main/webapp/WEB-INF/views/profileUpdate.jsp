@@ -37,7 +37,7 @@
             <!-- 프로필 -->
             <div class="profileChange">
                 <div class="profileChange_cut">
-                    <img class="image-box" src="/img/${requestScope.userInfo.profileImg}" alt="profile" height="150" width="150">
+                    <img class="image-box" src="${requestScope.userInfo.profileImg}" alt="profile" height="150" width="150">
                     <input id="my-img" type="file" accept="image/*" name="profileImg">
                     <button id="my-button" class="change" type="button" onclick="onClickUpload();">변경</button>
                 </div>

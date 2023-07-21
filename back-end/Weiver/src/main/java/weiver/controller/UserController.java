@@ -1,5 +1,6 @@
 package weiver.controller;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ import weiver.dto.ReplyDTO;
 import weiver.dto.SimpleMusicalDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
+import weiver.service.AwsS3Service;
 import weiver.service.SubscribeService;
 import weiver.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	private SubscribeService subscribeService;
+
+	@Autowired
+	private AwsS3Service awsS3Service;
 
 	// 유저 아이디로 조회
 	@RequestMapping(value="/test1",method = RequestMethod.GET)
@@ -109,10 +115,8 @@ public class UserController {
 								@RequestParam(value = "nickname") String nickname,
 								@RequestParam(value = "profileImg") MultipartFile profileImg) {
 
-		// 파일 저장은 어디에?
 		String prevName = userservice.findById(id).getNickname();
 		String prevImg = userservice.findById(id).getProfileImg();
-		String imgName = profileImg.getOriginalFilename();
 
 		if( !nickname.equals(prevName) ) {
 			boolean result = false;
@@ -121,19 +125,24 @@ public class UserController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println(result);
 		}
 
-
-		if( !imgName.isEmpty() && !imgName.equals(prevImg)) {
-			boolean result = false;
-			try {
-				result = userservice.updateImg(imgName, id);
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			String url = awsS3Service.uploadFileV1(profileImg);
+			if( !url.isEmpty() && !url.equals(prevImg)) {
+				boolean result = false;
+				try {
+					result = userservice.updateImg(url, id);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			System.out.println(result);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
+
 
 		return "redirect:/mypage/profileUpdate";
 	}

@@ -28,7 +28,7 @@
     
         <!-- 프로필 -->
         <div class="profile">
-            <img src="/img/${requestScope.userInfo.profileImg}" alt="profile" height="150" width="150">
+            <img src="${requestScope.userInfo.profileImg}" alt="profile" height="150" width="150">
             <div>${requestScope.userInfo.nickname}</div>
         </div>
     
