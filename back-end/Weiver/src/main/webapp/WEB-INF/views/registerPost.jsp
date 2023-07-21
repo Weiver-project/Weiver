@@ -242,6 +242,7 @@ function handleMusicalItemClick(musicalId) {
 						</button>
 					</div>
 
+					
 						<!-- 내용칸 -->
 					<div>
 						<textarea name="content" type="text" class="content" id="editor"></textarea>
@@ -257,6 +258,11 @@ function handleMusicalItemClick(musicalId) {
 				
 				</div>
 			</form>
+
+			<form action="/upload" method="post" enctype="multipart/form-data">
+		        <input type="file" name="file" required>
+		        <button type="submit">Upload</button>
+		    </form>
 
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 

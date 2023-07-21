@@ -1,12 +1,7 @@
 package weiver.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,30 +13,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.RequiredArgsConstructor;
-import weiver.entity.Musical;
-import weiver.entity.Post;
-import weiver.entity.PostLike;
-import weiver.entity.ReReply;
-import weiver.entity.Reply;
-import weiver.entity.Review;
-import weiver.entity.User;
+import weiver.entity.*;
+import weiver.service.AwsS3Service;
 import weiver.service.CommunityService;
 import weiver.service.MusicalService;
 import weiver.service.UserService;
 
+
+import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpSession;
+
+
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
-	@Autowired
-	private final CommunityService communityService;
+	  private final CommunityService communityService;
+    private final UserService userService;
+    private final MusicalService MusicalService;
+    private final AwsS3Service awsS3Service;
     
-	@Autowired
-	private final UserService userService;
     
-	@Autowired
-	private final MusicalService musicalService;
+   @PostMapping("/upload")
+   public void uploadFile(
+      @RequestPart(value = "file") MultipartFile multipartFile) throws FileUploadException, FileNotFoundException {
+	  System.out.println(multipartFile.getOriginalFilename());	//받아온 파일 이름 test용
+	  System.out.println(awsS3Service.uploadFileV1(multipartFile));	//S3에 저장한 이미지 url 값
+   }
 
+
+	  
 
     /*
      * 커뮤니티 메인 페이지
@@ -280,6 +285,7 @@ public class CommunityController {
 
 
 
+	
 
 
     /*
