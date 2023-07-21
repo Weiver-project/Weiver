@@ -43,7 +43,7 @@ public class LoginService {
 							.id(userId)
 							.password(encodedPassword)
 							.nickname(userNickname)
-							.profileImg("Default_Profile.png")
+							.profileImg("https://weiver-image-bucket.s3.ap-northeast-2.amazonaws.com/Default_Profile1689916525640.png")
 							.essentialAgree("Y")
 							.personalAgree("Y")
 							.ageAgree("Y")
