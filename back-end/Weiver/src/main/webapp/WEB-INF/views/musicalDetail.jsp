@@ -76,7 +76,7 @@
       
       <div class="like-jjim-btn">
         <div class="button">
-          <button onclick="addSubscirbe(${musical.getId()}, '찜했어요')">
+          <button onclick="addSubscribe(${musical.getId()}, '찜했어요')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
               <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
               <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
@@ -86,7 +86,7 @@
 
         </div>
         <div class="button">
-          <button onclick="addSubscirbe(${musical.getId()}, '봤어요')">
+          <button onclick="addSubscribe(${musical.getId()}, '봤어요')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
               <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
               <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
@@ -161,7 +161,7 @@
   </nav> 
 
 <script>
-function addSubscirbe(musicalId, type){
+function addSubscribe(musicalId, type){
 
     // 서버에 데이터 전송 (AJAX 사용)
     $.ajax({
