@@ -108,7 +108,17 @@ p {
 }
 
 .data_show .inquiry_text {
-    height: 100px;
+    width: 640px;
+    height: 0;
+    background-color: #101322;
+    border-radius: 8px;
+    border: 1px solid #25304A;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #586A85;
+    resize: none;
 }
 
 .data_show .answer {
