@@ -38,4 +38,10 @@ public class InquiryService {
     public Inquiry findById(Long id) {
         return inquiryRepository.getInquiryById(id);
     }
+
+	public void deleteInquiry(Long inquiryId) {
+		inquiryRepository.deleteById(inquiryId);
+	}
+
+
 }
