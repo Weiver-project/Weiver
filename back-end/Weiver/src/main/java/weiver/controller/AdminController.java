@@ -34,7 +34,7 @@ public class AdminController {
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String adminLogin(HttpSession session) {
-		if(session.getAttribute("userId") != null) {
+		if(session.getAttribute("adminId") != null) {
 			return "redirect:/admin/main";
 		}
 
@@ -59,11 +59,11 @@ public class AdminController {
 
 	// 회원 탈퇴
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public String removeUser(HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
+	public String removeAdmin(HttpSession session) {
+		String adminId = (String) session.getAttribute("adminId");
 
 		try {
-//			loginService.removeUser(userId);
+			adminService.removeAdmin(adminId);
 			session.invalidate();
 			log.info("회원 탈퇴됨");
 		} catch (Exception e) {

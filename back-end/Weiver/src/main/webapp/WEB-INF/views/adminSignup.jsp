@@ -39,22 +39,22 @@
         </div>
 
         <!-- 회원가입 form -->
-        <form id="signupForm" action="/signupTest" method="post">
+        <form id="signupForm" action="/ad/signupTest" method="post">
             <!-- ID -->
             <div class="ID">
-                <input id="userId" class="info_input" type="email" name="userId" placeholder="이메일을 입력해주세요" required style="text-transform: lowercase">
+                <input id="adminId" class="info_input" type="text" name="adminId" placeholder="아이디를 입력해주세요" required style="text-transform: lowercase">
             </div>
 
             <!-- 닉네임 -->
             <div class="data_input">
-                <input class="info_input" type="password" name="userPw" placeholder="비밀번호를 입력주세요" required>
+                <input class="info_input" type="password" name="adminPw" placeholder="비밀번호를 입력주세요" required>
             </div>
 
             <div class="data_input">
-                <input class="info_input" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력해주세요" required>
+                <input class="info_input" type="password" name="adminPwCheck" placeholder="비밀번호를 다시 입력해주세요" required>
             </div>
             <div class="data_input">
-                <input class="info_input" type="text" name="userNickname" placeholder="닉네임을 입력해주세요" required>
+                <input class="info_input" type="text" name="adminName" placeholder="이름을 입력해주세요" required>
             </div>
         </form>
 
@@ -72,7 +72,7 @@
 			const signupButton = document.querySelector(".signupBtn");
 			const signupForm = document.querySelector("#signupForm");
 			const signupCheckBoxes = document.querySelectorAll(".signupCheckBox");
-			const emailValue = document.querySelector("#userId")
+			const emailValue = document.querySelector("#adminId")
 			
 			/* 소문자로 변형 */
 			emailValue.addEventListener("input", (e) => {
@@ -87,7 +87,7 @@
 			    if (signupForm.checkValidity()) { // 양식이 유효한지 확인
 			        const formData = new FormData(signupForm);
 			
-			        axios.post("/admin/signupTest", formData)
+			        axios.post("/ad/signupTest", formData)
 			            .then(response => {
 			                const data = response.data;
 			                if (response.status === 200) {
