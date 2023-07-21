@@ -30,6 +30,27 @@
     resize: vertical;
 }
 
+#musicalInfoContainer {
+  list-style: none;
+  color: #D4D9E1;
+  padding: 0;
+  max-height: 400px;
+  width: 687px;
+  overflow-y: auto;
+}
+
+#musicalInfoContainer::-webkit-scrollbar {
+  width: 0; /* Set the width of the scrollbar to 0 */
+  display: none; /* Hide the scrollbar */
+}
+
+#searchBox {
+	width: 687px;
+	height: 36px;
+	border: 1px solid #D6D6D6;
+	
+	}
+
 /* text + img */
 div#editor {
   padding: 16px 24px;
