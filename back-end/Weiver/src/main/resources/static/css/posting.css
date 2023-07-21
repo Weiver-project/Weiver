@@ -14,6 +14,16 @@
   flex-wrap: wrap;
 }
 
+.submit-btn{
+	width: 113px;
+    height: 25px;
+    background-color: #4263EB;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 48px;
+}
+
 .back-btn{
   margin-right:100px;
 }
@@ -22,12 +32,14 @@
 	width:680px;
 	height:30px;
     resize: vertical;
+    margin-top: 10px;
 }
 
 .content{
 	width:680px;
 	height:400px;
     resize: vertical;
+    margin-top: 10px;
 }
 
 #musicalInfoContainer {

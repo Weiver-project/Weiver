@@ -31,11 +31,13 @@
     <!-- 결과 리스트 -->
     <ul class="musical_list">
 	  <c:forEach items="${musicals}" var="musical">
+	  <a href="/musical-detail/${musical.getId()}">
 	    <li>
 	      <img src="${musical.getPosterImage()}" alt="poster">
 	      <h2>${musical.getTitle()}</h2>
 	      <span><fmt:formatDate value="${musical.getStDate()}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${musical.getEdDate()}" pattern="yyyy-MM-dd" /></span>
 	    </li>
+	    </a>
 	  </c:forEach>
 	</ul>
     

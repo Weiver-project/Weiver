@@ -189,6 +189,10 @@ a {
     background-color: #172036;
 }
 
+.icon.addPostlike{
+	color: red;
+}
+
 
 .bi-suit-heart {
     cursor: pointer;
@@ -200,16 +204,12 @@ a {
     height: 24px;
 }
 
-
-#likeForm {
-  width: 24px;
-  height: 24px;
+.postContent{
+	background-color: #172036;
+	border: none;
+	resize: none;
 }
 
-#likeIcon {
-  width: 24px;
-  height: 24px;
-}
 
 
 /*유저 사이드 네비 바*/
