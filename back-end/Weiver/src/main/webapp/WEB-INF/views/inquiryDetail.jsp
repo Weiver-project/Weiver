@@ -40,7 +40,7 @@
 
             <div class="data_show">
                 <p>문의사항</p>
-                <div class="inquiry_text">${inquiry.content}</div>
+                <textarea id="inquiry_text" class="inquiry_text" style="font-family: 'Pretendard-Regular', sans-serif;" disabled>${inquiry.content}</textarea>
             </div>
             <c:if test="${not empty inquiry.answer}">
                 <div class="data_show">
@@ -75,5 +75,21 @@
             <div>MY PAGE</div>
         </a>
     </nav>
+    <script type="text/javascript">
+        /* 문의사항 세로 크기 자동 조절 */
+        function resize() {
+            let textarea = document.getElementById("inquiry_text");
+
+            let scrollHeight = textarea.scrollHeight;
+            let style = window.getComputedStyle(textarea);
+            let borderTop = parseInt(style.borderTop);
+            let borderBottom = parseInt(style.borderBottom);
+
+            textarea.style.height = (scrollHeight + borderTop + borderBottom)+"px";
+        }
+
+        window.addEventListener("load", resize);
+        window.onresize = resize;
+    </script>
 </body>
 </html>
