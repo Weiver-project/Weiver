@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import weiver.entity.Image;
+import weiver.entity.Musical;
 import weiver.entity.Post;
 import weiver.entity.PostLike;
 import weiver.entity.ReReply;
@@ -24,6 +25,7 @@ import weiver.entity.Review;
 import weiver.entity.User;
 import weiver.repository.CommunityRepository;
 import weiver.repository.ImageRepository;
+import weiver.repository.MusicalRepository;
 import weiver.repository.PostLikeRepository;
 import weiver.repository.ReReplyRepository;
 import weiver.repository.ReplyRepository;
@@ -54,6 +56,9 @@ public class CommunityService {
 	@Autowired
 	private ReviewRepository reviewRepository;
 	
+	@Autowired
+	private MusicalRepository musicalRepository;
+	
 	// 이미지를 저장하는 디렉토리 경로
     private static final String IMAGE_UPLOAD_DIR = "C:/multi/Weiver/back-end/Weiver/src/main/resources/static/img/image";
 	
@@ -64,7 +69,6 @@ public class CommunityService {
 	//모든 게시글 가져오기
 	public List<Post> getAllPosts() {
 		 List<Post> posts = communityRepository.findAll();
-		 System.out.println(posts);
 		 return posts;
 	}
 
@@ -72,7 +76,6 @@ public class CommunityService {
 	//게시글 타입(Review, Chat)에 따라 게시글 가져오기
 	public List<Post> getAllPostsByType(String type) {
 	    List<Post> posts = communityRepository.findAllByType(type);
-	    System.out.println(posts);
 	    return posts;
 	}
 
@@ -80,28 +83,24 @@ public class CommunityService {
 	//조회수를 기준으로 인기 게시글 가져오기
 	public List<Post> getBestPostDesc() {
 		List<Post> posts = communityRepository.findAllByOrderByViewedDesc();
-		System.out.println(posts);
 	    return posts;
 	}
 
 	//게시글 id에 따라 게시글 가져오기 > 상세 페이지
 	public Post getPostById(Long id) {
 		Post post = communityRepository.getPostById(id);
-		System.out.println(post);
 		
 		return post;
 	}
 	
 	public Review getReviewByPostId(Long PostId) {
 		Review review = reviewRepository.getReviewByPostId(PostId);
-		System.out.println(review);
 		return review;
 	}
 
 	//title, content에 들어 있는 키워드에 따라 게시글 가져오기 > 커뮤니티 검색 페이지
 		public List<Post> getPostByKeyword(String keyword) {
 			List<Post> posts = communityRepository.findByTitleContainingOrContentContaining(keyword, keyword);
-			System.out.println(posts);
 		    return posts;
 		}
 	
@@ -132,38 +131,40 @@ public class CommunityService {
 		return result;
 	}
 	
-	// 게시글 작성
-		 public boolean savePost(User user, String type, String title, String content, List<String> imagePaths) throws Exception {
-		        Date date = new Date();
+	// 게시글 작성 및 저장
+	public Post savePost(User user, String type, String title, String content, List<String> imagePaths) throws Exception {
+	    Date date = new Date();
 
-		        Post post = Post.builder()
-		                        .user(user)
-		                        .type(type)
-		                        .title(title)
-		                        .content(content)
-		                        .createdTime(date)
-		                        .viewed(0L)
-		                        .build();
+	    Post post = Post.builder()
+	                    .user(user)
+	                    .type(type)
+	                    .title(title)
+	                    .content(content)
+	                    .createdTime(date)
+	                    .viewed(0L)
+	                    .build();
 
-		        Post resultPost = communityRepository.save(post);
-		        if (resultPost.getId() == null) {
-		            return false;
-		        }
+	    Post resultPost = communityRepository.save(post);
+	    if (resultPost.getId() == null) {
+	        return null;
+	    }
+	    
+	    System.out.println("포스트 저장되나" + resultPost);
 
-		        // 이미지 삽입
-		        if (imagePaths != null && !imagePaths.isEmpty()) {
-		            for (String imagePath : imagePaths) {
-		                Image image = Image.builder()
-		                                    .postId(resultPost.getId())
-		                                    .path(imagePath)
-		                                    .build();
+	    // 이미지 삽입
+	    if (imagePaths != null && !imagePaths.isEmpty()) {
+	        for (String imagePath : imagePaths) {
+	            Image image = Image.builder()
+	                                .postId(resultPost.getId())
+	                                .path(imagePath)
+	                                .build();
 
-		                imageRepository.save(image);
-		            }
-		        }
+	            imageRepository.save(image);
+	        }
+	    }
 
-		        return true;
-		    }
+	    return resultPost;
+	}
 
     
 	
@@ -419,6 +420,30 @@ public class CommunityService {
 			return result;
 			
 		}
+
+
+		// 리뷰 정보 저장
+		public boolean insertReview(Review review) {
+		    // post_id와 musical_id 유효성 검증
+		    
+			System.out.println("review in service: " + review);
+			Post post = communityRepository.getPostById(review.getPost().getId());
+		    if (post == null) {
+		        return false;
+		    }
+
+		    Musical musical = musicalRepository.getMusicalById(review.getMusical().getId());
+		    if (musical == null) {
+		        return false;
+		    }
+
+		    if (reviewRepository.save(review) != null) {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+
 
 
 		

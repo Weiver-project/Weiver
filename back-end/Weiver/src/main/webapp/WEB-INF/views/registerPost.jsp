@@ -19,147 +19,137 @@
 <body>
 <script type="text/javascript">
 
-	var musicalsData = [
-	    <c:forEach var="musical" items="${musicals}">
-	      {
-	        id: '${musical.id}',
-	        title: `${musical.title.replace('\\',"")}`,
-	        theater: '${musical.theater}',
-	        posterImage: '${musical.posterImage}',
-	        // Add other properties as needed
-	      },
-	    </c:forEach>
-	];
-	
-	function handleSearchBoxChange() {
-		
-		  //기존 검색 리스트를 지우는 코드가 들어가야함
-		  var searchTerm = document.getElementById("searchBox").value;
-		  
-		  //뮤지컬 키워드에 해당하는 뮤지컬 리스트 필터링
-		  var filteredMusicals = musicalsData.filter(function (musical) {
-		    return musical.title.toLowerCase().includes(searchTerm.toLowerCase());
-		  });
-	
-		  //검색 리스트 초기화 후 새로운 검색 결과로 다시 채우기
-		  var musicalInfoContainer = document.getElementById("musicalInfoContainer");
-		  musicalInfoContainer.innerHTML = "";
-	
-  		 filteredMusicals.forEach(function (musical) {
-	     var musicalElement = document.createElement("li");
-	     var imgElement = document.createElement("img");
-	     imgElement.src = musical.posterImage;
-	     imgElement.alt = "poster";
+var musicalsData = [
+    <c:forEach var="musical" items="${musicals}">
+        {
+            id: '${musical.id}',
+            title: `${musical.title.replace('\\',"")}`,
+            theater: '${musical.theater}',
+            posterImage: '${musical.posterImage}',
+            // Add other properties as needed
+        },
+    </c:forEach>
+];
 
-	     var h2Element = document.createElement("h2");
-	     h2Element.textContent = musical.title;
+function handleMusicalItemClick(musicalId) {
+    console.log("Clicked on musical with ID:", musicalId);
 
-	     var spanElement = document.createElement("span");
-	     spanElement.textContent = musical.stDate + " ~ " + musical.edDate;
+    // Hide the search box and musical list container
+    var searchBox = document.getElementById("searchBox");
+    searchBox.style.display = "none";
 
-	     musicalElement.appendChild(imgElement);
-	     musicalElement.appendChild(h2Element);
-	     musicalElement.appendChild(spanElement);
-	     musicalInfoContainer.appendChild(musicalElement);
-	   });
-	
-	
-		  musicalInfoContainer.style.display = "block";
-		  
-		}
-	
-	
-	function postTypeChange(){
-		  let selectFormType = document.getElementById("selectFormType");
-		 
-		  let formType = selectFormType.options[selectFormType.selectedIndex].value;
-		  if(formType == 'Review'){
-			  document.getElementById("reviewForm").style.display="";
-			  document.getElementById("reviewPerformance").required="required";
-			  console.log("Review");
-			 
-		  }else if(formType == 'Chat'){
-			  document.getElementById("reviewForm").style.display="none";
-			  document.getElementById("reviewPerformance").required="";
-			  console.log("Chat");
-		  }
-		 
-	}
-	
-	function searchPerformance(){
-		let performanceTitle = document.getElementById("reviewPerformance");
-		
-		axios
-	}
+    var musicalInfoContainer = document.getElementById("musicalInfoContainer");
+    musicalInfoContainer.style.display = "none";
 
-	// 테스트
-	const editor = document.getElementById('editor');
-    const btnBold = document.getElementById('btn-bold');
-    const btnItalic = document.getElementById('btn-italic');
-    const btnUnderline = document.getElementById('btn-underline');
-    const btnStrike = document.getElementById('btn-strike');
-    const btnOrderedList = document.getElementById('btn-ordered-list');
-    const btnUnorderedList = document.getElementById('btn-unordered-list');
+    // Show the musical information container
+    var musicalDetailContainer = document.getElementById("musicalDetailContainer");
+    musicalDetailContainer.style.display = "block";
 
-    btnBold.addEventListener('click', function () {
-        setStyle('bold');
+    // Find the selected musical by its ID in the musicalsData array
+    var selectedMusical = musicalsData.find(function (musical) {
+        return musical.id === musicalId;
     });
+	
+    console.log("selectedMusical: " ,selectedMusical);
 
-    btnItalic.addEventListener('click', function () {
-        setStyle('italic');
-    });
-
-    btnUnderline.addEventListener('click', function () {
-        setStyle('underline');
-    });
-
-    btnStrike.addEventListener('click', function () {
-        setStyle('strikeThrough')
-    });
-
-    btnOrderedList.addEventListener('click', function () {
-        setStyle('insertOrderedList');
-    });
-
-    btnUnorderedList.addEventListener('click', function () {
-        setStyle('insertUnorderedList');
-    });
-
-    function setStyle(style) {
-        document.execCommand(style);
-        focusEditor();
-    }
-
-    // 버튼 클릭 시 에디터가 포커스를 잃기 때문에 다시 에디터에 포커스를 해줌
-    function focusEditor() {
-        editor.focus({ preventScroll: true });
-    }
-
-    const btnImage = document.getElementById('btn-image');
     
-    /*====================이미지 selector 삭제됐으므로 새로 추가해줘야함*/
-    const imageSelector = document.getElementById('img-selector');
+    
+    // Populate the musical information container with the details
+    if (selectedMusical) {
+        var musicalTitleElement = document.createElement("h2");
+        musicalTitleElement.textContent = selectedMusical.title;
 
+        var musicalTheaterElement = document.createElement("p");
+        musicalTheaterElement.textContent = selectedMusical.theater;
 
-    btnImage.addEventListener('click', function () {
-        imageSelector.click();
-    });
+        var musicalPosterElement = document.createElement("img");
+        musicalPosterElement.src = selectedMusical.posterImage;
+        musicalPosterElement.alt = "Musical Poster";
 
-    imageSelector.addEventListener('change', function (e) {
-        const files = e.target.files;
-        if (!!files) {
-            insertImageDate(files[0]);
-        }
-    });
+        // Append the elements to the musicalDetailContainer
+        musicalDetailContainer.innerHTML = ""; // Clear previous content
+        musicalDetailContainer.appendChild(musicalTitleElement);
+        musicalDetailContainer.appendChild(musicalTheaterElement);
+        musicalDetailContainer.appendChild(musicalPosterElement);
 
-    function insertImageDate(file) {
-        const reader = new FileReader();
-        reader.addEventListener('load', function (e) {
-            focusEditor();
-            document.execCommand('insertImage', false, `${reader.result}`);
-        });
-        reader.readAsDataURL(file);
+        // Set the selected musical's ID to the hidden input
+        var musicalIdInput = document.getElementById("musicalIdInput");
+        musicalIdInput.value = musicalId;
     }
+}
+
+    function handleSearchBoxChange() {
+        var searchTerm = document.getElementById("searchBox").value;
+
+        // 뮤지컬 키워드에 해당하는 뮤지컬 리스트 필터링
+        var filteredMusicals = musicalsData.filter(function (musical) {
+            return musical.title.toLowerCase().includes(searchTerm.toLowerCase());
+        });
+
+        // 검색 리스트 초기화 후 새로운 검색 결과로 다시 채우기
+        var musicalInfoContainer = document.getElementById("musicalInfoContainer");
+        musicalInfoContainer.innerHTML = "";
+
+        filteredMusicals.forEach(function (musical) {
+            var musicalElement = document.createElement("li");
+
+            var imgElement = document.createElement("img");
+            imgElement.src = musical.posterImage;
+            imgElement.alt = "poster";
+            imgElement.style.marginRight = "20px";
+            imgElement.style.height = "120px";
+            imgElement.style.width = "85px";
+            imgElement.style.float = "left";
+
+            var h2Element = document.createElement("h2");
+            h2Element.textContent = musical.title;
+            h2Element.style.padding = "0";
+            h2Element.style.marginTop = "10px";
+            h2Element.style.textAlign = "left";
+            h2Element.style.fontSize = "20px";
+            h2Element.style.backgroundColor = "#172036";
+
+            var spanElement = document.createElement("span");
+            spanElement.textContent = musical.stDate + " ~ " + musical.edDate;
+            spanElement.style.backgroundColor = "#172036";
+            spanElement.style.fontSize = "15px";
+
+            musicalElement.appendChild(imgElement);
+            musicalElement.appendChild(h2Element);
+            musicalElement.appendChild(spanElement);
+
+            musicalElement.style.backgroundColor = "#172036";
+            musicalElement.style.height = "120px";
+            musicalElement.style.padding = "10px";
+            musicalElement.style.borderRadius = "10px";
+            musicalElement.style.marginBottom = "10px";
+            musicalElement.style.marginTop = "10px";
+
+            musicalElement.addEventListener("click", function () {
+                handleMusicalItemClick(musical.id);
+            });
+
+            musicalInfoContainer.appendChild(musicalElement);
+        });
+
+        musicalInfoContainer.style.display = "block";
+    }
+
+    function postTypeChange() {
+        let selectFormType = document.getElementById("selectFormType");
+
+        let formType = selectFormType.options[selectFormType.selectedIndex].value;
+        if (formType === 'Review') {
+            document.getElementById("reviewForm").style.display = "";
+            document.getElementById("reviewPerformance").required = "required";
+            console.log("Review");
+        } else if (formType === 'Chat') {
+            document.getElementById("reviewForm").style.display = "none";
+            document.getElementById("reviewPerformance").required = "";
+            console.log("Chat");
+        }
+    }
+
 </script>
 
 
@@ -204,19 +194,21 @@
 
 				<!-- 작품 명 작성칸 -->
 				<div align="left" id="reviewForm" style="display:none">
-					<br>
-					작품명
-					<div>
-					 <input
-					    type="text"
-					    id="searchBox"
-					    placeholder="${musicals.get(0).id}"
-					    autocomplete="off"
-					    oninput="handleSearchBoxChange()"
-					  />
+				    <br>
+				    작품명
+				    <div>
+				        <input
+				            type="text"
+				            id="searchBox"
+				            placeholder="작품명을 입력해주세요."
+				            autocomplete="off"
+				            oninput="handleSearchBoxChange()"
+				        />
+				    </div>
+				    <div id="musicalInfoContainer">
+				    </div>
+				    <div id="musicalDetailContainer" style="display: none;">
 					</div>
-					  <div id="musicalInfoContainer">
-				      </div>
 				</div>
 				
 				
@@ -255,13 +247,15 @@
 					<div>
 						<textarea name="content" type="text" class="content" id="editor"></textarea>
 					</div>
+					
+					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
 				
 				<br>
 				<!-- 작성하기 버튼 -->
 				<div class="nameTag">
-				<button>
+				
 					<input type="submit" value="작성하기" class="submit-btn">
-				</button>
+				
 				</div>
 			</form>
 
