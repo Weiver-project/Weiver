@@ -18,6 +18,7 @@ import java.util.Date;
 public class Inquiry {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "INQUIRY_SEQUENCE_GENERATOR")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "user_id")
