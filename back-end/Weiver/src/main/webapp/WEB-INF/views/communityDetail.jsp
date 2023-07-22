@@ -271,7 +271,7 @@ function checkLogin() {
 
         <!-- 뒤로가기 버튼 -->
         <div class="backBtn">
-            <a href="/community">
+            <a href="javascript:history.back();">
                 <i class="bi-chevron-left"></i>
             </a>
         </div>

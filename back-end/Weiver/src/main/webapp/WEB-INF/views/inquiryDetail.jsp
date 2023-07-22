@@ -22,7 +22,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="/inquiry/inquiryMain"><i class="bi bi-chevron-left" style="color: #EFEFEF"></i></a>
+                <a href="javascript:history.back();"><i class="bi bi-chevron-left" style="color: #EFEFEF"></i></a>
             </div>
             <div class="name">문의하기</div>
         </div>
