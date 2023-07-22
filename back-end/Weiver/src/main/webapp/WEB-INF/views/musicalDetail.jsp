@@ -76,24 +76,15 @@
       
       <div class="like-jjim-btn">
         <div class="button">
-          <button onclick="addSubscribe(${musical.getId()}, '찜했어요')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
-              <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
-              <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
-            </svg>
-          </button>
-          <span>찜하기</span>
-
-        </div>
-        <div class="button">
-          <button onclick="addSubscribe(${musical.getId()}, '봤어요')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
-              <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
-              <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
-            </svg>
-          </button>
-          <span>봤어요</span>
-        </div>
+			  <i class="bi bi-bookmarks-fill icon1" onclick="addSubscirbe(${musical.getId()}, '찜했어요')"
+			    style="cursor: pointer;"></i>
+			  <span>찜하기</span>
+			</div>
+			<div class="button">
+			  <i class="bi bi-check2-all icon2" onclick="addSubscirbe(${musical.getId()}, '봤어요')"
+			    style="cursor: pointer;"></i>
+			  <span>봤어요</span>
+			</div>
       </div>
       
       <h1 class="title">출연진 정보✨</h1>
@@ -161,16 +152,30 @@
   </nav> 
 
 <script>
-function addSubscribe(musicalId, type){
+//버튼 상태를 추적하기 위한 변수 정의
+let isSubscribed1 = false;
+let isSubscribed2 = false;
 
-    // 서버에 데이터 전송 (AJAX 사용)
-    $.ajax({
-        type: 'GET',
-        url: '/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
-        contentType: 'application/json'
-        
-    });
-    
+function addSubscirbe(musicalId, type) {
+  // 서버에 데이터 전송 (AJAX 사용)
+  $.ajax({
+    type: 'GET',
+    url: '/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
+    contentType: 'application/json',
+    success: function () {
+      // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 색깔 변경
+      const buttonIcon1 = $('.icon1');
+      const buttonIcon2 = $('.icon2');
+
+      if (type === '찜했어요') {
+        isSubscribed1 = !isSubscribed1; // 다음 클릭을 위해 버튼1 상태 토글
+        buttonIcon1.toggleClass('subscribed', isSubscribed1);
+      } else if (type === '봤어요') {
+        isSubscribed2 = !isSubscribed2; // 다음 클릭을 위해 버튼2 상태 토글
+        buttonIcon2.toggleClass('subscribed', isSubscribed2);
+      }
+    }
+  });
 }
 
 </script>

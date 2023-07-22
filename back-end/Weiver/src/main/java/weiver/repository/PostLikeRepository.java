@@ -2,6 +2,9 @@ package weiver.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import weiver.entity.PostLike;
 
 import javax.transaction.Transactional;
@@ -16,7 +19,10 @@ public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
 
 	PostLike getPostLikeById(Long id);
 
-	@Modifying
-	@Transactional
-	int deletePostLikeById(Long id);
+	 List<PostLike> findByUserIdAndPostId(String userId, Long postId);
+
+	    @Modifying
+	    @Transactional
+	    @Query("DELETE FROM PostLike pl WHERE pl.user.id = :userId AND pl.post.id = :postId")
+	    void deleteByUserIdAndPostId(@Param("userId") String userId, @Param("postId") Long postId);
 }

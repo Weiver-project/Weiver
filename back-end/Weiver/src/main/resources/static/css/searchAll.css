@@ -1,5 +1,10 @@
 /*검색과 관련된 css입니다.*/
 
+a {
+  text-decoration: none; /* 링크에 밑줄 제거 */
+  color: inherit; /* 링크의 기본 색상 상속 */
+}
+
 /*메인 페이지*/
 /*검색창 CSS*/
 .mainSearch-container {

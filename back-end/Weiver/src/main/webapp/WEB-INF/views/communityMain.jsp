@@ -48,7 +48,26 @@
         
         swiperPopularCommunity.init();  // Swiper 인스턴스 초기화
     });
+ 
+    function checkLogin() {
+        // 로그인 상태를 확인하는 변수 선언
+        var loggedIn = ${not empty user};
 
+        if (loggedIn) {
+            location.href = '/community/board'; // 로그인한 경우 링크로 이동
+        } else {
+            alert('로그인 해주세요.'); // 로그인하지 않은 경우 팝업 메시지 띄우기
+        }
+    }
+    
+ // 스크롤 버튼을 클릭하면 페이지 상단으로 스크롤하는 함수
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 버튼 요소를 찾고 클릭 이벤트를 추가
+    const scrollButton = document.getElementById('scrollToTop');
+    scrollButton.addEventListener('click', scrollToTop);
     </script>
     
 </head>
@@ -144,7 +163,7 @@
                     <button style="background-color: #466093;" onclick="showPostList('리뷰', this)">리뷰</button>
                     <button style="background-color: #466093;" onclick="showPostList('잡담', this)">잡담</button>
                 </div>
-                <button class="writeBtn" onclick="location.href='/community/board'">글 작성하기</button>
+                <button class="writeBtn" onclick="checkLogin()">글 작성하기</button>
             </div>
             <div class="postAndUserInfo">
                 <div id="postListAll" class="postList">
@@ -228,26 +247,26 @@
                     <div class="userInfoAndLoginBtn">
                         <c:choose>
                             <c:when test="${empty user}">
-                                <button class="loginBtn" onClick = '#'>로그인</button>
+                                <a href="/login"><button class="loginBtn">로그인</button></a>
                             </c:when>
                             <c:otherwise>
                                 <div class="userInfo">
-                                    <p class="userInfoID">${user.nickname}</p>
+                                    <p class="userInfoID">${user}</p>
                                     <div class="myWrited">
                                         <div class="myPost">
                                             <p>내가 쓴 글</p>
-                                            <p><a href="#" style="text-decoration: none;">링크1</a></p>
+                                            <p><a href="/mypage/myBoard" style="text-decoration: none;">${postCount}</a></p>
                                         </div>
                                         <div class="myComment">
                                             <p>내가 쓴 댓글</p>
-                                            <p><a href="#" style="text-decoration: none;">링크2</a></p>
+                                            <p><a href="/mypage/myComment" style="text-decoration: none;">${replyCount}</a></p>
                                         </div>
                                     </div>
                                 </div>
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <i class="bi bi-arrow-up-circle"></i>
+                    <i id="scrollToTop" class="bi bi-arrow-up-circle" style="cursor: pointer;"></i>
                 </div>
             </div>
         </div>

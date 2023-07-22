@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import weiver.dto.PostDTO;
 import weiver.entity.*;
 import weiver.service.AwsS3Service;
 import weiver.service.CommunityService;
@@ -45,7 +47,7 @@ public class CommunityController {
     @GetMapping("/community")
     public String communityMain(@RequestParam(required = false) String type,
 								@RequestParam(required = false) Long id,
-								Model model) {
+								Model model, HttpSession session) {
 
 		//모든 게시글 가져오기
 		List<Post> postList = communityService.getAllPosts();
@@ -56,11 +58,18 @@ public class CommunityController {
 		//인기 게시글 리스트 가져오기
         List<Post> bestPostList = communityService.getBestPostDesc();
         
-        //댓글 개수 가져오기
+        String userName = (String) session.getAttribute("userNickname");
+        
+        String userId = (String) session.getAttribute("userId");
+        int postCount = userService.countPostsByUserId(userId);
+        int replyCount = userService.countRepliesByUserId(userId);
         
         model.addAttribute("post", postList);
         model.addAttribute("typePost", postTypeList);
         model.addAttribute("bestPost", bestPostList);
+        session.setAttribute("user", userName);
+        model.addAttribute("postCount", postCount);
+        model.addAttribute("replyCount", replyCount);
 
         return "communityMain"; // 반환할 뷰의 이름
     }
@@ -71,7 +80,7 @@ public class CommunityController {
      * */
 
     @GetMapping("/community/{id}")
-    public String communityDetail(@PathVariable Long id, Model model) {
+    public String communityDetail(@PathVariable Long id, Model model, HttpSession session) {
         //id에 따라 게시글 가져오기
         Post post = communityService.getPostById(id);
 
@@ -91,11 +100,19 @@ public class CommunityController {
         
         // 조회수 +1
         communityService.incrementViewCount(post);
-
+        
+        String userId = (String) session.getAttribute("userId");
+        
+        List<PostDTO> postLikeList = userService.findPostLikeByUserId(userId);
+        int likeCount = postLikeList.size();
+        
+        
         model.addAttribute("posts", post);
         model.addAttribute("reply", replies);
         model.addAttribute("rereply", rereplies);
         model.addAttribute("reviews", review);
+        session.setAttribute("user", userId);
+        model.addAttribute("likeCount", likeCount);
 
         return "communityDetail";
 	}
@@ -201,75 +218,76 @@ public class CommunityController {
 	}
 
 	/*
-		 * 게시글 작성 페이지
-		 * */
-	@RequestMapping(value="/community/board", method=RequestMethod.GET)
-	public String insertPostForm(Model model) {
-		List<Musical> musicals = musicalService.getAllMusical();
-
-		model.addAttribute("musicals",musicals);
-
-		return "registerPost";
-	}
-
-	@PostMapping("/community/board")
-	public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
-	                                  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
-	    String userId = (String) session.getAttribute("userId");
-	    
-	    System.out.println(musicalId);
-	    try {
-	        // 사용자 정보 가져오기
-	        User user = userService.findById(userId);
-
-	        List<String> imagePaths = new ArrayList<>();
-	        if (images != null && !images.isEmpty()) {
-	            for (MultipartFile imageFile : images) {
-	                String imagePath = communityService.saveImage(imageFile);
-	                imagePaths.add(imagePath);
-	            }
-	        }
-
-	        // 게시글 정보 저장
-	        Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
-
-//	        if (!isPostSaved) {
-//	            return "errorPage";
-//	        }
-
-	        // 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
-	        if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
-	            // Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
-	        
-
-	            // Review 객체 생성
-	            Review review = new Review();
-
-	            // Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
-	            System.out.println(isPostSaved.getId());
-	            review.setPost(isPostSaved);
-
-	            // Musical 객체 설정
-	            Musical musical = new Musical();
-	            musical.setId(musicalId);
-	            review.setMusical(musical);
-
-	            // Review 삽입
-	            if (communityService.insertReview(review)) {
-	                return "redirect:/community";
-	            }
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "errorPage";
-	    }
-
-	    return "redirect:/community";
-	}
-
-
-
-
+	 * 게시글 작성 페이지
+	 * */
+			@RequestMapping(value="/community/board", method=RequestMethod.GET)
+			public String insertPostForm(Model model) {
+				List<Musical> musicals = musicalService.getAllMusical();
+			
+				model.addAttribute("musicals",musicals);
+			
+				return "registerPost";
+			}
+			
+			@PostMapping("/community/board")
+			public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
+			                                  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
+			    String userId = (String) session.getAttribute("userId");
+			    
+			    System.out.println(musicalId);
+			    try {
+			        // 사용자 정보 가져오기
+			        User user = userService.findById(userId);
+			
+			        List<String> imagePaths = new ArrayList<>();
+			        if (images != null && !images.isEmpty()) {
+			            for (MultipartFile imageFile : images) {
+			                String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
+			                imagePaths.add(s3ImageUrl);
+			            }
+			        }
+			
+			        // 게시글 정보 저장
+			        Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
+			
+			//        if (!isPostSaved) {
+			//            return "errorPage";
+			//        }
+			
+			        // 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
+			        if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
+			            // Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
+			        
+			
+			            // Review 객체 생성
+			            Review review = new Review();
+			
+			            // Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
+			            System.out.println(isPostSaved.getId());
+			            review.setPost(isPostSaved);
+			
+			            // Musical 객체 설정
+			            Musical musical = new Musical();
+			            musical.setId(musicalId);
+			            review.setMusical(musical);
+			
+			            // Review 삽입
+			            if (communityService.insertReview(review)) {
+			                return "redirect:/community";
+			            }
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        return "errorPage";
+			    }
+			
+			    return "redirect:/community";
+			}
+			
+			
+			
+			
+			
 
 
 
@@ -462,57 +480,19 @@ public class CommunityController {
 		     * 좋아요 기능
 		     * */
 
-	// 게시글 좋아요 삽입
-	@RequestMapping(value = "/community/postlike/{postId}", method = RequestMethod.POST)
-	public String insertPostLike(@RequestParam String postId, HttpSession session) {
-		// 세션에서 userId 가져오기
+
+		@GetMapping("/community/postlike/{postId}")
+		public String addPostlike(@PathVariable Long postId,
+		                      Model model, HttpSession session) {
+		
 		String userId = session.getAttribute("userId").toString();
-
-		// PostLike 객체 생성
-		PostLike postlike = new PostLike();
-
-		// Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
-		Post post = new Post();
-		post.setId(Long.parseLong(postId));
-		postlike.setPost(post);
-
-		// User 객체 설정
-		User user = new User();
-		user.setId(userId);
-		postlike.setUser(user);
-
-		// PostLike 삽입
-		if (communityService.insertPostLike(postlike)) {
-			return "redirect:/community/" + postId;
+		
+		if (postId != null) {
+		    communityService.insertPostLike(userId, postId);
 		}
-
-		return "error";
-	}
-
-	//좋아요 취소 -> 좋아요 데이터 삭제
-	@RequestMapping(value="/community/delete/postlike/{id}", method=RequestMethod.DELETE)
-	public String deletePostlike(@PathVariable Long id) {
-		String view = "error";
-
-		boolean postlikeResult = false;
-
-		PostLike postlike = communityService.getpostlikeById(id);
-
-		try {
-
-			postlikeResult = communityService.deletePostlike(id);
-
-			if(postlikeResult) {
-				view ="redirect:/community/" + postlike.getPost().getId();
-				return view;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return view;
-		}
-
-		return view;
-	}
+		
+		return "communityDetail";
+}
 
 
 }

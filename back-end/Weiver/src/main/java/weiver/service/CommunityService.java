@@ -132,40 +132,37 @@ public class CommunityService {
 	}
 	
 	// 게시글 작성 및 저장
-	public Post savePost(User user, String type, String title, String content, List<String> imagePaths) throws Exception {
-	    Date date = new Date();
+    public Post savePost(User user, String type, String title, String content, List<String> imageUrls) throws Exception {
+        Date date = new Date();
 
-	    Post post = Post.builder()
-	                    .user(user)
-	                    .type(type)
-	                    .title(title)
-	                    .content(content)
-	                    .createdTime(date)
-	                    .viewed(0L)
-	                    .build();
+        Post post = Post.builder()
+                .user(user)
+                .type(type)
+                .title(title)
+                .content(content)
+                .createdTime(date)
+                .viewed(0L)
+                .build();
 
-	    Post resultPost = communityRepository.save(post);
-	    if (resultPost.getId() == null) {
-	        return null;
-	    }
-	    
-	    System.out.println("포스트 저장되나" + resultPost);
+        Post resultPost = communityRepository.save(post);
+        if (resultPost.getId() == null) {
+            return null;
+        }
 
-	    // 이미지 삽입
-	    if (imagePaths != null && !imagePaths.isEmpty()) {
-	        for (String imagePath : imagePaths) {
-	            Image image = Image.builder()
-	                                .postId(resultPost.getId())
-	                                .path(imagePath)
-	                                .build();
+        // 이미지 삽입
+        if (imageUrls != null && !imageUrls.isEmpty()) {
+            for (String imageUrl : imageUrls) {
+                Image image = Image.builder()
+                        .postId(resultPost.getId())
+                        .path(imageUrl)
+                        .build();
 
-	            imageRepository.save(image);
-	        }
-	    }
+                imageRepository.save(image);
+            }
+        }
 
-	    return resultPost;
-	}
-
+        return resultPost;
+    }
     
 	
 	/*
@@ -376,49 +373,21 @@ public class CommunityService {
 
 		
 		// 게시글 좋아요 삽입
-		public boolean insertPostLike(PostLike postlike) {
+		public boolean insertPostLike(String userId, Long postId) {
 
-			// user_id와 post_id의 유효성 검증
-		    User user = userRepository.getUserById(postlike.getUser().getId());
-		    if (user == null) {
-		        return false;
+		    List<PostLike> findPostlikes = postlikeRepository.findByUserIdAndPostId(userId, postId);
+
+		    if (findPostlikes.size() == 0) { // 데이터가 없다면 추가
+		            postlikeRepository.save(PostLike.builder()
+		                    .user(userRepository.getUserById(userId))
+		                    .post(communityRepository.getPostById(postId))
+		                    .build());
+		            return true;
+		    } else { // 데이터가 있다면 삭제
+		        postlikeRepository.deleteByUserIdAndPostId(userId, postId);
 		    }
 
-		    Post post = communityRepository.getPostById(postlike.getPost().getId());
-		    if (post == null) {
-		    	return false;
-		    }
-
-		    // 좋아요 삽입 로직
-		    if (postlikeRepository.save(postlike) != null) {
-		        return true;
-		    } else {
-		    	return false;
-		    }
-		}
-
-
-
-		public PostLike getpostlikeById(Long id) {
-			PostLike postlike = postlikeRepository.getPostLikeById(id);
-			
-			return postlike;
-		}
-
-
-		public boolean deletePostlike(Long id) throws Exception, SQLException {
-			boolean result = false;
-			
-			int res = postlikeRepository.deletePostLikeById(id);
-			
-			if(res != 0) {
-				result = true;
-			} else {
-				throw new Exception("좋아요 취소 실패");
-			}
-			
-			return result;
-			
+		    return false;
 		}
 
 

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../css/musical.css">
     <link rel="stylesheet" href="../css/public.css">
     
-<script>
+    <script>
 
 $(function() {
     // 댓글 수정 버튼 클릭 이벤트
@@ -187,48 +187,50 @@ function deleteReply(commentId) {
     });
 }
 
-//페이지 로드 시 이전 상태를 복원하는 함수
-function restoreLikeState() {
-    var likeIcon = document.getElementById("likeIcon");
-    var postId = "${posts.id}";
+//좋아요 삽입
+function addPostlike(postsId) {
+    // 서버에 데이터 전송 (AJAX 사용)
+    $.ajax({
+        type: 'GET',
+        url: '/community/postlike/' + postsId, // postId에 맞게 URL 수정
+        contentType: 'application/json',
+        success: function () {
+            // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 색깔 변경
+            const buttonIcon = $('.icon');
+            buttonIcon.toggleClass('bi-suit-heart bi-suit-heart-fill');
+        },
+        error: function (xhr) {
+            // 오류 처리 (예를 들어, 서버에서 좋아요 처리 실패 시)
+            console.error('Error adding postlike:', xhr.responseText);
+        }
+    });
+}
 
-    // Local Storage에서 해당 게시물의 좋아요 상태를 가져옴
-    var likeState = localStorage.getItem("like_" + postId);
 
-    if (likeState === "liked") {
-        likeIcon.classList.remove("bi-suit-heart");
-        likeIcon.classList.add("bi-heart-fill");
+function resize() {
+    let textarea = document.getElementById("postContent");
+
+    let scrollHeight = textarea.scrollHeight;
+    let style = window.getComputedStyle(textarea);
+    let borderTop = parseInt(style.borderTop);
+    let borderBottom = parseInt(style.borderBottom);
+
+    textarea.style.height = (scrollHeight + borderTop + borderBottom)+"px";
+}
+
+window.addEventListener("load", resize);
+window.onresize = resize;
+
+function checkLogin() {
+    var userId = "${sessionScope.user}";
+
+    if (!userId) {
+        alert("로그인해주세요.");
+        return false;
     }
+    return true;
 }
-
-// 좋아요 상태를 Local Storage에 저장하는 함수
-function saveLikeState() {
-    var postId = "${posts.id}";
-
-    // 해당 게시물의 좋아요 상태를 Local Storage에 저장
-    localStorage.setItem("like_" + postId, "liked");
-}
-
-function submitForm() {
-    var likeIcon = document.getElementById("likeIcon");
-    var form = document.getElementById("likeForm");
-
-    // "bi-suit-heart"에서 "bi-heart-fill"로 아이콘 변경
-    likeIcon.classList.remove("bi-suit-heart");
-    likeIcon.classList.add("bi-heart-fill");
-
-    // 좋아요 상태를 Local Storage에 저장
-    saveLikeState();
-
-    // Ajax 요청으로 폼 전송 (생략 가능)
-    form.submit();
-}
-
-// 페이지 로드 시 이전 상태를 복원
-document.addEventListener("DOMContentLoaded", restoreLikeState);
 </script>
-
-
 
 </head>
 
@@ -252,7 +254,7 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
             <!-- 게시글 헤더 (작성, 제목, 공유하기 버튼) -->
             <div class="postHeader">
                 <h2>${posts.title}</h2>
-                <i class="bi bi-reply-fill"></i>
+                <!--<i class="bi bi-reply-fill"></i>  -->
             </div>
             <hr>
 
@@ -273,7 +275,7 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
 			</c:if>
 
             <!-- 게시글 내용 (텍스트, 이미지) -->
-            <div class="postContent">${posts.content}</div>
+            <textarea id="postContent" class="postContent" style="font-family: 'Pretendard-Regular', sans-serif;" disabled>${posts.content}</textarea>
             <c:if test="${not empty posts.images}">
 			    <img class="postImg" src="${posts.images}" alt="게시글 이미지">
 			</c:if>
@@ -289,21 +291,22 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
                     <i class="bi-chat"></i>
                     <span>${reply.size()}</span>
                 </div>
-                <div>
-				    <form id="likeForm" method="post" action="/community/postlike/${posts.id}">
-				    <input type="hidden" name="postId" value="${posts.id}">
-				        <i id="likeIcon" class="bi-suit-heart" onclick="submitForm()" style="width: 24px; height: 24px;"></i>
-				        <span>${post.viewed}</span>
-					</form>
-				</div>
+                <div class="button">
+			  	<i class="bi-suit-heart icon" onclick="addPostlike(${posts.id})"
+			    	style="cursor: pointer;"></i>
+			  	<!--  <span>${likeCount}</span>-->
+				</div>	
             </div>
         </div>
 
         <!-- 게시글 수정하기, 삭제하기 버튼 -->
-        <div class="postBtnGroup">
-                <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
-                <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
-        </div>
+        <c:if test="${user != null && user == posts.user.id}">
+  			  <!-- 게시글 수정하기, 삭제하기 버튼 -->
+		    <div class="postBtnGroup">
+		        <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
+		        <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
+		    </div>
+		</c:if>
 
         <!-- 댓글 컨테이너 -->
         <div class="commentWrap">
@@ -318,20 +321,23 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
 		            <div class="commentID">${reply.user.nickname}</div>
 		            <div class="commentContent" id="commentContent_${reply.id}">${reply.content}</div>
 		            <div class="likeAndRecomment">
-		                <i class="bi-suit-heart" onclick="changeHeartIcon('reply', ${reply.id}, this)"></i>
-		                <span>${reply.id}</span>
-		                <a href="/community/${posts.id}/${reply.id}" style="text-decoration: none;">
+		                <!-- <i class="bi-suit-heart" onclick="changeHeartIcon('reply', ${reply.id}, this)"></i>
+		                <span>${reply.id}</span> -->
+		                <a href="/community/${posts.id}/reply/${reply.id}" style="text-decoration: none;">
 		                    <span class="recommentBtn">대댓글</span>
 		                </a>
                         </div>
                     </div>
 
                     <!-- 댓글 수정, 삭제 버튼 -->
+                    <c:if test="${user != null && user == posts.user.id}">
                     <div class="commentBtnGroup">
                         <button class="commentEditBtn">수정</button>
                         <button onclick="deleteReply(${reply.id})">삭제</button>
                     </div>
+                    </c:if>
                 </div>
+                
 
                 <!-- 대댓글 컨테이너 -->
                 <c:forEach var="rereply" items="${rereply}">
@@ -343,8 +349,8 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
                                     <div class="recommentID">${rereply.user.nickname}</div>
                                     <div class="recommentContent" id="recommentContent_${rereply.id}">${rereply.content}</div>
                                     <div class="likeAndRecomment">
-                                        <i class="bi-suit-heart" onclick="changeHeartIcon('rereply', ${rereply.id}, this)"></i>
-                                        <span>${rerepliesForReply.size()}</span>
+                                       <!-- <i class="bi-suit-heart" onclick="changeHeartIcon('rereply', ${rereply.id}, this)"></i>
+                                        <span>${rerepliesForReply.size()}</span>  -->
                                     </div>
                                 </div>
                             </div>
@@ -363,7 +369,7 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
 
         <!-- 댓글 입력 창 -->
         <div class="commentInputGroup">
-        	<form action="/community/insert/reply/${posts.id}" method="post">
+        	<form action="/community/insert/reply/${posts.id}" method="post" onsubmit="return checkLogin()">
 	            <input name="content" class="commentInput" type="text">
     	        <input class="commentInputBtn" type="submit">
         	</form>
@@ -383,6 +389,8 @@ document.addEventListener("DOMContentLoaded", restoreLikeState);
             <div>MY PAGE</div>
         </a>
     </nav>
+    
+
 </body>
 
 

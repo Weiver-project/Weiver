@@ -1,6 +1,6 @@
-/*�����ð� ���õ� css�Դϴ�.*/
+/*占쏙옙占쏙옙占시곤옙 占쏙옙占시듸옙 css占쌉니댐옙.*/
 
-/*���� ���� css*/
+/*占쏙옙占쏙옙 占쏙옙占쏙옙 css*/
 
 .title {
     font-size: 30px;
@@ -9,8 +9,8 @@
     margin-top: 50px;
 }
 
-/*���� ������*/
-/*�α� ������ list css*/
+/*占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙*/
+/*占싸깍옙 占쏙옙占쏙옙占쏙옙 list css*/
 
 .popular_musical_list {
     margin-bottom: 50px;
@@ -32,7 +32,7 @@
     color: #FFFFFF;
 }
 
-/*������ ��� css*/
+/*占쏙옙占쏙옙占쏙옙 占쏙옙占� css*/
 .poster-container {
     display: flex;
     overflow: hidden;
@@ -56,7 +56,7 @@
 }
 
 
-/*���� ���� ������ css*/
+/*占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 css*/
 .progress-musical {
     margin-bottom: 20px;
 }
@@ -69,9 +69,9 @@
     flex-shrink: 0;
 }
 
-/*������ �� ������*/
+/*占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙*/
   
-/*�ڷΰ��� ��ư, ������ ����*/
+/*占쌘로곤옙占쏙옙 占쏙옙튼, 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙*/
 .title-container {
   position: relative;
   justify-content: center;
@@ -93,7 +93,7 @@
   font-size: 30px;
 }
 
-/*������ ������ �� �� ����*/
+/*占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙*/
 .musical-info {
   display: flex;
   justify-content: center;
@@ -117,12 +117,12 @@
   color: #FFFFFF;
 }
 
-/*���ƿ�, ���ϱ� ��ư*/
+/*占쏙옙占싣울옙, 占쏙옙占싹깍옙 占쏙옙튼*/
 .like-jjim-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px;
   border-bottom: 2px solid #ccc;
 }
 
@@ -130,15 +130,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 60px;
   padding-bottom: 10px;
 }
-
-.like-jjim-btn .button svg {
+.icon1 {
   width: 40px;
   height: 40px;
-  color: #98A4B8;
-  padding: 5px 100px;
+  font-size: 40px;
+ }
+ 
+.icon2 {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+ }
+
+.icon1.subscribed {
+  color: #fff100;
+}
+
+.icon2.subscribed {
+  color: #fff100;
 }
 
 .like-jjim-btn .button span {
@@ -147,7 +159,7 @@
   margin-top: 5px;
 }
 
-/*��Ʃ�� ����*/
+/*占쏙옙튜占쏙옙 占쏙옙占쏙옙*/
 .youtube-api{
   margin-bottom: 20px;
 }
@@ -167,20 +179,20 @@
   margin-right: 10px;
 }
 
-/*������ ���� �� ������*/
-/* ����� ������ �����̳� */
+/*占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙*/
+/* 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싱놂옙 */
 .currentMusical {
     padding-left: 10px;
     display: flex;
 }
 
-/* ����� ������ �̹��� */
+/* 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占싱뱄옙占쏙옙 */
 .currentMusical > img {
     max-width: 200px;
     max-height: 200px;
 }
 
-/* ����� ������ ���� */
+/* 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 */
 .currentMusicalInfo {
     display: flex;
     flex-direction: column;
@@ -189,13 +201,13 @@
     margin-left: 10px;
 }
 
-/* ����� ������ ���� */
+/* 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 */
 .musicalTitle {
     color: #EFEFEF;
     font-weight: bold;
 }
 
-/* ����� ������ ���� �Ⱓ */
+/* 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占썩간 */
 .musicalPeriod {
     color: #98A4B7;
 }

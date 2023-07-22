@@ -150,6 +150,7 @@ function handleMusicalItemClick(musicalId) {
         }
     }
 
+   
 </script>
 
 
@@ -218,7 +219,7 @@ function handleMusicalItemClick(musicalId) {
 				<span>내용</span>
 				
 					<!-- 내용 작성칸(편집 버튼: 굵기, 이탤릭, 언더라인 등) -->
-					<div class="editor-menu">
+					<!--  <div class="editor-menu">
 						<button id="btn-bold" name="reviewTool" type="button">
 							<b>B</b>
 						</button>
@@ -240,7 +241,7 @@ function handleMusicalItemClick(musicalId) {
 						<button id="btn-image" name="reviewTool" type="button">
 							IMG
 						</button>
-					</div>
+					</div>-->
 
 					
 						<!-- 내용칸 -->
@@ -249,7 +250,12 @@ function handleMusicalItemClick(musicalId) {
 					</div>
 					
 					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
-				
+					
+				<form action="/upload" method="post" enctype="multipart/form-data">
+		        <input type="file" id="imageUpload" name="file" required onchange="previewImage(event)">
+		        <button type="submit">Upload</button>
+		    </form>
+		    
 				<br>
 				<!-- 작성하기 버튼 -->
 				<div class="nameTag">
@@ -259,10 +265,7 @@ function handleMusicalItemClick(musicalId) {
 				</div>
 			</form>
 
-			<form action="/upload" method="post" enctype="multipart/form-data">
-		        <input type="file" name="file" required>
-		        <button type="submit">Upload</button>
-		    </form>
+			
 
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
