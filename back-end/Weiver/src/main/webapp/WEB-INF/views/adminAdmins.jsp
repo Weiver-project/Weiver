@@ -18,7 +18,7 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="http://localhost:8081/admin/main"><img src="../img/image-removebg-preview.png" width="200px" height="70px"></a>
+    <a class="navbar-brand ps-3" href="http://3.36.252.181:8081/admin/main"><img src="../img/image-removebg-preview.png" width="200px" height="70px"></a>
 
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -27,7 +27,7 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="http://localhost:8081/logout">Logout</a></li>
+                <li><a class="dropdown-item" href="http://3.36.252.181:8081/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -38,27 +38,27 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">데이터 관리</div>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllActors">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllActors">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         배우
                     </a>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllMusicals">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllMusicals">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         뮤지컬
                     </a>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllUsers">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllUsers">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         유저
                     </a>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllAdmins">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllAdmins">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         관리자
                     </a>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllPosts">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllPosts">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         게시글
                     </a>
-                    <a class="nav-link" href="http://localhost:8081/admin/getAllInquirys">
+                    <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllInquirys">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         문의
                     </a>
@@ -135,13 +135,13 @@
         // 서버에 데이터 전송 (AJAX 사용)
         $.ajax({
             type: 'GET',
-            url: '/admin/deleteAdmin/' + adminId, // 문의 삭제를 처리하는 URL
+            url: 'http://3.36.252.181:8081/admin/deleteAdmin/' + adminId, // 문의 삭제를 처리하는 URL
             contentType: 'application/json'
 
         });
 
         // db에 적용되기까지 100ms 를 기다렸다가 페이지를 다시 불러온다.
-        setTimeout(() =>  location.href="/admin/getAllAdmins", 100);
+        setTimeout(() =>  location.href="http://3.36.252.181:8081/admin/getAllAdmins", 100);
     }
 </script>
 </body>

@@ -23,7 +23,7 @@
 
 	<div>
 		<div>
-			<a href="/inquiry/inquiryMain"><i class="bi-chevron-left"></i></a>
+			<a href="http://3.36.252.181:8081/inquiry/inquiryMain"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
@@ -36,7 +36,7 @@
 <div>
 	<div>
 		<!-- 문의 작성 폼 -->
-		<form id="inquiryForm" action="/inquiry/inquiryInsert" method="POST">
+		<form id="inquiryForm" action="http://3.36.252.181:8081/inquiry/inquiryInsert" method="POST">
 
 			<div>
 				<div>
@@ -64,13 +64,13 @@
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="/main"><i class="bi bi-house-door-fill"></i>
+    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>
