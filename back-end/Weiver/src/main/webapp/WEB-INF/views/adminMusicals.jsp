@@ -16,7 +16,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="/admin/main"><img src="../img/image-removebg-preview.png" width="200px" height="70px"></a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -29,7 +29,7 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">안녕하세요 ${sessionScope.adminName }님  <i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
@@ -45,27 +45,27 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllActors">
+                            <a class="nav-link" href="/admin/getAllActors">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 배우
                             </a>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllMusicals">
+                            <a class="nav-link" href="/admin/getAllMusicals">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 뮤지컬
                             </a>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllUsers">
+                            <a class="nav-link" href="/admin/getAllUsers">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                유저
                             </a>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllAdmins">
+                            <a class="nav-link" href="/admin/getAllAdmins">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 관리자
                             </a>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllPosts">
+                            <a class="nav-link" href="/admin/getAllPosts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                게시글
                             </a>
-                            <a class="nav-link" href="http://localhost:8081/admin/getAllInquirys">
+                            <a class="nav-link" href="/admin/getAllInquirys">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 문의
                             </a>
@@ -79,19 +79,8 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                    <div style="height:10px"></div>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tables</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
