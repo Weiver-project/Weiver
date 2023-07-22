@@ -262,10 +262,10 @@ function handleMusicalItemClick(musicalId) {
 				</div>
 			</form>
 			
-			<form action="/upload" method="post" enctype="multipart/form-data">
+			<!--  <form action="/upload" method="post" enctype="multipart/form-data">
 		        <input type="file" id="imageUpload" name="file" required onchange="previewImage(event)">
 		        <button type="submit">Upload</button>
-		    </form>
+		    </form>-->
 
 			
 
