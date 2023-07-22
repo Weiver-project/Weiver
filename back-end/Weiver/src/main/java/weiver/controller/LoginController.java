@@ -1,5 +1,7 @@
 package weiver.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,7 +22,6 @@ import weiver.service.LoginService;
 @RestController
 @Slf4j
 public class LoginController {
-	
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired

@@ -110,7 +110,12 @@
 	        <artifactId>s3</artifactId>
 	        <version>2.17.69</version>
 	    </dependency>
-		</dependencies>
+	    <!-- google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
