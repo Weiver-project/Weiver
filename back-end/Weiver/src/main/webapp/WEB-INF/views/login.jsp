@@ -23,14 +23,14 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form" action="loginTest" method="post">
+    <form id="login-form" action="http://3.36.252.181:8081/loginTest" method="post">
       <input type="email" name="userId" placeholder=" 이메일을 입력하세요" >
       <input type="password" name="userPw" placeholder=" 비밀번호를 입력하세요" >
       <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
     <div class="login-support">
-      <a href="/signup">회원가입</a>
+      <a href="http://3.36.252.181:8081/signup">회원가입</a>
       <a href="#">비밀번호를 잊으셨나요?</a>
     </div>
     <!-- 간편로그인 구분 선 -->
@@ -46,13 +46,13 @@
   </article>
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 <nav>
-    <a href="/main"><i class="bi bi-house-door-fill"></i>
+    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>
@@ -69,12 +69,12 @@
     	event.preventDefault(); // 기본 제출 동작 방지
     	
     	/* 로그인 axios 요청 */
-        axios.post("/loginTest", formData)
+        axios.post("http://3.36.252.181:8081/loginTest", formData)
         		.then(response => {
         			const data = response.data;
         			if(response.status === 200) {
         				alert(data);
-        				window.location.href = "/main";
+        				window.location.href = "http://3.36.252.181:8081/main";
         			}
   	   			})
   	   			.catch((error) => {

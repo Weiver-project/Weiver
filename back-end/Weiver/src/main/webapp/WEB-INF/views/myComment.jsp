@@ -22,7 +22,7 @@
 
 	<div>
 		<div>
-			<a href="/mypage/myinfo"><i class="bi-chevron-left"></i></a>
+			<a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
@@ -48,7 +48,7 @@
 		<div id="sortDate">
 			<c:forEach var="reply" items="${replyListTime}">
 				<div class="myBoardCard">
-					<a href="/community/${reply.postId}">
+					<a href="http://3.36.252.181:8081/community/${reply.postId}">
 						<span class="card">
 							<div class="date">${reply.createdTime}</div>
 							<div>${reply.content}</div>
@@ -67,7 +67,7 @@
 		<div id="sortLike" style="display: none">
 			<c:forEach var="reply" items="${replyListLike}">
 				<div class="myBoardCard">
-					<a href="/community/${reply.postId}">
+					<a href="http://3.36.252.181:8081/community/${reply.postId}">
 						<span class="card">
 							<div class="date">${reply.createdTime}</div>
 							<div>${reply.content}</div>
@@ -88,13 +88,13 @@
 	<footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 	<nav>
-	    <a href="/main"><i class="bi bi-house-door-fill"></i>
+	    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
 	        <div>HOME</div>
 	    </a>
-	    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+	    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
 	        <div>COMMUNITY</div>
 	    </a>
-	    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+	    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
 	        <div>MY PAGE</div>
 	    </a>
 	</nav>

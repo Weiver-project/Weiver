@@ -23,15 +23,15 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">관리자 로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form" action="/ad/loginTest" method="post">
+    <form id="login-form" action="http://3.36.252.181:8081/ad/loginTest" method="post">
       <input type="text" name="adminId" placeholder=" 관리자 아이디를 입력하세요" >
       <input type="password" name="adminPw" placeholder=" 비밀번호를 입력하세요" >
       <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
-    <!-- <div class="login-support">
-      <a href="/admin/signup">회원가입</a>
-    </div> -->
+    <div class="login-support">
+      <a href="http://3.36.252.181:8081/admin/signup">회원가입</a>
+    </div>
   </article>
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
@@ -52,7 +52,7 @@
         			const data = response.data;
         			if(response.status === 200) {
         				alert(data);
-        				window.location.href = "/admin/main";
+        				window.location.href = "http://3.36.252.181:8081/admin/main";
         			}
   	   			})
   	   			.catch((error) => {

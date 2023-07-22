@@ -47,7 +47,7 @@
 	    		<td class="td-margin" style="display:flex; flex-wrap: wrap">
 		    		<c:forEach items="${requestScope.musicalList}" var="musical">
 		    		<div style="max-width: 200px;">
-		    			<a href="/musical-detail/${musical.getId()}" style="text-decoration: none;">
+		    			<a href="http://3.36.252.181:8081/musical-detail/${musical.getId()}" style="text-decoration: none;">
 		    				<img src="${musical.getPosterImage()}" alt="${musical.getTitle()}" height="200" width="200" class="img-margin">
 		    				<p style="font-size: 14px; text-align: center;">${musical.getTitle()}</p>
 		    			</a>
@@ -65,13 +65,13 @@
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="/main"><i class="bi bi-house-door-fill"></i>
+    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>

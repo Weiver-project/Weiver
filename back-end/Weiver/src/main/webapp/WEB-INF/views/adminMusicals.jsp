@@ -34,7 +34,7 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/admin/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="http://3.36.252.181:8081/admin/logout">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -45,27 +45,27 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="/admin/getAllActors">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllActors">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 배우
                             </a>
-                            <a class="nav-link" href="/admin/getAllMusicals">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllMusicals">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 뮤지컬
                             </a>
-                            <a class="nav-link" href="/admin/getAllUsers">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllUsers">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                유저
                             </a>
-                            <a class="nav-link" href="/admin/getAllAdmins">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllAdmins">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 관리자
                             </a>
-                            <a class="nav-link" href="/admin/getAllPosts">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllPosts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                게시글
                             </a>
-                            <a class="nav-link" href="/admin/getAllInquirys">
+                            <a class="nav-link" href="http://3.36.252.181:8081/admin/getAllInquirys">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 문의
                             </a>
