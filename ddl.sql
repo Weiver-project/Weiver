@@ -15,7 +15,7 @@ ALTER TABLE scott.admin
         USING INDEX scott.pk_admin;
 
 CREATE TABLE scott.answer (
-    id           VARCHAR2(30 BYTE) NOT NULL,
+    id           NUMBER NOT NULL,
     inquiry_id   NUMBER NOT NULL,
     admin_id     VARCHAR2(30) NOT NULL,
     answer       VARCHAR2(4000 BYTE) NOT NULL,

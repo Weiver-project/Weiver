@@ -147,7 +147,7 @@ public class AdminController {
 	
 	/*============================        User         ===================================*/
 	
-	// 뮤지컬 리스트 조회
+	// 유저 리스트 조회
 	@RequestMapping(value="/getAllUsers",method = RequestMethod.GET)
 	public String getAllUsers(Model model) {
 		model.addAttribute("users", adminService.getAllUsers());
@@ -155,7 +155,7 @@ public class AdminController {
 		return "adminUsers";
 	}
 	
-	// 특정 뮤지컬 상세 조회
+	// 특정 유저 상세 조회
 	@RequestMapping(value="/getUserDetail/{userId}",method = RequestMethod.GET)
 	public String getUserDetail(@PathVariable String userId, Model model) {
 		model.addAttribute("user", adminService.getUser(userId));
@@ -163,7 +163,7 @@ public class AdminController {
 		return "adminUserDetail";
 	}
 	
-	// 뮤지컬 정보 수정
+	// 유저 정보 수정
 	@RequestMapping(value="/updateUser",method = RequestMethod.GET)
 	public String updateUser(@RequestParam User user, Model model) {
 		adminService.updateUser(user);
@@ -173,7 +173,7 @@ public class AdminController {
 		return "adminUsers";
 	}
 
-	// 뮤지컬 정보 삭제
+	// 유저 정보 삭제
 	@RequestMapping(value="/deleteUser/{userId}",method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String userId, Model model) {
 		adminService.deleteUser(userId);
