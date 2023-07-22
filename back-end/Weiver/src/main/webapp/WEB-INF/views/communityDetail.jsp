@@ -220,6 +220,16 @@ function resize() {
 
 window.addEventListener("load", resize);
 window.onresize = resize;
+
+function checkLogin() {
+    var userId = "${sessionScope.user}";
+
+    if (!userId) {
+        alert("로그인해주세요.");
+        return false;
+    }
+    return true;
+}
 </script>
 
 </head>
@@ -284,16 +294,19 @@ window.onresize = resize;
                 <div class="button">
 			  	<i class="bi-suit-heart icon" onclick="addPostlike(${posts.id})"
 			    	style="cursor: pointer;"></i>
-			  	<span></span>
+			  	<!--  <span>${likeCount}</span>-->
 				</div>	
             </div>
         </div>
 
         <!-- 게시글 수정하기, 삭제하기 버튼 -->
-        <div class="postBtnGroup">
-                <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
-                <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
-        </div>
+        <c:if test="${user != null && user == posts.user.id}">
+  			  <!-- 게시글 수정하기, 삭제하기 버튼 -->
+		    <div class="postBtnGroup">
+		        <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
+		        <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
+		    </div>
+		</c:if>
 
         <!-- 댓글 컨테이너 -->
         <div class="commentWrap">
@@ -317,11 +330,14 @@ window.onresize = resize;
                     </div>
 
                     <!-- 댓글 수정, 삭제 버튼 -->
+                    <c:if test="${user != null && user == posts.user.id}">
                     <div class="commentBtnGroup">
                         <button class="commentEditBtn">수정</button>
                         <button onclick="deleteReply(${reply.id})">삭제</button>
                     </div>
+                    </c:if>
                 </div>
+                
 
                 <!-- 대댓글 컨테이너 -->
                 <c:forEach var="rereply" items="${rereply}">
@@ -353,7 +369,7 @@ window.onresize = resize;
 
         <!-- 댓글 입력 창 -->
         <div class="commentInputGroup">
-        	<form action="/community/insert/reply/${posts.id}" method="post">
+        	<form action="/community/insert/reply/${posts.id}" method="post" onsubmit="return checkLogin()">
 	            <input name="content" class="commentInput" type="text">
     	        <input class="commentInputBtn" type="submit">
         	</form>

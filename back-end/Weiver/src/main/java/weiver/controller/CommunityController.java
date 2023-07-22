@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import weiver.dto.PostDTO;
 import weiver.entity.*;
 import weiver.service.AwsS3Service;
 import weiver.service.CommunityService;
@@ -45,7 +47,7 @@ public class CommunityController {
     @GetMapping("/community")
     public String communityMain(@RequestParam(required = false) String type,
 								@RequestParam(required = false) Long id,
-								Model model) {
+								Model model, HttpSession session) {
 
 		//모든 게시글 가져오기
 		List<Post> postList = communityService.getAllPosts();
@@ -56,11 +58,18 @@ public class CommunityController {
 		//인기 게시글 리스트 가져오기
         List<Post> bestPostList = communityService.getBestPostDesc();
         
-        //댓글 개수 가져오기
+        String userName = (String) session.getAttribute("userNickname");
+        
+        String userId = (String) session.getAttribute("userId");
+        int postCount = userService.countPostsByUserId(userId);
+        int replyCount = userService.countRepliesByUserId(userId);
         
         model.addAttribute("post", postList);
         model.addAttribute("typePost", postTypeList);
         model.addAttribute("bestPost", bestPostList);
+        session.setAttribute("user", userName);
+        model.addAttribute("postCount", postCount);
+        model.addAttribute("replyCount", replyCount);
 
         return "communityMain"; // 반환할 뷰의 이름
     }
@@ -71,7 +80,7 @@ public class CommunityController {
      * */
 
     @GetMapping("/community/{id}")
-    public String communityDetail(@PathVariable Long id, Model model) {
+    public String communityDetail(@PathVariable Long id, Model model, HttpSession session) {
         //id에 따라 게시글 가져오기
         Post post = communityService.getPostById(id);
 
@@ -91,11 +100,19 @@ public class CommunityController {
         
         // 조회수 +1
         communityService.incrementViewCount(post);
-
+        
+        String userId = (String) session.getAttribute("userId");
+        
+        List<PostDTO> postLikeList = userService.findPostLikeByUserId(userId);
+        int likeCount = postLikeList.size();
+        
+        
         model.addAttribute("posts", post);
         model.addAttribute("reply", replies);
         model.addAttribute("rereply", rereplies);
         model.addAttribute("reviews", review);
+        session.setAttribute("user", userId);
+        model.addAttribute("likeCount", likeCount);
 
         return "communityDetail";
 	}

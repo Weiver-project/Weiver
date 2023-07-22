@@ -29,10 +29,10 @@
       <div class="commentIDAndContent">
         <div class="commentID">${reply.user.nickname}</div>
         <div class="commentContent" id="commentContent_${reply.id}">${reply.content}</div>
-        <div class="likeAndRecomment">
+        <!--<div class="likeAndRecomment">
           <i class="bi-suit-heart"></i>
           <span>${reply.id}</span>
-        </div>
+        </div>  -->
       </div>
     </div>
 
@@ -44,10 +44,10 @@
           <div class="recommentInfo">
             <div class="commentID">${reReply.user.nickname}</div>
             <div class="commentContent">${reReply.content}</div>
-            <div class="likeAndRecomment">
+            <!--<div class="likeAndRecomment">
               <i class="bi-suit-heart"></i>
               <span>${reReply.id}</span>
-            </div>
+            </div>-->
           </div>
         </div>
         <div class="commentBtnGroup">

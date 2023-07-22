@@ -9,7 +9,7 @@
 .nameTag{
 	justify-content: center;
 	align-items: center;
-  margin: auto auto;
+	  margin: auto auto;
   display: flex;
   flex-wrap: wrap;
 }
