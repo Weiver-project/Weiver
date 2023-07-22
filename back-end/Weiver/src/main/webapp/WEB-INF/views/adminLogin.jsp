@@ -29,9 +29,9 @@
       <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
-    <div class="login-support">
+    <!-- <div class="login-support">
       <a href="/admin/signup">회원가입</a>
-    </div>
+    </div> -->
   </article>
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
