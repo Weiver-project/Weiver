@@ -28,6 +28,7 @@
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="http://3.36.252.181:8081/logout">Logout</a></li>
+
             </ul>
         </li>
     </ul>
@@ -77,7 +78,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        문의 내역
+                        관리자 목록
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
