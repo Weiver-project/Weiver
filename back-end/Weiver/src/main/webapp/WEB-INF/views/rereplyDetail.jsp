@@ -50,10 +50,6 @@
             </div>-->
           </div>
         </div>
-        <div class="commentBtnGroup">
-          <button type="button" class="replyUpdateBtn" data-id="${reReply.id}">수정</button>
-          <button type="button" class="replyDeleteBtn" data-id="${reReply.id}">삭제</button>
-        </div>
       </div>
     </c:forEach>
   </article>

@@ -188,6 +188,34 @@ function deleteReply(commentId) {
 }
 
 //좋아요 삽입
+// 버튼 상태를 토글하고 localStorage에 상태를 저장하는 함수
+function toggleButtonState() {
+    const buttonIcon = $('.icon');
+    buttonIcon.toggleClass('bi-suit-heart bi-suit-heart-fill');
+
+    // 버튼 상태를 localStorage에 저장
+    const buttonState = buttonIcon.hasClass('bi-suit-heart-fill') ? 'liked' : 'not-liked';
+    localStorage.setItem('buttonState', buttonState);
+}
+
+// 버튼 클릭 이벤트를 처리하는 함수
+function handleButtonClick(postsId) {
+    // 서버에 데이터 전송 (AJAX 사용)
+    $.ajax({
+        type: 'GET',
+        url: '/community/postlike/' + postsId,
+        contentType: 'application/json',
+        success: function () {
+            // 버튼 상태를 토글하고 localStorage에 저장
+            toggleButtonState();
+        },
+        error: function (xhr) {
+            console.error('Error adding postlike:', xhr.responseText);
+        }
+    });
+}
+
+// 페이지 로드 시 버튼 상태를 초기화하는 함수
 function addPostlike(postsId) {
     // 서버에 데이터 전송 (AJAX 사용)
     $.ajax({
@@ -195,7 +223,7 @@ function addPostlike(postsId) {
         url: '/community/postlike/' + postsId, // postId에 맞게 URL 수정
         contentType: 'application/json',
         success: function () {
-            // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 색깔 변경
+            // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 아이콘 변경
             const buttonIcon = $('.icon');
             buttonIcon.toggleClass('bi-suit-heart bi-suit-heart-fill');
         },
@@ -205,7 +233,6 @@ function addPostlike(postsId) {
         }
     });
 }
-
 
 function resize() {
     let textarea = document.getElementById("postContent");
@@ -330,7 +357,7 @@ function checkLogin() {
                     </div>
 
                     <!-- 댓글 수정, 삭제 버튼 -->
-                    <c:if test="${user != null && user == posts.user.id}">
+                    <c:if test="${user != null && user == reply.user.id}">
                     <div class="commentBtnGroup">
                         <button class="commentEditBtn">수정</button>
                         <button onclick="deleteReply(${reply.id})">삭제</button>
@@ -355,10 +382,12 @@ function checkLogin() {
                                 </div>
                             </div>
                             
+                            <c:if test="${user != null && user == rereply.user.id}">
                             <div class="recommentBtnGroup">
                                 <button type="button" class="recommentEditBtn">수정</button>
                                 <button onclick="deleteRereply(${rereply.id})">삭제</button>
                             </div>
+                            </c:if>
                             
                         </div>
                     </c:if>
