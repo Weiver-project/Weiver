@@ -174,6 +174,9 @@ function addSubscirbe(musicalId, type) {
         isSubscribed2 = !isSubscribed2; // 다음 클릭을 위해 버튼2 상태 토글
         buttonIcon2.toggleClass('subscribed', isSubscribed2);
       }
+    },
+    error: function () {
+        window.location.href = "/login";
     }
   });
 }

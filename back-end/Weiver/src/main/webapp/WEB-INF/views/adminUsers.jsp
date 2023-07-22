@@ -75,7 +75,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                	배우 정보
+                                	유저 정보
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -94,11 +94,11 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    	<c:forEach var="actor" items="${actors}">
+                                    	<c:forEach var="user" items="${users}">
                                     		<tr>
-                                    			<td><a href="http://localhost:8081/admin/getAllMusicals"><img src="${actor.profileImage }" height="150" width="120"></a></td>
-                                    			<td>${actor.id}</td>
-                                    			<td>${actor.name }</td>
+                                    			<td><a href="http://localhost:8081/admin/getAllMusicals"><img src="${user.profileImg }" height="150" width="120"></a></td>
+                                    			<td>${user.id}</td>
+                                    			<td>${user.nickname }</td>
                                     		</tr>
                                     	</c:forEach>                                        
                                     </tbody>
