@@ -57,7 +57,7 @@
       </div>
     </c:forEach>
   </article>
-  <form class="input-reple" action="/community/insert/rereply/${postId}/${reply.id}" method="post">
+  <form class="input-reple" action="/community/insert/rereply/${reply.post.id}/${reply.id}" method="post">
     <input type="text"  name="content">
     <input type="submit">
   </form>

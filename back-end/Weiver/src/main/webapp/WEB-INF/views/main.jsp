@@ -126,7 +126,7 @@
 		</div>
 
 <!--오늘의 배우 2개씩 총 8개 출력-->
-<h1 class="title">오늘의 배우✨</h1>
+<h1 class="title">추천 배우✨</h1>
 <div class="today_actor" style="max-height: 180px">
   <div class="actor_img">
     <div>
@@ -221,6 +221,7 @@
 	actorImage.onerror = () => { 
 		actorImage.remove();
 		spanElement.textContent = '배우 이미지가 없습니다.';
+		actorInfo.appendChild(spanElement);
 	}
 </script>
 </body>

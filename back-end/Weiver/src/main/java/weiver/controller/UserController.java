@@ -174,7 +174,14 @@ public class UserController {
 	public ResponseEntity<String> updatePW(@RequestParam("userId") String userId,
 										   @RequestParam("myPw") String userPw,
 										   @RequestParam("newPw") String newPw,
-										   @RequestParam("checkPw") String checkPw) {
+										   @RequestParam("checkPw") String checkPw,
+										   HttpSession session) {
+
+		String kakaoId = (String) session.getAttribute("kakao");
+
+		if (kakaoId != null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("카카오 아이디는 비밀번호 변경이 안됩니다.");
+		}
 
 		String password = userservice.findById(userId).getPassword();
 		boolean result = BCrypt.checkpw(userPw, password);

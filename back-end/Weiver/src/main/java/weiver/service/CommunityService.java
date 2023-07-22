@@ -1,36 +1,21 @@
 	package weiver.service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+	import org.apache.commons.io.FilenameUtils;
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.stereotype.Service;
+	import org.springframework.web.multipart.MultipartFile;
+	import weiver.entity.*;
+	import weiver.repository.*;
 
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import weiver.entity.Image;
-import weiver.entity.Musical;
-import weiver.entity.Post;
-import weiver.entity.PostLike;
-import weiver.entity.ReReply;
-import weiver.entity.Reply;
-import weiver.entity.Review;
-import weiver.entity.User;
-import weiver.repository.CommunityRepository;
-import weiver.repository.ImageRepository;
-import weiver.repository.MusicalRepository;
-import weiver.repository.PostLikeRepository;
-import weiver.repository.ReReplyRepository;
-import weiver.repository.ReplyRepository;
-import weiver.repository.ReviewRepository;
-import weiver.repository.UserRepository;
+	import java.io.IOException;
+	import java.nio.file.Files;
+	import java.nio.file.Path;
+	import java.nio.file.Paths;
+	import java.nio.file.StandardCopyOption;
+	import java.sql.SQLException;
+	import java.util.Date;
+	import java.util.List;
+	import java.util.UUID;
 
 @Service
 public class CommunityService {
@@ -253,7 +238,7 @@ public class CommunityService {
 	
 	// post_id와 reply_id에 따라 대댓글 가져오기
 		public List<ReReply> getReReplyByPostIdAndReplyId(Long postId, Long replyId) {
-		    	List<ReReply> rereplies = rereplyRepository.findByPostIdAndReplyId(postId, replyId);
+		    	List<ReReply> rereplies = rereplyRepository.findByPostIdAndReplyIdOrderByCreatedTime(postId, replyId);
 		    	System.out.println(rereplies);
 		    	return rereplies;
 		   }
