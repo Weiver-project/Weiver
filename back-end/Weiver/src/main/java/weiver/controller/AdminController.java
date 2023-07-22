@@ -24,9 +24,8 @@ public class AdminController {
 	// 테스트
 		@RequestMapping(value="/main",method = RequestMethod.GET)
 		public String main(Model model) {
-			System.out.println("main");
-			model.addAttribute("actors", adminService.getAllActors());
-			return "adminActors";
+			model.addAttribute("inquirys", adminService.getAllInquirys());
+			return "adminInquirys";
 		}
 
 	/*============================        Login         ===================================*/
