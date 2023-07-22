@@ -26,7 +26,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="/login"><i class="bi bi-chevron-left"></i></a>
+                <a href="http://3.36.252.181:8081/login"><i class="bi bi-chevron-left"></i></a>
             </div>
         </div>
     </header>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- 회원가입 form -->
-        <form id="signupForm" action="/signupTest" method="post">
+        <form id="signupForm" action="http://3.36.252.181:8081/signupTest" method="post">
             <!-- ID -->
             <div class="ID">
                 <input id="userId" class="info_input" type="email" name="userId" placeholder="이메일을 입력해주세요" required style="text-transform: lowercase">
@@ -167,13 +167,13 @@
 
         <!-- navibar -->
         <nav>
-		    <a href="/main"><i class="bi bi-house-door-fill"></i>
+		    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
 		        <div>HOME</div>
 		    </a>
-		    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+		    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
 		        <div>COMMUNITY</div>
 		    </a>
-		    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+		    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
 		        <div>MY PAGE</div>
 		    </a>
 		</nav>
@@ -235,7 +235,7 @@
 			                const data = response.data;
 			                if (response.status === 200) {
 		                        alert(data);
-		                        window.location.href = "/login";
+		                        window.location.href = "http://3.36.252.181:8081/login";
 			                } 
 			            })
 			            .catch((error) => {

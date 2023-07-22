@@ -51,7 +51,7 @@ $(function() {
 
         // AJAX로 댓글 업데이트 컨트롤러 실행하기
         $.ajax({
-            url: '/community/update/reply/' + commentId,
+            url: 'http://3.36.252.181:8081/community/update/reply/' + commentId,
             type: 'POST',
             data: {
                 id: commentId,
@@ -77,7 +77,7 @@ $(function() {
 
         // AJAX로 대댓글 업데이트 컨트롤러 실행하기
         $.ajax({
-            url: '/community/update/rereply/' + recommentId,
+            url: 'http://3.36.252.181:8081/community/update/rereply/' + recommentId,
             type: 'POST',
             data: {
                 id: recommentId,
@@ -105,11 +105,11 @@ function deletePost(postsId) {
 
     // AJAX로 댓글 삭제 컨트롤러 실행하기
     $.ajax({
-        url: '/community/delete/post/' + postsId,
+        url: 'http://3.36.252.181:8081/community/delete/post/' + postsId,
         type: 'DELETE',
         success: function(response) {
             console.log('글이 삭제되었습니다.');
-            window.location.href = 'http://localhost:8081/community';
+            window.location.href = 'http://3.36.252.181:8081/community';
         },
         error: function(xhr) {
             // 작동 실패
@@ -128,7 +128,7 @@ function deleteReply(commentId) {
 
     // AJAX로 댓글 삭제 컨트롤러 실행하기
     $.ajax({
-        url: '/community/delete/reply/' + commentId,
+        url: 'http://3.36.252.181:8081/community/delete/reply/' + commentId,
         type: 'DELETE',
         success: function(response) {
             console.log('댓글이 삭제되었습니다.');
@@ -150,7 +150,7 @@ function deleteRereply(recommentId) {
     }
 
     $.ajax({
-        url: '/community/delete/rereply/' + recommentId,
+        url: 'http://3.36.252.181:8081/community/delete/rereply/' + recommentId,
         type: 'DELETE',
         success: function(response) {
             console.log('대댓글이 삭제되었습니다.');
@@ -173,7 +173,7 @@ function deleteReply(commentId) {
 
     // AJAX로 댓글 삭제 컨트롤러 실행하기
     $.ajax({
-        url: '/community/delete/reply/' + commentId,
+        url: 'http://3.36.252.181:8081/community/delete/reply/' + commentId,
         type: 'DELETE',
         success: function(response) {
             console.log('댓글이 삭제되었습니다.');
@@ -203,7 +203,7 @@ function handleButtonClick(postsId) {
     // 서버에 데이터 전송 (AJAX 사용)
     $.ajax({
         type: 'GET',
-        url: '/community/postlike/' + postsId,
+        url: 'http://3.36.252.181:8081/community/postlike/' + postsId,
         contentType: 'application/json',
         success: function () {
             // 버튼 상태를 토글하고 localStorage에 저장
@@ -220,7 +220,7 @@ function addPostlike(postsId) {
     // 서버에 데이터 전송 (AJAX 사용)
     $.ajax({
         type: 'GET',
-        url: '/community/postlike/' + postsId, // postId에 맞게 URL 수정
+        url: 'http://3.36.252.181:8081/community/postlike/' + postsId, // postId에 맞게 URL 수정
         contentType: 'application/json',
         success: function () {
             // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 아이콘 변경
@@ -271,7 +271,7 @@ function checkLogin() {
 
         <!-- 뒤로가기 버튼 -->
         <div class="backBtn">
-            <a href="javascript:history.back();">
+            <a href="http://3.36.252.181:8081/community">
                 <i class="bi-chevron-left"></i>
             </a>
         </div>
@@ -330,7 +330,7 @@ function checkLogin() {
         <c:if test="${user != null && user == posts.user.id}">
   			  <!-- 게시글 수정하기, 삭제하기 버튼 -->
 		    <div class="postBtnGroup">
-		        <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='/community/update/${posts.id}'">
+		        <input type="submit" value="수정하기" class="postModifyBtn" onclick="location.href='http://3.36.252.181:8081/community/update/${posts.id}'">
 		        <input type="submit" value="삭제하기" class="postDeleteBtn" onclick="deletePost(${posts.id})">
 		    </div>
 		</c:if>
@@ -350,7 +350,7 @@ function checkLogin() {
 		            <div class="likeAndRecomment">
 		                <!-- <i class="bi-suit-heart" onclick="changeHeartIcon('reply', ${reply.id}, this)"></i>
 		                <span>${reply.id}</span> -->
-		                <a href="/community/${posts.id}/reply/${reply.id}" style="text-decoration: none;">
+		                <a href="http://3.36.252.181:8081/community/${posts.id}/reply/${reply.id}" style="text-decoration: none;">
 		                    <span class="recommentBtn">대댓글</span>
 		                </a>
                         </div>
@@ -408,13 +408,13 @@ function checkLogin() {
 
     <footer>Copyright Weiver 2023 All Rights Reserved</footer>
     <nav>
-        <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
