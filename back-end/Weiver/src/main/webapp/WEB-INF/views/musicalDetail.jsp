@@ -156,27 +156,45 @@
 let isSubscribed1 = false;
 let isSubscribed2 = false;
 
+// 웹 스토리지에 상태 저장하기
+function saveButtonState() {
+  localStorage.setItem('isSubscribed1', JSON.stringify(isSubscribed1));
+  localStorage.setItem('isSubscribed2', JSON.stringify(isSubscribed2));
+}
+
+// 페이지 로드 시, 웹 스토리지에서 상태 가져오기
+$(document).ready(function() {
+  isSubscribed1 = JSON.parse(localStorage.getItem('isSubscribed1')) || false;
+  isSubscribed2 = JSON.parse(localStorage.getItem('isSubscribed2')) || false;
+  const buttonIcon1 = $('.icon1');
+  const buttonIcon2 = $('.icon2');
+  buttonIcon1.toggleClass('subscribed', isSubscribed1);
+  buttonIcon2.toggleClass('subscribed', isSubscribed2);
+});
+
+// 버튼 상태를 변경하고 웹 스토리지에 저장하기
 function addSubscirbe(musicalId, type) {
-  // 서버에 데이터 전송 (AJAX 사용)
   $.ajax({
     type: 'GET',
     url: '/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
     contentType: 'application/json',
     success: function () {
-      // AJAX 호출이 성공하면, 해당 버튼의 클래스를 토글하여 버튼 색깔 변경
       const buttonIcon1 = $('.icon1');
       const buttonIcon2 = $('.icon2');
 
       if (type === '찜했어요') {
-        isSubscribed1 = !isSubscribed1; // 다음 클릭을 위해 버튼1 상태 토글
+        isSubscribed1 = !isSubscribed1;
         buttonIcon1.toggleClass('subscribed', isSubscribed1);
       } else if (type === '봤어요') {
-        isSubscribed2 = !isSubscribed2; // 다음 클릭을 위해 버튼2 상태 토글
+        isSubscribed2 = !isSubscribed2;
         buttonIcon2.toggleClass('subscribed', isSubscribed2);
       }
+
+      // 웹 스토리지에 상태 저장
+      saveButtonState();
     },
     error: function () {
-        window.location.href = "/login";
+      window.location.href = "/login";
     }
   });
 }

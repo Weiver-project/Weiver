@@ -44,27 +44,42 @@ function handleMusicalItemClick(musicalId) {
     // Show the musical information container
     var musicalDetailContainer = document.getElementById("musicalDetailContainer");
     musicalDetailContainer.style.display = "block";
+    musicalDetailContainer.style.backgroundColor = "#172036";
+    musicalDetailContainer.style.padding = "20px";
+    musicalDetailContainer.style.borderRadius = "10px";
+    musicalDetailContainer.style.marginTop = "10px";
+    musicalDetailContainer.style.color = "#fff";
+    musicalDetailContainer.style.fontSize = "18px";
+    musicalDetailContainer.style.textAlign = "center";
 
     // Find the selected musical by its ID in the musicalsData array
     var selectedMusical = musicalsData.find(function (musical) {
         return musical.id === musicalId;
     });
-	
-    console.log("selectedMusical: " ,selectedMusical);
 
-    
-    
+    console.log("selectedMusical: ", selectedMusical);
+
     // Populate the musical information container with the details
     if (selectedMusical) {
-        var musicalTitleElement = document.createElement("h2");
-        musicalTitleElement.textContent = selectedMusical.title;
-
-        var musicalTheaterElement = document.createElement("p");
-        musicalTheaterElement.textContent = selectedMusical.theater;
-
+    
         var musicalPosterElement = document.createElement("img");
         musicalPosterElement.src = selectedMusical.posterImage;
         musicalPosterElement.alt = "Musical Poster";
+        musicalPosterElement.style.height = "120px";
+        musicalPosterElement.style.width = "85px";
+
+        var musicalTitleElement = document.createElement("h2");
+        musicalTitleElement.textContent = selectedMusical.title;
+        musicalTitleElement.style.fontSize = "25px";
+        musicalTitleElement.style.backgroundColor = "#172036";
+        musicalTitleElement.style.textAlign = "center";
+        musicalTitleElement.style.marginTop = "-5px";
+
+        var musicalTheaterElement = document.createElement("p");
+        musicalTheaterElement.textContent = selectedMusical.theater;
+        musicalTheaterElement.style.backgroundColor = "#172036";
+        musicalTheaterElement.style.fontSize = "15px";
+        musicalTheaterElement.style.textAlign = "center";
 
         // Append the elements to the musicalDetailContainer
         musicalDetailContainer.innerHTML = ""; // Clear previous content
@@ -77,6 +92,7 @@ function handleMusicalItemClick(musicalId) {
         musicalIdInput.value = musicalId;
     }
 }
+
 
     function handleSearchBoxChange() {
         var searchTerm = document.getElementById("searchBox").value;
@@ -208,7 +224,7 @@ function handleMusicalItemClick(musicalId) {
 				    </div>
 				    <div id="musicalInfoContainer">
 				    </div>
-				    <div id="musicalDetailContainer" style="display: none;">
+				    <div id="musicalDetailContainer"  style="display: none;">
 					</div>
 				</div>
 				
