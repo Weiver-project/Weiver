@@ -46,9 +46,14 @@
 	    	<tr>
 	    		<td class="td-margin" style="display:flex; flex-wrap: wrap">
 		    		<c:forEach items="${requestScope.musicalList}" var="musical">
-		    		<div>
-		    			<a href="/musical-detail/${musical.getId()}"><img src="${musical.getPosterImage()}" alt="logo" height="200" width="200" class="img-margin"></a>
+		    		<div style="max-width: 200px;">
+		    			<a href="/musical-detail/${musical.getId()}" style="text-decoration: none;">
+		    				<img src="${musical.getPosterImage()}" alt="${musical.getTitle()}" height="200" width="200" class="img-margin">
+		    				<p style="font-size: 14px; text-align: center;">${musical.getTitle()}</p>
+		    			</a>
+		    			
 		    		</div>
+		    		
 		    		</c:forEach>
 	    		</td>
 	    	</tr>

@@ -27,7 +27,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	// 회원가입...
+	// 회원가입....
 	@PostMapping(value = "/signupTest")
 	public ResponseEntity<String> signup(@RequestParam("userId") String userId,
 			@RequestParam("userPw") String userPw,
