@@ -12,25 +12,21 @@ import weiver.repository.InquiryRepository;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class AnswerService {
 
     @Autowired
     private AnswerRepository answerRepository;
 
-    public void answerInquiry(Inquiry inquiry, String answerContent) {
+    public void answerInquiry(Inquiry inquiry, String answerContent, Admin admin) {
     	// Answer가 없다면 save
     	if(answerRepository.findAnswerByInquiryId(inquiry.getId()) == null) {
     		
-    		// Admin 계정을 로그인에 연동해주어야 한다.
-    		
 	    	Answer answer = Answer.builder()
 					    			.inquiry(inquiry)
-					    			.admin(Admin.builder()
-					    						.id("1234")
-					    						.password("adminpw")
-					    						.name("ad")
-					    						.build())
+					    			.admin(admin)
 					    			.answer(answerContent)
 					    			.createdTime(new Date())
 					    			.build();

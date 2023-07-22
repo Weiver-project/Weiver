@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Admin - Inquiry</title>
+        <title>Admin - Post</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -77,7 +77,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                	문의 내역
+                                	게시글 목록
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -85,9 +85,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>제목</th>
+                                            <th>타입</th>
                                             <th>작성자</th>
                                             <th>작성 일자</th>
-                                            <th>답변</th>
                                             <th>삭제</th>
                                         </tr>
                                     </thead>
@@ -95,29 +95,22 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>제목</th>
+                                            <th>타입</th>
                                             <th>작성자</th>
                                             <th>작성 일자</th>
-                                            <th>답변</th>
                                             <th>삭제</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    	<c:forEach var="inquiry" items="${inquirys}">
+                                    	<c:forEach var="post" items="${posts}">
                                     		<tr>
-                                    			<td>${inquiry.id}</td>
-                                    			<td>${inquiry.title }</td>
-                                    			<td>${inquiry.userId }</td>
-                                    			<td>${inquiry.createdTime }</td>
+                                    			<td>${post.id}</td>
+                                    			<td>${post.title }</td>
+                                    			<td>${post.type }</td>
+                                    			<td>${post.user.id }</td>
+                                    			<td>${post.createdTime }</td>
                                     			<td>
-                                    				<c:if test="${inquiry.answer.answer == null}">
-                                    					<button onclick="location.href='../answerInquiryForm/${inquiry.id}'">답변</button>
-                                    				</c:if>
-                                    				<c:if test="${inquiry.answer.answer != null}">
-                                    					<span>답변 완료</span>
-                                    				</c:if>
-                                    			</td>
-                                    			<td>
-                                    				<button onclick="deleteInquiry(${inquiry.id})">삭제</button>
+                                    				<button onclick="deletePost(${post.id})">삭제</button>
                                     			</td>
                                     		</tr>       
                                     	</c:forEach>                              		
@@ -147,18 +140,18 @@
         <script src="../js/datatables-simple-demo.js"></script>
         
         <script>        	
-        	// DB에서 inquiry를 삭제한다.
-        	function deleteInquiry(inquiryId){
+        	// DB에서 Post를 삭제한다.
+        	function deletePost(postId){
         	    // 서버에 데이터 전송 (AJAX 사용)
         	    $.ajax({
         	        type: 'GET',
-        	        url: '/admin/deleteInquiry/' + inquiryId, // 문의 삭제를 처리하는 URL
+        	        url: '/admin/deletePost/' + postId, // 문의 삭제를 처리하는 URL
         	        contentType: 'application/json'
         	        
         	    });
         	    
         	    // db에 적용되기까지 100ms 를 기다렸다가 페이지를 다시 불러온다.
-        	    setTimeout(() =>  location.href="http://localhost:8081/admin/getAllInquirys", 100);
+        	    setTimeout(() =>  location.href="http://localhost:8081/admin/getAllPosts", 100);
         	}
         </script>
     </body>

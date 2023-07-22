@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin - User</title>
+    <title>Admin - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="../css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -83,7 +83,6 @@
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
-                                <th>프로필 이미지</th>
                                 <th>ID</th>
                                 <th>이름</th>
                                 <th>삭제</th>
@@ -91,20 +90,18 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>프로필 이미지</th>
                                 <th>ID</th>
                                 <th>이름</th>
                                 <th>삭제</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="user" items="${users}">
+                            <c:forEach var="admin" items="${admins}">
                                 <tr>
-                                    <td><img src="${user.profileImg}" height="150" width="120"></td>
-                                    <td>${user.id }</td>
-                                    <td>${user.nickname }</td>
+                                    <td>${admin.id}</td>
+                                    <td>${admin.name }</td>
                                     <td>
-                                        <button onclick="deleteUser('${user.id}')">삭제</button>
+                                        <button onclick="deleteAdmin('${admin.id}')">삭제</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -134,17 +131,17 @@
 <script src="../js/datatables-simple-demo.js"></script>
 
 <script>
-    function deleteUser(userId){
+    function deleteAdmin(adminId){
         // 서버에 데이터 전송 (AJAX 사용)
         $.ajax({
             type: 'GET',
-            url: '/admin/deleteUser/' + userId, // 문의 삭제를 처리하는 URL
+            url: '/admin/deleteAdmin/' + adminId, // 문의 삭제를 처리하는 URL
             contentType: 'application/json'
 
         });
 
         // db에 적용되기까지 100ms 를 기다렸다가 페이지를 다시 불러온다.
-        setTimeout(() =>  location.href="http://localhost:8081/admin/getAllUsers", 100);
+        setTimeout(() =>  location.href="/admin/getAllAdmins", 100);
     }
 </script>
 </body>

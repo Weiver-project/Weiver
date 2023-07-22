@@ -70,6 +70,11 @@ public class AdminService {
     public void removeAdmin(String adminId) throws Exception{
         adminRepository.deleteById(adminId);
     }
+    
+    // AdminId로 Admin 정보 가져오기
+    public Admin getAdminById(String adminId) {
+    	return adminRepository.getAdminById(adminId);
+    }
 
     /*============================        Actor         ===================================*/
     
