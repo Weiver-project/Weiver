@@ -155,6 +155,7 @@
 
         <hr style="margin-top: 22px; margin-bottom: 22px; color: #D4D9E1;">
 
+		<!-- 카테고리 그룹 -->
         <p style="font-weight:bold; font-size: 17px; margin-bottom: 12px;">카테고리</p>
         <div>
             <div class="btnGroup">
@@ -165,6 +166,7 @@
                 </div>
                 <button class="writeBtn" onclick="checkLogin()">글 작성하기</button>
             </div>
+            <!-- 전체 태그일 때 게시글 -->
             <div class="postAndUserInfo">
                 <div id="postListAll" class="postList">
                     <c:forEach var="post" items="${post}">
@@ -172,7 +174,10 @@
                         <div class="postWrap-main">
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
+							    <div class="post-content">
+								    ${post.content}
+								</div>
+							    <%-- <p class="post-content">${post.content}</p> --%>
 								 <c:if test="${not empty post.images}">
 								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
 								</c:if>
@@ -182,13 +187,21 @@
                             <div class="iconGroup">
                                 <div>
                                     <i class="bi-eye"></i>
-                                    <span>${post.viewed}</span>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${post.viewed}
                                 </div>
                                 <div>
-                                    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
+                                    <i class="bi-suit-heart"></i>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${post.viewed}
                                 </div>
                                 <div>
                                     <i class="bi-chat"></i>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${post.viewed}
                                 </div>
                             </div>
                         </div>
@@ -202,17 +215,34 @@
                             <div class="postWrap-main">
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							     <div class="post-content">
+								    ${post.content}
+								</div>
+							    <c:if test="${not empty post.images}">
+								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+								</c:if>
+								<c:if test="${empty post.images}">
+								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+								</c:if>
                                 <div class="iconGroup">
                                     <div>
                                         <i class="bi-eye"></i>
-                                        <span>${post.viewed}</span>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${post.viewed}
+                                	</div>
                                     <div>
-                                        <i class="bi-suit-heart" onclick="changeHeartIcon(this)"></i>
-                                        <span>${post.viewed}</span>
+                                        <i class="bi-suit-heart"></i>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${post.viewed}
+                                	</div>
+                                	<div>
+	                                    <i class="bi-chat"></i>
+	                                </div>
+	                                <div style="margin: 4px 0px 0px -15px;">
+	                                	${post.viewed}
+	                                </div>
                                 </div>
                             </div>
                              </a>
@@ -226,17 +256,34 @@
                             <div class="postWrap-main">
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							    <div class="post-content">
+								    ${post.content}
+								</div>
+							    <c:if test="${not empty post.images}">
+								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+								</c:if>
+								<c:if test="${empty post.images}">
+								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+								</c:if>
                                 <div class="iconGroup">
                                     <div>
                                         <i class="bi-eye"></i>
-                                        <span>${post.viewed}</span>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${post.viewed}
+                                	</div>
                                     <div>
-								    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
-								    <span>${post.viewed}</span>
-								 </div>
+								    	<i class="bi-suit-heart"></i>
+								 	</div>
+								 	<div style="margin: 4px 0px 0px -15px;">
+                                		${post.viewed}
+                                	</div>
+                                	<div>
+	                                    <i class="bi-chat"></i>
+	                                </div>
+	                                <div style="margin: 4px 0px 0px -15px;">
+	                                	${post.viewed}
+	                                </div>
                                 </div>
                             </div>
                             </a>
