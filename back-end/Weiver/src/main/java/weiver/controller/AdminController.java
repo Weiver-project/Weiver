@@ -183,7 +183,7 @@ public class AdminController {
 	
 	/*============================        Admin         ===================================*/
 	
-	// 뮤지컬 리스트 조회
+	// 관리자 리스트 조회
 	@RequestMapping(value="/getAllAdmins",method = RequestMethod.GET)
 	public String getAllAdmins(Model model) {
 		model.addAttribute("admins", adminService.getAllAdmins());
@@ -191,7 +191,7 @@ public class AdminController {
 		return "adminAdmins";
 	}
 	
-	// 특정 뮤지컬 상세 조회
+	// 특정 관리자 상세 조회
 	@RequestMapping(value="/getAdminDetail/{adminId}",method = RequestMethod.GET)
 	public String getAdminDetail(@PathVariable String adminId, Model model) {
 		model.addAttribute("admin", adminService.getAdmin(adminId));
@@ -199,7 +199,7 @@ public class AdminController {
 		return "adminAdminDetail";
 	}
 	
-	// 뮤지컬 정보 수정
+	// 관리자 정보 수정
 	@RequestMapping(value="/updateAdmin",method = RequestMethod.GET)
 	public String updateAdmin(@RequestParam Admin admin, Model model) {
 		adminService.updateAdmin(admin);
@@ -209,7 +209,7 @@ public class AdminController {
 		return "adminAdmins";
 	}
 
-	// 뮤지컬 정보 삭제
+	// 관리자 정보 삭제
 	@RequestMapping(value="/deleteAdmin/{adminId}",method = RequestMethod.GET)
 	public String deleteAdmin(@PathVariable String adminId, Model model) {
 		adminService.deleteAdmin(adminId);
@@ -219,7 +219,7 @@ public class AdminController {
 	
 	/*============================        Post         ===================================*/
 	
-	// 뮤지컬 리스트 조회
+	// 게시글 리스트 조회
 	@RequestMapping(value="/getAllPosts",method = RequestMethod.GET)
 	public String getAllPosts(Model model) {
 		model.addAttribute("posts", adminService.getAllPosts());
@@ -227,7 +227,7 @@ public class AdminController {
 		return "adminPosts";
 	}
 	
-	// 특정 뮤지컬 상세 조회
+	// 특정 게시글 상세 조회
 	@RequestMapping(value="/getPostDetail/{postId}",method = RequestMethod.GET)
 	public String getPostDetail(@PathVariable Long postId, Model model) {
 		model.addAttribute("post", adminService.getPost(postId));
@@ -235,7 +235,7 @@ public class AdminController {
 		return "adminPostDetail";
 	}
 	
-	// 뮤지컬 정보 수정
+	// 게시글 정보 수정
 	@RequestMapping(value="/updatePost",method = RequestMethod.GET)
 	public String updatePost(@RequestParam Post post, Model model) {
 		adminService.updatePost(post);
@@ -245,7 +245,7 @@ public class AdminController {
 		return "adminPosts";
 	}
 
-	// 뮤지컬 정보 삭제
+	// 게시글 정보 삭제
 	@RequestMapping(value="/deletePost/{postId}",method = RequestMethod.GET)
 	public String deletePost(@PathVariable Long postId, Model model) {
 		adminService.deletePost(postId);
@@ -255,7 +255,7 @@ public class AdminController {
 	
 	/*============================        Inquiry         ===================================*/
 	
-	// 뮤지컬 리스트 조회
+	// 문의 리스트 조회
 	@RequestMapping(value="/getAllInquirys",method = RequestMethod.GET)
 	public String getAllInquirys(Model model) {
 		model.addAttribute("inquirys", adminService.getAllInquirys());
@@ -263,7 +263,7 @@ public class AdminController {
 		return "adminInquirys";
 	}
 	
-	// 특정 뮤지컬 상세 조회
+	// 특정 문의 상세 조회
 	@RequestMapping(value="/getInquiryDetail/{inquriyId}",method = RequestMethod.GET)
 	public String getInquiryDetail(@PathVariable Long inquiryId, Model model) {
 		model.addAttribute("inquiry", adminService.getInquiry(inquiryId));
@@ -271,7 +271,7 @@ public class AdminController {
 		return "adminInquiryDetail";
 	}
 	
-	// 뮤지컬 정보 수정
+	// 문의 정보 수정
 	@RequestMapping(value="/updateInquiry",method = RequestMethod.GET)
 	public String updateInquiry(@RequestParam Inquiry inquiry, Model model) {
 		adminService.updateInquiry(inquiry);
@@ -281,7 +281,7 @@ public class AdminController {
 		return "adminInquirys";
 	}
 
-	// 뮤지컬 정보 삭제
+	// 문의 정보 삭제
 	@RequestMapping(value="/deleteInquiry/{inquiryId}",method = RequestMethod.GET)
 	public String deleteInquiry(@PathVariable Long inquiryId, Model model) {
 		adminService.deleteInquiry(inquiryId);
@@ -289,6 +289,6 @@ public class AdminController {
 		return "adminInquirys";
 	}
 	
-	
+
 }
 

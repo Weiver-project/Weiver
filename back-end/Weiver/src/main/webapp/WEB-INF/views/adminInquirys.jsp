@@ -146,20 +146,13 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="../js/datatables-simple-demo.js"></script>
         
-        <script>
-        	// inquiry 상세 페이지로 이동한다.
-        	function answerInquiry(inquiryId){
-        		
-        		
-        		
-        	}
-        	
+        <script>        	
         	// DB에서 inquiry를 삭제한다.
         	function deleteInquiry(inquiryId){
         	    // 서버에 데이터 전송 (AJAX 사용)
         	    $.ajax({
         	        type: 'GET',
-        	        url: '/inquiry/deleteInquiry/' + inquiryId, // 문의 삭제를 처리하는 URL
+        	        url: '/admin/deleteInquiry/' + inquiryId, // 문의 삭제를 처리하는 URL
         	        contentType: 'application/json'
         	        
         	    });
