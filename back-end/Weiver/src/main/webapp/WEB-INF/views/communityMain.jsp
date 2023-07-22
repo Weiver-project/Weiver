@@ -169,19 +169,19 @@
             <!-- 전체 태그일 때 게시글 -->
             <div class="postAndUserInfo">
                 <div id="postListAll" class="postList">
-                    <c:forEach var="post" items="${post}">
-                    <a href="http://3.36.252.181:8081/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                    <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                         <div class="postWrap-main">
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
 							    <div class="post-content">
-								    ${post.content}
+								    ${postWithReplyAndLikeCount.post.content}
 								</div>
 							    <%-- <p class="post-content">${post.content}</p> --%>
-								 <c:if test="${not empty post.images}">
-								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+								 <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                             <div class="iconGroup">
@@ -189,19 +189,19 @@
                                     <i class="bi-eye"></i>
                                 </div>
                                 <div style="margin: 4px 0px 0px -15px;">
-                                	${post.viewed}
+                                	${postWithReplyAndLikeCount.post.viewed}
                                 </div>
                                 <div>
                                     <i class="bi-suit-heart"></i>
                                 </div>
                                 <div style="margin: 4px 0px 0px -15px;">
-                                	${post.viewed}
+                                	${postWithReplyAndLikeCount.likeCount}
                                 </div>
                                 <div>
                                     <i class="bi-chat"></i>
                                 </div>
                                 <div style="margin: 4px 0px 0px -15px;">
-                                	${post.viewed}
+                                	${postWithReplyAndLikeCount.likeCount}
                                 </div>
                             </div>
                         </div>
@@ -209,19 +209,19 @@
                     </c:forEach>
                 </div>
                 <div id="postListReview" class="postList" style="display: none;">
-                    <c:forEach var="post" items="${post}">
-                        <c:if test="${post.type == 'Review'}">
-                        <a href="http://3.36.252.181:8081/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                        <c:if test="${postWithReplyAndLikeCount.post.type == 'Review'}">
+                        <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                             <div class="postWrap-main">
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
 							     <div class="post-content">
-								    ${post.content}
+								    ${postWithReplyAndLikeCount.post.content}
 								</div>
-							    <c:if test="${not empty post.images}">
-								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                                 <div class="iconGroup">
@@ -229,19 +229,19 @@
                                         <i class="bi-eye"></i>
                                     </div>
                                     <div style="margin: 4px 0px 0px -15px;">
-                                		${post.viewed}
+                                		${postWithReplyAndLikeCount.post.viewed}
                                 	</div>
                                     <div>
                                         <i class="bi-suit-heart"></i>
                                     </div>
                                     <div style="margin: 4px 0px 0px -15px;">
-                                		${post.viewed}
+                                		${postWithReplyAndLikeCount.likeCount}
                                 	</div>
                                 	<div>
 	                                    <i class="bi-chat"></i>
 	                                </div>
 	                                <div style="margin: 4px 0px 0px -15px;">
-	                                	${post.viewed}
+	                                	${postWithReplyAndLikeCount.replyCount}
 	                                </div>
                                 </div>
                             </div>
@@ -250,19 +250,19 @@
                     </c:forEach>
                 </div>
                 <div id="postListChat" class="postList" style="display: none;">
-                    <c:forEach var="post" items="${post}">
-                        <c:if test="${post.type == 'Chat'}">
-                        <a href="http://3.36.252.181:8081/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                        <c:if test="${postWithReplyAndLikeCount.post.type == 'Chat'}">
+                        <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                             <div class="postWrap-main">
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
 							    <div class="post-content">
-								    ${post.content}
+								    ${postWithReplyAndLikeCount.post.content}
 								</div>
-							    <c:if test="${not empty post.images}">
-								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                                 <div class="iconGroup">
@@ -270,19 +270,19 @@
                                         <i class="bi-eye"></i>
                                     </div>
                                     <div style="margin: 4px 0px 0px -15px;">
-                                		${post.viewed}
+                                		${postWithReplyAndLikeCount.post.viewed}
                                 	</div>
                                     <div>
-								    	<i class="bi-suit-heart"></i>
-								 	</div>
-								 	<div style="margin: 4px 0px 0px -15px;">
-                                		${post.viewed}
+                                        <i class="bi-suit-heart"></i>
+                                    </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${postWithReplyAndLikeCount.likeCount}
                                 	</div>
                                 	<div>
 	                                    <i class="bi-chat"></i>
 	                                </div>
 	                                <div style="margin: 4px 0px 0px -15px;">
-	                                	${post.viewed}
+	                                	${postWithReplyAndLikeCount.replyCount}
 	                                </div>
                                 </div>
                             </div>
