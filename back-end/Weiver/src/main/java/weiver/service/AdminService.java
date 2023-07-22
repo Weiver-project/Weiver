@@ -2,6 +2,7 @@ package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import weiver.entity.*;
 import weiver.repository.*;
 
@@ -30,9 +31,47 @@ public class AdminService {
 
     /*============================        Login         ===================================*/
 
+    // 아이디 중복 확인
+    public boolean checkUserExists(String userId) {
+        boolean result = adminRepository.existsById(userId);
+        return result;
+    }
 
-    
-	/*============================        Actor         ===================================*/
+    // 회원 가입
+    @Transactional
+    public boolean saveAdmin(String adminId, String adminPw, String name) throws Exception{
+        Admin admin = Admin.builder()
+                .id(adminId)
+                .password(adminPw)
+                .name(name)
+                .build();
+
+        Admin result = adminRepository.save(admin);
+
+        if(!result.getId().isEmpty()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // 로그인
+    public Admin loginTest(String adminId, String adminPw) throws Exception{
+        Admin admin = adminRepository.getAdminById(adminId);
+
+        if(admin.getPassword().equals(adminPw)) {
+            return admin;
+        }
+
+        return null;
+    }
+
+    // 회원 탈퇴
+    public void removeAdmin(String adminId) throws Exception{
+        adminRepository.deleteById(adminId);
+    }
+
+    /*============================        Actor         ===================================*/
     
     // 전체 Actor 반환 : 전체 리스트를 볼 때 사용
     public List<Actor> getAllActors() {
@@ -41,17 +80,17 @@ public class AdminService {
     
     // 특정 Actor 반환 : 특정 Actor 정보를 볼 때 사용
     public Actor getActor(String actorId) {
-    	return actorRepository.getById(actorId);
+        return actorRepository.getById(actorId);
     }
     
     // 특정 Actor 업데이트
     public void updateActor(Actor actor) {
-    	actorRepository.save(actor);
+        actorRepository.save(actor);
     }
     
     // 특정 Actor 삭제
     public void deleteActor(String actorId) {
-    	actorRepository.deleteById(actorId);
+        actorRepository.deleteById(actorId);
     }
     
     /*============================        Musical         ===================================*/
@@ -63,17 +102,17 @@ public class AdminService {
     
     // 특정 Musical 반환
     public Musical getMusical(String musicalId) {
-    	return musicalRepository.getMusicalById(musicalId);
+        return musicalRepository.getMusicalById(musicalId);
     }
     
     // 특정 Musical 업데이트
     public void updateMusical(Musical musical) {
-    	musicalRepository.save(musical);
+        musicalRepository.save(musical);
     }
     
     // 특정 Musical 삭제
     public void deleteMusical(String musicalId) {
-    	musicalRepository.deleteById(musicalId);
+        musicalRepository.deleteById(musicalId);
     }
     
     /*============================        User         ===================================*/
@@ -85,17 +124,17 @@ public class AdminService {
     
     // 특정 User 반환
     public User getUser(String userId) {
-    	return userRepository.getUserById(userId);
+        return userRepository.getUserById(userId);
     }
     
     // 특정 User 업데이트
     public void updateUser(User user) {
-    	userRepository.save(user);
+        userRepository.save(user);
     }
     
     // 특정 User 삭제
     public void deleteUser(String userId) {
-    	userRepository.deleteById(userId);
+        userRepository.deleteById(userId);
     }
     
     /*============================        Admin         ===================================*/
@@ -107,17 +146,17 @@ public class AdminService {
     
     // 특정 Admin 반환
     public Admin getAdmin(String adminId) {
-    	return adminRepository.getAdminById(adminId);
+        return adminRepository.getAdminById(adminId);
     }
     
     // 특정 Admin 업데이트
     public void updateAdmin(Admin admin) {
-    	adminRepository.save(admin);
+        adminRepository.save(admin);
     }
     
     // 특정 Admin 삭제
     public void deleteAdmin(String adminId) {
-    	adminRepository.deleteById(adminId);
+        adminRepository.deleteById(adminId);
     }
     
     
@@ -130,17 +169,17 @@ public class AdminService {
     
     // 특정 Post 반환
     public Post getPost(Long postId) {
-    	return postRepository.getPostById(postId);
+        return postRepository.getPostById(postId);
     }
     
     // 특정 Post 업데이트
     public void updatePost(Post post) {
-    	postRepository.save(post);
+        postRepository.save(post);
     }
     
     // 특정 Post 삭제
     public void deletePost(Long postId) {
-    	postRepository.deleteById(postId);
+        postRepository.deleteById(postId);
     }
     
     
@@ -153,17 +192,17 @@ public class AdminService {
     
     // 특정 Inquiry 반환
     public Inquiry getInquiry(Long inquiryId) {
-    	return inquiryRepository.getInquiryById(inquiryId);
+        return inquiryRepository.getInquiryById(inquiryId);
     }
     
     // 특정 Inquiry 업데이트
     public void updateInquiry(Inquiry inquiry) {
-    	inquiryRepository.save(inquiry);
+        inquiryRepository.save(inquiry);
     }
     
     // 특정 Inquiry 삭제
     public void deleteInquiry(Long inquiryId) {
-    	inquiryRepository.deleteById(inquiryId);
+        inquiryRepository.deleteById(inquiryId);
     }
     
 }

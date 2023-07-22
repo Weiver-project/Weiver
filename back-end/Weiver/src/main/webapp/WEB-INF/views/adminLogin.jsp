@@ -23,9 +23,9 @@
     <img id="logo" src="/img/logo.png" alt="logo" height="100" width="450">
     <div class="login-title">관리자 로그인</div>
     <!-- 로그인 입력 폼 -->
-    <form id="login-form" action="loginTest" method="post">
-      <input type="email" name="userId" placeholder=" 관리자 아이디를 입력하세요" >
-      <input type="password" name="userPw" placeholder=" 비밀번호를 입력하세요" >
+    <form id="login-form" action="/ad/loginTest" method="post">
+      <input type="text" name="adminId" placeholder=" 관리자 아이디를 입력하세요" >
+      <input type="password" name="adminPw" placeholder=" 비밀번호를 입력하세요" >
       <input class="submit" type="submit" value="Login" style="cursor: pointer;">
     </form>
     <!-- 회원가입, 비번 찾기 -->
@@ -37,8 +37,8 @@
 
   <script>
   	const loginForm = document.querySelector("#login-form");
-  	const userId = document.getElementsByName("userId")[0];
-    const userPw = document.getElementsByName("userPw")[0];
+  	const userId = document.getElementsByName("adminId")[0];
+    const userPw = document.getElementsByName("adminPw")[0];
     
     /* 폼 제출 이벤트 핸들러 */
     loginForm.addEventListener("submit", function (event) {
@@ -47,7 +47,7 @@
     	event.preventDefault(); // 기본 제출 동작 방지
     	
     	/* 로그인 axios 요청 */
-        axios.post("/admin/loginTest", formData)
+        axios.post("/ad/loginTest", formData)
         		.then(response => {
         			const data = response.data;
         			if(response.status === 200) {

@@ -14,10 +14,10 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "INQUIRY")
-@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "INQUIRY_SEQUENCE", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name="INQUIRY_SEQUENCE_GENERATOR", sequenceName = "INQUIRY_SEQUENCE", initialValue = 1, allocationSize = 1)
 public class Inquiry {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "INQUIRY_SEQUENCE_GENERATOR")
     @Column(name = "id")
     private Long id;
 

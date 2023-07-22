@@ -15,6 +15,7 @@ import weiver.dto.SimpleMusicalDTO;
 import weiver.dto.UserDTO;
 import weiver.entity.User;
 import weiver.service.AwsS3Service;
+import weiver.service.LoginService;
 import weiver.service.SubscribeService;
 import weiver.service.UserService;
 
@@ -33,6 +34,9 @@ public class UserController {
 
 	@Autowired
 	private SubscribeService subscribeService;
+
+	@Autowired
+	private LoginService loginService;
 
 	@Autowired
 	private AwsS3Service awsS3Service;
@@ -85,7 +89,7 @@ public class UserController {
 	// 마이 페이지
 	@GetMapping("/myinfo")
 	public String mypage(Model model, HttpSession session) {
-		
+
 		String userId = (String) session.getAttribute("userId");
 		UserDTO userInfo = userservice.userInfo(userId);
 
@@ -98,7 +102,7 @@ public class UserController {
 	@GetMapping("/profileUpdate")
 	public String profileUpdateForm(HttpSession session,
 									Model model) {
-		
+
 		String userId = (String) session.getAttribute("userId");
 		User userInfo = userservice.findById(userId);
 		System.out.println(userInfo.getId());
@@ -117,8 +121,10 @@ public class UserController {
 
 		String prevName = userservice.findById(id).getNickname();
 		String prevImg = userservice.findById(id).getProfileImg();
+		boolean existName = loginService.checkUserNicknameExists(nickname);
 
-		if( !nickname.equals(prevName) ) {
+
+		if( !nickname.equals(prevName) && !existName ) {
 			boolean result = false;
 			try {
 				result = userservice.updateName(nickname, id);
@@ -222,7 +228,7 @@ public class UserController {
 	@GetMapping("/myComment")
 	public String myComment(HttpSession session, Model model) {
 		String userId = (String) session.getAttribute("userId");
-		
+
 		List<ReplyDTO> replyDTOList = userservice.findRepliesByUserId(userId);
 
 		List<ReplyDTO> replyDTOListTime = replyDTOList.stream()
@@ -243,12 +249,12 @@ public class UserController {
 	}
 
 
-	// 내가 좋아요 누른 글들 
+	// 내가 좋아요 누른 글들
 	@GetMapping("/myLike")
 	public String myLike(HttpSession session,Model model) {
-		
+
 		String userId = (String) session.getAttribute("userId");
-		
+
 		List<PostDTO> postLikeList = userservice.findPostLikeByUserId(userId);
 
 		List<PostDTO> postLikeListTime = postLikeList.stream()

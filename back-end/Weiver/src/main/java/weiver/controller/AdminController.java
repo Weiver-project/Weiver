@@ -34,7 +34,7 @@ public class AdminController {
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String adminLogin(HttpSession session) {
-		if(session.getAttribute("userId") != null) {
+		if(session.getAttribute("adminId") != null) {
 			return "redirect:/admin/main";
 		}
 
@@ -59,11 +59,11 @@ public class AdminController {
 
 	// 회원 탈퇴
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public String removeUser(HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
+	public String removeAdmin(HttpSession session) {
+		String adminId = (String) session.getAttribute("adminId");
 
 		try {
-//			loginService.removeUser(userId);
+			adminService.removeAdmin(adminId);
 			session.invalidate();
 			log.info("회원 탈퇴됨");
 		} catch (Exception e) {
@@ -147,7 +147,7 @@ public class AdminController {
 	
 	/*============================        User         ===================================*/
 	
-	// 뮤지컬 리스트 조회
+	// 유저 리스트 조회
 	@RequestMapping(value="/getAllUsers",method = RequestMethod.GET)
 	public String getAllUsers(Model model) {
 		model.addAttribute("users", adminService.getAllUsers());
@@ -155,7 +155,7 @@ public class AdminController {
 		return "adminUsers";
 	}
 	
-	// 특정 뮤지컬 상세 조회
+	// 특정 유저 상세 조회
 	@RequestMapping(value="/getUserDetail/{userId}",method = RequestMethod.GET)
 	public String getUserDetail(@PathVariable String userId, Model model) {
 		model.addAttribute("user", adminService.getUser(userId));
@@ -163,7 +163,7 @@ public class AdminController {
 		return "adminUserDetail";
 	}
 	
-	// 뮤지컬 정보 수정
+	// 유저 정보 수정
 	@RequestMapping(value="/updateUser",method = RequestMethod.GET)
 	public String updateUser(@RequestParam User user, Model model) {
 		adminService.updateUser(user);
@@ -173,7 +173,7 @@ public class AdminController {
 		return "adminUsers";
 	}
 
-	// 뮤지컬 정보 삭제
+	// 유저 정보 삭제
 	@RequestMapping(value="/deleteUser/{userId}",method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String userId, Model model) {
 		adminService.deleteUser(userId);
