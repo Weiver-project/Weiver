@@ -251,10 +251,7 @@ function handleMusicalItemClick(musicalId) {
 					
 					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
 					
-				<form action="/upload" method="post" enctype="multipart/form-data">
-		        <input type="file" id="imageUpload" name="file" required onchange="previewImage(event)">
-		        <button type="submit">Upload</button>
-		    </form>
+				
 		    
 				<br>
 				<!-- 작성하기 버튼 -->
@@ -264,6 +261,11 @@ function handleMusicalItemClick(musicalId) {
 				
 				</div>
 			</form>
+			
+			<form action="/upload" method="post" enctype="multipart/form-data">
+		        <input type="file" id="imageUpload" name="file" required onchange="previewImage(event)">
+		        <button type="submit">Upload</button>
+		    </form>
 
 			
 
