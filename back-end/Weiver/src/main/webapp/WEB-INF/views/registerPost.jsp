@@ -26,7 +26,8 @@ var musicalsData = [
             title: `${musical.title.replace('\\',"")}`,
             theater: '${musical.theater}',
             posterImage: '${musical.posterImage}',
-            // Add other properties as needed
+            stDate: '${musical.stDate}',
+            edDate: '${musical.edDate}'
         },
     </c:forEach>
 ];
