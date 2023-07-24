@@ -75,16 +75,16 @@
 
     <!-- navibar -->
     <nav>
-        <a href="#"><i class="bi bi-house-door-fill"></i>
-            <div>HOME</div>
-        </a>
-        <a href="#"><i class="bi bi-chat-dots-fill"></i>
-            <div>COMMUNITY</div>
-        </a>
-        <a href="#"><i class="bi bi-person-fill"></i>
-            <div>MY PAGE</div>
-        </a>
-    </nav>
+	    <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
+	        <div>HOME</div>
+	    </a>
+	    <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
+	        <div>COMMUNITY</div>
+	    </a>
+	    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
+	        <div>MY PAGE</div>
+	    </a>
+	</nav>
     <script type="text/javascript">
 
         /* 파일 버튼 - input 연결 */

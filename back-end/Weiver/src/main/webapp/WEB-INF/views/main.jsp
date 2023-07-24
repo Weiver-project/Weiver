@@ -131,9 +131,9 @@
   <div class="actor_img">
     <div>
     	<a id="actorInfo" href="${baseURL}/actorDetail/${randomActor.id}">
-    		<c:if test="${not empty randomActor.profileImage}">
-    		<img id="actorImage" src="${randomActor.profileImage}" style="border-radius: 50%; width:180px; height: 180px;">
-    		</c:if>
+    		
+    		<img id="actorImage" src="${randomActor.profileImage}" style="border-radius: 50%; width:180px; height: 180px;"alt="해당 배우는 이미지가 없습니다.">
+    		
 		   	<span class="actor-name">${randomActor.name}</span>
     	</a>
     </div>
@@ -213,17 +213,6 @@
 
 
 
-<script type="text/javascript">
-	const actorInfo = document.getElementById('actorInfo');
-	const actorImage = document.getElementById('actorImage');
-	const spanElement = document.createElement('span');
-	
-	actorImage.onerror = () => { 
-		actorImage.remove();
-		spanElement.textContent = '배우 이미지가 없습니다.';
-		actorInfo.appendChild(spanElement);
-	}
-</script>
 </body>
 
 </html>
