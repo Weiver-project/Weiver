@@ -219,7 +219,7 @@ function handleMusicalItemClick(musicalId) {
 				<div class="selectbtn">	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
 					<select id="selectFormType" name="type" onchange="postTypeChange()">
-						<option value="select">글 종류</option>
+						<option value="select" disabled>글 종류</option>
                         <option value="Chat">잡담</option>
                         <option value="Review">리뷰</option>
 					</select>

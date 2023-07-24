@@ -42,10 +42,10 @@
              
 				<div class = selectbtn>	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
-					<select name = "type" id="selectFormType" onchange="postTypeChange()">
-						<option value="select">글 종류</option>
+					<select name = "type" id="selectFormType" class="readonly" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+						<option value="select" disabled>글 종류</option>
                         <option value="Chat" ${posts.type == 'Chat' ? 'selected' : ''}>잡담</option>
-                        <option value="Review" ${posts.type == 'Result' ? 'selected' : ''}>리뷰</option>
+                        <option value="Review" ${posts.type == 'Review' ? 'selected' : ''}>리뷰</option>
 					</select>
 				</div>
 
@@ -59,43 +59,21 @@
 
 
 				<!-- 작품 명 작성칸 -->
-				<div align="left" id="reviewForm" style="display:none">
-					<br>
-					작품명
-					<div>
-						<textarea name = "#" class="title" id="reviewPerformance" oninput="searchPerformance()">${posts.type == 'Result' ? posts.title : ''}</textarea>
+				<c:if test="${posts.type == 'Review'}">
+					<div align="left" id="reviewForm">
+						<br>
+						작품명
+						<div id="musicalDetailContainer" style="display: block; background-color: #172036; padding: 20px; border-radius: 10px; color: #fff; font-size: 18px; text-align: center;">
+							<img src="${review.musical.posterImage}" alt="Musical Poster" style="height: 120px; width: 85px;">
+							<h2 style="background-color: #172036; font-size: 25px; text-align: center; margin-top: -5px;">${review.musical.title}</h2>
+							<p style="background-color: #172036; font-size: 15px; text-align: center;">${review.musical.theater}</p>
+						</div>
 					</div>
-				</div>
-
+				</c:if>
 				<br>
 
 				<!-- 내용 작성칸 -->
 				<span>내용</span>
-
-					<!-- 내용 작성칸(편집 버튼: 굵기, 이탤릭, 언더라인 등) -->
-					<div class="editor-menu">
-						<button id="btn-bold" name="reviewTool" type="button">
-							<b>B</b>
-						</button>
-						<button id="btn-italic" name="reviewTool" type="button">
-							<i>I</i>
-						</button>
-						<button id="btn-underline" name="reviewTool" type="button">
-							<u>U</u>
-						</button>
-						<button id="btn-strike" name="reviewTool" type="button">
-							<s>S</s>
-						</button>
-						<button id="btn-ordered-list" name="reviewTool" type="button">
-							OL
-						</button>
-						<button id="btn-unordered-list" name="reviewTool" type="button">
-							UL
-						</button>
-						<button id="btn-image" name="reviewTool" type="button">
-							IMG
-						</button>
-					</div>
 
 						<!-- 내용칸 -->
 					<div>
@@ -105,9 +83,7 @@
 				<br>
 					<!-- 작성하기 버튼 -->
 					<div class="nameTag">
-					<button>
 						<input type="submit" value="작성하기" class="submit-btn">
-					</button>
 					</div>
 			</form>
 
@@ -127,101 +103,5 @@
 
 </div>
 </body>
-
-<script type="text/javascript">
-	
-function postTypeChange(){
-	  let selectFormType = document.getElementById("selectFormType");
-	  
-	  let formType = selectFormType.options[selectFormType.selectedIndex].value;
-	  if(formType == 'Review'){
-		  document.getElementById("reviewForm").style.display="";
-		  document.getElementById("reviewPerformance").required="required";
-
-		  console.log("Review");
-		  
-	  }else if(formType == 'Chat'){
-		  document.getElementById("reviewForm").style.display="none";
-		  document.getElementById("reviewPerformance").required="";
-
-		  console.log("Chat");
-	  }
-	  
-}
-
-function searchPerformance(){
-	let performanceTitle = document.getElementById("reviewPerformance");
-	
-	axios
-}
-
-	// 테스트
-	const editor = document.getElementById('editor');
-    const btnBold = document.getElementById('btn-bold');
-    const btnItalic = document.getElementById('btn-italic');
-    const btnUnderline = document.getElementById('btn-underline');
-    const btnStrike = document.getElementById('btn-strike');
-    const btnOrderedList = document.getElementById('btn-ordered-list');
-    const btnUnorderedList = document.getElementById('btn-unordered-list');
-
-    btnBold.addEventListener('click', function () {
-        setStyle('bold');
-    });
-
-    btnItalic.addEventListener('click', function () {
-        setStyle('italic');
-    });
-
-    btnUnderline.addEventListener('click', function () {
-        setStyle('underline');
-    });
-
-    btnStrike.addEventListener('click', function () {
-        setStyle('strikeThrough')
-    });
-
-    btnOrderedList.addEventListener('click', function () {
-        setStyle('insertOrderedList');
-    });
-
-    btnUnorderedList.addEventListener('click', function () {
-        setStyle('insertUnorderedList');
-    });
-
-    function setStyle(style) {
-        document.execCommand(style);
-        focusEditor();
-    }
-
-    // 버튼 클릭 시 에디터가 포커스를 잃기 때문에 다시 에디터에 포커스를 해줌
-    function focusEditor() {
-        editor.focus({ preventScroll: true });
-    }
-
-    const btnImage = document.getElementById('btn-image');
-    const imageSelector = document.getElementById('img-selector');
-
-
-    btnImage.addEventListener('click', function () {
-        imageSelector.click();
-    });
-
-    imageSelector.addEventListener('change', function (e) {
-        const files = e.target.files;
-        if (!!files) {
-            insertImageDate(files[0]);
-        }
-    });
-
-    function insertImageDate(file) {
-        const reader = new FileReader();
-        reader.addEventListener('load', function (e) {
-            focusEditor();
-            document.execCommand('insertImage', false, `${reader.result}`);
-        });
-        reader.readAsDataURL(file);
-    }
-
-</script>
 
 </html>

@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
-	  private final CommunityService communityService;
+	private final CommunityService communityService;
     private final UserService userService;
     private final MusicalService musicalService;
     private final AwsS3Service awsS3Service;
@@ -34,14 +34,14 @@ public class CommunityController {
    @PostMapping("/upload")
    public void uploadFile(
       @RequestPart(value = "file") MultipartFile multipartFile) throws FileUploadException, FileNotFoundException {
-	  System.out.println(multipartFile.getOriginalFilename());	//받아온 파일 이름 test용
-	  System.out.println(awsS3Service.uploadFileV1(multipartFile));	//S3에 저장한 이미지 url 값
+	   System.out.println(multipartFile.getOriginalFilename());    //받아온 파일 이름 test용
+	   System.out.println(awsS3Service.uploadFileV1(multipartFile));    //S3에 저장한 이미지 url 값
    }
 
 
-	  
 
-    /*
+
+	/*
      * 커뮤니티 메인 페이지
      * */
     
@@ -190,6 +190,11 @@ public class CommunityController {
 
 		model.addAttribute("posts", post);
 
+		if(post.getType().equals("Review")) {
+			Review review = communityService.getReviewByPostId(id);
+			model.addAttribute("review", review);
+		}
+
 		return "updatePost";
 	}
 
@@ -288,20 +293,9 @@ public class CommunityController {
 
 			return "redirect:/community";
 		}
-			
-			
-			
-			
-			
 
 
-
-
-
-	
-
-
-    /*
+	/*
      * 댓글 관련 기능
      * */
 
@@ -486,16 +480,16 @@ public class CommunityController {
 		     * */
 
 
-		@GetMapping("/community/postlike/{postId}")
-		public String addPostlike(@PathVariable Long postId,
-		                      Model model, HttpSession session) {
-		
+	@GetMapping("/community/postlike/{postId}")
+	public String addPostlike(@PathVariable Long postId,
+							  Model model, HttpSession session) {
+
 		String userId = session.getAttribute("userId").toString();
-		
+
 		if (postId != null) {
-		    communityService.insertPostLike(userId, postId);
+			communityService.insertPostLike(userId, postId);
 		}
-		
+
 		return "communityDetail";
 }
 
