@@ -158,15 +158,25 @@ let isSubscribed1 = false;
 let isSubscribed2 = false;
 
 // 웹 스토리지에 상태 저장하기
-function saveButtonState() {
-  localStorage.setItem('isSubscribed1', JSON.stringify(isSubscribed1));
-  localStorage.setItem('isSubscribed2', JSON.stringify(isSubscribed2));
-}
+// function saveButtonState() {
+//   localStorage.setItem('isSubscribed1', JSON.stringify(isSubscribed1));
+//   localStorage.setItem('isSubscribed2', JSON.stringify(isSubscribed2));
+// }
 
 // 페이지 로드 시, 웹 스토리지에서 상태 가져오기
 $(document).ready(function() {
-  isSubscribed1 = JSON.parse(localStorage.getItem('isSubscribed1')) || false;
-  isSubscribed2 = JSON.parse(localStorage.getItem('isSubscribed2')) || false;
+    <c:if test="${not empty subscribeJjim}">
+        isSubscribed1 = true;
+    </c:if>
+    <c:if test="${empty subscribeJjim}">
+        isSubscribed1 = false;
+    </c:if>
+    <c:if test="${not empty subscribeWatched}">
+        isSubscribed2 =  true;
+    </c:if>
+    <c:if test="${empty subscribeWatched}">
+        isSubscribed2 =  false;
+    </c:if>
   const buttonIcon1 = $('.icon1');
   const buttonIcon2 = $('.icon2');
   buttonIcon1.toggleClass('subscribed', isSubscribed1);
@@ -192,7 +202,7 @@ function addSubscirbe(musicalId, type) {
       }
 
       // 웹 스토리지에 상태 저장
-      saveButtonState();
+      // saveButtonState();
     },
     error: function () {
       window.location.href = "${baseURL}/login";
