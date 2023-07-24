@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
-	  private final CommunityService communityService;
+	private final CommunityService communityService;
     private final UserService userService;
     private final MusicalService musicalService;
     private final AwsS3Service awsS3Service;
@@ -33,14 +33,14 @@ public class CommunityController {
    @PostMapping("/upload")
    public void uploadFile(
       @RequestPart(value = "file") MultipartFile multipartFile) throws FileUploadException, FileNotFoundException {
-	  System.out.println(multipartFile.getOriginalFilename());	//받아온 파일 이름 test용
-	  System.out.println(awsS3Service.uploadFileV1(multipartFile));	//S3에 저장한 이미지 url 값
+	   System.out.println(multipartFile.getOriginalFilename());    //받아온 파일 이름 test용
+	   System.out.println(awsS3Service.uploadFileV1(multipartFile));    //S3에 저장한 이미지 url 값
    }
 
 
-	  
 
-    /*
+
+	/*
      * 커뮤니티 메인 페이지
      * */
     
@@ -185,6 +185,11 @@ public class CommunityController {
 
 		model.addAttribute("posts", post);
 
+		if(post.getType().equals("Review")) {
+			Review review = communityService.getReviewByPostId(id);
+			model.addAttribute("review", review);
+		}
+
 		return "updatePost";
 	}
 
@@ -220,83 +225,83 @@ public class CommunityController {
 	/*
 	 * 게시글 작성 페이지
 	 * */
-			@RequestMapping(value="/community/board", method=RequestMethod.GET)
-			public String insertPostForm(Model model) {
-				List<Musical> musicals = musicalService.getAllMusical();
-			
-				model.addAttribute("musicals",musicals);
-			
-				return "registerPost";
+	@RequestMapping(value="/community/board", method=RequestMethod.GET)
+	public String insertPostForm(Model model) {
+		List<Musical> musicals = musicalService.getAllMusical();
+
+		model.addAttribute("musicals",musicals);
+
+		return "registerPost";
+	}
+
+	@PostMapping("/community/board")
+	public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
+									  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+
+		System.out.println(musicalId);
+		try {
+			// 사용자 정보 가져오기
+			User user = userService.findById(userId);
+
+			List<String> imagePaths = new ArrayList<>();
+			if (images != null && !images.isEmpty()) {
+				for (MultipartFile imageFile : images) {
+					String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
+					imagePaths.add(s3ImageUrl);
+				}
 			}
-			
-			@PostMapping("/community/board")
-			public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
-			                                  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
-			    String userId = (String) session.getAttribute("userId");
-			    
-			    System.out.println(musicalId);
-			    try {
-			        // 사용자 정보 가져오기
-			        User user = userService.findById(userId);
-			
-			        List<String> imagePaths = new ArrayList<>();
-			        if (images != null && !images.isEmpty()) {
-			            for (MultipartFile imageFile : images) {
-			                String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
-			                imagePaths.add(s3ImageUrl);
-			            }
-			        }
-			
-			        // 게시글 정보 저장
-			        Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
-			
+
+			// 게시글 정보 저장
+			Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
+
 			//        if (!isPostSaved) {
 			//            return "errorPage";
 			//        }
-			
-			        // 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
-			        if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
-			            // Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
-			        
-			
-			            // Review 객체 생성
-			            Review review = new Review();
-			
-			            // Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
-			            System.out.println(isPostSaved.getId());
-			            review.setPost(isPostSaved);
-			
-			            // Musical 객체 설정
-			            Musical musical = new Musical();
-			            musical.setId(musicalId);
-			            review.setMusical(musical);
-			
-			            // Review 삽입
-			            if (communityService.insertReview(review)) {
-			                return "redirect:/community";
-			            }
-			        }
-			    } catch (Exception e) {
-			        e.printStackTrace();
-			        return "errorPage";
-			    }
-			
-			    return "redirect:/community";
+
+			// 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
+			if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
+				// Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
+
+
+				// Review 객체 생성
+				Review review = new Review();
+
+				// Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
+				System.out.println(isPostSaved.getId());
+				review.setPost(isPostSaved);
+
+				// Musical 객체 설정
+				Musical musical = new Musical();
+				musical.setId(musicalId);
+				review.setMusical(musical);
+
+				// Review 삽입
+				if (communityService.insertReview(review)) {
+					return "redirect:/community";
+				}
 			}
-			
-			
-			
-			
-			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "errorPage";
+		}
+
+		return "redirect:/community";
+	}
 
 
 
 
 
-	
 
 
-    /*
+
+
+
+
+
+
+	/*
      * 댓글 관련 기능
      * */
 
@@ -481,16 +486,16 @@ public class CommunityController {
 		     * */
 
 
-		@GetMapping("/community/postlike/{postId}")
-		public String addPostlike(@PathVariable Long postId,
-		                      Model model, HttpSession session) {
-		
+	@GetMapping("/community/postlike/{postId}")
+	public String addPostlike(@PathVariable Long postId,
+							  Model model, HttpSession session) {
+
 		String userId = session.getAttribute("userId").toString();
-		
+
 		if (postId != null) {
-		    communityService.insertPostLike(userId, postId);
+			communityService.insertPostLike(userId, postId);
 		}
-		
+
 		return "communityDetail";
 }
 
