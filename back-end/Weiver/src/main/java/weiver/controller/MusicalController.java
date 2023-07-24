@@ -76,7 +76,7 @@ public class MusicalController {
             }
 		}
 
-		if(session != null) {
+		if(session.getAttribute("userId") != null) {
 			Subscribe subscribeJjim = subscribeService.getSubscribe(session.getAttribute("userId").toString(), id, "찜했어요");
 			model.addAttribute("subscribeJjim", subscribeJjim);
 			Subscribe subscribeWatched = subscribeService.getSubscribe(session.getAttribute("userId").toString(), id, "봤어요");
