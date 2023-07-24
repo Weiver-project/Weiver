@@ -27,7 +27,7 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="http://3.36.252.181:8081/logout">Logout</a></li>
+                <li><a class="dropdown-item" href="http://3.36.252.181:8081/admin/logout">Logout</a></li>
 
             </ul>
         </li>
