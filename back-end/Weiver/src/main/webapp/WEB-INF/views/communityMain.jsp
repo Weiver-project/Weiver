@@ -54,7 +54,7 @@
         var loggedIn = ${not empty user};
 
         if (loggedIn) {
-            location.href = '/community/board'; // 로그인한 경우 링크로 이동
+            location.href = 'http://3.36.252.181:8081/community/board'; // 로그인한 경우 링크로 이동
         } else {
             alert('로그인 해주세요.'); // 로그인하지 않은 경우 팝업 메시지 띄우기
         }
@@ -79,7 +79,7 @@
         </header>
         <div class="pageName" style="margin-bottom: 15px;">커뮤니티</div>
         <div>
-            <form class="communittySearch" action="/community/search" method="get">
+            <form class="communittySearch" action="http://3.36.252.181:8081/community/search" method="get">
 			    <input type="text" name="keyword">
 			    <button type="submit">검색</button>
 			</form>
@@ -93,7 +93,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index < 3}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -111,7 +111,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index >= 3 and status.index < 6}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -129,7 +129,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index >= 6}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -155,6 +155,7 @@
 
         <hr style="margin-top: 22px; margin-bottom: 22px; color: #D4D9E1;">
 
+		<!-- 카테고리 그룹 -->
         <p style="font-weight:bold; font-size: 17px; margin-bottom: 12px;">카테고리</p>
         <div>
             <div class="btnGroup">
@@ -165,30 +166,42 @@
                 </div>
                 <button class="writeBtn" onclick="checkLogin()">글 작성하기</button>
             </div>
+            <!-- 전체 태그일 때 게시글 -->
             <div class="postAndUserInfo">
                 <div id="postListAll" class="postList">
-                    <c:forEach var="post" items="${post}">
-                    <a href="/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                    <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                         <div class="postWrap-main">
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
-								 <c:if test="${not empty post.images}">
-								    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
+							    <div class="post-content">
+								    ${postWithReplyAndLikeCount.post.content}
+								</div>
+							    <%-- <p class="post-content">${post.content}</p> --%>
+								 <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                             <div class="iconGroup">
                                 <div>
                                     <i class="bi-eye"></i>
-                                    <span>${post.viewed}</span>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${postWithReplyAndLikeCount.post.viewed}
                                 </div>
                                 <div>
-                                    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
+                                    <i class="bi-suit-heart"></i>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${postWithReplyAndLikeCount.likeCount}
                                 </div>
                                 <div>
                                     <i class="bi-chat"></i>
+                                </div>
+                                <div style="margin: 4px 0px 0px -15px;">
+                                	${postWithReplyAndLikeCount.likeCount}
                                 </div>
                             </div>
                         </div>
@@ -196,23 +209,40 @@
                     </c:forEach>
                 </div>
                 <div id="postListReview" class="postList" style="display: none;">
-                    <c:forEach var="post" items="${post}">
-                        <c:if test="${post.type == 'Review'}">
-                        <a href="/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                        <c:if test="${postWithReplyAndLikeCount.post.type == 'Review'}">
+                        <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                             <div class="postWrap-main">
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
+							     <div class="post-content">
+								    ${postWithReplyAndLikeCount.post.content}
+								</div>
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
+								</c:if>
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
+								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+								</c:if>
                                 <div class="iconGroup">
                                     <div>
                                         <i class="bi-eye"></i>
-                                        <span>${post.viewed}</span>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${postWithReplyAndLikeCount.post.viewed}
+                                	</div>
                                     <div>
-                                        <i class="bi-suit-heart" onclick="changeHeartIcon(this)"></i>
-                                        <span>${post.viewed}</span>
+                                        <i class="bi-suit-heart"></i>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${postWithReplyAndLikeCount.likeCount}
+                                	</div>
+                                	<div>
+	                                    <i class="bi-chat"></i>
+	                                </div>
+	                                <div style="margin: 4px 0px 0px -15px;">
+	                                	${postWithReplyAndLikeCount.replyCount}
+	                                </div>
                                 </div>
                             </div>
                              </a>
@@ -220,23 +250,48 @@
                     </c:forEach>
                 </div>
                 <div id="postListChat" class="postList" style="display: none;">
-                    <c:forEach var="post" items="${post}">
-                        <c:if test="${post.type == 'Chat'}">
-                        <a href="/community/${post.id}">
+                    <c:forEach var="postWithReplyAndLikeCount" items="${postWithReplyCountList}">
+                        <c:if test="${postWithReplyAndLikeCount.post.type == 'Chat'}">
+                        <a href="http://3.36.252.181:8081/community/${postWithReplyAndLikeCount.post.id}">
                             <div class="postWrap-main">
+
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
 							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+                                <c:if test="${post != null}">
+                                    <img src="${post.images.get(0)}" alt="게시글 이미지" class="post-image">
+                                </c:if>
+
+							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
+							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
+							    <div class="post-content">
+								    ${postWithReplyAndLikeCount.post.content}
+								</div>
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
+								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
+								</c:if>
+								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
+								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+								</c:if>
                                 <div class="iconGroup">
                                     <div>
                                         <i class="bi-eye"></i>
-                                        <span>${post.viewed}</span>
                                     </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${postWithReplyAndLikeCount.post.viewed}
+                                	</div>
                                     <div>
-								    <i class="bi-suit-heart" onclick="changeHeartIcon('post', ${post.id}, this)"></i>
-								    <span>${post.viewed}</span>
-								 </div>
+                                        <i class="bi-suit-heart"></i>
+                                    </div>
+                                    <div style="margin: 4px 0px 0px -15px;">
+                                		${postWithReplyAndLikeCount.likeCount}
+                                	</div>
+                                	<div>
+	                                    <i class="bi-chat"></i>
+	                                </div>
+	                                <div style="margin: 4px 0px 0px -15px;">
+	                                	${postWithReplyAndLikeCount.replyCount}
+	                                </div>
                                 </div>
                             </div>
                             </a>
@@ -247,7 +302,7 @@
                     <div class="userInfoAndLoginBtn">
                         <c:choose>
                             <c:when test="${empty user}">
-                                <a href="/login"><button class="loginBtn">로그인</button></a>
+                                <a href="http://3.36.252.181:8081/login"><button class="loginBtn">로그인</button></a>
                             </c:when>
                             <c:otherwise>
                                 <div class="userInfo">
@@ -255,11 +310,11 @@
                                     <div class="myWrited">
                                         <div class="myPost">
                                             <p>내가 쓴 글</p>
-                                            <p><a href="/mypage/myBoard" style="text-decoration: none;">${postCount}</a></p>
+                                            <p><a href="http://3.36.252.181:8081/mypage/myBoard" style="text-decoration: none;">${postCount}</a></p>
                                         </div>
                                         <div class="myComment">
                                             <p>내가 쓴 댓글</p>
-                                            <p><a href="/mypage/myComment" style="text-decoration: none;">${replyCount}</a></p>
+                                            <p><a href="http://3.36.252.181:8081/mypage/myComment" style="text-decoration: none;">${replyCount}</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -274,13 +329,13 @@
 
     <footer>&copy; Weiver 2023 All Rights Reserved</footer>
     <nav>
-        <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
@@ -323,7 +378,7 @@
             // 서버에 데이터 전송 (AJAX 사용)
             $.ajax({
                 type: 'POST',
-                url: '/community/insert/postlike/' + id, // 좋아요 처리를 담당하는 컨트롤러 URL
+                url: 'http://3.36.252.181:8081/community/insert/postlike/' + id, // 좋아요 처리를 담당하는 컨트롤러 URL
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 success: function (response) {

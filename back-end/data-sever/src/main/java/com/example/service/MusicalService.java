@@ -146,10 +146,10 @@ public class MusicalService {
 
             //일시 정보를 Date 타입으로 변환해서 stDate, edDate로 저장
             //지정된 포맷의 10글자가 맞을 경우에만 Date로 변환
-            if(dates[0].length() == 10){
+            if(dates[0].length() == 11){
                 stDate = dateFormat.parse(dates[0].trim());
             }
-            if(dates[1].length() == 10){
+            if(dates[1].length() == 11){
                 edDate = dateFormat.parse(dates[1].trim());
             }
         }

@@ -23,7 +23,7 @@
     </header>
     <article>
         <!-- 검색 폼 -->
-        <form class="search" action="/community/search" method="get">
+        <form class="search" action="http://3.36.252.181:8081/community/search" method="get">
             <input type="text" name="keyword" placeholder=" 검색어를 입력하세요">
             <input type="submit" value="검색">
         </form>
@@ -32,9 +32,11 @@
         <ul class="community_list">
         	
             <c:forEach var="post" items="${searchResults}">
-            <a href="/community/${post.id}">
+            <a href="http://3.36.252.181:8081/community/${post.id}">
                 <li>
-                    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+                    <c:if test="${post != null}">
+                        <img src="${post.images.get(0)}" alt="게시글 이미지" class="post-image">
+                    </c:if>
                     <h6 class="post-title">${post.title}</h6>
                     <span class="post-content">${post.content}</span>
                 </li>
@@ -45,13 +47,13 @@
     </article>
     <footer>Copyright Weiver  2023 All Rights Reserved</footer>
     <nav>
-        <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>

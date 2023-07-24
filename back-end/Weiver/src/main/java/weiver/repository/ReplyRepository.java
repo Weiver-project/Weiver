@@ -4,15 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import weiver.entity.Post;
 import weiver.entity.Reply;
-import weiver.entity.User;
-
-import java.util.Date;
-import java.util.List;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     //내가 쓴 댓글 리스트 조회 작성순
@@ -28,7 +23,7 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
 	Reply getReplyById(Long id);
 	
 	//post id에 따라 댓글 조회
-	List<Reply> findRepliesByPostId(Long postId);
+	List<Reply> findRepliesByPostIdOrderByCreatedTime(Long postId);
 	
 	//댓글 수정
 	@Modifying

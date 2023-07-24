@@ -97,7 +97,7 @@
 		                    <div class="profile-container">
                     </c:if>
 		                        <div class="casting-actor" style="max-width:130px; margin-right: 20px; display: flex; flex-direction: column;">
-		                            <a href="/actorDetail/${casting.id }"><img src="${casting.profileImage}" style="max-width: 90px; max-height: 90px;"></a>
+		                            <a href="http://3.36.252.181:8081/actorDetail/${casting.id }"><img src="${casting.profileImage}" style="max-width: 90px; max-height: 90px;"></a>
 		                            <span style="font-size: 8px; text-align: center;">${casting.name}</span>
 		                            <span style="font-size: 8px; text-align: center;">${casting.role}</span>
 		                        </div>
@@ -140,13 +140,13 @@
   <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
   <nav>
-      <a href="/main"><i class="bi bi-house-door-fill"></i>
+      <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
           <div>HOME</div>
       </a>
-      <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+      <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
           <div>COMMUNITY</div>
       </a>
-      <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+      <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
           <div>MY PAGE</div>
       </a>
   </nav> 
@@ -186,7 +186,7 @@ $(document).ready(function() {
 function addSubscirbe(musicalId, type) {
   $.ajax({
     type: 'GET',
-    url: '/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
+    url: 'http://3.36.252.181:8081/addSubscribe/' + musicalId + "/" + type, // 찜 처리를 담당하는 컨트롤러 URL
     contentType: 'application/json',
     success: function () {
       const buttonIcon1 = $('.icon1');
@@ -204,7 +204,7 @@ function addSubscirbe(musicalId, type) {
       // saveButtonState();
     },
     error: function () {
-      window.location.href = "/login";
+      window.location.href = "http://3.36.252.181:8081/login";
     }
   });
 }
