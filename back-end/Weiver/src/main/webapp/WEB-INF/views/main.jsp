@@ -34,7 +34,7 @@
 
 <!--검색 창-->
 <div class="mainSearch-container">
-	<form action="/musical-search">
+	<form action="http://3.36.252.181:8081/musical-search">
   <input type="text" name="keyword" style="border-radius: 8px; background: #25304A;">
   <button>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -52,7 +52,7 @@
 <div class="popular_musical_list">
   <ul>
   <c:forEach var="musical" items="${popularMusicals}" varStatus="status">
-  	<a href="/musical-detail/${musical.id}"><li>${status.index+1} ${musical.title}</li></a>
+  	<a href="http://3.36.252.181:8081/musical-detail/${musical.id}"><li>${status.index+1} ${musical.title}</li></a>
   </c:forEach>
   </ul>
 </div>
@@ -66,7 +66,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index < 3}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -84,7 +84,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index >= 3 and status.index < 6}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -102,7 +102,7 @@
 		                <div class="card-container">
 		                    <c:forEach var="card" items="${bestPost}" varStatus="status">
 		                        <c:if test="${status.index >= 6}">
-		                            <a href="/community/${card.id}">
+		                            <a href="http://3.36.252.181:8081/community/${card.id}">
 		                                <div class="card">
 		                                    <div class="card-header">
 		                                        <h3 class="card-title">${card.title}</h3>
@@ -130,7 +130,7 @@
 <div class="today_actor" style="max-height: 180px">
   <div class="actor_img">
     <div>
-    	<a id="actorInfo" href="/actorDetail/${randomActor.id}">
+    	<a id="actorInfo" href="http://3.36.252.181:8081/actorDetail/${randomActor.id}">
     		<c:if test="${not empty randomActor.profileImage}">
     		<img id="actorImage" src="${randomActor.profileImage}" style="border-radius: 50%; width:180px; height: 180px;">
     		</c:if>
@@ -147,7 +147,7 @@
 	          		<div class="poster-container"> 
        		</c:if>
 	            <div class="poster">
-	            <a href="/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}" alt="${limitedMusical.getTitle()}"></a>
+	            <a href="http://3.36.252.181:8081/musical-detail/${limitedMusical.getId()}"><img src="${limitedMusical.getPosterImage()}" alt="${limitedMusical.getTitle()}"></a>
 	            </div>
                <c:if test="${status.index % 2 == 1 or status.last}">
 		           </div>
@@ -180,7 +180,7 @@
             <div class="poster-container">
         </c:if>
         <div class="poster" id="${performingMusical.getId()}">
-          <a href="/musical-detail/${performingMusical.getId()}"><img src="${performingMusical.getPosterImage()}" alt="image ${status.index + 1}"></a>
+          <a href="http://3.36.252.181:8081/musical-detail/${performingMusical.getId()}"><img src="${performingMusical.getPosterImage()}" alt="image ${status.index + 1}"></a>
         </div>
         <c:if test="${status.index % 4 == 3 or status.last}">
             </div>
@@ -198,13 +198,13 @@
 
 
 <nav>
-  <a href="/main"><i class="bi bi-house-door-fill"></i>
+  <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
     <div>HOME</div>
   </a>
-  <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+  <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
     <div>COMMUNITY</div>
   </a>
-  <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+  <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
     <div>MY PAGE</div>
   </a>
 </nav>
