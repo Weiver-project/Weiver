@@ -35,9 +35,6 @@ public class CommunityService {
 	private ReReplyRepository rereplyRepository;
 	
 	@Autowired
-	private ImageRepository imageRepository;
-	
-	@Autowired
 	private PostLikeRepository postlikeRepository;
 	
 	@Autowired
@@ -119,7 +116,7 @@ public class CommunityService {
 	}
 	
 	// 게시글 작성 및 저장
-    public Post savePost(User user, String type, String title, String content, List<String> imageUrls) throws Exception {
+    public Post savePost(User user, String type, String title, String content, String imageUrl) throws Exception {
         Date date = new Date();
 
         Post post = Post.builder()
@@ -128,24 +125,13 @@ public class CommunityService {
                 .title(title)
                 .content(content)
                 .createdTime(date)
+				.iamge(imageUrl)
                 .viewed(0L)
                 .build();
 
         Post resultPost = communityRepository.save(post);
         if (resultPost.getId() == null) {
             return null;
-        }
-
-        // 이미지 삽입
-        if (imageUrls != null && !imageUrls.isEmpty()) {
-            for (String imageUrl : imageUrls) {
-                Image image = Image.builder()
-                        .postId(resultPost.getId())
-                        .path(imageUrl)
-                        .build();
-
-                imageRepository.save(image);
-            }
         }
 
         return resultPost;
@@ -313,23 +299,23 @@ public class CommunityService {
 		 * 기타
 		 * */
 		
-		public boolean insertImage(Image image) throws SQLException, Exception {
-			boolean result = false;
-			
-			Long postId = image.getPostId();
-			String path = image.getPath();
-			
-			int res = imageRepository.insertImage(postId, path);
-			
-			
-			if (res != 0) {
-		        result = true;
-		    } else {
-		        throw new Exception("이미지 생성 실패");
-		    }
-			System.out.println(res);
-		    return result;
-		}
+//		public boolean insertImage(Image image) throws SQLException, Exception {
+//			boolean result = false;
+//
+//			Long postId = image.getPostId();
+//			String path = image.getPath();
+//
+//			int res = imageRepository.insertImage(postId, path);
+//
+//
+//			if (res != 0) {
+//		        result = true;
+//		    } else {
+//		        throw new Exception("이미지 생성 실패");
+//		    }
+//			System.out.println(res);
+//		    return result;
+//		}
 		
 		public void incrementViewCount(Post post) {
 			// 현재 조회수를 가져옴

@@ -66,4 +66,6 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 		       "(SELECT COUNT(*) FROM PostLike pl WHERE p.id = pl.post.id)) " +
 		       "FROM Post p")
 	List<PostReplyLikeDTO> findPostsWithReplyAndLikeCount();
+
+
 }

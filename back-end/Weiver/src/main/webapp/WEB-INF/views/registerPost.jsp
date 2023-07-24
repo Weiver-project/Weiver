@@ -54,7 +54,7 @@ function loadFile(input) {
 	//이미지를 image-show div에 추가
 	var container = document.getElementById('image-show');
 	container.appendChild(newImage);
-};
+}
 
 function handleMusicalItemClick(musicalId) {
     console.log("Clicked on musical with ID:", musicalId);
@@ -292,9 +292,8 @@ function handleMusicalItemClick(musicalId) {
 					
 					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
 
-
-
-					<input type="file" id="imageUpload" name="file" required onchange="loadFile(this)">
+					<%--이미지 파일 업로드--%>
+					<input type="file" id="imageUpload" name="image" required onchange="loadFile(this)">
 				<br>
 				<!-- 작성하기 버튼 -->
 				<div class="nameTag">
