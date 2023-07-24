@@ -16,7 +16,7 @@ public class GoogleAPIService {
 	
 	// keyword에 맞는 GoogleAPI youtube clip videoId 값들을 반환해 준다.
 	public static List<String> search(String keyword) throws IOException {
-		String API_KEY = "AIzaSyBWqVIZqxy91VIx5Hzc8RlBYxpbOqs9GYg";
+		String API_KEY = "AIzaSyC-cI9EhkpSeyO-TX71Fc967nY75ioXM_4";
 		
 		List<String> clips = new ArrayList<String>();
 		
