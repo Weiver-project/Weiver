@@ -43,7 +43,7 @@
             <c:forEach var="inquiry" items="${inquiryList}">
                 <div class="list">
                     <div class="inquiry">
-                        <a href="${baseURL}/inquiryDetail/${inquiry.id}">
+                        <a href="${baseURL}/inquiry/inquiryDetail/${inquiry.id}">
                             <p>${inquiry.createdTime}</p>
                             <p>${inquiry.title} </p>
                         </a>
