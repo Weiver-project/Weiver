@@ -22,8 +22,8 @@
 
         <!-- 설정 -->
         <div class="setting">
-            <a href="http://3.36.252.181:8081/profileUpdate"><i class="bi bi-person-lines-fill"></i></a>
-            <a href="http://3.36.252.181:8081/setting"><i class="bi bi-gear-wide"></i></a>
+            <a href="http://3.36.252.181:8081/mypage/profileUpdate"><i class="bi bi-person-lines-fill"></i></a>
+            <a href="http://3.36.252.181:8081/mypage/setting"><i class="bi bi-gear-wide"></i></a>
         </div>
     
         <!-- 프로필 -->
@@ -34,14 +34,14 @@
     
         <!-- 찜했어요/ 봤어요 -->
         <div class="subscribe">
-            <a href="http://3.36.252.181:8081/mySubscribe">
+            <a href="http://3.36.252.181:8081/mypage/mySubscribe">
                 <div>${requestScope.userInfo.countJjim}</div>
                 찜했어요
             </a>
         
             <div class="line"></div>
                 
-            <a href="http://3.36.252.181:8081/mySubscribe">
+            <a href="http://3.36.252.181:8081/mypage/mySubscribe">
                 <div>${requestScope.userInfo.countIsWatched}</div>
                 봤어요
             </a>
@@ -51,7 +51,7 @@
         <!-- 내가 쓴 글/ 내가 쓴 댓글/ 좋아요한 글 -->
         <div class="board">
             
-            <a href="http://3.36.252.181:8081/myBoard">
+            <a href="http://3.36.252.181:8081/mypage/myBoard">
                 <div>내가 쓴 글</div>
                 <div>
                     ${requestScope.userInfo.countPosts}
@@ -61,7 +61,7 @@
             
             <hr>
             
-            <a href="http://3.36.252.181:8081/myComment">
+            <a href="http://3.36.252.181:8081/mypage/myComment">
                 <div>내가 쓴 댓글</div>
                 <div>
                     ${requestScope.userInfo.countReplies}
@@ -71,7 +71,7 @@
             
             <hr>
             
-            <a href="http://3.36.252.181:8081/myLike">
+            <a href="http://3.36.252.181:8081/mypage/myLike">
                 <div>좋아요한 글</div>
                 <div>
                     ${requestScope.userInfo.countPostLikes}

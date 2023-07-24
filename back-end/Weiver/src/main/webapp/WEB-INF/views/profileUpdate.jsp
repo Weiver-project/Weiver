@@ -25,14 +25,14 @@
             <!-- 타이틀 -->
             <div class="title">
                 <div class="back">
-                    <a href="http://3.36.252.181:8081/myinfo"><i class="bi bi-chevron-left"></i></a>
+                    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
                 </div>
                 <div class="name">프로필 수정</div>
             </div>
         </header>
         
 
-        <form action="http://3.36.252.181:8081/update" method="POST" enctype="multipart/form-data">
+        <form action="http://3.36.252.181:8081/mypage/update" method="POST" enctype="multipart/form-data">
 
             <!-- 프로필 -->
             <div class="profileChange">
