@@ -400,7 +400,7 @@ function checkLogin() {
         <!-- 댓글 입력 창 -->
         <div class="commentInputGroup">
         	<form action="/community/insert/reply/${posts.id}" method="post" onsubmit="return checkLogin()">
-	            <input name="content" class="commentInput" type="text">
+	            <input name="content" class="commentInput" type="text" required>
     	        <input class="commentInputBtn" type="submit">
         	</form>
         </div>
