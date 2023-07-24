@@ -52,7 +52,7 @@
 <div class="popular_musical_list">
   <ul>
   <c:forEach var="musical" items="${popularMusicals}" varStatus="status">
-  	<a href="http://3.36.252.181:8081/musical-detail/${musical.id}"><li>${status.index+1} ${musical.title}</li></a>
+  	<a href="http://3.36.252.181:8081/musical-detail/${musical.id}"><li>${status.index+1}. ${musical.title}</li></a>
   </c:forEach>
   </ul>
 </div>
