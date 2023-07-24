@@ -19,7 +19,7 @@
 <body class="container">
   <header>
     <img id="logo" src="/img/logo.png" alt="logo" height="70" width="300">
-    <a href="http://3.36.252.181:8081/myinfo"><i class="bi bi-chevron-left"></i></a>
+    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
     <h2>작품 목록</h2>
     <!-- 검색 타입 지정 -->
     <div class="select">

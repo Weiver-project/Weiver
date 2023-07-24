@@ -4,7 +4,9 @@
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.stereotype.Service;
 	import org.springframework.web.multipart.MultipartFile;
-	import weiver.entity.*;
+
+import weiver.dto.PostReplyLikeDTO;
+import weiver.entity.*;
 	import weiver.repository.*;
 
 	import java.io.IOException;
@@ -399,7 +401,11 @@ public class CommunityService {
 		}
 
 
-
+		// 모든 게시글, 댓글 수, 좋아요 수 가져오기
+		public List<PostReplyLikeDTO> findPostsWithReplyCount() {
+			List<PostReplyLikeDTO> postWithReplyCountList = communityRepository.findPostsWithReplyAndLikeCount();
+			return postWithReplyCountList;
+		}
 		
 
 

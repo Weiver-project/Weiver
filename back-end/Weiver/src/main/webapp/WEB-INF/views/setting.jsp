@@ -36,7 +36,7 @@
                 <a onclick="logutConfirm()" style="cursor: pointer;">로그아웃</a>
             </div>
             <div class="card">
-                <a href="http://3.36.252.181:8081/password">비밀번호 변경</a>
+                <a href="http://3.36.252.181:8081/mypage/password">비밀번호 변경</a>
             </div>
             <div class="card">
                 <a href="http://3.36.252.181:8081/inquiry/inquiryMain">문의하기</a>
