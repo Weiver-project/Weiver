@@ -246,14 +246,7 @@
                         <c:if test="${postWithReplyAndLikeCount.post.type == 'Chat'}">
                         <a href="${baseURL}/community/${postWithReplyAndLikeCount.post.id}">
                             <div class="postWrap-main">
-
-							    <p class="post-nickname">${post.user.nickname}</p>
-							    <h2 class="post-title">${post.title}</h2>
-							    <p class="post-content">${post.content}</p>
-                                <c:if test="${post != null}">
-                                    <img src="${post.image}" alt="게시글 이미지" class="post-image">
-                                </c:if>
-
+                            
 							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
 							    <h2 class="post-title">${postWithReplyAndLikeCount.post.title}</h2>
 							    <div class="post-content">
