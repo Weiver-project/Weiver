@@ -227,7 +227,9 @@
 							    <p class="post-nickname">${post.user.nickname}</p>
 							    <h2 class="post-title">${post.title}</h2>
 							    <p class="post-content">${post.content}</p>
-							    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+                                <c:if test="${post != null}">
+                                    <img src="${post.images.get(0)}" alt="게시글 이미지" class="post-image">
+                                </c:if>
                                 <div class="iconGroup">
                                     <div>
                                         <i class="bi-eye"></i>
