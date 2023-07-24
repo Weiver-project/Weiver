@@ -43,5 +43,5 @@ public class Post {
     private Long viewed = 0L;
 
     @Column(name = "image")
-    private String iamge;
+    private String image;
 }

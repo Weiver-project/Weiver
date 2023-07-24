@@ -293,7 +293,7 @@ function handleMusicalItemClick(musicalId) {
 					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
 
 					<%--이미지 파일 업로드--%>
-					<input type="file" id="imageUpload" name="image" required onchange="loadFile(this)">
+					<input type="file" id="imageUpload" name="file" required onchange="loadFile(this)">
 				<br>
 				<!-- 작성하기 버튼 -->
 				<div class="nameTag">

@@ -17,13 +17,13 @@
     <!-- SWIPER 외부 라이브러리 연결-->
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script src="../js/swiper.js"></script>
+    <script src="/js/swiper.js"></script>
 
     <!--css 연결-->
     <link rel="stylesheet" href="/css/community.css">
     <link rel="stylesheet" href="/css/searchAll.css">
     <link rel="stylesheet" href="/css/swiper.css">
-    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="/css/public.css">
 
     <script>
  // 인기 게시글 슬라이드 기능
