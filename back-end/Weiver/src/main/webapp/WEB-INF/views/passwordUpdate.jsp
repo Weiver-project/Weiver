@@ -25,7 +25,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="http://3.36.252.181:8081/setting"><i class="bi bi-chevron-left"></i></a>
+                <a href="http://3.36.252.181:8081/mypage/setting"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="name">비밀번호 변경</div>
         </div>
@@ -34,7 +34,7 @@
     <div class="page">
 
             
-        <form id="updatePasswordForm" action="http://3.36.252.181:8081/updatePW" method="POST">
+        <form id="updatePasswordForm" action="http://3.36.252.181:8081/mypage/updatePW" method="POST">
             <!-- 입력 칸 -->
             <div class="text_input">
 
