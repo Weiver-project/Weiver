@@ -2,6 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="config.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,7 @@
 <body class="container">
   <header>
     <img id="logo" src="/img/logo.png" alt="logo" height="70" width="300">
-    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
+    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
     <h2>작품 목록</h2>
     <!-- 검색 타입 지정 -->
     <div class="select">
@@ -34,7 +36,7 @@
         <div id="musical_Jjim">
           <c:forEach var="Jjim" items="${JjimList}">
             <li>
-              <a href="http://3.36.252.181:8081/musical-detail/${Jjim.getId()}">
+              <a href="${baseURL}/musical-detail/${Jjim.getId()}">
                 <img src="${Jjim.getPosterImage()}" alt="poster">
                 <h2>${Jjim.getTitle()}</h2>
                 <c:if test="${Jjim.getStDate() != null && Jjim.getEdDate() != null}">
@@ -50,7 +52,7 @@
         <div id="musical_IsWatched" style="display: none">
           <c:forEach var="IsWatched" items="${WatchedList}">
             <li>
-              <a href="http://3.36.252.181:8081/musical-detail/${IsWatched.getId()}">
+              <a href="${baseURL}/musical-detail/${IsWatched.getId()}">
                 <img src="${IsWatched.getPosterImage()}" alt="poster">
                 <h2>${IsWatched.getTitle()}</h2>
                 <c:if test="${IsWatched.getStDate() != null && IsWatched.getEdDate() != null}">
@@ -67,13 +69,13 @@
   </article>
   <footer>Copyright Weiver 2023 All Rights Reserved</footer>
     <nav>
-      <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+      <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
       </a>
-      <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+      <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
       </a>
-      <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+      <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
       </a>
     </nav>

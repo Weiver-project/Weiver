@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="config.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +23,8 @@
 
         <!-- 설정 -->
         <div class="setting">
-            <a href="http://3.36.252.181:8081/mypage/profileUpdate"><i class="bi bi-person-lines-fill"></i></a>
-            <a href="http://3.36.252.181:8081/mypage/setting"><i class="bi bi-gear-wide"></i></a>
+            <a href="${baseURL}/mypage/profileUpdate"><i class="bi bi-person-lines-fill"></i></a>
+            <a href="${baseURL}/mypage/setting"><i class="bi bi-gear-wide"></i></a>
         </div>
     
         <!-- 프로필 -->
@@ -34,14 +35,14 @@
     
         <!-- 찜했어요/ 봤어요 -->
         <div class="subscribe">
-            <a href="http://3.36.252.181:8081/mypage/mySubscribe">
+            <a href="${baseURL}/mypage/mySubscribe">
                 <div>${requestScope.userInfo.countJjim}</div>
                 찜했어요
             </a>
         
             <div class="line"></div>
                 
-            <a href="http://3.36.252.181:8081/mypage/mySubscribe">
+            <a href="${baseURL}/mypage/mySubscribe">
                 <div>${requestScope.userInfo.countIsWatched}</div>
                 봤어요
             </a>
@@ -51,7 +52,7 @@
         <!-- 내가 쓴 글/ 내가 쓴 댓글/ 좋아요한 글 -->
         <div class="board">
             
-            <a href="http://3.36.252.181:8081/mypage/myBoard">
+            <a href="${baseURL}/mypage/myBoard">
                 <div>내가 쓴 글</div>
                 <div>
                     ${requestScope.userInfo.countPosts}
@@ -61,7 +62,7 @@
             
             <hr>
             
-            <a href="http://3.36.252.181:8081/mypage/myComment">
+            <a href="${baseURL}/mypage/myComment">
                 <div>내가 쓴 댓글</div>
                 <div>
                     ${requestScope.userInfo.countReplies}
@@ -71,7 +72,7 @@
             
             <hr>
             
-            <a href="http://3.36.252.181:8081/mypage/myLike">
+            <a href="${baseURL}/mypage/myLike">
                 <div>좋아요한 글</div>
                 <div>
                     ${requestScope.userInfo.countPostLikes}
@@ -88,13 +89,13 @@
 
     <!-- navibar -->
     <nav>
-	    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+	    <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
 	        <div>HOME</div>
 	    </a>
-	    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+	    <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
 	        <div>COMMUNITY</div>
 	    </a>
-	    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+	    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
 	        <div>MY PAGE</div>
 	    </a>
 	</nav>

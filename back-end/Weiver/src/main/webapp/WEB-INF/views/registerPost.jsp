@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+<%@ include file="config.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -205,7 +205,7 @@ function handleMusicalItemClick(musicalId) {
 
         <!-- 뒤로가기 버튼 -->
         <div class="backBtn">
-            <a href="http://3.36.252.181:8081/community">
+            <a href="${baseURL}/community">
                 <i class="bi-chevron-left"></i>
             </a>
 			<div class="nameTag">
@@ -215,7 +215,7 @@ function handleMusicalItemClick(musicalId) {
 
 	    <br>
 
-		<form action="http://3.36.252.181:8081/community/board" method="post" enctype="multipart/form-data">
+		<form action="${baseURL}/community/board" method="post" enctype="multipart/form-data">
 				<div class="selectbtn">	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
 					<select id="selectFormType" name="type" onchange="postTypeChange()">
@@ -308,13 +308,13 @@ function handleMusicalItemClick(musicalId) {
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+    <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>

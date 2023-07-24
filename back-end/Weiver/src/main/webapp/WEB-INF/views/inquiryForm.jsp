@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="config.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +25,7 @@
 
 	<div>
 		<div>
-			<a href="http://3.36.252.181:8081/inquiry/inquiryMain"><i class="bi-chevron-left"></i></a>
+			<a href="${baseURL}/inquiry/inquiryMain"><i class="bi-chevron-left"></i></a>
 		</div>
 		<div class="nameTag">
 
@@ -36,7 +38,7 @@
 <div>
 	<div>
 		<!-- 문의 작성 폼 -->
-		<form id="inquiryForm" action="http://3.36.252.181:8081/inquiry/inquiryInsert" method="POST">
+		<form id="inquiryForm" action="${baseURL}/inquiry/inquiryInsert" method="POST">
 
 			<div>
 				<div>
@@ -64,13 +66,13 @@
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+    <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>
