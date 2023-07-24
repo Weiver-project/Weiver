@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
-	  private final CommunityService communityService;
+	private final CommunityService communityService;
     private final UserService userService;
     private final MusicalService musicalService;
     private final AwsS3Service awsS3Service;
@@ -34,14 +34,14 @@ public class CommunityController {
    @PostMapping("/upload")
    public void uploadFile(
       @RequestPart(value = "file") MultipartFile multipartFile) throws FileUploadException, FileNotFoundException {
-	  System.out.println(multipartFile.getOriginalFilename());	//받아온 파일 이름 test용
-	  System.out.println(awsS3Service.uploadFileV1(multipartFile));	//S3에 저장한 이미지 url 값
+	   System.out.println(multipartFile.getOriginalFilename());    //받아온 파일 이름 test용
+	   System.out.println(awsS3Service.uploadFileV1(multipartFile));    //S3에 저장한 이미지 url 값
    }
 
 
-	  
 
-    /*
+
+	/*
      * 커뮤니티 메인 페이지
      * */
     
@@ -59,20 +59,21 @@ public class CommunityController {
 		//인기 게시글 리스트 가져오기
        List<Post> bestPostList = communityService.getBestPostDesc();
        
-       // 모든 게시글, 댓글 수, 좋아요 수 가져오기, 기존 전체 Post 조회 기능을 대체할 수 있음
+       // 모든 게시글, 댓글 수, 좋아요 수 가져오기, 기존 전체 Post 조회 기능을 대체할 수 있음.
        List<PostReplyLikeDTO> postWithReplyCountList = communityService.findPostsWithReplyCount();
-       model.addAttribute("postWithReplyCountList", postWithReplyCountList);
-       System.out.println("테스트 출력" + postWithReplyCountList);
        String userName = (String) session.getAttribute("userNickname");
-       
+
        String userId = (String) session.getAttribute("userId");
        int postCount = userService.countPostsByUserId(userId);
        int replyCount = userService.countRepliesByUserId(userId);
-       
+
+
+	   session.setAttribute("user", userName);
+
+       model.addAttribute("postWithReplyCountList", postWithReplyCountList);
        model.addAttribute("post", postList);
        model.addAttribute("typePost", postTypeList);
        model.addAttribute("bestPost", bestPostList);
-       session.setAttribute("user", userName);
        model.addAttribute("postCount", postCount);
        model.addAttribute("replyCount", replyCount);
 
@@ -190,6 +191,11 @@ public class CommunityController {
 
 		model.addAttribute("posts", post);
 
+		if(post.getType().equals("Review")) {
+			Review review = communityService.getReviewByPostId(id);
+			model.addAttribute("review", review);
+		}
+
 		return "updatePost";
 	}
 
@@ -235,29 +241,23 @@ public class CommunityController {
 		}
 
 		@PostMapping("/community/board")
-		public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
+		public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "image", required = false) MultipartFile image,
 										  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
 			String userId = (String) session.getAttribute("userId");
 
-			System.out.println(musicalId);
 			try {
 				// 사용자 정보 가져오기
 				User user = userService.findById(userId);
 
-				List<String> imagePaths = new ArrayList<>();
-				if (images != null && !images.isEmpty()) {
-					for (MultipartFile imageFile : images) {
-						String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
-						imagePaths.add(s3ImageUrl);
-					}
+				String imagePath = "";
+				if (image != null && !image.isEmpty()) {
+					String s3ImageUrl = awsS3Service.uploadFileV1(image);
+					imagePath = s3ImageUrl;
 				}
 
 				// 게시글 정보 저장
-				Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
+				Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePath);
 
-		//        if (!isPostSaved) {
-		//            return "errorPage";
-		//        }
 
 				// 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
 				if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
@@ -288,20 +288,9 @@ public class CommunityController {
 
 			return "redirect:/community";
 		}
-			
-			
-			
-			
-			
 
 
-
-
-
-	
-
-
-    /*
+	/*
      * 댓글 관련 기능
      * */
 
@@ -486,16 +475,16 @@ public class CommunityController {
 		     * */
 
 
-		@GetMapping("/community/postlike/{postId}")
-		public String addPostlike(@PathVariable Long postId,
-		                      Model model, HttpSession session) {
-		
+	@GetMapping("/community/postlike/{postId}")
+	public String addPostlike(@PathVariable Long postId,
+							  Model model, HttpSession session) {
+
 		String userId = session.getAttribute("userId").toString();
-		
+
 		if (postId != null) {
-		    communityService.insertPostLike(userId, postId);
+			communityService.insertPostLike(userId, postId);
 		}
-		
+
 		return "communityDetail";
 }
 

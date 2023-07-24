@@ -61,10 +61,11 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
                    @Param("content") String content);
 
 	// Post Entity, 댓글 수, 좋아요 수를 가져옴
-	@Query("SELECT new weiver.dto.PostReplyLikeDTO(p, COUNT(r), COUNT(pl)) " +
-		       "FROM Post p " +
-		       "LEFT JOIN Reply r ON p.id = r.post.id " +
-		       "LEFT JOIN PostLike pl ON p.id = pl.post.id " +
-		       "GROUP BY p")
+	@Query("SELECT new weiver.dto.PostReplyLikeDTO(p, " +
+		       "(SELECT COUNT(*) FROM Reply r WHERE p.id = r.post.id), " +
+		       "(SELECT COUNT(*) FROM PostLike pl WHERE p.id = pl.post.id)) " +
+		       "FROM Post p")
 	List<PostReplyLikeDTO> findPostsWithReplyAndLikeCount();
+
+
 }
