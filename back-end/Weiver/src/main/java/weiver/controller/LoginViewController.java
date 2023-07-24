@@ -111,7 +111,7 @@ public class LoginViewController {
 				session.setAttribute("userId", userId);
 				session.setAttribute("userNickname", userNickname);
 				session.setAttribute("kakao", "kakao"); // 카카오 유저 비밀번호 변경 페이지 막을 때 사용
-				return "main";
+				return "redirect:/main";
 			} 
 			
 		} catch (Exception e) {
