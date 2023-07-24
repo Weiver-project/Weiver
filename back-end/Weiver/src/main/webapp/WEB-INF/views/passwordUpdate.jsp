@@ -54,12 +54,12 @@
 
                 <div class="data_input">
                     <p>새 비밀번호</p>
-                    <input name="newPw" id="newPw" type="password" placeholder="새 비밀번호를 입력주세요" required>
+                    <input name="newPw" id="newPw" type="password" placeholder="새 비밀번호를 입력주세요" minlength="6" maxlength="20" required>
                 </div>
 
                 <div class="data_input">
                     <p>새 비밀번호 확인</p>
-                    <input name="checkPw" id="checkPw" type="password" placeholder="새 비밀번호를 다시 입력해주세요" required>
+                    <input name="checkPw" id="checkPw" type="password" placeholder="새 비밀번호를 다시 입력해주세요" minlength="6" maxlength="20" required>
                 </div>
 
             </div>

@@ -49,11 +49,11 @@
 
             <!-- 닉네임 -->
             <div class="data_input">
-                <input class="info_input" type="password" name="userPw" placeholder="비밀번호를 입력주세요" required>
+                <input class="info_input" type="password" name="userPw" placeholder="비밀번호를 입력주세요" minlength="6" maxlength="20" required>
             </div>
 
             <div class="data_input">
-                <input class="info_input" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력해주세요" required>
+                <input class="info_input" type="password" name="userPwCheck" placeholder="비밀번호를 다시 입력해주세요" minlength="6" maxlength="20" required>
             </div>
             <div class="data_input">
                 <input class="info_input" type="text" name="userNickname" placeholder="닉네임을 입력해주세요" required>
