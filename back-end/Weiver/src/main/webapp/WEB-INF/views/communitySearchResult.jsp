@@ -34,7 +34,12 @@
             <c:forEach var="post" items="${searchResults}">
             <a href="http://3.36.252.181:8081/community/${post.id}">
                 <li>
-                    <img src="${post.images}" alt="게시글 이미지" class="post-image">
+                    <c:if test="${not empty post.images}">
+						<img src="${post.images}" alt="게시글 이미지" class="post-image">
+					</c:if>
+					<c:if test="${empty post.images}">
+						<img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
+					</c:if>
                     <h6 class="post-title">${post.title}</h6>
                     <span class="post-content">${post.content}</span>
                 </li>
