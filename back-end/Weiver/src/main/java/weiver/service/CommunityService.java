@@ -186,7 +186,7 @@ public class CommunityService {
 
 	// post_id에 따라 댓글 가져오기
     public List<Reply> findReplyByPostId(Long postId) {
-    	List<Reply> replies = replyRepository.findRepliesByPostId(postId);
+    	List<Reply> replies = replyRepository.findRepliesByPostIdOrderByCreatedTime(postId);
     	System.out.println(replies);
     	return replies;
     }
