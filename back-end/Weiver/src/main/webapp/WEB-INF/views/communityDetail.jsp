@@ -321,7 +321,7 @@ function checkLogin() {
                 <div class="button">
 			  	<i class="bi-suit-heart icon" onclick="addPostlike(${posts.id})"
 			    	style="cursor: pointer;"></i>
-			  	<!--  <span>${likeCount}</span>-->
+			  	<span>${likeCount}</span>
 				</div>	
             </div>
         </div>
