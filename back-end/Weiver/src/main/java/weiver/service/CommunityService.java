@@ -393,6 +393,11 @@ public class CommunityService {
 			return postWithReplyCountList;
 		}
 		
+		// 좋아요 기능
+		public PostLike checkPostLike(String userId, Long postId) {
+			return postlikeRepository.checkPostLike(userId, postId);
+		}
+		
 
 
 

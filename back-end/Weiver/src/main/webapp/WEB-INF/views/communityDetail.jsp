@@ -319,11 +319,16 @@ function checkLogin() {
                     <i class="bi-chat"></i>
                     <span>${reply.size()}</span>
                 </div>
-                <div class="button">
-			  	<i class="bi-suit-heart icon" onclick="addPostlike(${posts.id})"
-			    	style="cursor: pointer;"></i>
-			  	<span>${likeCount }</span>
-				</div>	
+                <c:if test="${not empty postLikeCheck}">
+                	<div class="button">
+                		<i class="bi-suit-heart-fill icon" onclick="addPostlike(${posts.id})"style="cursor: pointer;"></i>
+                	</div>	
+                </c:if>
+                <c:if test="${empty postLikeCheck}">
+                	<div class="button">
+				  		<i class="bi-suit-heart icon" onclick="addPostlike(${posts.id})"style="cursor: pointer;"></i>
+					</div>	
+                </c:if>
             </div>
         </div>
 

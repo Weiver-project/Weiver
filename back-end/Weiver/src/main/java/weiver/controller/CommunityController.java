@@ -87,6 +87,15 @@ public class CommunityController {
 
     @GetMapping("/community/{id}")
     public String communityDetail(@PathVariable Long id, Model model, HttpSession session) {
+    	
+    	// userId 받기
+    	if(session.getAttribute("userId") != null) {
+    		String userId = (String) session.getAttribute("userId");
+    		PostLike postLikeCheck = communityService.checkPostLike(userId, id);
+    		model.addAttribute("postLikeCheck", postLikeCheck);
+    	}
+    	
+    	
         //id에 따라 게시글 가져오기
         Post post = communityService.getPostById(id);
 
@@ -106,7 +115,7 @@ public class CommunityController {
         
         // 조회수 +1
         communityService.incrementViewCount(post);
-        
+                
         String userId = (String) session.getAttribute("userId");
         
         List<PostDTO> postLikeList = userService.findPostLikeByUserId(userId);
@@ -482,7 +491,6 @@ public class CommunityController {
 		}
 
 		return "communityDetail";
-}
-
+	}
 
 }
