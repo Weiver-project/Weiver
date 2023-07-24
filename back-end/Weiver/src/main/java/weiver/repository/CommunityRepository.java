@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import weiver.dto.PostReplyLikeDTO;
 import weiver.entity.Post;
 
 import javax.transaction.Transactional;
@@ -58,4 +60,11 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
                    @Param("title") String title,
                    @Param("content") String content);
 
+	// Post Entity, 댓글 수, 좋아요 수를 가져옴
+	@Query("SELECT new weiver.dto.PostReplyLikeDTO(p, COUNT(r), COUNT(pl)) " +
+		       "FROM Post p " +
+		       "LEFT JOIN Reply r ON p.id = r.post.id " +
+		       "LEFT JOIN PostLike pl ON p.id = pl.post.id " +
+		       "GROUP BY p")
+	List<PostReplyLikeDTO> findPostsWithReplyAndLikeCount();
 }
