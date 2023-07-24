@@ -26,10 +26,35 @@ var musicalsData = [
             title: `${musical.title.replace('\\',"")}`,
             theater: '${musical.theater}',
             posterImage: '${musical.posterImage}',
-            // Add other properties as needed
+            stDate: '${musical.stDate}',
+            edDate: '${musical.edDate}'
         },
     </c:forEach>
 ];
+
+function loadFile(input) {
+	var file = input.files[0];	//선택된 파일 가져오기
+
+	//미리 만들어 놓은 div에 text(파일 이름) 추가
+	var name = document.getElementById('fileName');
+	name.textContent = file.name;
+
+	//새로운 이미지 div 추가
+	var newImage = document.createElement("img");
+	newImage.setAttribute("class", 'img');
+
+	//이미지 source 가져오기
+	newImage.src = URL.createObjectURL(file);
+
+	newImage.style.width = "70%";
+	newImage.style.height = "70%";
+	newImage.style.visibility = "hidden";   //버튼을 누르기 전까지는 이미지를 숨긴다
+	newImage.style.objectFit = "contain";
+
+	//이미지를 image-show div에 추가
+	var container = document.getElementById('image-show');
+	container.appendChild(newImage);
+};
 
 function handleMusicalItemClick(musicalId) {
     console.log("Clicked on musical with ID:", musicalId);
@@ -180,7 +205,7 @@ function handleMusicalItemClick(musicalId) {
 
         <!-- 뒤로가기 버튼 -->
         <div class="backBtn">
-            <a href="/community">
+            <a href="http://3.36.252.181:8081/community">
                 <i class="bi-chevron-left"></i>
             </a>
 			<div class="nameTag">
@@ -190,7 +215,7 @@ function handleMusicalItemClick(musicalId) {
 
 	    <br>
 
-		<form action="/community/board" method="post" enctype="multipart/form-data">
+		<form action="http://3.36.252.181:8081/community/board" method="post" enctype="multipart/form-data">
 				<div class="selectbtn">	
 					<!-- 셀렉트 버튼(리뷰, 잡담) -->
 					<select id="selectFormType" name="type" onchange="postTypeChange()">
@@ -266,9 +291,10 @@ function handleMusicalItemClick(musicalId) {
 					</div>
 					
 					<input type="hidden" name="musicalId" id="musicalIdInput" value="">
-					
-				
-		    
+
+
+
+					<input type="file" id="imageUpload" name="file" required onchange="loadFile(this)">
 				<br>
 				<!-- 작성하기 버튼 -->
 				<div class="nameTag">
@@ -277,24 +303,19 @@ function handleMusicalItemClick(musicalId) {
 				
 				</div>
 			</form>
-			
-			<!--  <form action="/upload" method="post" enctype="multipart/form-data">
-		        <input type="file" id="imageUpload" name="file" required onchange="previewImage(event)">
-		        <button type="submit">Upload</button>
-		    </form>-->
 
 			
 
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="/main"><i class="bi bi-house-door-fill"></i>
+    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>

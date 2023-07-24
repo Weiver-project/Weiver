@@ -21,7 +21,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
+                <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="name">설정</div>
         </div>
@@ -36,10 +36,10 @@
                 <a onclick="logutConfirm()" style="cursor: pointer;">로그아웃</a>
             </div>
             <div class="card">
-                <a href="password">비밀번호 변경</a>
+                <a href="http://3.36.252.181:8081/mypage/password">비밀번호 변경</a>
             </div>
             <div class="card">
-                <a href="/inquiry/inquiryMain">문의하기</a>
+                <a href="http://3.36.252.181:8081/inquiry/inquiryMain">문의하기</a>
             </div>
             <div class="card">
                 <a onclick="signOut()" style="cursor: pointer;">회원 탈퇴</a>
@@ -52,13 +52,13 @@
 
     <!-- navibar -->
     <nav>
-        <a href="/main"><i class="bi bi-house-door-fill"></i>
+        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
@@ -69,7 +69,7 @@
     		
     		if(result) {
     			alert("로그아웃 되었습니다.");
-    			window.location.href = "/logout";
+    			window.location.href = "http://3.36.252.181:8081/logout";
     		} 
     	}
     	
@@ -78,7 +78,7 @@
     		
     		if(result) {
     			alert("정상적으로 탈퇴 되었습니다.");
-    			window.location.href = "/signOut";
+    			window.location.href = "http://3.36.252.181:8081/signOut";
     		} 
     	}
     </script>

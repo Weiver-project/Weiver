@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import weiver.dto.PostDTO;
+import weiver.dto.PostReplyLikeDTO;
 import weiver.entity.*;
 import weiver.service.AwsS3Service;
 import weiver.service.CommunityService;
@@ -44,8 +45,8 @@ public class CommunityController {
      * 커뮤니티 메인 페이지
      * */
     
-    @GetMapping("/community")
-    public String communityMain(@RequestParam(required = false) String type,
+   @GetMapping("/community")
+   public String communityMain(@RequestParam(required = false) String type,
 								@RequestParam(required = false) Long id,
 								Model model, HttpSession session) {
 
@@ -56,23 +57,27 @@ public class CommunityController {
 		List<Post> postTypeList = communityService.getAllPostsByType(type);
 
 		//인기 게시글 리스트 가져오기
-        List<Post> bestPostList = communityService.getBestPostDesc();
-        
-        String userName = (String) session.getAttribute("userNickname");
-        
-        String userId = (String) session.getAttribute("userId");
-        int postCount = userService.countPostsByUserId(userId);
-        int replyCount = userService.countRepliesByUserId(userId);
-        
-        model.addAttribute("post", postList);
-        model.addAttribute("typePost", postTypeList);
-        model.addAttribute("bestPost", bestPostList);
-        session.setAttribute("user", userName);
-        model.addAttribute("postCount", postCount);
-        model.addAttribute("replyCount", replyCount);
+       List<Post> bestPostList = communityService.getBestPostDesc();
+       
+       // 모든 게시글, 댓글 수, 좋아요 수 가져오기, 기존 전체 Post 조회 기능을 대체할 수 있음
+       List<PostReplyLikeDTO> postWithReplyCountList = communityService.findPostsWithReplyCount();
+       model.addAttribute("postWithReplyCountList", postWithReplyCountList);
+       System.out.println("테스트 출력" + postWithReplyCountList);
+       String userName = (String) session.getAttribute("userNickname");
+       
+       String userId = (String) session.getAttribute("userId");
+       int postCount = userService.countPostsByUserId(userId);
+       int replyCount = userService.countRepliesByUserId(userId);
+       
+       model.addAttribute("post", postList);
+       model.addAttribute("typePost", postTypeList);
+       model.addAttribute("bestPost", bestPostList);
+       session.setAttribute("user", userName);
+       model.addAttribute("postCount", postCount);
+       model.addAttribute("replyCount", replyCount);
 
-        return "communityMain"; // 반환할 뷰의 이름
-    }
+       return "communityMain"; // 반환할 뷰의 이름
+   }
     
     
     /*
@@ -225,80 +230,69 @@ public class CommunityController {
 	/*
 	 * 게시글 작성 페이지
 	 * */
-	@RequestMapping(value="/community/board", method=RequestMethod.GET)
-	public String insertPostForm(Model model) {
-		List<Musical> musicals = musicalService.getAllMusical();
+		@RequestMapping(value="/community/board", method=RequestMethod.GET)
+		public String insertPostForm(Model model) {
+			List<Musical> musicals = musicalService.getAllMusical();
 
-		model.addAttribute("musicals",musicals);
+			model.addAttribute("musicals",musicals);
 
-		return "registerPost";
-	}
-
-	@PostMapping("/community/board")
-	public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
-									  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-
-		System.out.println(musicalId);
-		try {
-			// 사용자 정보 가져오기
-			User user = userService.findById(userId);
-
-			List<String> imagePaths = new ArrayList<>();
-			if (images != null && !images.isEmpty()) {
-				for (MultipartFile imageFile : images) {
-					String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
-					imagePaths.add(s3ImageUrl);
-				}
-			}
-
-			// 게시글 정보 저장
-			Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
-
-			//        if (!isPostSaved) {
-			//            return "errorPage";
-			//        }
-
-			// 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
-			if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
-				// Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
-
-
-				// Review 객체 생성
-				Review review = new Review();
-
-				// Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
-				System.out.println(isPostSaved.getId());
-				review.setPost(isPostSaved);
-
-				// Musical 객체 설정
-				Musical musical = new Musical();
-				musical.setId(musicalId);
-				review.setMusical(musical);
-
-				// Review 삽입
-				if (communityService.insertReview(review)) {
-					return "redirect:/community";
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "errorPage";
+			return "registerPost";
 		}
 
-		return "redirect:/community";
-	}
+		@PostMapping("/community/board")
+		public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "images", required = false) List<MultipartFile> images,
+										  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+
+			System.out.println(musicalId);
+			try {
+				// 사용자 정보 가져오기
+				User user = userService.findById(userId);
+
+				List<String> imagePaths = new ArrayList<>();
+				if (images != null && !images.isEmpty()) {
+					for (MultipartFile imageFile : images) {
+						String s3ImageUrl = awsS3Service.uploadFileV1(imageFile);
+						imagePaths.add(s3ImageUrl);
+					}
+				}
+
+				// 게시글 정보 저장
+				Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePaths);
+
+		//        if (!isPostSaved) {
+		//            return "errorPage";
+		//        }
+
+				// 리뷰 정보 저장 (타입이 Review이고 MusicalId가 제공된 경우)
+				if ("Review".equals(type) && musicalId != null && !musicalId.isEmpty()) {
+					// Post 객체가 DB에 저장된 것을 확인하기 위해 가져온다
 
 
+					// Review 객체 생성
+					Review review = new Review();
 
+					// Post 객체 설정 (PostLike 엔티티에서 Post 참조 사용)
+					System.out.println(isPostSaved.getId());
+					review.setPost(isPostSaved);
 
+					// Musical 객체 설정
+					Musical musical = new Musical();
+					musical.setId(musicalId);
+					review.setMusical(musical);
 
+					// Review 삽입
+					if (communityService.insertReview(review)) {
+						return "redirect:/community";
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "errorPage";
+			}
 
-
-
-
-
-
+			return "redirect:/community";
+		}
 
 
 	/*

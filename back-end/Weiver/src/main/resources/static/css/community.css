@@ -1,8 +1,8 @@
-/*Ä¿¹Â´ÏÆ¼¿Í °ü·ÃµÈ cssÀÔ´Ï´Ù.*/
+/*Ä¿ï¿½Â´ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ cssï¿½Ô´Ï´ï¿½.*/
 
-/*Ä¿¹Â´ÏÆ¼ ¸ÞÀÎ ÆäÀÌÁö*/
+/*Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
-/*°øÅë Àû¿ë*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 body {
     color: #FFFFFF;
 }
@@ -20,7 +20,7 @@ a {
     color: #D4D9E1;
 }
 
-/*Ä¿¹Â´ÏÆ¼ ÀÎ±â±Û ¼½¼Ç*/
+/*Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Î±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .popular_community {
     margin-bottom: 20px;
 }
@@ -66,7 +66,7 @@ a {
     margin-top: 15px;
 }
 
-/*Ä«Å×°í¸®*/
+/*Ä«ï¿½×°ï¿½*/
 
 .btnGroup {
     display: flex;
@@ -91,7 +91,7 @@ a {
 }
 
 
-/*±Û ÀÛ¼ºÇÏ±â ¹öÆ°*/
+/*ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°*/
 
 .writeBtn {
     width: 113px;
@@ -113,7 +113,7 @@ a {
     flex: 1;
 } */
 
-/* °Ô½Ã±Û*/
+/* ï¿½Ô½Ã±ï¿½*/
 .postWrap-main {
     background-color: #172036;
     border: 1px solid blue;
@@ -137,10 +137,12 @@ a {
 }
 
 .post-content {
-	width: 480px;
-	height: 50px;
-	max-width: 480px;
-	max-height: 50px;
+	width:480px;
+	max-height:200px;
+	font-size:14px;
+	line-height:1.6;
+	overflow:hidden;
+	word-wrap: break-word;
 }
 
 .postWrap-main > img {
@@ -212,7 +214,7 @@ a {
 
 
 
-/*À¯Àú »çÀÌµå ³×ºñ ¹Ù*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½×ºï¿½ ï¿½ï¿½*/
 
 .sideGroup {
     display: flex;
@@ -267,7 +269,7 @@ a {
     background: none;
 }
 
-/*·Î±×ÀÎ ¹öÆ°*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .loginBtn {
     background-color: #4263EB;
     width: 115px;
@@ -283,22 +285,22 @@ a {
     margin:  0px auto 20px;
 }
 
-/*Àâ´ã °Ô½ÃÆÇ »ó¼¼*/
+/*ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½*/
 
-/* utf ¼³Á¤ ¾î³ëÅ×ÀÌ¼Ç */
+/* utf ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ */
 * {
     color: #FFFFFF;
 }
 
 
-/* °øÅë hr ÅÂ±× */
+/* ï¿½ï¿½ï¿½ï¿½ hr ï¿½Â±ï¿½ */
 hr {
     width: 650px;
     border: 1px solid #586A85;
     margin: 10px auto 10px auto;
 }
 
-/* °Ô½Ã±Û ÄÁÅ×ÀÌ³Ê */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ */
 .postWrap {
     display: flex;
     flex-direction: column;
@@ -310,7 +312,7 @@ hr {
     margin: 100px auto 20px auto;
 }
 
-/* °Ô½Ã±Û Çì´õ (ÀÛ¼º, Á¦¸ñ, °øÀ¯ÇÏ±â ¹öÆ°) */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (ï¿½Û¼ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°) */
 .postHeader {
     padding-left: 10px;
     margin-top: 10px;
@@ -319,17 +321,17 @@ hr {
     justify-content: space-between;
 }
 
-/* °Ô½Ã±Û Á¦¸ñ */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .postHeader > h2 {
     max-width: 500px;
 }
 
-/* °Ô½Ã±Û ÀÛ¼ºÀÚ */
+/* ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ */
 .postWriter {
     max-width: 500px;
 }
 
-/* °øÀ¯ÇÏ±â ¹öÆ° */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° */
 .postHeader > i {
     cursor: pointer;
     margin-top: 5px;
@@ -339,34 +341,34 @@ hr {
     margin-right: 10px;
 }
 
-/* °Ô½Ã±Û ÀÛ¼ºÀÚ */
+/* ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ */
 .postWriter {
     padding-left: 10px;
     font-size: 14px;
     background: #172036;
 }
 
-/* °Ô½Ã±Û Á¦¸ñ */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .titleAndIcon > h2 {
     padding-left: 10px;
     background: #172036;
 }
 
-/* °Ô½Ã±Û ÀÌ¹ÌÁö */
+/* ï¿½Ô½Ã±ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ */
 .postWrap > img {
     margin: 24px auto;
     max-width: calc(100% - 10px);
     border: none;
 }
 
-/* °Ô½Ã±Û ÅØ½ºÆ® */
+/* ï¿½Ô½Ã±ï¿½ ï¿½Ø½ï¿½Æ® */
 .postContent {
     margin-top: 20px;
     padding-left: 10px;
     line-height: 1.5;
 }
 
-/* Á¶È¸, ´ñ±Û, ÁÁ¾Æ¿ä ¾ÆÀÌÄÜ */
+/* ï¿½ï¿½È¸, ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .iconGroup {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -375,31 +377,31 @@ hr {
     background:none;
 }
 
-/* ¾ÆÀÌÄÜ ±×·ì */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ */
 .iconGroup > div {
     padding-left: 10px;
 }
 
-/* Á¶È¸, ´ñ±Û, ÁÁ¾Æ¿ä ¾ÆÀÌÄÜ */
+/* ï¿½ï¿½È¸, ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .iconGroup > div > i {
     font-size: 24px;
     background-color: #172036;
 }
 
-/* ÁÁ¾Æ¿ä ¹öÆ° */
+/* ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½Æ° */
 .bi-suit-heart {
     cursor: pointer;
 }
 
 
-/* °Ô½Ã±Û ¼öÁ¤, »èÁ¦¹öÆ° ±×·ì */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° ï¿½×·ï¿½ */
 .postBtnGroup {
     margin: 10px 0px 20px auto;
     max-width: 210px;
     display: flex;
 }
 
-/* °Ô½Ã±Û ¼öÁ¤ÇÏ±â ¹öÆ° */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° */
 .postModifyBtn {
     border: none;
     border-radius: 8px;
@@ -413,7 +415,7 @@ hr {
 
 }
 
-/* °Ô½Ã±Û »èÁ¦ÇÏ±â ¹öÆ° */
+/* ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° */
 .postDeleteBtn {
     border: none;
     border-radius: 8px;
@@ -427,7 +429,7 @@ hr {
     margin-left: 10px;
 }
 
-/* ´ñ±Û ÄÁÅ×ÀÌ³Ê */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ */
 .commentWrap {
     display: flex;
     flex-direction: column;
@@ -438,7 +440,7 @@ hr {
     margin: 0px auto;
 }
 
-/* ÃÑ ´ñ±Û ¼ö */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ */
 .totalComment {
     margin-top: 20px;
     margin-left: 10px;
@@ -446,7 +448,7 @@ hr {
     font-size: 16px;
 }
 
-/* ÀÛ¼ºµÈ ´ñ±Û (¾ÆÀÌµð, ´ñ±Û, ÁÁ¾Æ¿ä ¾ÆÀÌÄÜ, ´ë´ñ±Û ¸µÅ©, ¹öÆ°) */
+/* ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Ìµï¿½, ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©, ï¿½ï¿½Æ°) */
 .commentAndBtn {
     margin-right: 10px;
     display: flex;
@@ -454,12 +456,12 @@ hr {
     line-height: 1.5;
 }
 
-/* ´ñ±Û ¾ÆÀÌµð, ³»¿ë Å©±â Á¶Àý */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½, ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .commentIDAndContent {
     width: 500px;
 }
 
-/* ´ñ±Û ÀÛ¼ºÀÚ */
+/* ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ */
 .commentID {
     margin-left: 10px;
     font-weight: bold;
@@ -472,7 +474,7 @@ hr {
     font-size: 14px;
 }
 
-/* ´ñ±Û ³»¿ë */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .commentContent {
     margin-left: 10px;
     font-size: 14px;
@@ -483,7 +485,7 @@ hr {
     font-size: 14px;
 }
 
-/* ÁÁ¾Æ¿ä, ´ë´ñ±Û div */
+/* ï¿½ï¿½ï¿½Æ¿ï¿½, ï¿½ï¿½ï¿½ï¿½ div */
 .likeAndRecomment {
     margin-top: 10px;
     margin-left: 10px;
@@ -491,7 +493,7 @@ hr {
     font-size: 14px;
 }
 
-/* ´ë´ñ±Û ¹öÆ° */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° */
 .recommentBtn {
     margin-left: 5px;
     font-size: 12px;
@@ -499,7 +501,7 @@ hr {
     cursor: pointer;
 }
 
-/* ´ñ±Û ¼öÁ¤, »èÁ¦ÇÏ±â ¹öÆ° */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° */
 .commentBtnGroup > button{
     cursor: pointer;
     border: none;
@@ -520,20 +522,20 @@ hr {
     text-align: center;
 }
 
-/* È­»ìÇ¥ ¾ÆÀÌÄÜ row Ã³¸®¸¦ À§ÇØ »ç¿ë*/
+/* È­ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ row Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½*/
 .recommentWrap {
     display: flex;
     margin: 10px 10px 10px 25px;
     justify-content: space-between;
 }
 
-/* ´ñ±Û ÀÔ·Â ±×·ì */
+/* ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½×·ï¿½ */
 .recommentGroup {
     display: flex;
     flex-direction: row;
 }
 
-/* ´ñ±Û ÀÔ·Â ±×·ì */
+/* ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½×·ï¿½ */
 .commentInputGroup {
     padding-left: 20px;
     width: 680px;
@@ -543,7 +545,7 @@ hr {
     margin: 20px auto 30px;
 }
 
-/* ´ñ±Û ÀÔ·ÂÃ¢ */
+/* ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½Ã¢ */
 .commentInput {
     border: none;
     border-radius: 8px;
@@ -554,7 +556,7 @@ hr {
     padding-left: 5px;
 }
 
-/* ´ñ±Û ÀÛ¼ºÇÏ±â ¹öÆ° */
+/* ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° */
 .commentInputBtn {
     cursor: pointer;
     color: #FFFFFF;
@@ -568,16 +570,16 @@ hr {
     background-color: #4263EB;
 }
 
-/*¸®ºä »ó¼¼ °Ô½ÃÆÇ*/
-/* ´ë´ñ±Û ÄÁÅ×ÀÌ³Ê */
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½*/
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ */
 .recommentWrap {
     display: flex;
     margin: 10px 10px 10px 25px;
     justify-content: space-between;
 }
 
-/*´ñ±Û*/
-/* ÅÂ±× °øÅë Àû¿ë »çÇ×*/
+/*ï¿½ï¿½ï¿½*/
+/* ï¿½Â±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 ul{
     padding-top: 20px;
     list-style: none;
@@ -600,12 +602,12 @@ ul{
     font-size: 12px;
   }
   
-  /* ´ñ±Û */
+  /* ï¿½ï¿½ï¿½ */
   .comment li {
     padding-bottom: 10px;
   }
   
-  /* À¯Àú¾ÆÀÌµð + ¼öÁ¤, »èÁ¦ ¹öÆ° */
+  /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ + ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° */
   .user-container{
     display: flex;
     margin: 3px;
@@ -629,7 +631,7 @@ ul{
     display: flex;
     margin-bottom: 10px;
   }
-  /* ´ë´ñ±Û */
+  /* ï¿½ï¿½ï¿½ï¿½ */
   .re-comment {
     padding: 0;
   }
@@ -644,7 +646,7 @@ ul{
     margin: 0 20px;
   }
   
-  /* ´ñ±Û ÀÔ·Â */
+  /* ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ */
   .input-reple {
     margin-top: 15px;
     text-align: center;
