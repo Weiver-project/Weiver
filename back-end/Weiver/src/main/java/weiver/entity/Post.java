@@ -42,17 +42,6 @@ public class Post {
     @Column(name = "viewed")
     private Long viewed = 0L;
 
-    //이미지 데이터 받아와서 저장
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
-    private List<Image> images = new ArrayList<>();
-
-    public void addImage(Image image) {
-        images.add(image);
-    }
-
-    public void removeImage(Image image) {
-        images.remove(image);
-    }
- 
+    @Column(name = "image")
+    private String iamge;
 }

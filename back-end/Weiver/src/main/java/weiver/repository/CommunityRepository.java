@@ -67,4 +67,6 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 		       "LEFT JOIN PostLike pl ON p.id = pl.post.id " +
 		       "GROUP BY p")
 	List<PostReplyLikeDTO> findPostsWithReplyAndLikeCount();
+
+
 }
