@@ -178,10 +178,10 @@
 								    ${postWithReplyAndLikeCount.post.content}
 								</div>
 							    <%-- <p class="post-content">${post.content}</p> --%>
-								 <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
-								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
+								 <c:if test="${not empty postWithReplyAndLikeCount.post.image}">
+								    <img src="${postWithReplyAndLikeCount.post.image}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.image}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                             <div class="iconGroup">
@@ -218,10 +218,10 @@
 							     <div class="post-content">
 								    ${postWithReplyAndLikeCount.post.content}
 								</div>
-							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
-								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.image}">
+								    <img src="${postWithReplyAndLikeCount.post.image}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.image}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                                 <div class="iconGroup">
@@ -259,7 +259,7 @@
 							    <h2 class="post-title">${post.title}</h2>
 							    <p class="post-content">${post.content}</p>
                                 <c:if test="${post != null}">
-                                    <img src="${post.images.get(0)}" alt="게시글 이미지" class="post-image">
+                                    <img src="${post.image}" alt="게시글 이미지" class="post-image">
                                 </c:if>
 
 							    <p class="post-nickname">${postWithReplyAndLikeCount.post.user.nickname}</p>
@@ -267,10 +267,10 @@
 							    <div class="post-content">
 								    ${postWithReplyAndLikeCount.post.content}
 								</div>
-							    <c:if test="${not empty postWithReplyAndLikeCount.post.images}">
-								    <img src="${postWithReplyAndLikeCount.post.images}" alt="게시글 이미지" class="post-image">
+							    <c:if test="${not empty postWithReplyAndLikeCount.post.image}">
+								    <img src="${postWithReplyAndLikeCount.post.image}" alt="게시글 이미지" class="post-image">
 								</c:if>
-								<c:if test="${empty postWithReplyAndLikeCount.post.images}">
+								<c:if test="${empty postWithReplyAndLikeCount.post.image}">
 								    <img src="" alt="게시글 이미지" class="post-image" style="visibility: hidden;">
 								</c:if>
                                 <div class="iconGroup">

@@ -303,8 +303,8 @@ function checkLogin() {
 
             <!-- 게시글 내용 (텍스트, 이미지) -->
             <textarea id="postContent" class="postContent" style="font-family: 'Pretendard-Regular', sans-serif;" disabled>${posts.content}</textarea>
-            <c:if test="${not empty posts.images}">
-			    <img class="postImg" src="${posts.images}" alt="게시글 이미지">
+            <c:if test="${not empty posts.image}">
+			    <img class="postImg" src="${posts.image}" alt="게시글 이미지">
 			</c:if>
 
 
