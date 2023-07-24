@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="config.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +28,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="http://3.36.252.181:8081/admin/login"><i class="bi bi-chevron-left"></i></a>
+                <a href="${baseURL}/admin/login"><i class="bi bi-chevron-left"></i></a>
             </div>
         </div>
     </header>
@@ -39,7 +41,7 @@
         </div>
 
         <!-- 회원가입 form -->
-        <form id="signupForm" action="http://3.36.252.181:8081/ad/signupTest" method="post">
+        <form id="signupForm" action="${baseURL}/ad/signupTest" method="post">
             <!-- ID -->
             <div class="ID">
                 <input id="adminId" class="info_input" type="text" name="adminId" placeholder="아이디를 입력해주세요" required style="text-transform: lowercase">
@@ -92,7 +94,7 @@
 			                const data = response.data;
 			                if (response.status === 200) {
 		                        alert(data);
-		                        window.location.href = "http://3.36.252.181:8081/admin/login";
+		                        window.location.href = "${baseURL}/admin/login";
 			                } 
 			            })
 			            .catch((error) => {

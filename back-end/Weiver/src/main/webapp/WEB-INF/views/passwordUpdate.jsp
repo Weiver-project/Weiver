@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="config.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
         <!-- 타이틀 -->
         <div class="title">
             <div class="back">
-                <a href="http://3.36.252.181:8081/mypage/setting"><i class="bi bi-chevron-left"></i></a>
+                <a href="${baseURL}/mypage/setting"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="name">비밀번호 변경</div>
         </div>
@@ -34,7 +36,7 @@
     <div class="page">
 
             
-        <form id="updatePasswordForm" action="http://3.36.252.181:8081/mypage/updatePW" method="POST">
+        <form id="updatePasswordForm" action="${baseURL}/mypage/updatePW" method="POST">
             <!-- 입력 칸 -->
             <div class="text_input">
 
@@ -75,13 +77,13 @@
 
     <!-- navibar -->
     <nav>
-        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+        <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>
@@ -108,7 +110,7 @@
                         const data = response.data;
                         if(response.status === 200) {
                             alert(data);
-                            window.location.href = "http://3.36.252.181:8081/mypage/myinfo";
+                            window.location.href = "${baseURL}/mypage/myinfo";
                         }
                     })
                     .catch((error) => {
