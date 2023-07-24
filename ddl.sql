@@ -34,7 +34,7 @@ ALTER TABLE scott.answer
 CREATE TABLE scott.inquiry (
     id           NUMBER NOT NULL,
     user_id      VARCHAR2(30 BYTE) NOT NULL,
-    title        VARCHAR2(30 BYTE) NOT NULL,
+    title        VARCHAR2(4000 BYTE) NOT NULL,
     content      VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL
 );
@@ -119,7 +119,7 @@ CREATE TABLE scott.post (
     id           NUMBER NOT NULL,
     user_id      VARCHAR2(30 BYTE) NOT NULL,
     type         VARCHAR2(20 BYTE) NOT NULL,
-    title        VARCHAR2(100 BYTE) NOT NULL,
+    title        VARCHAR2(4000 BYTE) NOT NULL,
     content      VARCHAR2(4000 BYTE) NOT NULL,
     created_time DATE NOT NULL,
     viewed       NUMBER(20) DEFAULT 0 NOT NULL
