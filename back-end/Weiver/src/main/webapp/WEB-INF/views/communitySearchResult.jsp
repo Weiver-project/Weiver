@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="config.jsp" %>
 
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
     </header>
     <article>
         <!-- 검색 폼 -->
-        <form class="search" action="http://3.36.252.181:8081/community/search" method="get">
+        <form class="search" action="${baseURL}/community/search" method="get">
             <input type="text" name="keyword" placeholder=" 검색어를 입력하세요">
             <input type="submit" value="검색">
         </form>
@@ -32,7 +33,7 @@
         <ul class="community_list">
         	
             <c:forEach var="post" items="${searchResults}">
-            <a href="http://3.36.252.181:8081/community/${post.id}">
+            <a href="${baseURL}/community/${post.id}">
                 <li>
                     <c:if test="${post != null}">
                         <img src="${post.image}" alt="게시글 이미지" class="post-image">
@@ -47,13 +48,13 @@
     </article>
     <footer>Copyright Weiver  2023 All Rights Reserved</footer>
     <nav>
-        <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+        <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
             <div>HOME</div>
         </a>
-        <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+        <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
             <div>COMMUNITY</div>
         </a>
-        <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+        <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
             <div>MY PAGE</div>
         </a>
     </nav>

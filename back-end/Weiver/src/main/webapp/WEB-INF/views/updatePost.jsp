@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="config.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,7 @@
 
         <!-- 뒤로가기 버튼 -->
         <div class="backBtn">
-            <a href="http://3.36.252.181:8081/community">
+            <a href="${baseURL}/community">
                 <i class="bi-chevron-left"></i>
             </a>
 			<div class="nameTag">
@@ -37,7 +38,7 @@
 
 	    <br>
 
-		<form action="http://3.36.252.181:8081/community/${posts.id}" method="post" enctype="multipart/form-data">
+		<form action="${baseURL}/community/${posts.id}" method="post" enctype="multipart/form-data">
              <input type="hidden" name="_method" value="PUT" />
              
 				<div class = selectbtn>	
@@ -90,13 +91,13 @@
 <footer>Copyright Weiver 2023 All Rights Reserved</footer>
 
 <nav>
-    <a href="http://3.36.252.181:8081/main"><i class="bi bi-house-door-fill"></i>
+    <a href="${baseURL}/main"><i class="bi bi-house-door-fill"></i>
         <div>HOME</div>
     </a>
-    <a href="http://3.36.252.181:8081/community"><i class="bi bi-chat-dots-fill"></i>
+    <a href="${baseURL}/community"><i class="bi bi-chat-dots-fill"></i>
         <div>COMMUNITY</div>
     </a>
-    <a href="http://3.36.252.181:8081/mypage/myinfo"><i class="bi bi-person-fill"></i>
+    <a href="${baseURL}/mypage/myinfo"><i class="bi bi-person-fill"></i>
         <div>MY PAGE</div>
     </a>
 </nav>

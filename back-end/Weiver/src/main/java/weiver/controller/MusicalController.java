@@ -1,13 +1,11 @@
 package weiver.controller;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import weiver.dto.PerformingMusical;
 import weiver.dto.PoPularMusicalDTO;
 import weiver.dto.ResponseCastingDTO;
@@ -15,12 +13,10 @@ import weiver.dto.SimpleMusicalDTO;
 import weiver.entity.Actor;
 import weiver.entity.Musical;
 import weiver.entity.Post;
-import weiver.service.ActorService;
-import weiver.service.CommunityService;
-import weiver.service.GoogleAPIService;
+import weiver.entity.Subscribe;
+import weiver.service.*;
 
-import weiver.service.MusicalService;
-
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +27,7 @@ public class MusicalController {
     private final MusicalService musicalService;
     private final ActorService actorService;
     private final CommunityService communityService;
+	private final SubscribeService subscribeService;
     
     @GetMapping("/main")
     public String getMainPage(Model model){
@@ -38,27 +35,26 @@ public class MusicalController {
         List<PerformingMusical> performingMusicals = musicalService.getPerformingMusical();
         
         //인기 게시글 리스트 가져오기.
-	    List<Post> bestPostList = communityService.getBestPostDesc();
-	    
-	    //댓글 개수 가져오기
-	    model.addAttribute("bestPost", bestPostList);
+		List<Post> bestPostList = communityService.getBestPostDesc();
+
+		//댓글 개수 가져오기
+		model.addAttribute("bestPost", bestPostList);
 
         try {
-        	// 오늘의 배우 뮤지컬 정보.
+			// 오늘의 배우 뮤지컬 정보.
 			Actor randomActor = actorService.getRandomActor();
 			List<SimpleMusicalDTO> musicalList = actorService.getmusicalListByActorId(randomActor.getId());
 			List<SimpleMusicalDTO> limitedMusicalList = musicalList.subList(0, Math.min(musicalList.size(), 8));
 			System.out.println("size : " + limitedMusicalList.size());
-			
+
 			model.addAttribute("randomActor", randomActor);
 			model.addAttribute("limitedMusicalList", limitedMusicalList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        	
 
-        //인기 뮤지컬 추가
+
+		//인기 뮤지컬 추가
         model.addAttribute("popularMusicals", poPularMusicalDTOs);
         //공연 중인 뮤지컬 추가
         model.addAttribute("performingMusicals", performingMusicals);
@@ -67,44 +63,50 @@ public class MusicalController {
     }
     
     @GetMapping("/musical-detail/{id}")
-    public String getMusicalDetail(@PathVariable String id, Model model){
-    	Optional<Musical> musical =  musicalService.getMusicalById(id);
-    	
-    	if(musical.isPresent()) {
-    		model.addAttribute("musical", musical.get());
-    		List<ResponseCastingDTO> castingList = actorService.getCastingByMusicalId(musical.get().getId());
+    public String getMusicalDetail(@PathVariable String id, Model model, HttpSession session){
+		Optional<Musical> musical =  musicalService.getMusicalById(id);
+
+		if(musical.isPresent()) {
+			model.addAttribute("musical", musical.get());
+			List<ResponseCastingDTO> castingList = actorService.getCastingByMusicalId(musical.get().getId());
             
             if (castingList != null) {
                 List<ResponseCastingDTO> limitedCastingList = castingList.subList(0, Math.min(castingList.size(), 10));
                 model.addAttribute("castingList", limitedCastingList);
             }
-    	}
-    	
+		}
+
+		if(session != null) {
+			Subscribe subscribeJjim = subscribeService.getSubscribe(session.getAttribute("userId").toString(), id, "찜했어요");
+			model.addAttribute("subscribeJjim", subscribeJjim);
+			Subscribe subscribeWatched = subscribeService.getSubscribe(session.getAttribute("userId").toString(), id, "봤어요");
+			model.addAttribute("subscribeWatched", subscribeWatched);
+		}
 //    	ResponseCastingDTO casting = actorService.getCastingByMusicalId(musical.get().getId());
 //    	if (casting != null){
 //    		model.addAttribute("casting", casting);
 //    	}
-    	
-    	// Youtube API 가져오기
-    	try {
+
+		// Youtube API 가져오기
+		try {
 			List<String> clips = GoogleAPIService.search("뮤지컬" + musical.get().getTitle());
 			model.addAttribute("clips", clips);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	return "musicalDetail";
+
+		return "musicalDetail";
     }
     
     @GetMapping("/musical-search")
     public String getMusicalSearch(@RequestParam(required = false) String keyword, Model model){
-    	if(keyword != null) {
-    		List<SimpleMusicalDTO> musicals = musicalService.getMusicalByKeyword(keyword);
-    		model.addAttribute("musicals", musicals);
-    	}    	
-    	
-    	return "musicalSearch";
+		if(keyword != null) {
+			List<SimpleMusicalDTO> musicals = musicalService.getMusicalByKeyword(keyword);
+			model.addAttribute("musicals", musicals);
+		}
+
+		return "musicalSearch";
     }
     
 }
