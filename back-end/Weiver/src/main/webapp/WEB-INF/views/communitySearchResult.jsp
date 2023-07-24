@@ -35,7 +35,7 @@
             <a href="http://3.36.252.181:8081/community/${post.id}">
                 <li>
                     <c:if test="${post != null}">
-                        <img src="${post.images.get(0)}" alt="게시글 이미지" class="post-image">
+                        <img src="${post.image}" alt="게시글 이미지" class="post-image">
                     </c:if>
                     <h6 class="post-title">${post.title}</h6>
                     <span class="post-content">${post.content}</span>
