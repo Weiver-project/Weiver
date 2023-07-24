@@ -59,7 +59,7 @@ public class CommunityController {
 		//인기 게시글 리스트 가져오기
        List<Post> bestPostList = communityService.getBestPostDesc();
        
-       // 모든 게시글, 댓글 수, 좋아요 수 가져오기, 기존 전체 Post 조회 기능을 대체할 수 있음
+       // 모든 게시글, 댓글 수, 좋아요 수 가져오기, 기존 전체 Post 조회 기능을 대체할 수 있음.
        List<PostReplyLikeDTO> postWithReplyCountList = communityService.findPostsWithReplyCount();
        model.addAttribute("postWithReplyCountList", postWithReplyCountList);
        System.out.println("테스트 출력" + postWithReplyCountList);

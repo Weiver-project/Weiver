@@ -201,7 +201,7 @@
                                     <i class="bi-chat"></i>
                                 </div>
                                 <div style="margin: 4px 0px 0px -15px;">
-                                	${postWithReplyAndLikeCount.likeCount}
+                                	${postWithReplyAndLikeCount.replyCount}
                                 </div>
                             </div>
                         </div>
