@@ -241,7 +241,7 @@ public class CommunityController {
 		}
 
 		@PostMapping("/community/board")
-		public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "image", required = false) MultipartFile image,
+		public String insertPostAndReview(@ModelAttribute Post post, @RequestParam(value = "file", required = false) MultipartFile file,
 										  @RequestParam String type, @RequestParam(value = "musicalId", required = false) String musicalId, HttpSession session) {
 			String userId = (String) session.getAttribute("userId");
 
@@ -249,11 +249,7 @@ public class CommunityController {
 				// 사용자 정보 가져오기
 				User user = userService.findById(userId);
 
-				String imagePath = "";
-				if (image != null && !image.isEmpty()) {
-					String s3ImageUrl = awsS3Service.uploadFileV1(image);
-					imagePath = s3ImageUrl;
-				}
+				String imagePath = awsS3Service.uploadFileV1(file);
 
 				// 게시글 정보 저장
 				Post isPostSaved = communityService.savePost(user, type, post.getTitle(), post.getContent(), imagePath);

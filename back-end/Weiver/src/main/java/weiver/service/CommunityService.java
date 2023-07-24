@@ -125,7 +125,7 @@ public class CommunityService {
                 .title(title)
                 .content(content)
                 .createdTime(date)
-				.iamge(imageUrl)
+				.image(imageUrl)
                 .viewed(0L)
                 .build();
 
