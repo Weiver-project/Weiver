@@ -17,7 +17,6 @@
     <!-- SWIPER 외부 라이브러리 연결-->
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script src="/js/swiper.js"></script>
 
     <!--css 연결-->
     <link rel="stylesheet" href="/css/community.css">
@@ -59,15 +58,6 @@
             alert('로그인 해주세요.'); // 로그인하지 않은 경우 팝업 메시지 띄우기
         }
     }
-    
- // 스크롤 버튼을 클릭하면 페이지 상단으로 스크롤하는 함수
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // 버튼 요소를 찾고 클릭 이벤트를 추가
-    const scrollButton = document.getElementById('scrollToTop');
-    scrollButton.addEventListener('click', scrollToTop);
     </script>
     
 </head>
@@ -321,7 +311,6 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <i id="scrollToTop" class="bi bi-arrow-up-circle" style="cursor: pointer;"></i>
                 </div>
             </div>
         </div>
