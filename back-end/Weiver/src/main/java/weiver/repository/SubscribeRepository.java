@@ -27,11 +27,14 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long>{
 	//유저의 봤어요, 찜 목록 카운팅
 	@Query("SELECT COUNT(?1) FROM Subscribe s WHERE s.userId.id = ?1 AND s.type = ?2")
 	int countByUserIdAndType(String userId, String type);
-	
+
 	// UserId와 MusicalId, type으로 찜을 했는지 확인
 	@Query("SELECT id  FROM Subscribe WHERE userId.id = ?1 AND musicalId.id = ?2 AND type =?3")
 	List<String> findByUserIdAndMusicalIdAndType(String userId, String musicalId, String type);
-	
+
+	@Query("SELECT s FROM Subscribe s WHERE s.userId.id = ?1 AND s.musicalId.id = ?2 AND s.type = ?3")
+	Subscribe getSubscribeByUserIdAndMusicalIdAndType(String userId, String musicalId, String type);
+
 	// UserId와 MusicalId로 subscribe 내역 삭제
 	@Modifying
 	@Transactional
