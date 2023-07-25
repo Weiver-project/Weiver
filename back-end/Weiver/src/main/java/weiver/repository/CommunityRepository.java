@@ -64,7 +64,7 @@ public interface CommunityRepository extends JpaRepository<Post, Long> {
 	@Query("SELECT new weiver.dto.PostReplyLikeDTO(p, " +
 		       "(SELECT COUNT(*) FROM Reply r WHERE p.id = r.post.id), " +
 		       "(SELECT COUNT(*) FROM PostLike pl WHERE p.id = pl.post.id)) " +
-		       "FROM Post p")
+		       "FROM Post p ORDER BY p.createdTime DESC")
 	List<PostReplyLikeDTO> findPostsWithReplyAndLikeCount();
 
 
