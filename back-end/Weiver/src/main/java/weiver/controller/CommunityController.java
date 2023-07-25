@@ -421,7 +421,7 @@ public class CommunityController {
 	}
 
 
-	//대댓글 삽입
+	//대댓글 삽입.
 	@RequestMapping(value = "/community/insert/rereply/{postId}/{replyId}", method = RequestMethod.POST)
 	public String insertReReply(@PathVariable String postId, @PathVariable String replyId,  @RequestParam String content, HttpSession Session) {
 		
