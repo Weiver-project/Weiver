@@ -16,10 +16,7 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(sessionInterceptor)
-					.addPathPatterns("/post/**")
-					.addPathPatterns("/reply/**")
-					.addPathPatterns("/like/**")
-					.addPathPatterns("/reReply/**")
+					.addPathPatterns("/community/postlike/**")
 					.addPathPatterns("/mypage/**")
 					.addPathPatterns("/setting/**")
 					.addPathPatterns("/logout/**")

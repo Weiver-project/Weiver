@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=“viewport” content=“width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no”>
     <title>WEIVER - 커뮤니티 메인 페이지</title>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
@@ -152,9 +152,9 @@
         <div>
             <div class="btnGroup">
                 <div class="categoryGroup">
-                    <button style="background-color: #4263EB;" onclick="showPostList('전체', this)">전체</button>
-                    <button style="background-color: #466093;" onclick="showPostList('리뷰', this)">리뷰</button>
-                    <button style="background-color: #466093;" onclick="showPostList('잡담', this)">잡담</button>
+                    <button style="background-color: #4263EB; cursor: pointer;" onclick="showPostList('전체', this)">전체</button>
+                    <button style="background-color: #466093; cursor: pointer;" onclick="showPostList('리뷰', this)">리뷰</button>
+                    <button style="background-color: #466093; cursor: pointer;" onclick="showPostList('잡담', this)">잡담</button>
                 </div>
                 <button class="writeBtn" onclick="checkLogin()">글 작성하기</button>
             </div>
@@ -287,7 +287,7 @@
                     <div class="userInfoAndLoginBtn">
                         <c:choose>
                             <c:when test="${empty user}">
-                                <a href="${baseURL}/login"><button class="loginBtn">로그인</button></a>
+                                <a href="${baseURL}/login"><button style="cursor: pointer;" class="loginBtn">로그인</button></a>
                             </c:when>
                             <c:otherwise>
                                 <div class="userInfo">

@@ -421,9 +421,14 @@ public class CommunityController {
 	}
 
 
-	//대댓글 삽입
+	//대댓글 삽입.
 	@RequestMapping(value = "/community/insert/rereply/{postId}/{replyId}", method = RequestMethod.POST)
 	public String insertReReply(@PathVariable String postId, @PathVariable String replyId,  @RequestParam String content, HttpSession Session) {
+		
+		if (Session.getAttribute("userId") == null) {
+			return "login";
+		}
+		
 		Post post = new Post();
 		post.setId(Long.parseLong(postId));
 
@@ -483,6 +488,7 @@ public class CommunityController {
 	@GetMapping("/community/postlike/{postId}")
 	public String addPostlike(@PathVariable Long postId,
 							  Model model, HttpSession session) {
+		
 
 		String userId = session.getAttribute("userId").toString();
 
