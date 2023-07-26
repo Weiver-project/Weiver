@@ -81,7 +81,41 @@
 
     
 
+## 힘들었던 점
+세 번의 DB 변경
+![image](https://github.com/Weiver-project/Weiver/assets/129250941/670269c8-1450-4acd-a550-69c1d3c4f010)
+1. 불규칙적인 KOPIS API 뮤지컬 정보와 PLAY DB 배우 정보와의 매핑 과정을 거쳐서 각각의 테이블에 저장하는 방법보다 한 번에 하나의 컬렉션에 전부 저장하는 방식이 조회 속도와 삽입 속도 측면에서 보다 더 효과적일 것이라고 생각되어 MongoDB를 사용
+2. 뮤지컬과 배우를 제외한 나머지 데이터들은 정형화되어있고 관계성이 높기 때문에 Oracle DB를 도입하여 두 가지 데이터베이스를 사용
+3. KOPIS API를 사용했을 때 PLAY DB 배우 정보와 서로 매핑되는 비율이 444건 중 25건인 5%정도로 매우 낮아 KOPIS API를 포기하고 PLAY DB에서 뮤지컬 정보도 같이 크롤링하는 방식을 사용 -> 뮤지컬 데이터도 정형화되었고 배우 정보와 동일한 페이지에서 데이터를 가져옴 -> 매핑 방식이 이전보다 수월해져 전체 DB를 Oracle로 사용
+
 ## 트러블 슈팅
+크롤링 시 TimeOutException
+1. 크롤링 시 Timeout Option을 주는 방법과 Thread.sleep()을 주는 방식을 사용했지만 해결이 되지 않음
+2. 크롤링으로 데이터를 가져오는 과정과 DB에 데이터를 저장하는 과정이 같은 텀에서 실행되는 것이 리소스를 많이 잡아먹는다는 의문
+3. 데이터를 메모리에 전부 저장한 다음 DB에 일괄 저장하는 방식을 사용 (Exception 발생 시기가 뒤로 늦춰졌을 뿐 여전히 발생)
+4. 버퍼와 같이 일정량의 데이터를 저장한 후 비워주는 방식을 사용하여 해결
+```
+/*뮤지컬 상세 페이지에서 뮤지컬 정보 저장*/
+@SneakyThrows
+public void saveAllMusical(List<String> musicalIds){
+  List<Musical> musicals = new ArrayList<>();
+    
+    for(int i =0; i < musicalIds.size(); i++){
+        //뮤지컬 1개에 대한 데이터 크롤링
+        Musical musical = getMusical(musicalIds.get(i));
+        musicals.add(musical);
+        log.info(i + "번 MUSICAL(" + musicalIds.get(i) + ") 저장: " + musical);
+
+        // 데이터를 1000개씩 저장
+        if(i != 0 && i % 1000 == 0){
+          // musical 저장
+          musicalRepository.saveAll(musicals);
+
+          // 새로운 MusicalId를 채우기 위해 기존 리스트 초기화
+          musicals.clear();
+        }
+    }
+```
 
 ## 회고
 
