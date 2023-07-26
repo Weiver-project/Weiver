@@ -31,7 +31,8 @@
 ### 개발환경 :
 
 ## 서비스 아키텍처
-![weiver](https://github.com/Weiver-project/Weiver/assets/78299214/c935142c-2614-42c6-bf99-f86af0143e62)
+![image](https://github.com/Weiver-project/Weiver/assets/76997735/6e881153-f943-4c2f-a562-c80dda027428)
+
 ## ERD
 ![ERD](https://github.com/Weiver-project/Weiver/assets/78299214/d9689a4f-1e36-499f-beb1-9a8d57292528)
 ## 구현 결과
