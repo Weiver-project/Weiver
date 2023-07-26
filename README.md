@@ -89,16 +89,14 @@
 + 글 카테고리(잡담, 리뷰) 선택 가능   
 + 리뷰 선택 시, 뮤지컬 정보 연동   
 + 이미지 첨부 가능   
-     <p>    
-![제목 없는 동영상](https://github.com/Weiver-project/Weiver/assets/81962257/6fb59d44-8cba-4805-aedc-b767fa8a2023)
-     </p>
+<img src="https://github.com/Weiver-project/Weiver/assets/81962257/53a64563-cf8a-48b8-bb2d-fc76fd7cc044.gif" width="550" height="350"/>
 
 ### **마이 페이지**
 - [X] **메인 페이지**
 + 찜 / 봤던 뮤지컬 조회
 + 내가 쓴 글 / 댓글 / 좋아요한 글 조회 
 + 프로필 수정 / 설정(로그아웃, 비밀번호 변경, 문의하기, 회원탈퇴)
-<div align="center">
+<div>
   <img src="https://github.com/Weiver-project/Weiver/assets/78299214/98bb8c89-2e75-4d16-8e58-edfc996c3073" width="800">
   <br>
   <br>
@@ -112,7 +110,7 @@
 + 전체 배우, 뮤지컬 정보 조회
 + 유저, 게시글, 문의 조회 및 삭제
 + 문의글 답변
-<div align="center">
+<div>
   <img src="https://github.com/Weiver-project/Weiver/assets/78299214/439607a3-d431-43c3-bd03-fb52dad71411" width="800">
   <br>
   <br>
