@@ -80,7 +80,31 @@
 ![제목 없는 동영상](https://github.com/Weiver-project/Weiver/assets/81962257/6fb59d44-8cba-4805-aedc-b767fa8a2023)
      </p>
 
-    
+### **마이 페이지**
+- [X] **메인 페이지**
++ 찜 / 봤던 뮤지컬 조회
++ 내가 쓴 글 / 댓글 / 좋아요한 글 조회 
++ 프로필 수정 / 설정(로그아웃, 비밀번호 변경, 문의하기, 회원탈퇴)
+<div align="center">
+  <img src="https://github.com/Weiver-project/Weiver/assets/78299214/98bb8c89-2e75-4d16-8e58-edfc996c3073" width="800">
+  <br>
+  <br>
+  <img src="https://github.com/Weiver-project/Weiver/assets/78299214/f447a0bf-50b2-499b-95c1-c165207d1d85" width="300">
+  <img src="https://github.com/Weiver-project/Weiver/assets/78299214/562a57c0-0467-4792-94e8-6456ea83f21d" width="300">
+</div>
+
+### **관리자 페이지**
+- [X] **메인 페이지**
++ 관리자 문의 조회
++ 전체 배우, 뮤지컬 정보 조회
++ 유저, 게시글, 문의 조회 및 삭제
++ 문의글 답변
+<div align="center">
+  <img src="https://github.com/Weiver-project/Weiver/assets/78299214/439607a3-d431-43c3-bd03-fb52dad71411" width="800">
+  <br>
+  <br>
+  <img src="https://github.com/Weiver-project/Weiver/assets/78299214/311a35e0-07a8-4fe4-bb0d-52cc60df8420" width="800">
+</div>   
 
 ## 힘들었던 점
 세 번의 DB 변경
