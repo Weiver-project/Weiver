@@ -1,7 +1,9 @@
-package com.example.entity;
+package com.example.domain.casting;
 
 import javax.persistence.*;
 
+import com.example.domain.musical.Musical;
+import com.example.domain.actor.Actor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,17 +16,16 @@ import reactor.util.annotation.Nullable;
 @AllArgsConstructor
 @Entity
 @Table (name = "CASTING")
-
+@SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "CASTING_SEQUENCE", initialValue = 1, allocationSize = 1)
 public class Casting {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "casting_sequence_generator")
-    @SequenceGenerator(name = "casting_sequence_generator", sequenceName = "casting_sequence", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACTOR_ID", referencedColumnName = "ID")
     private Actor actorId;
-    
+
     @Nullable
     @Column(name = "ROLE")
     private String role;

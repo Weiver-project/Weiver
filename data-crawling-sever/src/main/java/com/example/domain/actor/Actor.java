@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.domain.actor;
 
 import lombok.*;
 import reactor.util.annotation.Nullable;

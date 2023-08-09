@@ -1,7 +1,6 @@
-package com.example.repository;
+package com.example.domain.musical;
 
 
-import com.example.entity.Musical;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
