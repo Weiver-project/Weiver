@@ -37,7 +37,7 @@ jobs:
       - name: Generate deployment package 
         run: |
           mkdir -p deploy
-          cp weiver-main-server/target/libs/*.war deploy/application.war
+          cp weiver-main-server/target/*.war deploy/application.war
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cp -r .platform deploy/.platform
