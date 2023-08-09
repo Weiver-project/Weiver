@@ -3,11 +3,11 @@ package weiver.service;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import weiver.dto.PostDTO;
-import weiver.dto.ReplyDTO;
-import weiver.dto.UserDTO;
-import weiver.entity.*;
-import weiver.repository.*;
+import weiver.domain.entity.*;
+import weiver.domain.repository.*;
+import weiver.web.dto.PostDTO;
+import weiver.web.dto.ReplyDTO;
+import weiver.web.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;

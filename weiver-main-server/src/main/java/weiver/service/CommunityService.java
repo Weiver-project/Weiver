@@ -5,9 +5,9 @@
 	import org.springframework.stereotype.Service;
 	import org.springframework.web.multipart.MultipartFile;
 
-import weiver.dto.PostReplyLikeDTO;
-import weiver.entity.*;
-	import weiver.repository.*;
+	import weiver.domain.entity.*;
+	import weiver.domain.repository.*;
+	import weiver.web.dto.PostReplyLikeDTO;
 
 	import java.io.IOException;
 	import java.nio.file.Files;

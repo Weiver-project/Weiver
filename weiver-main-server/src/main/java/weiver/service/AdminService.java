@@ -3,8 +3,8 @@ package weiver.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import weiver.entity.*;
-import weiver.repository.*;
+import weiver.domain.entity.*;
+import weiver.domain.repository.*;
 
 import java.util.List;
 

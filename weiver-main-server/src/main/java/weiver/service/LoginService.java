@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import weiver.entity.User;
-import weiver.repository.UserRepository;
+import weiver.domain.entity.User;
+import weiver.domain.repository.UserRepository;
 
 @Service
 public class LoginService {

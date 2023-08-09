@@ -8,13 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import weiver.dto.PerformingMusical;
-import weiver.dto.PoPularMusicalDTO;
-import weiver.dto.SimpleMusicalDTO;
-import weiver.entity.Musical;
-import weiver.repository.CastingRepository;
-import weiver.repository.MusicalRepository;
-import weiver.repository.SubscribeRepository;
+import weiver.web.dto.PerformingMusical;
+import weiver.web.dto.PoPularMusicalDTO;
+import weiver.web.dto.SimpleMusicalDTO;
+import weiver.domain.entity.Musical;
+import weiver.domain.repository.CastingRepository;
+import weiver.domain.repository.MusicalRepository;
+import weiver.domain.repository.SubscribeRepository;
 
 @Service
 @RequiredArgsConstructor

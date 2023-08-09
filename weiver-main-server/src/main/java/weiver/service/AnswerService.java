@@ -3,16 +3,12 @@ package weiver.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import weiver.entity.Admin;
-import weiver.entity.Answer;
-import weiver.entity.Inquiry;
-import weiver.repository.AnswerRepository;
-import weiver.repository.InquiryRepository;
+import weiver.domain.entity.Admin;
+import weiver.domain.entity.Answer;
+import weiver.domain.entity.Inquiry;
+import weiver.domain.repository.AnswerRepository;
 
 import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 public class AnswerService {
