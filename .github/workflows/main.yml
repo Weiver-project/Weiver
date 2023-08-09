@@ -20,7 +20,7 @@ jobs:
           java-version: 11
 
       - name: Build with Maven
-        run: mvn -f weiver-main-server/pom.xml clean install
+        run: mvn -f weiver-main-server/pom.xml clean package
         shell: bash
         
       - name: Get current time
@@ -37,10 +37,10 @@ jobs:
       - name: Generate deployment package 
         run: |
           mkdir -p deploy
-          cp weiver-main-server/build/libs/*.war deploy/application.war
-          cp weiver-main-server/Procfile deploy/Procfile
-          cp -r weiver-main-server/.ebextensions deploy/.ebextensions
-          cp -r weiver-main-server/.platform deploy/.platform
+          cp weiver-main-server/target/libs/*.war deploy/application.war
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
       - name: Deploy to EB
