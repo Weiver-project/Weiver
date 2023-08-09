@@ -22,3 +22,14 @@ jobs:
       - name: Build with Maven
         run: mvn -f weiver-main-server/pom.xml clean install
         shell: bash
+        
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2 
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss # (1)
+          utcOffset: "+09:00"
+      
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # (2)
+        shell: bash
