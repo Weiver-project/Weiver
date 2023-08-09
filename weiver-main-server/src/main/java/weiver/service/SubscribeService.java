@@ -2,12 +2,12 @@ package weiver.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import weiver.dto.SimpleMusicalDTO;
-import weiver.entity.Musical;
-import weiver.entity.Subscribe;
-import weiver.repository.MusicalRepository;
-import weiver.repository.SubscribeRepository;
-import weiver.repository.UserRepository;
+import weiver.web.dto.SimpleMusicalDTO;
+import weiver.domain.entity.Musical;
+import weiver.domain.entity.Subscribe;
+import weiver.domain.repository.MusicalRepository;
+import weiver.domain.repository.SubscribeRepository;
+import weiver.domain.repository.UserRepository;
 
 import java.util.List;
 

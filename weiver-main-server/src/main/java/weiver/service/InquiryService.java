@@ -2,8 +2,8 @@ package weiver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import weiver.entity.Inquiry;
-import weiver.repository.InquiryRepository;
+import weiver.domain.entity.Inquiry;
+import weiver.domain.repository.InquiryRepository;
 
 import java.util.Date;
 import java.util.List;

@@ -50,8 +50,7 @@
 		    		<c:forEach items="${requestScope.musicalList}" var="musical">
 		    		<div style="max-width: 200px;">
 		    			<a href="${baseURL}/musical-detail/${musical.getId()}" style="text-decoration: none;">
-		    				<img src="${musical.getPosterImage()}" alt="${musical.getTitle()}" height="200" width="200" class="img-margin">
-		    				<p style="font-size: 14px; text-align: center;">${musical.getTitle()}</p>
+		    				<img src="${musical.getPosterImage()}" alt="${musical.getId()}" height="200" width="200" class="img-margin">
 		    			</a>
 		    			
 		    		</div>

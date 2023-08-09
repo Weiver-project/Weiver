@@ -1,0 +1,57 @@
+name: weiver-main-server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build with Maven
+        run: mvn -f weiver-main-server/pom.xml clean package
+        shell: bash
+        
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2 
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss 
+          utcOffset: "+09:00"
+      
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" 
+        shell: bash
+
+      - name: Generate deployment package 
+        run: |
+          mkdir -p deploy
+          cp weiver-main-server/target/*.war deploy/application.war
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cp -r .platform deploy/.platform
+          cd deploy && zip -r deploy.zip .
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: weiver
+          environment_name: Weiver-beanstalk-env
+          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+          region: ap-northeast-2
+          deployment_package: deploy/deploy.zip
+          wait_for_environment_recovery: 300
+      

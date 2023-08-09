@@ -1,4 +1,4 @@
-# 🎬 **Weiver**
+# [🎬 **Weiver**](https://www.youtube.com/watch?v=nSRzYjURWPU)
 ### 🎬 Weiver는 뮤지컬 정보 제공, 후기 공유 커뮤니티입니다.
 ![logo](https://github.com/Weiver-project/Weiver/assets/116157924/af5207db-9c59-4600-a519-c42211897935)
 
